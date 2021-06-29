@@ -2573,11 +2573,11 @@ msgstr ""
 msgid "Wrong"
 msgstr "Kết quả sai (WA)"
 
-#: judge/utils/problems.py:77
+#: judge/utils/problems.py:76
 msgid "Timeout"
 msgstr "Quá thời gian (TLE)"
 
-#: judge/utils/problems.py:78
+#: judge/utils/problems.py:77
 msgid "Error"
 msgstr "Chạy bị lỗi (MLE,RTE,CE,...)"
 
