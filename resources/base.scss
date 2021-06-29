@@ -136,7 +136,8 @@ b {
 }
 
 h2 {
-    font-weight: 400;
+    font-weight: 900;
+    font-family: $title_fonts;
     font-size: 2em;
     border-radius: $widget_border_radius;
     padding: 0;

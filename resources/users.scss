@@ -7,8 +7,7 @@
 }
 
 td.user-name {
-    padding-left: 2em;
-    text-align: left;
+    text-align: center;
 }
 
 tr {
@@ -59,6 +58,14 @@ th.header.rank {
         &.highlight {
             background: #fff897;
         }
+    }
+	
+    th a {
+	color: #212121;
+    }
+
+    td:nth-child(2), th:nth-child(2) {
+            text-align: center;
     }
 }
 

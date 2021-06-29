@@ -1,14 +1,15 @@
 #problem-table {
     td {
         &.category {
-            text-align: left;
+            text-align: center;
             padding: 0 1em;
+	    width: 60%;
         }
 
         &.problem {
-            text-align: left;
+            text-align: center;
             padding-left: 1em;
-            width: 100%;
+            width: 70%;
         }
 
         &.pp {
@@ -18,7 +19,7 @@
         }
 
         &.users {
-            text-align: left;
+            text-align: right;
             padding: 0 1em;
             white-space: nowrap;
         }
@@ -250,9 +251,9 @@ ul.problem-list {
 }
 
 #problem-table th a {
-    color: inherit;
+    color: #212121;
     display: block;
-    padding: 4px 10px;
+    padding: 9px 10px;
 }
 
 #category, #types {
@@ -292,5 +293,9 @@ ul.problem-list {
         line-height: 13px;
         padding: 0 3px;
         font-size: 13px;
+    }
+
+    .noUi-connect {
+    	background: #00b8d4;
     }
 }

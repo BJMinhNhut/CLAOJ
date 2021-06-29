@@ -43,7 +43,7 @@
     font-size: $base_font_size;
 
     &:hover {
-        background: #00695c;
+        background: #00796b;
     }
 
     &.disabled {
@@ -58,11 +58,11 @@
 }
 
 button:hover, button:hover, input[type=submit]:hover {
-    background: #00695c;
+    background: #00796b;
 }
 
 .button:active, button:active, input[type=submit]:hover {
-    background: #00695c;
+    background: #00796b;
 }
 
 .inline-button {

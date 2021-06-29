@@ -44,24 +44,26 @@
 
     th {
         height: 2em;
-        color: #FFF;
-        background-color: $widget_black;
-        border-color: #555;
-        border-width: 1px 1px 0 0;
+        color: #212121;
+        border-color: $border_gray;
+        border-width: 1px 0 0 0;
         border-style: solid;
         padding: 4px 10px;
         vertical-align: middle;
         text-align: center;
         white-space: nowrap;
-        font-weight: 600;
+        font-weight: 800;
+	font-family: $title_fonts;
         font-size: 1.1em;
 
         &:first-child {
             border-top-left-radius: $table_header_rounding;
+            border-left: 1px solid $border_gray;
         }
 
         &:last-child {
             border-top-right-radius: $table_header_rounding;
+	    border-right: 1px solid $border_gray;
         }
     }
 
