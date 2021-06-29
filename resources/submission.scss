@@ -301,7 +301,7 @@ label[for="language"], label[for="status"] {
 }
 
 .case-AC {
-    color: green;
+    color: #388E3C;
     font-weight: bold;
 }
 
@@ -316,12 +316,12 @@ label[for="language"], label[for="status"] {
 }
 
 .case-TLE, .case-SC {
-    color: gray;
+    color: #607D8B;
     font-weight: bold;
 }
 
 .case-MLE, .case-OLE, .case-RTE, .case-IR {
-    color: orange;
+    color: #FFC107;
     font-weight: bold;
 }
 

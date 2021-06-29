@@ -73,10 +73,9 @@ def _get_result_data(results):
             # The caller, SubmissionList.get_result_data will run ugettext on the name.
             {'code': 'AC', 'name': gettext_noop('Accepted'), 'count': results['AC']},
             {'code': 'WA', 'name': gettext_noop('Wrong'), 'count': results['WA']},
-            {'code': 'CE', 'name': gettext_noop('Compile Error'), 'count': results['CE']},
             {'code': 'TLE', 'name': gettext_noop('Timeout'), 'count': results['TLE']},
             {'code': 'ERR', 'name': gettext_noop('Error'),
-             'count': results['MLE'] + results['OLE'] + results['IR'] + results['RTE'] + results['AB'] + results['IE']},
+             'count': results['CE'] + results['MLE'] + results['OLE'] + results['IR'] + results['RTE'] + results['AB'] + results['IE']},
         ],
         'total': sum(results.values()),
     }
