@@ -22,6 +22,7 @@ _mytempfile/
 tmp_uwsgi.ini
 nginx_template.conf
 martor/
+logs/
 judge/fixtures/fixed*
 judge/fixtures/voj_*
 judge/fixtures/VOJ_*
