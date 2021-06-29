@@ -75,8 +75,8 @@ def _get_result_data(results):
             {'code': 'WA', 'name': gettext_noop('Wrong'), 'count': results['WA']},
             {'code': 'TLE', 'name': gettext_noop('Timeout'), 'count': results['TLE']},
             {'code': 'ERR', 'name': gettext_noop('Error'),
-             'count': results['CE'] + results['MLE'] + results['OLE'] + results['IR'] +
-                      results['RTE'] + results['AB'] + results['IE']},
+             'count': results['CE'] + results['MLE'] + results['OLE'] + results['IR'] + \
+                results['RTE'] + results['AB'] + results['IE']},
         ],
         'total': sum(results.values()),
     }
