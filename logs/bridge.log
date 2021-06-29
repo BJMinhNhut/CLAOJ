@@ -930,3 +930,11 @@ INFO 2021-06-29 07:45:55,820 judge_handler Vịt Sống Ảo: 1 test case(s) com
 INFO 2021-06-29 07:45:55,831 judge_handler Vịt Sống Ảo: Batch ended on: 20
 INFO 2021-06-29 07:45:55,832 judge_handler Vịt Sống Ảo: Grading has ended on: 20
 INFO 2021-06-29 07:45:55,832 judge_list Judge available after grading 20: Vịt Sống Ảo
+INFO 2021-06-29 12:31:25,351 judge_handler Judge connected from: ('45.146.165.123', 43716)
+INFO 2021-06-29 12:31:25,355 base_handler Disconnecting client due to too-large message size (1195725856 bytes): ('45.146.165.123', 43716)
+INFO 2021-06-29 12:31:25,355 judge_handler Judge disconnected from: ('45.146.165.123', 43716) with name None
+INFO 2021-06-29 13:49:31,676 base_handler Socket timed out: ('113.169.222.240', 42558)
+WARNING 2021-06-29 13:49:31,682 judge_handler Judge seems dead: Vịt Toàn Năng: False
+INFO 2021-06-29 13:49:31,752 judge_handler Judge disconnected from: ('113.169.222.240', 42558) with name Vịt Toàn Năng
+INFO 2021-06-29 13:54:06,056 judge_handler Judge connected from: ('123.28.7.49', 42668)
+INFO 2021-06-29 13:54:06,083 judge_handler Judge authenticated: ('123.28.7.49', 42668) (Vịt Toàn Năng)

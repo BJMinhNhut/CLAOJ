@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap');
+
 @charset "UTF-8";
 
 @import "vars";
@@ -112,7 +114,7 @@ body {
     font-size: $base_font_size;
     line-height: 1.231;
     background: $background_light_gray;
-    font-family: "Segoe UI", "Lucida Grande", Arial, sans-serif;
+    font-family: "Roboto", "Segoe UI", "Lucida Grande", Arial, sans-serif;
     color: #000;
     height: 100%;
 }
@@ -246,10 +248,12 @@ nav {
     margin: 0 auto;
     z-index: 500;
     text-align: left;
+    font-family: $title_fonts;
+    font-weight: 700;
 
     ul {
         margin: 0 0 0 -5px !important;
-        padding: 0 0 0 1%;
+        padding: 0px 2pc;
         text-align: left;
         display: inline;
         list-style: none;
