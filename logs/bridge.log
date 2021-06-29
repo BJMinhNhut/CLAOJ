@@ -1,0 +1,288 @@
+INFO 2021-06-29 05:54:17,205 daemon Exiting due to SIGINT
+INFO 2021-06-29 05:57:32,477 judge_handler Judge connected from: ('66.42.48.198', 45576)
+WARNING 2021-06-29 05:57:32,550 judge_handler Authentication failure: ('66.42.48.198', 45576)
+INFO 2021-06-29 05:57:32,550 judge_handler Judge disconnected from: ('66.42.48.198', 45576) with name None
+INFO 2021-06-29 05:57:55,237 judge_handler Judge connected from: ('172.17.0.2', 46716)
+WARNING 2021-06-29 05:57:55,256 judge_handler Authentication failure: ('172.17.0.2', 46716)
+INFO 2021-06-29 05:57:55,256 judge_handler Judge disconnected from: ('172.17.0.2', 46716) with name None
+INFO 2021-06-29 05:58:02,783 judge_handler Judge connected from: ('113.169.222.240', 42322)
+WARNING 2021-06-29 05:58:02,809 judge_handler Authentication failure: ('113.169.222.240', 42322)
+INFO 2021-06-29 05:58:02,810 judge_handler Judge disconnected from: ('113.169.222.240', 42322) with name None
+INFO 2021-06-29 05:58:32,726 judge_handler Judge connected from: ('66.42.48.198', 45578)
+WARNING 2021-06-29 05:58:32,805 judge_handler Authentication failure: ('66.42.48.198', 45578)
+INFO 2021-06-29 05:58:32,806 judge_handler Judge disconnected from: ('66.42.48.198', 45578) with name None
+INFO 2021-06-29 05:58:46,032 daemon Exiting due to SIGINT
+INFO 2021-06-29 05:58:55,327 judge_handler Judge connected from: ('172.17.0.2', 46772)
+WARNING 2021-06-29 05:58:55,338 judge_handler Authentication failure: ('172.17.0.2', 46772)
+INFO 2021-06-29 05:58:55,344 judge_handler Judge disconnected from: ('172.17.0.2', 46772) with name None
+INFO 2021-06-29 05:59:09,529 judge_handler Judge connected from: ('113.169.222.240', 42324)
+WARNING 2021-06-29 05:59:09,554 judge_handler Authentication failure: ('113.169.222.240', 42324)
+INFO 2021-06-29 05:59:09,555 judge_handler Judge disconnected from: ('113.169.222.240', 42324) with name None
+INFO 2021-06-29 05:59:32,997 judge_handler Judge connected from: ('66.42.48.198', 45580)
+WARNING 2021-06-29 05:59:33,064 judge_handler Authentication failure: ('66.42.48.198', 45580)
+INFO 2021-06-29 05:59:33,064 judge_handler Judge disconnected from: ('66.42.48.198', 45580) with name None
+INFO 2021-06-29 05:59:55,408 judge_handler Judge connected from: ('172.17.0.2', 46794)
+WARNING 2021-06-29 05:59:55,430 judge_handler Authentication failure: ('172.17.0.2', 46794)
+INFO 2021-06-29 05:59:55,436 judge_handler Judge disconnected from: ('172.17.0.2', 46794) with name None
+INFO 2021-06-29 06:00:15,312 judge_handler Judge connected from: ('113.169.222.240', 42326)
+WARNING 2021-06-29 06:00:15,332 judge_handler Authentication failure: ('113.169.222.240', 42326)
+INFO 2021-06-29 06:00:15,332 judge_handler Judge disconnected from: ('113.169.222.240', 42326) with name None
+INFO 2021-06-29 06:00:33,240 judge_handler Judge connected from: ('66.42.48.198', 45582)
+WARNING 2021-06-29 06:00:33,307 judge_handler Authentication failure: ('66.42.48.198', 45582)
+INFO 2021-06-29 06:00:33,308 judge_handler Judge disconnected from: ('66.42.48.198', 45582) with name None
+INFO 2021-06-29 06:00:55,505 judge_handler Judge connected from: ('172.17.0.2', 46804)
+WARNING 2021-06-29 06:00:55,530 judge_handler Authentication failure: ('172.17.0.2', 46804)
+INFO 2021-06-29 06:00:55,534 judge_handler Judge disconnected from: ('172.17.0.2', 46804) with name None
+INFO 2021-06-29 06:01:21,521 judge_handler Judge connected from: ('113.169.222.240', 42328)
+WARNING 2021-06-29 06:01:21,552 judge_handler Authentication failure: ('113.169.222.240', 42328)
+INFO 2021-06-29 06:01:21,553 judge_handler Judge disconnected from: ('113.169.222.240', 42328) with name None
+INFO 2021-06-29 06:01:33,477 judge_handler Judge connected from: ('66.42.48.198', 45584)
+WARNING 2021-06-29 06:01:33,543 judge_handler Authentication failure: ('66.42.48.198', 45584)
+INFO 2021-06-29 06:01:33,555 judge_handler Judge disconnected from: ('66.42.48.198', 45584) with name None
+INFO 2021-06-29 06:01:55,564 judge_handler Judge connected from: ('172.17.0.2', 46812)
+WARNING 2021-06-29 06:01:55,581 judge_handler Authentication failure: ('172.17.0.2', 46812)
+INFO 2021-06-29 06:01:55,582 judge_handler Judge disconnected from: ('172.17.0.2', 46812) with name None
+INFO 2021-06-29 06:02:27,913 judge_handler Judge connected from: ('113.169.222.240', 42330)
+WARNING 2021-06-29 06:02:27,933 judge_handler Authentication failure: ('113.169.222.240', 42330)
+INFO 2021-06-29 06:02:27,934 judge_handler Judge disconnected from: ('113.169.222.240', 42330) with name None
+INFO 2021-06-29 06:02:33,722 judge_handler Judge connected from: ('66.42.48.198', 45586)
+WARNING 2021-06-29 06:02:33,795 judge_handler Authentication failure: ('66.42.48.198', 45586)
+INFO 2021-06-29 06:02:33,796 judge_handler Judge disconnected from: ('66.42.48.198', 45586) with name None
+INFO 2021-06-29 06:02:55,649 judge_handler Judge connected from: ('172.17.0.2', 46820)
+WARNING 2021-06-29 06:02:55,679 judge_handler Authentication failure: ('172.17.0.2', 46820)
+INFO 2021-06-29 06:02:55,680 judge_handler Judge disconnected from: ('172.17.0.2', 46820) with name None
+INFO 2021-06-29 06:03:16,937 daemon Exiting due to SIGINT
+INFO 2021-06-29 06:05:12,880 judge_handler Judge connected from: ('172.17.0.2', 36932)
+WARNING 2021-06-29 06:05:12,902 judge_handler Authentication failure: ('172.17.0.2', 36932)
+INFO 2021-06-29 06:05:12,902 judge_handler Judge disconnected from: ('172.17.0.2', 36932) with name None
+INFO 2021-06-29 06:05:16,912 judge_handler Judge connected from: ('172.17.0.2', 36936)
+WARNING 2021-06-29 06:05:16,920 judge_handler Authentication failure: ('172.17.0.2', 36936)
+INFO 2021-06-29 06:05:16,922 judge_handler Judge disconnected from: ('172.17.0.2', 36936) with name None
+INFO 2021-06-29 06:05:22,933 judge_handler Judge connected from: ('172.17.0.2', 36940)
+WARNING 2021-06-29 06:05:22,940 judge_handler Authentication failure: ('172.17.0.2', 36940)
+INFO 2021-06-29 06:05:22,940 judge_handler Judge disconnected from: ('172.17.0.2', 36940) with name None
+INFO 2021-06-29 06:05:31,957 judge_handler Judge connected from: ('172.17.0.2', 36944)
+WARNING 2021-06-29 06:05:31,976 judge_handler Authentication failure: ('172.17.0.2', 36944)
+INFO 2021-06-29 06:05:31,977 judge_handler Judge disconnected from: ('172.17.0.2', 36944) with name None
+INFO 2021-06-29 06:05:37,350 judge_handler Judge connected from: ('66.42.48.198', 45592)
+WARNING 2021-06-29 06:05:37,420 judge_handler Authentication failure: ('66.42.48.198', 45592)
+INFO 2021-06-29 06:05:37,421 judge_handler Judge disconnected from: ('66.42.48.198', 45592) with name None
+INFO 2021-06-29 06:05:45,491 judge_handler Judge connected from: ('172.17.0.2', 36950)
+WARNING 2021-06-29 06:05:45,498 judge_handler Authentication failure: ('172.17.0.2', 36950)
+INFO 2021-06-29 06:05:45,499 judge_handler Judge disconnected from: ('172.17.0.2', 36950) with name None
+INFO 2021-06-29 06:05:47,908 judge_handler Judge connected from: ('113.169.222.240', 42336)
+WARNING 2021-06-29 06:05:47,924 judge_handler Authentication failure: ('113.169.222.240', 42336)
+INFO 2021-06-29 06:05:47,932 judge_handler Judge disconnected from: ('113.169.222.240', 42336) with name None
+INFO 2021-06-29 06:06:05,775 judge_handler Judge connected from: ('172.17.0.2', 36956)
+WARNING 2021-06-29 06:06:05,794 judge_handler Authentication failure: ('172.17.0.2', 36956)
+INFO 2021-06-29 06:06:05,797 judge_handler Judge disconnected from: ('172.17.0.2', 36956) with name None
+INFO 2021-06-29 06:06:36,212 judge_handler Judge connected from: ('172.17.0.2', 36960)
+WARNING 2021-06-29 06:06:36,227 judge_handler Authentication failure: ('172.17.0.2', 36960)
+INFO 2021-06-29 06:06:36,227 judge_handler Judge disconnected from: ('172.17.0.2', 36960) with name None
+INFO 2021-06-29 06:06:37,588 judge_handler Judge connected from: ('66.42.48.198', 45594)
+WARNING 2021-06-29 06:06:37,654 judge_handler Authentication failure: ('66.42.48.198', 45594)
+INFO 2021-06-29 06:06:37,655 judge_handler Judge disconnected from: ('66.42.48.198', 45594) with name None
+INFO 2021-06-29 06:06:54,641 judge_handler Judge connected from: ('113.169.222.240', 42338)
+WARNING 2021-06-29 06:06:54,663 judge_handler Authentication failure: ('113.169.222.240', 42338)
+INFO 2021-06-29 06:06:54,678 judge_handler Judge disconnected from: ('113.169.222.240', 42338) with name None
+INFO 2021-06-29 06:07:21,849 judge_handler Judge connected from: ('172.17.0.2', 36978)
+WARNING 2021-06-29 06:07:21,889 judge_handler Authentication failure: ('172.17.0.2', 36978)
+INFO 2021-06-29 06:07:21,890 judge_handler Judge disconnected from: ('172.17.0.2', 36978) with name None
+INFO 2021-06-29 06:07:37,837 judge_handler Judge connected from: ('66.42.48.198', 45596)
+WARNING 2021-06-29 06:07:37,903 judge_handler Authentication failure: ('66.42.48.198', 45596)
+INFO 2021-06-29 06:07:37,904 judge_handler Judge disconnected from: ('66.42.48.198', 45596) with name None
+INFO 2021-06-29 06:08:00,382 judge_handler Judge connected from: ('113.169.222.240', 42340)
+WARNING 2021-06-29 06:08:00,398 judge_handler Authentication failure: ('113.169.222.240', 42340)
+INFO 2021-06-29 06:08:00,398 judge_handler Judge disconnected from: ('113.169.222.240', 42340) with name None
+INFO 2021-06-29 06:08:21,953 judge_handler Judge connected from: ('172.17.0.2', 37032)
+WARNING 2021-06-29 06:08:21,967 judge_handler Authentication failure: ('172.17.0.2', 37032)
+INFO 2021-06-29 06:08:21,967 judge_handler Judge disconnected from: ('172.17.0.2', 37032) with name None
+INFO 2021-06-29 06:08:38,072 judge_handler Judge connected from: ('66.42.48.198', 45598)
+WARNING 2021-06-29 06:08:38,130 judge_handler Authentication failure: ('66.42.48.198', 45598)
+INFO 2021-06-29 06:08:38,131 judge_handler Judge disconnected from: ('66.42.48.198', 45598) with name None
+INFO 2021-06-29 06:09:06,571 judge_handler Judge connected from: ('113.169.222.240', 42342)
+WARNING 2021-06-29 06:09:06,594 judge_handler Authentication failure: ('113.169.222.240', 42342)
+INFO 2021-06-29 06:09:06,595 judge_handler Judge disconnected from: ('113.169.222.240', 42342) with name None
+INFO 2021-06-29 06:09:22,037 judge_handler Judge connected from: ('172.17.0.2', 37054)
+WARNING 2021-06-29 06:09:22,051 judge_handler Authentication failure: ('172.17.0.2', 37054)
+INFO 2021-06-29 06:09:22,051 judge_handler Judge disconnected from: ('172.17.0.2', 37054) with name None
+INFO 2021-06-29 06:09:38,302 judge_handler Judge connected from: ('66.42.48.198', 45602)
+WARNING 2021-06-29 06:09:38,361 judge_handler Authentication failure: ('66.42.48.198', 45602)
+INFO 2021-06-29 06:09:38,361 judge_handler Judge disconnected from: ('66.42.48.198', 45602) with name None
+INFO 2021-06-29 06:10:12,888 judge_handler Judge connected from: ('113.169.222.240', 42344)
+WARNING 2021-06-29 06:10:12,903 judge_handler Authentication failure: ('113.169.222.240', 42344)
+INFO 2021-06-29 06:10:12,904 judge_handler Judge disconnected from: ('113.169.222.240', 42344) with name None
+INFO 2021-06-29 06:10:22,141 judge_handler Judge connected from: ('172.17.0.2', 37102)
+WARNING 2021-06-29 06:10:22,154 judge_handler Authentication failure: ('172.17.0.2', 37102)
+INFO 2021-06-29 06:10:22,155 judge_handler Judge disconnected from: ('172.17.0.2', 37102) with name None
+INFO 2021-06-29 06:10:38,538 judge_handler Judge connected from: ('66.42.48.198', 45604)
+WARNING 2021-06-29 06:10:38,617 judge_handler Authentication failure: ('66.42.48.198', 45604)
+INFO 2021-06-29 06:10:38,618 judge_handler Judge disconnected from: ('66.42.48.198', 45604) with name None
+INFO 2021-06-29 06:11:19,496 judge_handler Judge connected from: ('113.169.222.240', 42346)
+WARNING 2021-06-29 06:11:19,524 judge_handler Authentication failure: ('113.169.222.240', 42346)
+INFO 2021-06-29 06:11:19,536 judge_handler Judge disconnected from: ('113.169.222.240', 42346) with name None
+INFO 2021-06-29 06:11:22,225 judge_handler Judge connected from: ('172.17.0.2', 37148)
+WARNING 2021-06-29 06:11:22,233 judge_handler Authentication failure: ('172.17.0.2', 37148)
+INFO 2021-06-29 06:11:22,234 judge_handler Judge disconnected from: ('172.17.0.2', 37148) with name None
+INFO 2021-06-29 06:11:38,791 judge_handler Judge connected from: ('66.42.48.198', 45606)
+WARNING 2021-06-29 06:11:38,861 judge_handler Authentication failure: ('66.42.48.198', 45606)
+INFO 2021-06-29 06:11:38,862 judge_handler Judge disconnected from: ('66.42.48.198', 45606) with name None
+INFO 2021-06-29 06:12:22,318 judge_handler Judge connected from: ('172.17.0.2', 37156)
+WARNING 2021-06-29 06:12:22,329 judge_handler Authentication failure: ('172.17.0.2', 37156)
+INFO 2021-06-29 06:12:22,330 judge_handler Judge disconnected from: ('172.17.0.2', 37156) with name None
+INFO 2021-06-29 06:12:26,249 judge_handler Judge connected from: ('113.169.222.240', 42348)
+WARNING 2021-06-29 06:12:26,265 judge_handler Authentication failure: ('113.169.222.240', 42348)
+INFO 2021-06-29 06:12:26,265 judge_handler Judge disconnected from: ('113.169.222.240', 42348) with name None
+INFO 2021-06-29 06:12:40,776 judge_handler Judge connected from: ('66.42.48.198', 45608)
+WARNING 2021-06-29 06:12:40,930 judge_handler Authentication failure: ('66.42.48.198', 45608)
+INFO 2021-06-29 06:12:40,930 judge_handler Judge disconnected from: ('66.42.48.198', 45608) with name None
+INFO 2021-06-29 06:13:22,406 judge_handler Judge connected from: ('172.17.0.2', 37176)
+WARNING 2021-06-29 06:13:22,425 judge_handler Authentication failure: ('172.17.0.2', 37176)
+INFO 2021-06-29 06:13:22,430 judge_handler Judge disconnected from: ('172.17.0.2', 37176) with name None
+INFO 2021-06-29 06:13:32,992 judge_handler Judge connected from: ('113.169.222.240', 42350)
+WARNING 2021-06-29 06:13:33,008 judge_handler Authentication failure: ('113.169.222.240', 42350)
+INFO 2021-06-29 06:13:33,009 judge_handler Judge disconnected from: ('113.169.222.240', 42350) with name None
+INFO 2021-06-29 06:13:41,155 judge_handler Judge connected from: ('66.42.48.198', 45610)
+WARNING 2021-06-29 06:13:41,218 judge_handler Authentication failure: ('66.42.48.198', 45610)
+INFO 2021-06-29 06:13:41,218 judge_handler Judge disconnected from: ('66.42.48.198', 45610) with name None
+INFO 2021-06-29 06:14:22,486 judge_handler Judge connected from: ('172.17.0.2', 37184)
+WARNING 2021-06-29 06:14:22,517 judge_handler Authentication failure: ('172.17.0.2', 37184)
+INFO 2021-06-29 06:14:22,517 judge_handler Judge disconnected from: ('172.17.0.2', 37184) with name None
+INFO 2021-06-29 06:14:39,737 judge_handler Judge connected from: ('113.169.222.240', 42352)
+WARNING 2021-06-29 06:14:39,767 judge_handler Authentication failure: ('113.169.222.240', 42352)
+INFO 2021-06-29 06:14:39,768 judge_handler Judge disconnected from: ('113.169.222.240', 42352) with name None
+INFO 2021-06-29 06:14:41,385 judge_handler Judge connected from: ('66.42.48.198', 45612)
+WARNING 2021-06-29 06:14:41,443 judge_handler Authentication failure: ('66.42.48.198', 45612)
+INFO 2021-06-29 06:14:41,443 judge_handler Judge disconnected from: ('66.42.48.198', 45612) with name None
+INFO 2021-06-29 06:15:22,586 judge_handler Judge connected from: ('172.17.0.2', 37208)
+WARNING 2021-06-29 06:15:22,622 judge_handler Authentication failure: ('172.17.0.2', 37208)
+INFO 2021-06-29 06:15:22,623 judge_handler Judge disconnected from: ('172.17.0.2', 37208) with name None
+INFO 2021-06-29 06:15:41,623 judge_handler Judge connected from: ('66.42.48.198', 45614)
+WARNING 2021-06-29 06:15:41,984 judge_handler Authentication failure: ('66.42.48.198', 45614)
+INFO 2021-06-29 06:15:41,985 judge_handler Judge disconnected from: ('66.42.48.198', 45614) with name None
+INFO 2021-06-29 06:15:45,397 judge_handler Judge connected from: ('113.169.222.240', 42354)
+WARNING 2021-06-29 06:15:45,425 judge_handler Authentication failure: ('113.169.222.240', 42354)
+INFO 2021-06-29 06:15:45,427 judge_handler Judge disconnected from: ('113.169.222.240', 42354) with name None
+INFO 2021-06-29 06:16:22,699 judge_handler Judge connected from: ('172.17.0.2', 37216)
+WARNING 2021-06-29 06:16:22,721 judge_handler Authentication failure: ('172.17.0.2', 37216)
+INFO 2021-06-29 06:16:22,724 judge_handler Judge disconnected from: ('172.17.0.2', 37216) with name None
+INFO 2021-06-29 06:16:42,153 judge_handler Judge connected from: ('66.42.48.198', 45616)
+WARNING 2021-06-29 06:16:42,217 judge_handler Authentication failure: ('66.42.48.198', 45616)
+INFO 2021-06-29 06:16:42,224 judge_handler Judge disconnected from: ('66.42.48.198', 45616) with name None
+INFO 2021-06-29 06:16:51,574 judge_handler Judge connected from: ('113.169.222.240', 42356)
+WARNING 2021-06-29 06:16:51,612 judge_handler Authentication failure: ('113.169.222.240', 42356)
+INFO 2021-06-29 06:16:51,613 judge_handler Judge disconnected from: ('113.169.222.240', 42356) with name None
+INFO 2021-06-29 06:17:22,795 judge_handler Judge connected from: ('172.17.0.2', 37224)
+WARNING 2021-06-29 06:17:22,833 judge_handler Authentication failure: ('172.17.0.2', 37224)
+INFO 2021-06-29 06:17:22,833 judge_handler Judge disconnected from: ('172.17.0.2', 37224) with name None
+INFO 2021-06-29 06:17:42,401 judge_handler Judge connected from: ('66.42.48.198', 45618)
+WARNING 2021-06-29 06:17:42,467 judge_handler Authentication failure: ('66.42.48.198', 45618)
+INFO 2021-06-29 06:17:42,468 judge_handler Judge disconnected from: ('66.42.48.198', 45618) with name None
+INFO 2021-06-29 06:17:57,893 judge_handler Judge connected from: ('113.169.222.240', 42358)
+WARNING 2021-06-29 06:17:57,916 judge_handler Authentication failure: ('113.169.222.240', 42358)
+INFO 2021-06-29 06:17:57,917 judge_handler Judge disconnected from: ('113.169.222.240', 42358) with name None
+INFO 2021-06-29 06:18:22,913 judge_handler Judge connected from: ('172.17.0.2', 37232)
+WARNING 2021-06-29 06:18:22,928 judge_handler Authentication failure: ('172.17.0.2', 37232)
+INFO 2021-06-29 06:18:22,932 judge_handler Judge disconnected from: ('172.17.0.2', 37232) with name None
+INFO 2021-06-29 06:18:42,638 judge_handler Judge connected from: ('66.42.48.198', 45620)
+WARNING 2021-06-29 06:18:42,714 judge_handler Authentication failure: ('66.42.48.198', 45620)
+INFO 2021-06-29 06:18:42,715 judge_handler Judge disconnected from: ('66.42.48.198', 45620) with name None
+INFO 2021-06-29 06:19:04,445 judge_handler Judge connected from: ('113.169.222.240', 42360)
+WARNING 2021-06-29 06:19:04,471 judge_handler Authentication failure: ('113.169.222.240', 42360)
+INFO 2021-06-29 06:19:04,472 judge_handler Judge disconnected from: ('113.169.222.240', 42360) with name None
+INFO 2021-06-29 06:19:23,001 judge_handler Judge connected from: ('172.17.0.2', 37240)
+WARNING 2021-06-29 06:19:23,020 judge_handler Authentication failure: ('172.17.0.2', 37240)
+INFO 2021-06-29 06:19:23,020 judge_handler Judge disconnected from: ('172.17.0.2', 37240) with name None
+INFO 2021-06-29 06:19:42,890 judge_handler Judge connected from: ('66.42.48.198', 45622)
+WARNING 2021-06-29 06:19:42,977 judge_handler Authentication failure: ('66.42.48.198', 45622)
+INFO 2021-06-29 06:19:42,988 judge_handler Judge disconnected from: ('66.42.48.198', 45622) with name None
+INFO 2021-06-29 06:20:11,184 judge_handler Judge connected from: ('113.169.222.240', 42362)
+WARNING 2021-06-29 06:20:11,203 judge_handler Authentication failure: ('113.169.222.240', 42362)
+INFO 2021-06-29 06:20:11,203 judge_handler Judge disconnected from: ('113.169.222.240', 42362) with name None
+INFO 2021-06-29 06:20:23,090 judge_handler Judge connected from: ('172.17.0.2', 37248)
+WARNING 2021-06-29 06:20:23,108 judge_handler Authentication failure: ('172.17.0.2', 37248)
+INFO 2021-06-29 06:20:23,108 judge_handler Judge disconnected from: ('172.17.0.2', 37248) with name None
+INFO 2021-06-29 06:20:43,165 judge_handler Judge connected from: ('66.42.48.198', 45624)
+WARNING 2021-06-29 06:20:43,240 judge_handler Authentication failure: ('66.42.48.198', 45624)
+INFO 2021-06-29 06:20:43,241 judge_handler Judge disconnected from: ('66.42.48.198', 45624) with name None
+INFO 2021-06-29 06:21:17,938 judge_handler Judge connected from: ('113.169.222.240', 42364)
+WARNING 2021-06-29 06:21:17,957 judge_handler Authentication failure: ('113.169.222.240', 42364)
+INFO 2021-06-29 06:21:17,958 judge_handler Judge disconnected from: ('113.169.222.240', 42364) with name None
+INFO 2021-06-29 06:21:23,184 judge_handler Judge connected from: ('172.17.0.2', 37256)
+WARNING 2021-06-29 06:21:23,206 judge_handler Authentication failure: ('172.17.0.2', 37256)
+INFO 2021-06-29 06:21:23,207 judge_handler Judge disconnected from: ('172.17.0.2', 37256) with name None
+INFO 2021-06-29 06:21:43,581 judge_handler Judge connected from: ('66.42.48.198', 45626)
+WARNING 2021-06-29 06:21:44,118 judge_handler Authentication failure: ('66.42.48.198', 45626)
+INFO 2021-06-29 06:21:44,118 judge_handler Judge disconnected from: ('66.42.48.198', 45626) with name None
+INFO 2021-06-29 06:22:23,282 judge_handler Judge connected from: ('172.17.0.2', 37262)
+WARNING 2021-06-29 06:22:23,299 judge_handler Authentication failure: ('172.17.0.2', 37262)
+INFO 2021-06-29 06:22:23,299 judge_handler Judge disconnected from: ('172.17.0.2', 37262) with name None
+INFO 2021-06-29 06:22:24,662 judge_handler Judge connected from: ('113.169.222.240', 42366)
+WARNING 2021-06-29 06:22:24,687 judge_handler Authentication failure: ('113.169.222.240', 42366)
+INFO 2021-06-29 06:22:24,688 judge_handler Judge disconnected from: ('113.169.222.240', 42366) with name None
+INFO 2021-06-29 06:22:44,335 judge_handler Judge connected from: ('66.42.48.198', 45628)
+WARNING 2021-06-29 06:22:44,401 judge_handler Authentication failure: ('66.42.48.198', 45628)
+INFO 2021-06-29 06:22:44,401 judge_handler Judge disconnected from: ('66.42.48.198', 45628) with name None
+INFO 2021-06-29 06:23:23,382 judge_handler Judge connected from: ('172.17.0.2', 37270)
+WARNING 2021-06-29 06:23:23,423 judge_handler Authentication failure: ('172.17.0.2', 37270)
+INFO 2021-06-29 06:23:23,427 judge_handler Judge disconnected from: ('172.17.0.2', 37270) with name None
+INFO 2021-06-29 06:23:30,288 judge_handler Judge connected from: ('113.169.222.240', 42368)
+WARNING 2021-06-29 06:23:30,306 judge_handler Authentication failure: ('113.169.222.240', 42368)
+INFO 2021-06-29 06:23:30,313 judge_handler Judge disconnected from: ('113.169.222.240', 42368) with name None
+INFO 2021-06-29 06:23:44,572 judge_handler Judge connected from: ('66.42.48.198', 45630)
+WARNING 2021-06-29 06:23:44,637 judge_handler Authentication failure: ('66.42.48.198', 45630)
+INFO 2021-06-29 06:23:44,637 judge_handler Judge disconnected from: ('66.42.48.198', 45630) with name None
+INFO 2021-06-29 06:24:23,474 judge_handler Judge connected from: ('172.17.0.2', 37280)
+WARNING 2021-06-29 06:24:23,495 judge_handler Authentication failure: ('172.17.0.2', 37280)
+INFO 2021-06-29 06:24:23,496 judge_handler Judge disconnected from: ('172.17.0.2', 37280) with name None
+INFO 2021-06-29 06:24:36,401 judge_handler Judge connected from: ('113.169.222.240', 42370)
+WARNING 2021-06-29 06:24:36,414 judge_handler Authentication failure: ('113.169.222.240', 42370)
+INFO 2021-06-29 06:24:36,415 judge_handler Judge disconnected from: ('113.169.222.240', 42370) with name None
+INFO 2021-06-29 06:24:44,990 judge_handler Judge connected from: ('66.42.48.198', 45632)
+WARNING 2021-06-29 06:24:45,178 judge_handler Authentication failure: ('66.42.48.198', 45632)
+INFO 2021-06-29 06:24:45,179 judge_handler Judge disconnected from: ('66.42.48.198', 45632) with name None
+INFO 2021-06-29 06:25:23,574 judge_handler Judge connected from: ('172.17.0.2', 37290)
+WARNING 2021-06-29 06:25:23,602 judge_handler Authentication failure: ('172.17.0.2', 37290)
+INFO 2021-06-29 06:25:23,602 judge_handler Judge disconnected from: ('172.17.0.2', 37290) with name None
+INFO 2021-06-29 06:25:42,671 judge_handler Judge connected from: ('113.169.222.240', 42372)
+WARNING 2021-06-29 06:25:42,688 judge_handler Authentication failure: ('113.169.222.240', 42372)
+INFO 2021-06-29 06:25:42,689 judge_handler Judge disconnected from: ('113.169.222.240', 42372) with name None
+INFO 2021-06-29 06:25:45,427 judge_handler Judge connected from: ('66.42.48.198', 45634)
+WARNING 2021-06-29 06:25:45,493 judge_handler Authentication failure: ('66.42.48.198', 45634)
+INFO 2021-06-29 06:25:45,494 judge_handler Judge disconnected from: ('66.42.48.198', 45634) with name None
+INFO 2021-06-29 06:26:23,671 judge_handler Judge connected from: ('172.17.0.2', 37300)
+WARNING 2021-06-29 06:26:23,706 judge_handler Authentication failure: ('172.17.0.2', 37300)
+INFO 2021-06-29 06:26:23,707 judge_handler Judge disconnected from: ('172.17.0.2', 37300) with name None
+INFO 2021-06-29 06:26:45,677 judge_handler Judge connected from: ('66.42.48.198', 45636)
+WARNING 2021-06-29 06:26:45,737 judge_handler Authentication failure: ('66.42.48.198', 45636)
+INFO 2021-06-29 06:26:45,737 judge_handler Judge disconnected from: ('66.42.48.198', 45636) with name None
+INFO 2021-06-29 06:26:49,198 judge_handler Judge connected from: ('113.169.222.240', 42374)
+WARNING 2021-06-29 06:26:49,213 judge_handler Authentication failure: ('113.169.222.240', 42374)
+INFO 2021-06-29 06:26:49,213 judge_handler Judge disconnected from: ('113.169.222.240', 42374) with name None
+INFO 2021-06-29 06:27:23,786 judge_handler Judge connected from: ('172.17.0.2', 37308)
+WARNING 2021-06-29 06:27:23,815 judge_handler Authentication failure: ('172.17.0.2', 37308)
+INFO 2021-06-29 06:27:23,816 judge_handler Judge disconnected from: ('172.17.0.2', 37308) with name None
+INFO 2021-06-29 06:27:45,914 judge_handler Judge connected from: ('66.42.48.198', 45638)
+WARNING 2021-06-29 06:27:45,981 judge_handler Authentication failure: ('66.42.48.198', 45638)
+INFO 2021-06-29 06:27:45,982 judge_handler Judge disconnected from: ('66.42.48.198', 45638) with name None
+INFO 2021-06-29 06:27:55,933 judge_handler Judge connected from: ('113.169.222.240', 42382)
+WARNING 2021-06-29 06:27:55,955 judge_handler Authentication failure: ('113.169.222.240', 42382)
+INFO 2021-06-29 06:27:55,958 judge_handler Judge disconnected from: ('113.169.222.240', 42382) with name None
+INFO 2021-06-29 06:28:23,889 judge_handler Judge connected from: ('172.17.0.2', 37318)
+WARNING 2021-06-29 06:28:23,908 judge_handler Authentication failure: ('172.17.0.2', 37318)
+INFO 2021-06-29 06:28:23,920 judge_handler Judge disconnected from: ('172.17.0.2', 37318) with name None
+INFO 2021-06-29 06:28:46,152 judge_handler Judge connected from: ('66.42.48.198', 45640)
+WARNING 2021-06-29 06:28:46,222 judge_handler Authentication failure: ('66.42.48.198', 45640)
+INFO 2021-06-29 06:28:46,222 judge_handler Judge disconnected from: ('66.42.48.198', 45640) with name None
+INFO 2021-06-29 06:29:02,650 judge_handler Judge connected from: ('113.169.222.240', 42384)
+WARNING 2021-06-29 06:29:02,680 judge_handler Authentication failure: ('113.169.222.240', 42384)
+INFO 2021-06-29 06:29:02,683 judge_handler Judge disconnected from: ('113.169.222.240', 42384) with name None
+INFO 2021-06-29 06:29:23,964 judge_handler Judge connected from: ('172.17.0.2', 37352)
+WARNING 2021-06-29 06:29:23,994 judge_handler Authentication failure: ('172.17.0.2', 37352)
+INFO 2021-06-29 06:29:23,994 judge_handler Judge disconnected from: ('172.17.0.2', 37352) with name None
+INFO 2021-06-29 06:29:46,392 judge_handler Judge connected from: ('66.42.48.198', 45642)
+WARNING 2021-06-29 06:29:46,462 judge_handler Authentication failure: ('66.42.48.198', 45642)
+INFO 2021-06-29 06:29:46,463 judge_handler Judge disconnected from: ('66.42.48.198', 45642) with name None
+INFO 2021-06-29 06:30:09,419 judge_handler Judge connected from: ('113.169.222.240', 42398)
+WARNING 2021-06-29 06:30:09,443 judge_handler Authentication failure: ('113.169.222.240', 42398)
+INFO 2021-06-29 06:30:09,443 judge_handler Judge disconnected from: ('113.169.222.240', 42398) with name None

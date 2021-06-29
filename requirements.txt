@@ -28,7 +28,7 @@ jsonfield
 pymoss
 packaging
 celery
-ansi2html @ git+git://github.com/DMOJ/ansi2html.git
+ansi2html
 sqlparse
 lupa
 martor @ git+git://github.com/DMOJ/martor.git
