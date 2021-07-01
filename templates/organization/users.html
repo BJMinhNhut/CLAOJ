@@ -2,8 +2,7 @@
 {% block users_media %}
     <style>
         #users-table td:nth-child(2), #users-table th:nth-child(2) {
-            border-right: none;
-            text-align: left;
+            text-align: center;
         }
 
         .kick-form .button {
@@ -20,7 +19,8 @@
     </style>
 
     {% if is_admin %}
-        <style>#users-table td:nth-child(3), #users-table th:nth-child(3) {
+	<style>
+        #users-table td:nth-child(2), #users-table th:nth-child(2) {
             border-right: none;
         }
         </style>

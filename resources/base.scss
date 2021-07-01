@@ -88,9 +88,10 @@ th {
 .form-area {
     display: inline-block;
     background: $background_light_gray;
-    padding: 5px 10px 10px 15px;
+    padding: 10px 15px;
     border-radius: $widget_border_radius;
-    border: 1px solid $border_gray;
+    border: none;
+    box-shadow: $sidebox_shadow;
 }
 
 div.info-float {
@@ -283,22 +284,24 @@ nav {
                 text-decoration: none;
                 vertical-align: middle;
                 color: #FFF;
-                padding: 13px 7px;
+                padding: 18px 7px;
                 height: 18px;
+		transition: background ease-in-out 0.1s;
 
                 &:link {
                     color: #FFF;
                 }
 
                 &:hover {
-                    color: #FFF;
-                    background: rgba(255, 255, 255, 0.25);
+                    color: #4db6ac;
+                    background: #455a64;
                     margin: 0;
                 }
 
                 &.active {
-                    color: #FFF;
-                    background: $highlight_blue;
+                    color: #4db6ac;
+                    padding: 18px 7px 13px 7px;
+    		    border-bottom: 5px solid #4db6ac;
                 }
 
                 .nav-expand {
@@ -367,7 +370,7 @@ nav {
         display: inline-block;
         height: 32px;
         margin-right: 1px;
-        border-right: 3px solid rgba(255, 255, 255, 0.15);
+        border-right: 3px solid transparent;
     }
 }
 
@@ -521,8 +524,9 @@ noscript #noscript {
 
             a {
                 display: block;
-                padding: 0;
+                padding: 5px 0;
                 height: 100%;
+		font-weight: 400;
             }
         }
     }

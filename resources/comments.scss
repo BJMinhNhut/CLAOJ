@@ -86,6 +86,9 @@ a {
     input, textarea {
         min-width: 100%;
         max-width: 100%;
+	background: #eceff1;
+    	border: none;
+    	border-radius: $widget_border_radius;
 
         // Hack for 4k on Chrome
         font-size: $base_font_size;

@@ -148,6 +148,7 @@
                         {% endif %}
                     </div>
                 </div>
+<br> <br>
             {% endif %}
             {% if current_contests %}
                 <div class="blog-sidebox sidebox">
@@ -165,6 +166,7 @@
                         {% endfor %}
                     </div>
                 </div>
+<br> <br>
             {% endif %}
 
             {% if future_contests %}
@@ -183,6 +185,7 @@
                         {% endfor %}
                     </div>
                 </div>
+<br> <br>
             {% endif %}
 
             <div class="blog-sidebox sidebox">
@@ -205,6 +208,7 @@
                     </span>
                 </div>
             </div>
+<br> <br>
             <div class="blog-sidebox sidebox">
                 <h3>{{ _('New problems') }} <i class="fa fa-puzzle-piece"></i>
                 </h3>
@@ -221,6 +225,7 @@
                     </span>
                 </div>
             </div>
+<br> <br>
             {% if perms.judge.test_site and own_open_tickets %}
                 <div class="blog-sidebox sidebox">
                     <h3>{{ _('My open tickets') }} <i class="fa fa-question-circle"></i></h3>
@@ -240,6 +245,7 @@
                         </ul>
                     </div>
                 </div>
+<br> <br>
             {% endif %}
 
             {% if perms.judge.test_site and open_tickets %}
@@ -262,6 +268,7 @@
                         </ul>
                     </div>
                 </div>
+<br> <br>
             {% endif %}
         </div>
     </div>

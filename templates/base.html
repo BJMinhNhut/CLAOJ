@@ -266,7 +266,7 @@
     <noscript>
         <div id="noscript">{{ _('This site works best with JavaScript enabled.') }}</div>
     </noscript>
-    <br>
+    <br> <br>
     <main id="content">
         {% block title_row %}
             <h2 style="color:#393630; display:inline">
@@ -277,7 +277,6 @@
         {% endblock %}
         {% block header %}{% endblock %}
         {% block title_ruler %}
-            <hr>
         {% endblock %}
         <div id="content-body">{% block body %}{% endblock %}</div>
     </main>

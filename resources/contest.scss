@@ -128,7 +128,7 @@
         }
 
         &:nth-child(3) {
-            min-width: 6em;
+            min-width: 20em;
         }
     }
 
@@ -160,7 +160,7 @@
 
     .participate-button {
         display: inline-block;
-        width: 90px;
+        width: 100px;
     }
 
     .contest-block {
@@ -169,7 +169,7 @@
     }
 
     a.contest-sort-link {
-        color: white;
+        color: #212121;
     }
 }
 

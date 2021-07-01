@@ -1,3 +1,5 @@
+@import "vars";
+
 #problem-table {
     td {
         &.category {
@@ -49,7 +51,7 @@
 
 #filter-form {
     vertical-align: top;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.75em;
     margin-top: 0.75em;
 
     a {
@@ -70,6 +72,12 @@
 
     .filter-form-group {
         margin-top: 5px;
+    }
+	
+    .form-submit-group {
+    	border-top: 1px solid #EEE;
+    	padding-top: 0.8em;
+    	text-align: right;
     }
 }
 
@@ -260,9 +268,44 @@ ul.problem-list {
     visibility: hidden;
 }
 
-#filter-form .form-label {
-    margin-top: 0.5em;
-    font-style: italic;
+.select2-container--open .select2-dropdown--below {
+    border: none;
+    box-shadow: 0 12px 20px #aaa
+}
+
+
+#filter-form {
+    transition: box-shadow ease-in-out 0.1s;
+
+    .form-label {
+    	margin-top: 0.5em;
+    	font-style: italic;
+    }
+	
+    .select2-container--default {
+	.select2-selection--multiple {
+   		background-color: #eceff1;
+    		border: none; 
+    		border-radius: $input_box_radius;
+
+		.select2-selection__rendered {
+   			margin: 5px 2px 0 6px;
+    		}
+		
+		&:hover, &:focus {
+			box-shadow: inset 0 0 5px #ccc;
+		}
+	}
+	.select2-selection--single {
+   		background-color: #eceff1;
+    		border: none; 
+    		border-radius: $input_box_radius;
+		&:hover, &:focus {
+			box-shadow: inset 0 0 5px #ccc;
+		}
+
+	}
+    }
 }
 
 #point-slider {

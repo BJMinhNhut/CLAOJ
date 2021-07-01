@@ -32,7 +32,8 @@
     font-weight: 600;
     line-height: 1.4;
     background: $button_color;
-    box-shadow: 0 1px 7px #999;
+    box-shadow: $button_shadow;
+    border: none;
     border-radius: $widget_border_radius;
     font-family: $title_fonts;
     padding: 6px 12px;
@@ -73,13 +74,12 @@ button:hover, button:hover, input[type=submit]:hover {
 
 input {
     &[type=text], &[type=password], &[type=email], &[type=number] {
-        padding: 4px 8px;
+        padding: 4px 8px 3px 8px;
         color: #555;
-        background: #FFF none;
-        border: 1px solid $border_gray;
-        border-radius: $widget_border_radius;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-        transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+        background: #eceff1;
+	border: none;
+        border-radius: $input_box_radius;
+        transition: box-shadow ease-in-out 0.1s;
         box-sizing: border-box;
 
         // Need this explicitly because UA stylesheet for Chrome on 4k makes
@@ -99,36 +99,31 @@ input {
 textarea {
     padding: 4px 8px;
     color: #555;
-    background: #FFF none;
-    border: 1px solid $border_gray;
+    background: #eceff1;
+    border: none;
     border-radius: $widget_border_radius;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    transition: box-shadow ease-in-out 0.1s;
     box-sizing: border-box;
 }
 
 textarea:hover {
-    border-color: rgba(82, 168, 236, 0.8);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px rgba(82, 168, 236, 0.6);
+    box-shadow: inset 0 0 5px #ccc;
 }
 
 input {
-    &[type="text"]:hover, &[type="password"]:hover {
-        border-color: rgba(82, 168, 236, 0.8);
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px rgba(82, 168, 236, 0.6);
+    &[type="text"]:hover, &[type="password"]:hover, &[type="email"]:hover, &[type="number"]:hover {
+        box-shadow: inset 0 0 5px #ccc;
     }
 }
 
 textarea:focus {
-    border-color: rgba(82, 168, 236, 0.8);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+    box-shadow: inset 0 0 5px #ccc;
     outline: 0;
 }
 
 input {
-    &[type="text"]:focus, &[type="password"]:focus {
-        border-color: rgba(82, 168, 236, 0.8);
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+    &[type="text"]:focus, &[type="password"]:focus, &[type="email"]:focus, &[type="number"]:focus {
+        box-shadow: inset 0 0 5px #ccc;
         outline: 0;
     }
 }
@@ -155,19 +150,18 @@ input {
 
 // Bootstrap-y tabs
 .ul_tab_a_active {
-    color: black;
+    color: $button_color;
     cursor: default;
-    background-color: #fff;
-    border: 1px solid $border_gray;
-    border-bottom-color: transparent;
+    border-bottom-color: $button_color;
     border-image: none;
 }
 
 .tabs {
-    border-bottom: 1px solid $border_gray;
     margin: 0 0 8px;
     width: 100%;
     display: flex;
+    font-family: $title_fonts;
+    font-weight: 700;
 
     &.tabs-no-flex {
         display: block;
@@ -176,22 +170,24 @@ input {
     .tab {
         .tab-icon {
             padding-right: 0.3em;
-            color: gray;
         }
 
         a, span {
-            border-top-width: 3px !important;
+	    &:hover {
+	    	color: #546e7a;
+	    }
+            border-bottom-width: 5px;
         }
 
         &.active {
             a, span {
-                border-top-color: $highlight_blue !important;
+                border-top-color: $button_color;
             }
 
             .tab-icon {
-                color: black;
             }
         }
+	
     }
 
     h2 {
@@ -224,14 +220,16 @@ input {
             }
 
             > a, > span {
-                margin-right: 2px;
+		transition: color ease-in-out 0.1s;
+                margin-left: 12px;
+		margin-right: 2px;
                 line-height: 1.42857;
-                border: 1px solid transparent;
+                border: 0px solid transparent;
                 border-radius: $widget_border_radius $widget_border_radius 0 0;
                 position: relative;
                 display: block;
-                padding: 10px 15px;
-                color: #555;
+                padding: 10px 0 5px 0;
+                color: #90a4ae;
                 text-decoration: none;
                 white-space: nowrap;
             }
@@ -440,7 +438,7 @@ ul.select2-selection__rendered {
 
 .sidebox-content {
     margin: 0 -5px;
-    padding: 1px 0.5em 3px;
+    padding: 2px 1em 2px;
 
     &.sidebox-table {
         border: none;
