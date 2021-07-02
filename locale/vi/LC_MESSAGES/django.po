@@ -458,7 +458,7 @@ msgid ""
 "You need to have solved at least one problem before your voice can be heard."
 msgstr "Bạn cần giải được ít nhất một bài trước khi bình luận."
 
-#: judge/comments.py:93
+#: judge/comments.py:93 templates/comments/list.html:158
 msgid "Posted comment"
 msgstr "Đăng bình luận"
 
@@ -3612,10 +3612,6 @@ msgstr "Bình luận mới"
 msgid "Invalid comment body."
 msgstr "Bình luận không hợp lệ."
 
-#: templates/comments/list.html:158
-msgid "Post"
-msgstr "Đăng"
-
 #: templates/comments/list.html:166
 msgid "Comments are disabled on this page."
 msgstr "Bình luận đã bị vô hiệu hóa trên trang này."
@@ -3689,7 +3685,7 @@ msgstr "Thứ bảy"
 msgid "Enter a new key for the cloned contest:"
 msgstr "Nhập mã mới cho kỳ thi nhân bản:"
 
-#: templates/contest/clone.html:40 templates/problem/clone.html:40
+#: templates/contest/clone.html:40 templates/problem/clone.html:40 templates/contest/contest-tabs.html:27
 msgid "Clone"
 msgstr ""
 
@@ -3737,10 +3733,6 @@ msgstr "Các bài nộp"
 
 #: templates/contest/contest-tabs.html:22
 msgid "MOSS"
-msgstr ""
-
-#: templates/contest/contest-tabs.html:27
-msgid "Clone"
 msgstr ""
 
 #: templates/contest/contest-tabs.html:39
@@ -5072,16 +5064,12 @@ msgstr "Kết quả"
 msgid "Batch "
 msgstr "Subtask "
 
-#: templates/submission/status-testcases.html:64
+#: templates/submission/status-testcases.html:64 templates/submission/status-testcases.html:68
 msgid "Test case"
-msgstr " "
+msgstr ""
 
 #: templates/submission/status-testcases.html:66
 msgid "Pretest"
-msgstr ""
-
-#: templates/submission/status-testcases.html:68
-msgid "Test case"
 msgstr ""
 
 #: templates/submission/status-testcases.html:101
