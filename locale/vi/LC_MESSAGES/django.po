@@ -152,21 +152,21 @@ msgstr "Đánh dấu các kỳ thi là ẩn"
 #, python-format
 msgid "%d contest successfully locked."
 msgid_plural "%d contests successfully locked."
-msgstr[0] ""
+msgstr[0] "Kỳ thi %d đã được khoá thành công."
 
 #: judge/admin/contest.py:234
 msgid "Lock contest submissions"
-msgstr ""
+msgstr "Khoá nộp bài kỳ thi"
 
 #: judge/admin/contest.py:240
 #, python-format
 msgid "%d contest successfully unlocked."
 msgid_plural "%d contests successfully unlocked."
-msgstr[0] ""
+msgstr[0] "Kỳ thi %d đã được mở khoá thành công."
 
 #: judge/admin/contest.py:243
 msgid "Unlock contest submissions"
-msgstr ""
+msgstr "Bỏ khoá nộp bài kỳ thi"
 
 #: judge/admin/contest.py:264 judge/admin/submission.py:170
 #, python-format
@@ -270,11 +270,11 @@ msgstr "Tác giả"
 #, python-format
 msgid "%d problem's publish date successfully updated."
 msgid_plural "%d problems' publish date successfully updated."
-msgstr[0] ""
+msgstr[0] "Ngày đăng bài %d đã được cập nhật thành công."
 
 #: judge/admin/problem.py:196
 msgid "Set publish date to now"
-msgstr ""
+msgstr "Đặt ngày đăng bài thành hiện tại"
 
 #: judge/admin/problem.py:202
 #, python-format
@@ -546,19 +546,19 @@ msgstr ""
 
 #: judge/forms.py:24
 msgid "Two-factor authentication tokens must be 6 decimal digits."
-msgstr ""
+msgstr "Mã bảo mật 2 yếu tố phải chứa 6 chữ số thập phân."
 
 #: judge/forms.py:27
 msgid "Invalid two-factor authentication token."
-msgstr ""
+msgstr "Mã bảo mật không hợp lệ."
 
 #: judge/forms.py:30
 msgid "Scratch codes must be 16 base32 characters."
-msgstr ""
+msgstr "Scratch code phải gồm 16 kí tự cơ số 32."
 
 #: judge/forms.py:32
 msgid "Invalid scratch code."
-msgstr ""
+msgstr "Scratch code không hợp lệ."
 
 #: judge/forms.py:43
 msgid "Subscribe to contest updates"
@@ -570,9 +570,7 @@ msgstr "Bật các tính năng đang thử nghiệm"
 
 #: judge/forms.py:69
 msgid "You must solve at least one problem before you can update your profile."
-msgstr ""
-"Bạn phải giải ít nhất một bài trước khi có thể bỏ thay đổi thông tin người "
-"dùng"
+msgstr "Bạn phải giải ít nhất một bài trước khi có thể bỏ thay đổi thông tin người dùng"
 
 #: judge/forms.py:78 judge/views/organization.py:122
 #, python-brace-format
@@ -581,31 +579,31 @@ msgstr "Bạn không thể là thành viên của nhiều hơn {count} tổ ch�
 
 #: judge/forms.py:94
 msgid "Download comments?"
-msgstr ""
+msgstr "Tải bình luận?"
 
 #: judge/forms.py:95
 msgid "Download submissions?"
-msgstr ""
+msgstr "Tải bài nộp?"
 
 #: judge/forms.py:96
 msgid "Filter by problem code glob:"
-msgstr ""
+msgstr "Lọc theo mã đề bài:"
 
 #: judge/forms.py:100
 msgid "Leave empty to include all submissions"
-msgstr ""
+msgstr "Bỏ trống để hiện tất cả bài nộp"
 
 #: judge/forms.py:103 templates/problem/manage_submission.html:142
 msgid "Filter by result:"
-msgstr ""
+msgstr "Lọc theo kết quả chấm:"
 
 #: judge/forms.py:109
 msgid "Please select at least one thing to download."
-msgstr ""
+msgstr "Hãy chọn ít nhất một object để tải."
 
 #: judge/forms.py:135
 msgid "Any judge"
-msgstr ""
+msgstr "Bất kì máy chấm nào"
 
 #: judge/forms.py:156 judge/views/register.py:26
 #: templates/blog/top-contrib.html:8 templates/blog/top-pp.html:8
@@ -622,11 +620,11 @@ msgstr "Mật khẩu"
 
 #: judge/forms.py:190
 msgid "Invalid code length."
-msgstr ""
+msgstr "Độ dài code không hợp lệ."
 
 #: judge/forms.py:208
 msgid "Invalid WebAuthn response."
-msgstr ""
+msgstr "Phản hồi WebAuthn không hợp lệ."
 
 #: judge/forms.py:211
 msgid "No WebAuthn challenge issued."
@@ -1023,20 +1021,20 @@ msgstr ""
 
 #: judge/models/contest.py:143
 msgid "contest lock"
-msgstr ""
+msgstr "Khoá kỳ thi"
 
 #: judge/models/contest.py:144
 msgid ""
 "Prevent submissions from this contest from being rejudged after this date."
-msgstr ""
+msgstr "Ngừng chấm lại bài nộp của kỳ thi sau ngày này."
 
 #: judge/models/contest.py:146
 msgid "precision points"
-msgstr ""
+msgstr "Điểm chính xác"
 
 #: judge/models/contest.py:148
 msgid "Number of digits to round points to."
-msgstr ""
+msgstr "Số lượng số thập phân làm tròn của điểm."
 
 #: judge/models/contest.py:396
 msgid "See private contests"
@@ -1072,7 +1070,7 @@ msgstr "Tạo kỳ thi riêng tư"
 
 #: judge/models/contest.py:404
 msgid "Change contest visibility"
-msgstr ""
+msgstr "Thay đổi visibility của kỳ thi"
 
 #: judge/models/contest.py:405
 msgid "Edit contest problem label script"
@@ -1080,7 +1078,7 @@ msgstr ""
 
 #: judge/models/contest.py:406
 msgid "Change lock status of contest"
-msgstr ""
+msgstr "Thay đổi trạng thái khoá của contest"
 
 #: judge/models/contest.py:408 judge/models/contest.py:506
 #: judge/models/contest.py:544 judge/models/contest.py:566
@@ -1331,7 +1329,7 @@ msgstr "bài đăng blog"
 #: judge/models/problem.py:30
 #, python-format
 msgid "Disallowed characters: %(value)s"
-msgstr ""
+msgstr "Ký tự không hợp lệ: %(value)s"
 
 #: judge/models/problem.py:35
 msgid "problem category ID"
@@ -1424,7 +1422,7 @@ msgstr "Tên đầy đủ của bài, được hiển thị trong dánh sách b�
 
 #: judge/models/problem.py:111
 msgid "PDF statement URL"
-msgstr ""
+msgstr "URL file PDF đề bài"
 
 #: judge/models/problem.py:112
 msgid ""
@@ -1565,19 +1563,19 @@ msgstr "Nếu riêng tư, chỉ những tổ chức này có thể xem bài tậ
 
 #: judge/models/problem.py:424
 msgid "See hidden problems"
-msgstr ""
+msgstr "Hiện đề bài ẩn"
 
 #: judge/models/problem.py:425
 msgid "Edit own problems"
-msgstr ""
+msgstr "Chỉnh sửa đề bài của bạn"
 
 #: judge/models/problem.py:426
 msgid "Edit all problems"
-msgstr ""
+msgstr "Chỉnh sửa tất cả đề bài"
 
 #: judge/models/problem.py:427
 msgid "Edit all public problems"
-msgstr ""
+msgstr "Chỉnh sửa tất cả đề công khai"
 
 #: judge/models/problem.py:428
 msgid "Edit problems with full markup"
@@ -1698,11 +1696,11 @@ msgstr "tập tin dữ liệu nén dạng zip"
 
 #: judge/models/problem_data.py:39
 msgid "generator file"
-msgstr "trình sinh test"
+msgstr "code sinh test"
 
 #: judge/models/problem_data.py:41 judge/models/problem_data.py:98
 msgid "output prefix length"
-msgstr ""
+msgstr "độ dài tiền tố output"
 
 #: judge/models/problem_data.py:42 judge/models/problem_data.py:99
 msgid "output limit length"
@@ -1877,11 +1875,11 @@ msgstr "hiển thị xếp hạng"
 
 #: judge/models/profile.py:124
 msgid "Normal User"
-msgstr ""
+msgstr "Người dùng bình thường"
 
 #: judge/models/profile.py:125
 msgid "Problem Setter"
-msgstr ""
+msgstr "Người ra đề"
 
 #: judge/models/profile.py:126 templates/base.html:255
 #: templates/comments/list.html:100 templates/contest/contest-list-tabs.html:24
@@ -2514,7 +2512,7 @@ msgstr "Đang tính điểm"
 
 #: judge/tasks/user.py:49
 msgid "Applying filters"
-msgstr ""
+msgstr "Áp dụng lọc"
 
 #: judge/tasks/user.py:64
 msgid "Preparing your submission data"
@@ -2636,11 +2634,11 @@ msgstr "Bạn phải giải ít nhất một bài trước khi có thể bỏ bi
 
 #: judge/views/comment.py:48
 msgid "You cannot vote your own comment"
-msgstr ""
+msgstr "Bạn không thể tự vote"
 
 #: judge/views/comment.py:65
 msgid "You cannot vote twice."
-msgstr ""
+msgstr "Bạn không thể vote hai lần."
 
 #: judge/views/comment.py:126 judge/views/organization.py:290
 msgid "Edited from site"
@@ -2675,7 +2673,7 @@ msgstr "Bị từ chối truy cập vào kỳ thi \"%s\""
 
 #: judge/views/contests.py:263
 msgid "Clone Contest"
-msgstr ""
+msgstr "Clone kỳ thi"
 
 #: judge/views/contests.py:297
 #, python-format
@@ -3314,11 +3312,11 @@ msgstr "j M, Y, G:i"
 
 #: judge/views/user.py:313
 msgid "Preparing your data..."
-msgstr ""
+msgstr "Chuẩn bị dữ liệu"
 
 #: judge/views/user.py:317 templates/user/edit-profile.html:335
 msgid "Download your data"
-msgstr ""
+msgstr "Tải dữ liệu"
 
 #: judge/views/user.py:373
 msgid "Updated on site"
@@ -3615,8 +3613,8 @@ msgid "Invalid comment body."
 msgstr "Bình luận không hợp lệ."
 
 #: templates/comments/list.html:158
-msgid "Post!"
-msgstr "Đăng!"
+msgid "Post"
+msgstr "Đăng"
 
 #: templates/comments/list.html:166
 msgid "Comments are disabled on this page."
@@ -3637,7 +3635,7 @@ msgstr ""
 
 #: templates/comments/votes.html:5
 msgid "Voter"
-msgstr ""
+msgstr "Người bình chọn"
 
 #: templates/comments/votes.html:6 templates/user/user-problems.html:101
 msgid "Score"
@@ -3645,7 +3643,7 @@ msgstr "Điểm"
 
 #: templates/comments/votes.html:17
 msgid "No votes"
-msgstr ""
+msgstr "Không có bình chọn nào, thật trống trải :D"
 
 #: templates/contest/access_code.html:26
 msgid "Invalid access code."
@@ -3692,7 +3690,7 @@ msgid "Enter a new key for the cloned contest:"
 msgstr "Nhập mã mới cho kỳ thi nhân bản:"
 
 #: templates/contest/clone.html:40 templates/problem/clone.html:40
-msgid "Clone!"
+msgid "Clone"
 msgstr ""
 
 #: templates/contest/contest-list-tabs.html:7
@@ -3731,7 +3729,7 @@ msgstr "Bảng xếp hạng"
 
 #: templates/contest/contest-tabs.html:16
 msgid "Hidden Rankings"
-msgstr ""
+msgstr "Xếp hạng ẩn"
 
 #: templates/contest/contest-tabs.html:18 templates/user/prepare-data.html:103
 msgid "Submissions"
@@ -3847,7 +3845,7 @@ msgstr "Làm rõ"
 
 #: templates/contest/contest.html:128
 msgid "When"
-msgstr ""
+msgstr "Thời điểm"
 
 #: templates/contest/list.html:3
 #, python-format
@@ -3956,7 +3954,7 @@ msgstr ""
 
 #: templates/contest/moss.html:60
 msgid "No submissions"
-msgstr ""
+msgstr "Không có bài nộp"
 
 #: templates/contest/moss.html:74
 msgid "Re-MOSS contest"
@@ -4471,7 +4469,7 @@ msgstr "Các báo cáo của tôi"
 
 #: templates/problem/problem.html:155
 msgid "Manage submissions"
-msgstr "Quản lí submissions"
+msgstr "Quản lí bài nộp"
 
 #: templates/problem/problem.html:168
 msgid "Points:"
@@ -4479,7 +4477,7 @@ msgstr "Điểm:"
 
 #: templates/problem/problem.html:171 templates/problem/problem.html:173
 msgid "(partial)"
-msgstr "(một phần)"
+msgstr "(điểm từng phần)"
 
 #: templates/problem/problem.html:178
 msgid "Time limit:"
@@ -5028,7 +5026,7 @@ msgstr "Bài nộp này đã bị khoá, không thể chấm lại."
 
 #: templates/submission/row.html:65
 msgid "locked"
-msgstr ""
+msgstr "Đã khoá"
 
 #: templates/submission/row.html:71
 msgid "admin"
@@ -5072,11 +5070,11 @@ msgstr "Kết quả"
 
 #: templates/submission/status-testcases.html:51
 msgid "Batch "
-msgstr ""
+msgstr "Subtask "
 
 #: templates/submission/status-testcases.html:64
-msgid "Case"
-msgstr "Trường hợp"
+msgid "Test case"
+msgstr " "
 
 #: templates/submission/status-testcases.html:66
 msgid "Pretest"

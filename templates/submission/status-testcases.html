@@ -54,7 +54,7 @@
                 <div class="batch-cases">
             {% endif %}
         <table class="submissions-status-table">{% for case in batch.cases %}
-            {% set print_case_output = case.status != 'AC' and case.output and (prefix_length is none or prefix_length > 0) %}
+            {% set print_case_output = true and case.output and (prefix_length is none or prefix_length > 0) %}
             <tr id="{{ case.id }}" class="case-row toggle closed">
                 <td>
                     {%- if print_case_output or case.extended_feedback -%}
@@ -79,14 +79,14 @@
                 <td>
                     {%- if case.status != 'SC' -%}
                         {%- if case.status == 'TLE' -%}
-                            [&gt;<span>{{ time_limit|floatformat(3) }}s,</span>
+                            &gt;<span>{{ time_limit|floatformat(3) }}s</span>
                         {%- else -%}
-                            [<span title="{{ case.time }}s">{{ case.time|floatformat(3) }}s,</span>
+                            <span title="{{ case.time }}s">{{ case.time|floatformat(3) }}s</span>
                         {%- endif -%}
                     {%- endif -%}
                 </td>
 
-                <td>{% if case.status != 'SC' %}{{ case.memory|kbdetailformat }}]{% endif %}</td>
+                <td>{% if case.status != 'SC' %}{{ case.memory|kbdetailformat }}{% endif %}</td>
 
                 {% if not batch.id %}
                     <td>({{ case.points|floatformat(0) }}/{{ case.total|floatformat(0) }})</td>
@@ -97,8 +97,8 @@
                 <tr id="{{ case.id }}-output" style="display:none" class="case-feedback toggled">
                     {% if print_case_output %}
                         <td colspan="5" class="case-output">
+				<strong>{{ _('Your output (clipped)') }}</strong>
                             <div class="case-info">
-                                <strong>{{ _('Your output (clipped)') }}</strong>
                                 {% if prefix_length is none %}
                                     <pre class="case-output">{{ case.output|linebreaksbr }}</pre>
                                 {% else %}

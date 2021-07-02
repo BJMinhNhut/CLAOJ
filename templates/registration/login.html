@@ -50,10 +50,11 @@
                 </tr>
             </table>
             <hr>
+		<a href="{{ url('password_reset') }}">{{ _('Forgot your password?') }}</a>
             <button style="float:right;" type="submit">{{ _('Login!') }}</button>
             <input type="hidden" name="next" value="{{ next }}">
         </form>
-        <a href="{{ url('password_reset') }}">{{ _('Forgot your password?') }}</a>
+        
 
         {% if form.has_google_auth or form.has_facebook_auth or form.has_github_auth %}
             <h4>{{ _('Or log in with...') }}</h4>

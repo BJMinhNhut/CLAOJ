@@ -1,7 +1,7 @@
 <div class="sub-result {{ breakdown.sub_result_class }}">
-    <div class="score">{{ breakdown.sub_points|floatformat(0) }} / {{ breakdown.sub_total|floatformat(0) }}</div>
+    <div class="score"><span title="{{ breakdown.sub_long_status }}" class="status">{{ breakdown.sub_short_status }}</span></div>
     <div class="state">
-        <span title="{{ breakdown.sub_long_status }}" class="status">{{ breakdown.sub_short_status }}</span>
+	{{ breakdown.sub_points|floatformat(0) }} / {{ breakdown.sub_total|floatformat(0) }}
         |
         <span class="language">{{ breakdown.sub_lang }}</span>
     </div>

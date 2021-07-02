@@ -1,3 +1,5 @@
+@import "vars";
+
 .info-float {
     position: sticky;
     top: 60px;
@@ -10,6 +12,8 @@
 
 .submissions-status-table {
     border-spacing: 0;
+    width: 100%;
+    padding: 0 5em;
 }
 
 .submission-row {
@@ -234,15 +238,19 @@ label[for="language"], label[for="status"] {
 
 #test-cases {
     .toggle .fa {
-        margin-left: -1.28571em;
+        margin-left: -0.3em;
     }
 
     .batch-cases {
         margin: 0;
-        padding-left: 1em;
-        padding-bottom: 3px;
-        padding-top: 3px;
+        padding-bottom: 1em;
+        padding-top: 1em;
         display: inline-block;
+	width: 100%;
+
+	.case-row td:nth-child(4) {
+		border-right: 1px solid $border_gray;
+	}
     }
 
     .batch-cases .case-row td b {
@@ -250,37 +258,73 @@ label[for="language"], label[for="status"] {
     }
 
     .case-row td:nth-child(3) {
-        padding-right: 0;
-        text-align: right;
     }
 
     .case-row td:nth-child(3) span {
-        float: right;
     }
 
-    .case-row td:nth-child(4) {
-        text-align: right;
+    .case-row td:nth-child(5) {
+       border-right: 1px solid $border_gray;
     }
+	
+    tr:first-child td {
+	border-top: 1px solid #ccc;
+	
+	&:first-child {
+		border-top-left-radius: $widget_border_radius;
+	}
+	
+	&:last-child {
+		border-top-right-radius: $widget_border_radius;
+	}
+
+    }
+	
+    tr:last-child td, tr:nth-last-child(2) td {
+	
+	&:first-child {
+		border-bottom-left-radius: $widget_border_radius;
+	}
+	
+	&:last-child {
+		border-bottom-right-radius: $widget_border_radius;
+	}
+
+    }
+
 
     .case-info {
-        margin: 0;
-        padding-left: 1em;
-        padding-bottom: 3px;
-        padding-top: 3px;
-        border: 1px solid #2980b9;
-        border-left-width: .5em;
-        border-radius: 4px;
-        color: #222;
+    	padding: 0.5em 1em;
+    	/* padding-bottom: 3px; */
+    	/* padding-top: 0.5em; */
+   	 background: #eceff1;
+    	/* border: 1px solid #2980b9; */
+    	/* border-left-width: 0.5em; */
+   	border-radius: 4px;
+    	color: #263238;
+    	margin: 8px 5px 3px 5px;
+	text-align: left;
     }
 
     .case-output {
-        margin: 0;
-        margin-right: 1em;
+	text-align: left;
+        padding: 0.5em 1em;
+	border-right: 1px solid $border_gray;
+	pre {
+		border: none;
+		margin: 0;
+    		padding: 4px 0;
+	}
     }
 
     table td {
+    	min-width: 2em;
         margin: 0;
-        padding: 0 5px 0 0;
+    	padding: 5px;
+    	border: 1px solid $border_gray;
+   	border-right: none;
+    	border-top: none;
+    	text-align: center;    
     }
 
     .toggle {

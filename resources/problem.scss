@@ -119,9 +119,11 @@ span.type-tag {
 }
 
 ul.problem-list {
+    text-align: center;
     list-style: none;
-    padding-left: 1em;
-    padding-right: 0.5em;
+    font-weight: 700;
+    padding-bottom: 1px;
+    font-family: $title_fonts;
 
     li {
         margin-bottom: 0.5em;
