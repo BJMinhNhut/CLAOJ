@@ -158,7 +158,7 @@ input {
 }
 
 .tabs {
-    margin: 0 0 8px;
+    margin: 0 0 1em;
     width: 100%;
     display: flex;
     font-family: $title_fonts;
@@ -192,6 +192,7 @@ input {
     }
 
     h2 {
+	margin-top: 0.25em;
         color: #393630;
     }
 
@@ -204,6 +205,7 @@ input {
         overflow-y: hidden;
 
         > li {
+	    margin-top: 0.5em;
             margin-bottom: -1px;
             position: relative;
             display: block;
