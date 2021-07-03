@@ -13,7 +13,7 @@
     background: rgba(0, 0, 0, 0.01);
 
     &.striped tr:nth-child(even) {
-        background: #f7f7f7;
+        background: #f5f5f5;
     }
 
     td:first-child {
@@ -28,6 +28,10 @@
 
         border-color: $border_gray;
         border-width: 1px 1px 1px 0;
+    }
+
+    thead tr {
+	background: #f5f5f5;
     }
 
     thead th {

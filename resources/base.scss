@@ -138,6 +138,12 @@ footer {
     width: 100%;
     position: absolute;
     bottom: 0;
+
+    .select2-container--open .select2-dropdown {
+    	border: none;
+    	box-shadow: 0 0px 7px #aaa;
+    }
+
 }
 
 body {
@@ -147,7 +153,7 @@ body {
     max-width: 107em;
     font-size: $base_font_size;
     line-height: 1.231;
-    background: $background_light_gray;
+    background: $background_gray;
     font-family: "Roboto", "Segoe UI", "Lucida Grande", Arial, sans-serif;
     color: #000;
     height: 100%;
@@ -258,10 +264,16 @@ header {
 #nav-shadow {
     height: 3px;
     background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
+    margin: 0 0 0 -100em;
+    padding: 0 0 0 100em;
+    width: 500%;
 }
 
 #nav-container {
     background: $widget_black;
+    margin: 0 0 0 -100em;
+    padding: 0 0 0 100em;
+    width: 500%;
 
     // opacity: 0.77
     // filter: alpha(opacity=77)
@@ -269,6 +281,7 @@ header {
 }
 
 #navigation {
+    max-width: 1200px;
     position: fixed;
     top: 0;
     left: 0;
@@ -288,8 +301,8 @@ nav {
     font-weight: 700;
 
     ul {
+	max-width: 80em;
         margin: 0 0 0 -5px !important;
-        padding: 0px 2pc;
         text-align: left;
         display: inline;
         list-style: none;
@@ -504,6 +517,10 @@ noscript #noscript {
     display: none;
 }
 
+#nav-list {
+    padding: 0 12px;
+}
+
 #nav-placeholder {
     height: 47px;
     max-width: 107em;
@@ -569,6 +586,7 @@ noscript #noscript {
     min-height: 100%;
     position: relative;
     margin: 0 auto;
+    max-width: 1200px;
     box-shadow: $sidebox_shadow;
     background: white;
 }
@@ -619,7 +637,7 @@ math {
         line-height: 26px;
         font-size: 2em;
         color: #FFF;
-        padding: 0 0.25em;
+        padding: 0 0 0 0.25em;
         margin: 4px 0.25em;
         white-space: nowrap;
         float: left;

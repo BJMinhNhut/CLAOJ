@@ -91,19 +91,21 @@
 }
 
 #banner {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    padding-bottom: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 2em;
 
     a.date {
         display: block;
         text-decoration: none;
         text-align: center;
         line-height: 1.3;
-        font-size: 2.3em;
+	font-family: $title_fonts;
+        font-size: 2.3em;	
+	font-weight: 700;
         padding-bottom: 0.15em;
 
         &:link, &:visited {
-            color: #5B80B9;
+            color: $highlight_blue;
         }
 
         &:hover {
@@ -206,6 +208,10 @@ form.contest-join-pseudotab {
         background: none;
         font-weight: 600;
     }
+}
+
+.contest-problems {
+	padding: 1em 0;
 }
 
 .contest-participation-operation {
