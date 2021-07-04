@@ -106,7 +106,7 @@ a {
 .comment {
     list-style: none none;
     border-radius: $widget_border_radius;
-    margin: 0px -4px 10px -40px;
+    margin: 0px -4px 30px -40px;
 
     &:target > .comment-box {
         border-left: 10px solid $highlight_blue;
