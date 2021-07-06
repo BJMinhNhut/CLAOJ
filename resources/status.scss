@@ -1,44 +1,66 @@
-.AB {
+@import "vars";
+
+.AB .score span {
     background-color: #CCC;
+    padding: 2px 5px;
+    border-radius: $widget_border_radius;
     color: black;
 }
 
-.AC {
+.AC .score span {
     background-color: #4caf50;
+    padding: 2px 5px;
+    border-radius: $widget_border_radius;
     color: white;
 }
 
-._AC {
+._AC .score span {
     background-color: #4caf50;
+    padding: 2px 5px;
+    border-radius: $widget_border_radius;
     color: white;
 }
 
-.WA {
+.WA .score span {
     background-color: #FF5252;
+    padding: 2px 5px;
+    border-radius: $widget_border_radius;
     color: white;
 }
 
-.TLE, .MLE {
+.TLE .score span {
     background-color: #607d8b;
+    padding: 2px 5px;
+    border-radius: $widget_border_radius;
     color: white;
 }
 
-.OLE, .IR, .RTE, .OTH {
+.OLE, .IR, .RTE, .OTH, .MLE { 
+.score span {
     background-color: #FFC107;
+    padding: 2px 5px;
+    border-radius: $widget_border_radius;
     color: black;
 }
+}
 
-.CE {
+.CE .score span {
     background-color: #FFC107;
+    padding: 2px 5px;
+    border-radius: $widget_border_radius;
     color: black;
 }
 
-.IE {
-    background-color: red;
+.IE .score span {
+    background-color: #FFC107;
+    padding: 2px 5px;
+    border-radius: $widget_border_radius;
     color: black;
 }
 
-.QU, .G {
+.QU, .G .score span {
     background: white;
+    padding: 2px 5px;
+    border-radius: $widget_border_radius;
     color: black;
 }

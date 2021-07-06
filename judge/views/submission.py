@@ -357,8 +357,8 @@ class AllUserSubmissions(ConditionalUserTabMixin, UserMixin, SubmissionsListBase
 
     def get_content_title(self):
         if self.is_own:
-            return format_html('All my submissions')
-        return format_html('All submissions by <a href="{1}">{0}</a>', self.username,
+            return _('All my submissions')
+        return format_html(_('All submissions by') + ' <a href="{1}">{0}</a>', self.username,
                            reverse('user_page', args=[self.username]))
 
     def get_my_submissions_page(self):
@@ -387,7 +387,7 @@ class ProblemSubmissionsBase(SubmissionsListBase):
         return _('All submissions for %s') % self.problem_name
 
     def get_content_title(self):
-        return format_html('All submissions for <a href="{1}">{0}</a>', self.problem_name,
+        return format_html(_('All submissions for') + ' <a href="{1}">{0}</a>', self.problem_name,
                            reverse('problem_detail', args=[self.problem.code]))
 
     def access_check_contest(self, request):
@@ -451,10 +451,10 @@ class UserProblemSubmissions(ConditionalUserTabMixin, UserMixin, ProblemSubmissi
 
     def get_content_title(self):
         if self.request.user.is_authenticated and self.request.profile == self.profile:
-            return format_html('''My submissions for <a href="{3}">{2}</a>''',
+            return format_html(_('''My submissions for <a href="{3}">{2}</a>'''),
                                self.username, reverse('user_page', args=[self.username]),
                                self.problem_name, reverse('problem_detail', args=[self.problem.code]))
-        return format_html('''<a href="{1}">{0}</a>'s submissions for <a href="{3}">{2}</a>''',
+        return format_html(_('''<a href="{1}">{0}</a>'s submissions for <a href="{3}">{2}</a>'''),
                            self.username, reverse('user_page', args=[self.username]),
                            self.problem_name, reverse('problem_detail', args=[self.problem.code]))
 

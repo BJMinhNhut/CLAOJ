@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block media %}
@@ -58,12 +59,22 @@
     {% block content_js_media %}{% endblock %}
 {% endblock %}
 
+{% block title_row %}
+           	 <h2 style="display:none">
+                	{% block content_title %}
+                    		{% if content_title %}{{ content_title }}{% else %}{{ title }}{% endif %}
+                	{% endblock %}
+            	</h2>
+{% endblock %}
+
+
 {% block body %}
     <div id="common-content">
         <div id="content-right">
             <div class="info-float">{% block info_float %}{% endblock %}</div>
         </div>
         <div id="content-left" class="split-common-content">
+
             <div class="content-description screen">
                 {% block description %}{% endblock %}
                 {% block description_end %}

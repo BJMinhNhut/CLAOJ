@@ -352,10 +352,16 @@
             <li>{{ data_form.instance.feedback }}</li>
         </ul>
     {% endif %}
+
+	<br> <br>
+
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ cases_formset.management_form }}
         <table class="table">{{ data_form.as_table() }}</table>
+	
+	<br>
+
         <div id="column-visible" data-problem="{{ problem.code }}">
             <strong>{{ _('Show columns:') }}</strong>
             <label>
@@ -435,8 +441,10 @@
             {% endfor %}
             </tbody>
         </table>
+	<a id="add-case-row" href="#"><i class="fa fa-plus"></i> {{ _('Add new case') }}</a>
+
+	<br> <br>
         <input type="submit" value="{{ _('Submit!') }}" class="button">
-        <a id="add-case-row" href="#"><i class="fa fa-plus"></i> {{ _('Add new case') }}</a>
     </form>
     <div style="display: none" class="generator-args-editor"><textarea></textarea><a class="button">{{ _('Save') }}</a></div>
 {% endblock %}

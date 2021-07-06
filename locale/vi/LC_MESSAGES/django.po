@@ -1724,7 +1724,7 @@ msgstr "tham số của checker là một JSON"
 
 #: judge/models/problem_data.py:48
 msgid "custom checker file"
-msgstr ""
+msgstr "File chấm custom"
 
 #: judge/models/problem_data.py:85
 msgid "problem data set"
@@ -3135,7 +3135,13 @@ msgstr "Danh sách bài nộp bởi"
 #: judge/views/submission.py:403
 #, python-format
 msgid "All submissions for %s"
-msgstr "Danh sách bài nộp %s"
+msgstr "Danh sách bài nộp cho %s"
+
+#: judge/views/submission.py:403
+#, python-format
+msgid "All submissions for"
+msgstr "Danh sách bài nộp cho"
+
 
 #: judge/views/submission.py:426
 msgid "Must pass a problem"
@@ -3144,7 +3150,7 @@ msgstr "Phải giải được 1 bài"
 #: judge/views/submission.py:476
 #, python-format
 msgid "My submissions for %(problem)s"
-msgstr "Danh sách bài nộp của tôi trong %(problem)s"
+msgstr "Danh sách bài nộp của tôi cho %(problem)s"
 
 #: judge/views/submission.py:477
 #, python-format
@@ -3342,6 +3348,7 @@ msgstr ""
 
 #: judge/views/user.py:449 templates/user/list.html:20
 #: templates/user/user-list-tabs.html:4
+#: dmoj/urls.py:108 templates/base.html:220
 msgid "Leaderboard"
 msgstr "Bảng xếp hạng"
 
@@ -3728,6 +3735,7 @@ msgid "Hidden Rankings"
 msgstr "Xếp hạng ẩn"
 
 #: templates/contest/contest-tabs.html:18 templates/user/prepare-data.html:103
+#: dmoj/urls.py:108 templates/base.html:220
 msgid "Submissions"
 msgstr "Các bài nộp"
 
@@ -3812,8 +3820,9 @@ msgid "<b>%(length)s</b> long starting on <b>%(start_time)s</b>"
 msgstr "<b>%(length)s</b> tính từ <b>%(start_time)s</b>"
 
 #: templates/contest/contest.html:80
+#: dmoj/urls.py:108 templates/base.html:220
 msgid "Problems"
-msgstr "Bài"
+msgstr "Bài tập"
 
 #: templates/contest/contest.html:87
 msgid "AC Rate"
@@ -4469,7 +4478,7 @@ msgstr "Điểm:"
 
 #: templates/problem/problem.html:171 templates/problem/problem.html:173
 msgid "(partial)"
-msgstr "(điểm từng phần)"
+msgstr "(từng phần)"
 
 #: templates/problem/problem.html:178
 msgid "Time limit:"
@@ -4947,6 +4956,7 @@ msgid "Runtime Info"
 msgstr "Thông tin trình chấm"
 
 #: templates/status/status-tabs.html:4
+#: dmoj/urls.py:108 templates/base.html:220
 msgid "Judges"
 msgstr "Máy chấm"
 
@@ -5002,7 +5012,7 @@ msgstr ""
 #: templates/submission/row.html:44
 #, python-format
 msgid "Case #%(case)s"
-msgstr "Trường hợp #%(case)s"
+msgstr ""
 
 #: templates/submission/row.html:54
 msgid "view"
@@ -5062,7 +5072,7 @@ msgstr "Kết quả"
 
 #: templates/submission/status-testcases.html:51
 msgid "Batch "
-msgstr "Subtask "
+msgstr "Nhóm "
 
 #: templates/submission/status-testcases.html:64 templates/submission/status-testcases.html:68
 msgid "Test case"
@@ -5094,7 +5104,7 @@ msgstr "Điểm pretest:"
 
 #: templates/submission/status-testcases.html:145
 msgid "Final score:"
-msgstr "Điểm cuối cùng:"
+msgstr "Điểm chính thức:"
 
 #: templates/submission/status-testcases.html:159
 msgid "Passing pretests does not guarantee a full score on system tests."

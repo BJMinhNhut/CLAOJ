@@ -89,7 +89,8 @@ input {
 
     &[type=number] {
         padding: 2px 0 2px 5px;
-	width: 100%;
+	width: 100%;	
+	max-width: 300px;
     }
 
     &[type=checkbox] {
@@ -242,8 +243,8 @@ input {
 
 // Bootstrap-y pagination
 ul.pagination a:hover {
-    color: #FFF;
-    background: rgba(0, 0, 0, 0.55);
+    color: #212121;
+    background: $background_light_gray;
 }
 
 ul.pagination {
@@ -251,6 +252,7 @@ ul.pagination {
     padding-left: 0;
     margin: 0;
     border-radius: $widget_border_radius;
+    border-right: 1px solid $border_gray;
 
     > {
         li {
@@ -279,9 +281,10 @@ ul.pagination {
                     padding: 4px 12px;
                     line-height: 1.42857;
                     text-decoration: none;
-                    color: #FFF;
-                    background-color: $widget_black;
-                    border: 1px solid #505050;
+                    color: #212121;
+                    background-color: $background_light_gray;
+                    border: 1px solid $border_gray;
+		    border-right: none;
                     margin-left: -1px;
                 }
             }
@@ -289,15 +292,13 @@ ul.pagination {
 
         .disabled-page > {
             a {
-                color: #888;
-                background-color: $widget_black;
-                border-color: #282828;
+                color: #bbb;
+                background-color: $background_gray;
             }
 
             span {
-                color: #888;
-                background-color: $widget_black;
-                border-color: #505050;
+                color: #bbb;
+                background-color: $background_gray;
             }
         }
 
@@ -322,7 +323,6 @@ ul.pagination {
 }
 
 .top-pagination-bar {
-    margin-top: 11px;
     margin-bottom: 7px;
     display: flex;
 }
@@ -426,22 +426,23 @@ ul.select2-selection__rendered {
 
 .sidebox h3 {
     margin: 0 -5px;
-    background: #455a64;
+    background: white;
     border-radius: $widget_border_radius $widget_border_radius 0 0;
-    color: white;
-    padding: 9px 5px 8px 12px;
+    color: #546e7a;
+    padding: 15px 15px 0px 15px;
+    font-weight: 700;
     font-size: 1.3em;
 }
 
 .sidebox h3 .fa {
-    color: white;
+    color: #546e7a;
     float: right;
-    margin: 0.2em 0.4em 0 0;
+    margin: 0.1em 0.4em 0 0;
 }
 
 .sidebox-content {
     margin: 0 -5px;
-    padding: 2px 1em 2px;
+    padding: 5px 1.5em 5px;
 
     &.sidebox-table {
         border: none;
@@ -457,6 +458,7 @@ ul.select2-selection__rendered {
     border-radius: $widget_border_radius;
     box-shadow: $sidebox_shadow;
     padding: 0 5px !important;
+        border: 1px solid $border_gray;
 }
 
 .ws-closed {

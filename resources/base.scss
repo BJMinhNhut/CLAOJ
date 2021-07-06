@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&family=Open Sans:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
 @charset "UTF-8";
 
@@ -20,13 +21,15 @@
 }
 
 select {
-	background-color: #cfd8dc;
-    	border: none; 
-    	border-radius: $input_box_radius;
-	color: #90a4ae;
-    	font-weight: 600;
-	padding: 1px;
-	transition: box-shadow ease-in-out 0.1s, color ease-in-out 0.1s, background-color ease-in-out 0.1s;
+	background-color: #eceff1;
+    	border: 1px solid #cfd8dc;
+    	border-radius: 5px;
+    	color: #37474f;
+    	font-family: $monospace_fonts;
+   	font-weight: 600;
+    	padding: 1px;
+    	-webkit-transition: box-shadow ease-in-out 0.1s,color ease-in-out 0.1s,background-color ease-in-out 0.1s;
+    	transition: box-shadow ease-in-out 0.1s,color ease-in-out 0.1s,background-color ease-in-out 0.1s;
 
 	&:hover {
 		box-shadow: inset 0 0 5px #999;
@@ -90,6 +93,10 @@ div {
     }
 }
 
+pre, code {
+    font-family: $monospace-fonts;
+}
+
 pre {
         white-space: pre-wrap;
         word-wrap: break-word;
@@ -98,7 +105,6 @@ pre {
         background-color: #eceff1;
         color: black;
         border-radius: $widget_border_radius;
-	font-family: $monospace-fonts;
 }
 
 hr {
@@ -123,7 +129,7 @@ th {
     background: $background_light_gray;
     padding: 10px 15px;
     border-radius: $widget_border_radius;
-    border: none;
+    border: 1px solid $border_gray;
     box-shadow: $sidebox_shadow;
 }
 
@@ -150,11 +156,10 @@ body {
     position: relative;
     min-height: 100%;
     margin: 0 auto;
-    max-width: 107em;
     font-size: $base_font_size;
     line-height: 1.231;
-    background: $background_gray;
-    font-family: "Roboto", "Segoe UI", "Lucida Grande", Arial, sans-serif;
+    background: white;
+    font-family: $body_fonts;
     color: #000;
     height: 100%;
 }
@@ -185,7 +190,8 @@ h2 {
 }
 
 h3 {
-    font-weight: 600;
+    font-weight: 700;
+    color: #546e7a;
     font-family: $title_fonts;
     font-size: 1.4em;
     border-radius: $widget_border_radius;
@@ -244,7 +250,7 @@ header {
 
             & > img {
                 vertical-align: middle;
-                border-radius: $widget_border_radius;
+                border-radius: 50px;
                 display: inline;
                 margin: 2px 6px 0 5px;
             }
@@ -329,13 +335,13 @@ nav {
                 display: inline-block;
                 text-decoration: none;
                 vertical-align: middle;
-                color: #FFF;
+                color: #90a4ae;
                 padding: 18px 7px;
                 height: 18px;
 		transition: background ease-in-out 0.1s;
 
                 &:link {
-                    color: #FFF;
+                    color: #90a4ae;
                 }
 
                 &:hover {
@@ -345,7 +351,7 @@ nav {
                 }
 
                 &.active {
-                    color: #4db6ac;
+                    color: white;
                     padding: 18px 7px 13px 7px;
     		    border-bottom: 5px solid #4db6ac;
                 }
@@ -381,7 +387,7 @@ nav {
                         font-size: 0.8em;
                         line-height: 18px;
                         display: block;
-                        border-left: 4px solid $highlight_blue;
+                        border-left: 4px solid #4db6ac;
                         white-space: nowrap;
                     }
                 }
@@ -429,7 +435,7 @@ hr {
     margin: 50px auto auto;
 
     // Header
-    width: 90%;
+    max-width: 1150px;
     height: 100%;
     min-height: 25em;
     display: block;
@@ -441,7 +447,7 @@ hr {
 
 footer {
     text-align: center;
-    height: 50px;
+    height: 65px;
     background: #eceff1;
 }
 
@@ -586,9 +592,15 @@ noscript #noscript {
     min-height: 100%;
     position: relative;
     margin: 0 auto;
-    max-width: 1200px;
-    box-shadow: $sidebox_shadow;
     background: white;
+	
+	
+.select-items {
+  box-shadow: none;
+  border: none;
+  border-radius: $widget_border_radius;
+}
+
 }
 
 // border-bottom: 1px solid rgb(204, 204, 204)
@@ -597,7 +609,7 @@ noscript #noscript {
 
 #content-body {
     padding-top: 0.25em;
-    padding-bottom: 5em;
+    padding-bottom: 6.5em;
 }
 
 // Offset the footer

@@ -159,13 +159,12 @@
     {% endif %}
 {% endblock %}
 
-{% block title_ruler %}{% endblock %}
+	    {% block title_row %}
+    		{% set tab = 'list' %}
+    		{% set title = _('Problem list') %}
+    	    	{% include "problem/problem-list-tabs.html" %}	
+	    {% endblock %}
 
-{% block title_row %}
-    {% set tab = 'list' %}
-    {% set title = _('Problem list') %}
-    {% include "problem/problem-list-tabs.html" %}
-{% endblock %}
 
 {% block body %}
     {% if page_obj.has_other_pages() %}
@@ -179,6 +178,7 @@
                 <div class="info-float">
                     {% include "problem/search-form.html" %}
                     {% if hot_problems %}
+			<br> <br>
                         <div class="sidebox">
                             <h3>{{ _('Hot problems') }} <i class="fa fa-fire"></i></h3>
                             <div class="sidebox-content">
@@ -194,6 +194,7 @@
             </div>
         {% endif %}
         <div id="content-left" class="problems h-scrollable-table">
+
             <table id="problem-table" class="table striped">
                 <thead>
                 <tr>
@@ -230,10 +231,10 @@
                             <a href="{{ sort_links.points }}">{{ _('Points') }}{{ sort_order.points }}</a>
                         </th>
                         <th class="ac-rate">
-                            <a href="{{ sort_links.ac_rate }}">{{ _('AC %%') }}{{ sort_order.ac_rate }}</a>
+                            <a href="{{ sort_links.ac_rate }}">{{ _('%% AC') }}{{ sort_order.ac_rate }}</a>
                         </th>
                         <th class="users">
-                            <a href="{{ sort_links.user_count }}">{{ _('Users') }}{{ sort_order.user_count }}</a>
+                            <a href="{{ sort_links.user_count }}">{{ _('# AC') }}{{ sort_order.user_count }}</a>
                         </th>
                     {% endif %}
                 </tr>

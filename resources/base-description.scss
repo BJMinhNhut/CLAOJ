@@ -3,7 +3,7 @@
 @mixin content-description {
     line-height: 1.5em;
     font-size: 1em;
-    font-family: "Roboto", "Segoe UI", "Lucida Grande", Arial, sans-serif;
+    font-family: $body_fonts;
 
     .btn-clipboard {
     	box-shadow: 0 0 4px #ccc;

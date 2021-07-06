@@ -191,7 +191,7 @@
             {% for node in mptt_tree(nav_bar) recursive %}
                 <li>
                     <a href="{{ node.path }}" class="nav-{{ node.key }}{% if node.key in nav_tab %} active{% endif %}">
-                        {{ user_trans(node.label) }}
+                        {{ _(node.label) }}
                         {% if not node.is_leaf_node %}
                             <div href="javascript:void(0)" class="nav-expand">></div>
                         {% endif %}
@@ -268,16 +268,17 @@
     </noscript>
     <br> <br>
     <main id="content">
-        {% block title_row %}
-            <h2 style="color:#393630; display:inline">
-                {% block content_title %}
-                    {% if content_title %}{{ content_title }}{% else %}{{ title }}{% endif %}
-                {% endblock %}
-            </h2>
-        {% endblock %}
-        {% block header %}{% endblock %}
-        {% block title_ruler %}
-        {% endblock %}
+	{% block title_row %}
+           	 <h2 style="display:inline">
+                	{% block content_title %}
+                    		{% if content_title %}{{ content_title }}{% else %}{{ title }}{% endif %}
+                	{% endblock %}
+            	</h2>
+       	{% endblock %}
+
+	{% block header %}{% endblock %}
+        {% block title_ruler %}{% endblock %}
+
         <div id="content-body">{% block body %}{% endblock %}</div>
     </main>
 
@@ -290,7 +291,8 @@
     <footer>
         <span id="footer-content">
             <br>
-            <a style="color: #b0bec5" href="https://dmoj.ca">dựa trên nền tảng <b>DMOJ</b></a> |
+	    <a style="color: #b0bec5"> Chuyên Long An Online Judge </a> <br>
+            <a style="color: #b0bec5" href="https://dmoj.ca"> dựa trên nền tảng <b>DMOJ</b></a> |
             {% if i18n_config.footer %}
                 {{ i18n_config.footer|safe }} |
             {% endif %}
