@@ -2,6 +2,10 @@
 
 #problem-table {
     td {
+	&:first-child {
+		width: 8%;	
+	}
+
         &.category {
             text-align: left;
             padding: 0 1em;
@@ -11,7 +15,7 @@
         &.problem {
             text-align: left;
 	    padding: 0.6em 1em;
-            min-width: 25em;
+            width: 65%;
         }
 
         &.pp {
