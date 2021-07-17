@@ -16,6 +16,11 @@
     padding: 0 5em;
 }
 
+@media (max-width: 760px) {
+	.submissions-status-table {
+		padding: initial;
+	}
+}
 .submission-row {
     display: flex;
     border-top: $border_gray 1px solid;

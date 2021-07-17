@@ -459,6 +459,7 @@ ul.select2-selection__rendered {
     box-shadow: $sidebox_shadow;
     padding: 0 5px !important;
         border: 1px solid $border_gray;
+    height: fit-content;
 }
 
 .ws-closed {
