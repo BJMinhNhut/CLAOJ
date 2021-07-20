@@ -7,6 +7,7 @@ from random import randrange
 
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.db import transaction
 from django.db.models import Count, F, Prefetch, Q
@@ -623,7 +624,11 @@ class ProblemSubmit(LoginRequiredMixin, ProblemMixin, TitleMixin, SingleObjectFo
         if self.remaining_submission_count == 0:
             return generic_message(self.request, _('Too many submissions'),
                                    _('You have exceeded the submission limit for this problem.'))
-
+                                   
+        key = 'user_complete:%d' % request.user.id
+        result = cache.get(key)
+        if result is not None:
+            cache.set(key, result, 86400)
         with transaction.atomic():
             self.new_submission = form.save(commit=False)
 

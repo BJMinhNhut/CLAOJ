@@ -2785,17 +2785,17 @@ msgstr "lỗi 404"
 #: judge/views/error.py:15
 #, python-format
 msgid "Could not find page \"%s\""
-msgstr "Không thể tìm thấy trang \"%s\""
+msgstr "Bạn đang bị lạc vào dòng thời gian \"%s\" hiện đang không tồn tại."
 
 #: judge/views/error.py:22
 #, python-format
 msgid "no permission for %s"
-msgstr "không cho phép %s"
+msgstr "Dòng thời gian %s không được cấp phép để truy cập"
 
 #: judge/views/error.py:30
 #, python-format
 msgid "corrupt page %s"
-msgstr "trang lỗi %s"
+msgstr "Có vài tí lỗi xuất hiện ở %s. Đừng lo, đó không phải lỗi của bạn!"
 
 #: judge/views/language.py:12 templates/status/judge-status-table.html:9
 #: templates/status/status-tabs.html:5

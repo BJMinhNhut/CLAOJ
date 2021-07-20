@@ -22,47 +22,35 @@ def user_editable_ids(profile):
 
 def contest_completed_ids(participation):
     key = 'contest_complete:%d' % participation.id
-    result = cache.get(key)
-    if result is None:
-        result = set(participation.submissions.filter(submission__result='AC', points=F('problem__points'))
-                     .values_list('problem__problem__id', flat=True).distinct())
-        cache.set(key, result, 86400)
+    result = cache.get_or_set(key, participation.submissions.filter(submission__result='AC', points=F('problem__points'))
+                     .values_list('problem__problem__id', flat=True).distinct(), 300)
     return result
 
 
 def user_completed_ids(profile):
     key = 'user_complete:%d' % profile.id
-    result = cache.get(key)
-    if result is None:
-        result = set(Submission.objects.filter(user=profile, result='AC', points=F('problem__points'))
-                     .values_list('problem_id', flat=True).distinct())
-        cache.set(key, result, 86400)
+    result = cache.get_or_set(key, Submission.objects.filter(user=profile, result='AC', points=F('problem__points'))
+                     .values_list('problem_id', flat=True).distinct() , 300)
     return result
 
 
 def contest_attempted_ids(participation):
     key = 'contest_attempted:%s' % participation.id
-    result = cache.get(key)
-    if result is None:
-        result = {id: {'achieved_points': points, 'max_points': max_points}
+    result = cache.get_or_set(key, {id: {'achieved_points': points, 'max_points': max_points}
                   for id, max_points, points in (participation.submissions
                                                  .values_list('problem__problem__id', 'problem__points')
                                                  .annotate(points=Max('points'))
-                                                 .filter(points__lt=F('problem__points')))}
-        cache.set(key, result, 86400)
+                                                 .filter(points__lt=F('problem__points')))} , 300)
     return result
 
 
 def user_attempted_ids(profile):
     key = 'user_attempted:%s' % profile.id
-    result = cache.get(key)
-    if result is None:
-        result = {id: {'achieved_points': points, 'max_points': max_points}
+    result = cache.get_or_set(key, {id: {'achieved_points': points, 'max_points': max_points}
                   for id, max_points, points in (Submission.objects.filter(user=profile)
                                                  .values_list('problem__id', 'problem__points')
                                                  .annotate(points=Max('points'))
-                                                 .filter(points__lt=F('problem__points')))}
-        cache.set(key, result, 86400)
+                                                 .filter(points__lt=F('problem__points')))} , 300)
     return result
 
 
