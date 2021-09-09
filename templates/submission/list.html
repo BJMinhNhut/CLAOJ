@@ -350,13 +350,23 @@
     		{% endif %}
 
             <div id="submissions-table">
-                {% set profile_id = request.profile.id if request.user.is_authenticated else 0 %}
-                {% for submission in submissions %}
-                    <div class="submission-row" id="{{ submission.id }}">
-                        {% with problem_name=show_problem and (submission.problem.i18n_name or submission.problem.name) %}
-                            {% include "submission/row.html" %}
-                        {% endwith %}
-                    </div>
+				{% set profile_id = request.profile.id if request.user.is_authenticated else 0 %}
+				{% for submission in submissions %}
+					{% if not submission.user.user.is_superuser and not submission.user.user.is_staff %}
+						<div class="submission-row" id="{{ submission.id }}">
+							{% with problem_name=show_problem and (submission.problem.i18n_name or submission.problem.name) %}
+								{% include "submission/row.html" %}
+							{% endwith %}
+						</div>
+					{% else %}
+						{% if perms.judge.edit_all_problem or perms.judge.edit_public_problem or request.user == submission.user.user %}
+							<div class="submission-row" id="{{ submission.id }}">
+								{% with problem_name=show_problem and (submission.problem.i18n_name or submission.problem.name) %}
+									{% include "submission/row.html" %}
+								{% endwith %}
+							</div>
+						{% endif %}
+					{% endif %}
                 {% endfor %}
             </div>
 	        {% if page_obj.has_other_pages() %}

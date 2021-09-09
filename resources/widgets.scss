@@ -109,23 +109,23 @@ textarea {
 }
 
 textarea:hover {
-    box-shadow: inset 0 0 5px #ccc;
+    box-shadow: inset 0 0 3px #aaa;
 }
 
 input {
     &[type="text"]:hover, &[type="password"]:hover, &[type="email"]:hover, &[type="number"]:hover {
-        box-shadow: inset 0 0 5px #ccc;
+        box-shadow: inset 0 0 5px #aaa;
     }
 }
 
 textarea:focus {
-    box-shadow: inset 0 0 5px #ccc;
+    box-shadow: inset 0 0 3px #aaa;
     outline: 0;
 }
 
 input {
     &[type="text"]:focus, &[type="password"]:focus, &[type="email"]:focus, &[type="number"]:focus {
-        box-shadow: inset 0 0 5px #ccc;
+        box-shadow: inset 0 0 3px #aaa;
         outline: 0;
     }
 }

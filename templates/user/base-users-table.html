@@ -1,6 +1,7 @@
 <thead>
 <tr>
     <th class="header rank">{{ rank_header or _("Rank") }}</th>
+        {% block after_rank_head %}{% endblock %}
     <th class="header username">{{ _('Username') }}</th>
     {% block before_point_head %}{% endblock %}
 
@@ -17,6 +18,7 @@
 {% for rank, user in users %}
     <tr id="user-{{ user.user.username }}" {% block row_extra scoped %}{% endblock %}>
         <td>{{ rank }}</td>
+{% block after_rank scoped %}{% endblock %}
         <td class="user-name">{{ link_user(user) }} {% block user_data scoped %}{% endblock %}</td>
         {% block before_point scoped %}{% endblock %}
         {% block point scoped %}

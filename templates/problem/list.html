@@ -167,10 +167,6 @@
 
 
 {% block body %}
-    {% if page_obj.has_other_pages() %}
-        <div class="top-pagination-bar">{% include "list-pages.html" %}</div>
-    {% endif %}
-
     <div id="common-content">
         {% block before_table %}{% endblock %}
         {% if not request.in_contest %}
@@ -194,6 +190,10 @@
             </div>
         {% endif %}
         <div id="content-left" class="problems h-scrollable-table">
+		{% if page_obj.has_other_pages() %}
+        	<div class="top-pagination-bar">{% include "list-pages.html" %}</div>
+    		{% endif %}
+
 
             <table id="problem-table" class="table striped">
                 <thead>
@@ -301,9 +301,10 @@
                 {% endfor %}
                 </tbody>
             </table>
+		{% if page_obj.has_other_pages() %}
+       		<div class="bottom-pagination-bar">{% include "list-pages.html" %}</div>
+   		{% endif %}
+
         </div>
     </div>
-   {% if page_obj.has_other_pages() %}
-       <div class="bottom-pagination-bar">{% include "list-pages.html" %}</div>
-   {% endif %}
 {% endblock %}

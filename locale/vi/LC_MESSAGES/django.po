@@ -241,6 +241,10 @@ msgstr "Mạng Xã hội"
 msgid "Taxonomy"
 msgstr "Phân loại"
 
+#: templates/problem/data.html:462
+msgid "Save test"
+msgstr "Lưu test"
+
 #: judge/admin/problem.py:132 templates/blog/top-pp.html:9
 #: templates/contest/contest.html:86 templates/organization/list.html:24
 #: templates/problem/data.html:462 templates/problem/list.html:188
