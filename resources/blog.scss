@@ -5,10 +5,16 @@
     flex: 73.5%;
     vertical-align: top;
     margin-right: 0;
+    
+    .sidebox {
+	border: none;
+	box-shadow: none;
+    }
 
     .post {
-        border-bottom: 2px solid $border_gray;
-        padding-top: 0.5em;
+        border-bottom: 1px solid $border_gray;
+        padding-top: 1em;
+	padding-bottom: 1em;
 
         .title {
             font-weight: 600;
@@ -24,6 +30,10 @@
                 }
             }
         }
+
+	&:first-child {
+		padding-top: 0.5em;
+	}
 
         &:last-child {
             border-bottom: none;
