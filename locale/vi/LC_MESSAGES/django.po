@@ -245,6 +245,10 @@ msgstr "Phân loại"
 msgid "Save test"
 msgstr "Lưu test"
 
+#: templates/problem/data.html:100
+msgid "Autofill testcases"
+msgstr "Tự động điền test"
+
 #: judge/admin/problem.py:132 templates/blog/top-pp.html:9
 #: templates/contest/contest.html:86 templates/organization/list.html:24
 #: templates/problem/data.html:462 templates/problem/list.html:188
@@ -5086,9 +5090,13 @@ msgstr ""
 msgid "Pretest"
 msgstr ""
 
-#: templates/submission/status-testcases.html:101
-msgid "Your output (clipped)"
-msgstr "Output của bạn (lượt bỏ)"
+#: templates/submission/status-testcases.html:112
+msgid "Your output"
+msgstr "Output của bạn"
+
+#: templates/submission/status-testcases.html:122
+msgid "Answer"
+msgstr "Đáp án"
 
 #: templates/submission/status-testcases.html:113
 msgid "Judge feedback"

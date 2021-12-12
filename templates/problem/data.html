@@ -1,20 +1,30 @@
 {% extends "base.html" %}
 
 {% block js_media %}
-    <script type="text/javascript">
-        window.valid_files = {{valid_files_json}};
-
-        $(function () {
-        });
-    </script>
     <script type="text/javascript" src="{{ static('libs/jquery-sortable.js') }}"></script>
     <script type="text/javascript" src="{{ static('libs/featherlight/featherlight.min.js') }}"></script>
     <script type="text/javascript">
+        window.valid_files = {{valid_files_json}}.sort();
+
         $(function () {
             function autofill_if_exists($select, file) {
                 if (!$select.val() && ~window.valid_files.indexOf(file))
-                    $select.val(file).trigger('change');
+                    $select.append(new Option(file, file, true, true)).change();
             }
+
+            var valid_files_options = window.valid_files.map(function (file) {
+                return {id: file, text: file};
+            });
+
+            var select2_settings = {
+                ajax: {
+                    transport: function (params, success) {
+                        success({results: valid_files_options});
+                    },
+                },
+                allowClear: true,
+                placeholder: ''
+            };
 
             var $table = $('#case-table');
             $table.on('add-row', function (e, $tr) {
@@ -24,11 +34,8 @@
                         name: $(this).attr('name'),
                         style: 'width: 100%'
                     })).val();
-                    $select.select2({
-                        data: window.valid_files,
-                        allowClear: true,
-                        placeholder: ''
-                    }).val(val).trigger('change').on('change', function () {
+                    var option = new Option(val, val, true, true);
+                    $select.select2(select2_settings).append(option).change().on('change', function () {
                         var val = $select.val();
                         if (val) {
                             if ($select.attr('id').endsWith('input_file'))
@@ -85,6 +92,16 @@
                     $precision.toggle($checker.val().startsWith('floats')).change();
                 }).change();
             }
+
+            var $file_test = $('#id_problem-data-zipfile');
+            $("<br>").appendTo($file_test.parent());
+            $("<input/>", {
+                type: "submit",
+                value: "{{ _('Autofill testcases') }}",
+                class: "button",
+                style: "display: inherit",
+                id: "submit-button",
+            }).appendTo($file_test.parent());
 
             function swap_row($a, $b) {
                 var $a_order = $a.find('input[id$=order]'), $b_order = $b.find('input[id$=order]');
@@ -196,6 +213,88 @@
                 return false;
             });
 
+            function reordering_row(oldIndex, newIndex, $item) {
+                if (newIndex > oldIndex) {
+                    var order = parseInt($item.parent().children().slice(oldIndex, newIndex).each(function () {
+                        var $order = $(this).find('input[id$=order]');
+                        $order.val(parseInt($order.val()) - 1).siblings('span.order').text($order.val());
+                    }).last().after($item).find('input[id$=order]').val());
+                    $item.find('input[id$=order]').val(order + 1).siblings('span.order').text(order + 1);
+                } else if (newIndex < oldIndex) {
+                    var order = parseInt($item.parent().children().slice(newIndex + 1, oldIndex + 1).each(function () {
+                        var $order = $(this).find('input[id$=order]');
+                        $order.val(parseInt($order.val()) + 1).siblings('span.order').text($order.val());
+                    }).first().before($item).find('input[id$=order]').val());
+                    $item.find('input[id$=order]').val(order - 1).siblings('span.order').text(order - 1);
+                }
+                if (newIndex != oldIndex)
+                    handle_table_reorder();
+            };
+
+            $('a#add-case-first-row').click(function () {
+                var cntRow = parseInt($total.val());
+                $('a#add-case-row').click();
+                if (cntRow == parseInt($total.val()))
+                    return false;
+                var newIndex = -1;
+                var oldIndex = parseInt($total.val()) - 1;
+                $item = $($table.find('tbody:first').children()[oldIndex]);
+                reordering_row(oldIndex, newIndex, $item);
+                return false;
+            });
+
+            $('#case-table tbody').on("click", ".add-case-row-below", function (event) {
+                var cntRow = parseInt($total.val());
+                $('a#add-case-row').click();
+                if (cntRow == parseInt($total.val()))
+                    return false;
+                var $current_row = $(this).parent().parent();
+                var newIndex = parseInt($current_row.find('input[id$=order]').val()) - 1;
+                var oldIndex = parseInt($total.val()) - 1;
+                $item = $($current_row.parent().children()[oldIndex]);
+                reordering_row(oldIndex, newIndex, $item);
+                return false;
+            });
+
+            function fill_testcases() {
+                var inFiles = [], outFiles = [];
+                var input_re = new RegExp(/^(?=.*?\.in|in).*?(?:(?:^|\W)(\d+)[^\d\s]+)?(\d+)[^\d\s]*$/);
+                var output_re = new RegExp(/^(?=.*?\.out|.*?\.ok|.*?\.ans|out|ok|ans).*?(?:(?:^|\W)(\d+)[^\d\s]+)?(\d+)[^\d\s]*$/);
+                for (var i = 0; i < window.valid_files.length; i++) {
+                    if (input_re.test(window.valid_files[i].toLowerCase().replace('/', '.'))) {
+                        inFiles.push(window.valid_files[i]);
+                    }
+                    if (output_re.test(window.valid_files[i].toLowerCase().replace('/', '.'))) {
+                        outFiles.push(window.valid_files[i]);
+                    }
+                }
+                if (inFiles.length == 0) {
+                    alert("{{_('No input/output files. Make sure your files are following themis/cms test format')}}");
+                    return false;
+                }
+                if (inFiles.length != outFiles.length) {
+                    s = `{{_('The number of input files (${inFiles.length}) do not match the number of output files (${outFiles.length})!')}}`
+                    s = s + `Input: ${inFiles}\n=====================\n`
+                    s = s + `Output: ${outFiles}\n`
+                    alert(s);
+                    return false;
+                }
+                n_test = inFiles.length;
+                // add boxes
+                while ($total.val() < n_test) {
+                    $('a#add-case-row').click();
+                }
+                // fill cases
+                for (var i = 0; i < n_test; i++) {
+                    $("#id_cases-" + i + "-input_file").append(new Option(inFiles[i], inFiles[i], true, true)).change();
+                    $("#id_cases-" + i + "-output_file").append(new Option(outFiles[i], outFiles[i], true, true)).change();
+                    $("#id_cases-" + i + "-points").val("1").change();
+                }
+                $("#fill-test-case-noti").show();
+                return false;
+            };
+
+
             var oldIndex;
             $table.sortable({
                 containerSelector: 'table',
@@ -209,45 +308,33 @@
                 },
                 onDrop: function ($item, container, _super) {
                     var newIndex = $item.index();
-                    if (newIndex > oldIndex) {
-                        var order = parseInt($item.parent().children().slice(oldIndex, newIndex).each(function () {
-                            var $order = $(this).find('input[id$=order]');
-                            $order.val(parseInt($order.val()) - 1).siblings('span.order').text($order.val());
-                        }).last().after($item).find('input[id$=order]').val());
-                        $item.find('input[id$=order]').val(order + 1).siblings('span.order').text(order + 1);
-                    } else if (newIndex < oldIndex) {
-                        var order = parseInt($item.parent().children().slice(newIndex + 1, oldIndex + 1).each(function () {
-                            var $order = $(this).find('input[id$=order]');
-                            $order.val(parseInt($order.val()) + 1).siblings('span.order').text($order.val());
-                        }).first().before($item).find('input[id$=order]').val());
-                        $item.find('input[id$=order]').val(order - 1).siblings('span.order').text(order - 1);
-                    }
-                    if (newIndex != oldIndex)
-                        handle_table_reorder();
+                    reordering_row(oldIndex, newIndex, $item);
                     _super($item, container);
                 }
             });
 
-            var $controls = $('#column-visible');
-            var problem = $controls.attr('data-problem');
-            $controls.find('input').change(function () {
-                var $this = $(this), suffix = $this.attr('data-suffix'), checked = $this.is(':checked');
-                $table.find('.' + suffix.replace(/_/g, '-')).toggle(checked);
-                localStorage.setItem('data-visible:' + problem + ':' + suffix, checked ? '1' : '0')
-            }).each(function () {
-                var $this = $(this), suffix = $this.attr('data-suffix'), filled = false;
-                filled = localStorage.getItem('data-visible:' + problem + ':' + suffix);
-                if (filled !== null)
-                    filled = filled == '1';
-                else {
-                    filled = false;
-                    $table.find('[id$=' + suffix + ']').each(function () {
-                        filled |= !!$(this).val();
-                    });
+            $('input#delete-all').change(function() {
+                if (this.checked) {
+                    $("input[name$='DELETE']").attr('checked', true);
                 }
-                $this.prop('checked', filled).trigger('change');
+                else {
+                    $("input[name$='DELETE']").attr('checked', false);
+                }
             });
-        });
+            $('#problem-data-zipfile-clear_id').change(function(){
+                if (this.checked) {
+                    $('input#delete-all').attr('checked', true);
+                }
+                else {
+                    $('input#delete-all').attr('checked', false);
+                }
+                $('input#delete-all').change();
+            });
+            if (parseInt($total.val()) == 0 && window.valid_files.length) {
+                console.log("Filling testcase...");
+                fill_testcases();
+            }
+        }).change();
     </script>
 {% endblock %}
 
@@ -359,28 +446,18 @@
         {% csrf_token %}
         {{ cases_formset.management_form }}
         <table class="table">{{ data_form.as_table() }}</table>
-	
-	<br>
 
-        <div id="column-visible" data-problem="{{ problem.code }}">
-            <strong>{{ _('Show columns:') }}</strong>
-            <label>
-                <input type="checkbox" data-suffix="output_prefix">
-                {{ _('Output prefix') }}
-            </label>
-            <label>
-                <input type="checkbox" data-suffix="output_limit">
-                {{ _('Output limit') }}
-            </label>
-            <label>
-                <input type="checkbox" data-suffix="checker">
-                {{ _('Checker') }}
-            </label>
-            <label>
-                <input type="checkbox" data-suffix="generator_args">
-                {{ _('Generator args') }}
-            </label>
+	<div class="alert alert-warning alert-dismissable" id="fill-test-case-noti" style="display: none;">
+            <a class="close">x</a>
+            <b>{{ _('Test cases have been filled automatically!') }}</b>
+            <br>
+            {%- trans -%}
+                Test cases have been filled automatically and <strong>not saved yet</strong>.
+                <br>
+                Please modify the table below if needed and press the `Apply` button to save!
+            {%- endtrans -%}
         </div>
+	<br>
         <table id="case-table" class="table">
             <thead>
             <tr>
@@ -390,16 +467,16 @@
                 <th>{{ _('Output file') }}</th>
                 <th>{{ _('Points') }}</th>
                 <th>{{ _('Pretest?') }}</th>
-                <th class="output-prefix">{{ _('Output prefix') }}</th>
-                <th class="output-limit">{{ _('Output limit') }}</th>
-                <th class="checker">{{ _('Checker') }}</th>
-                <th class="generator-args">{{ _('Generator args') }}</th>
+                <!-- <th class="generator-args">{{ _('Generator args') }}</th> -->
                 {% if cases_formset.can_delete %}
-                    <th>{{ _('Delete?') }}</th>
+                    <th>{{ _('Delete?') }}
+                        <br>
+                        <input type="checkbox" name="delete-all" id="delete-all">
+                    </th>
                 {% endif %}
             </tr>
-            </thead>
-            <tbody>
+            </thead>            
+	    <tbody>
             {% for form in all_case_forms %}
                 {% if form.non_field_errors() %}
                     <tr>
@@ -423,17 +500,12 @@
                     </td>
                     <td>{{ form.points.errors }}{{ form.points }}</td>
                     <td>{{ form.is_pretest.errors }}{{ form.is_pretest }}</td>
-                    <td class="output-prefix">{{ form.output_prefix.errors }}{{ form.output_prefix }}</td>
-                    <td class="output-limit">{{ form.output_limit.errors }}{{ form.output_limit }}</td>
-                    <td class="checker">
-                        {{ form.checker.errors }}{{ form.checker }}{{ form.checker_args.errors }}{{ form.checker_args }}
-                    </td>
-                    <td class="generator-args">{{ form.generator_args.errors }}{{ form.generator_args }}
+                     <!-- <td class="generator-args">{{ form.generator_args.errors }}{{ form.generator_args }}
                         <a href="javascript:void(0)" class="edit-generator-args">
                             <i class="fa fa-pencil"></i>
                             {{ _('Edit') }}
                         </a>
-                    </td>
+                    </td> -->
                     {% if cases_formset.can_delete %}
                         <td>{{ form.DELETE }}</td>
                     {% endif %}

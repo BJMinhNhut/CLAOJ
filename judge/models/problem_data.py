@@ -1,6 +1,7 @@
 import errno
 import os
 
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -21,6 +22,7 @@ def problem_directory_file(data, filename):
 
 CHECKERS = (
     ('standard', _('Standard')),
+    ('bridged', _('Custom checker')),
     ('floats', _('Floats')),
     ('floatsabs', _('Floats (absolute)')),
     ('floatsrel', _('Floats (relative)')),
@@ -44,7 +46,6 @@ class ProblemData(models.Model):
     checker = models.CharField(max_length=10, verbose_name=_('checker'), choices=CHECKERS, blank=True)
     checker_args = models.TextField(verbose_name=_('checker arguments'), blank=True,
                                     help_text=_('checker arguments as a JSON object'))
-
     __original_zipfile = None
 
     def __init__(self, *args, **kwargs):
@@ -69,6 +70,8 @@ class ProblemData(models.Model):
             self.zipfile.name = _problem_directory_file(new, self.zipfile.name)
         if self.generator:
             self.generator.name = _problem_directory_file(new, self.generator.name)
+        if self.custom_checker:
+            self.custom_checker.name = _problem_directory_file(new, self.custom_checker.name)
         self.save()
     _update_code.alters_data = True
 

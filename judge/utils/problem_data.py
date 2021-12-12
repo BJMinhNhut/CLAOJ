@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import zipfile
 
 import yaml
 from django.conf import settings
@@ -55,6 +56,15 @@ class ProblemDataCompiler(object):
         self.generator = data.generator
 
     def make_init(self):
+        # The judge server has an ability to find the testcase
+        # even if we don't specify it.
+        # That is a good behavior, however, the zip file
+        # could contain a very large number of testcases
+        # and that is not what we want. So in case of user
+        # did not specify testcases, we will not create the init
+        if self.cases.count() == 0:
+            return {}
+
         cases = []
         batch = None
 
@@ -64,6 +74,25 @@ class ProblemDataCompiler(object):
             cases.append(batch)
 
         def make_checker(case):
+            if (case.checker == 'bridged'):
+                custom_checker_path = split_path_first(case.custom_checker.name)
+                if len(custom_checker_path) != 2:
+                    raise ProblemDataError(_('How did you corrupt the custom checker path?'))
+                try:
+                    checker_ext = custom_checker_path[1].split('.')[-1]
+                except Exception as e:
+                    raise ProblemDataError(e)
+
+                # Python checker doesn't need to use bridged
+                # so we return the name dirrectly
+                if checker_ext == 'py':
+                    return custom_checker_path[1]
+
+                if checker_ext != 'cpp':
+                    raise ProblemDataError(_("Why don't you use a cpp/py checker?"))
+                # the cpp checker will be handled
+                # right below here, outside of this scope
+
             if case.checker_args:
                 return {
                     'name': case.checker,
@@ -182,7 +211,9 @@ class ProblemDataCompiler(object):
 
         yml_file = '%s/init.yml' % self.problem.code
         try:
-            init = yaml.safe_dump(self.make_init())
+            init = self.make_init()
+            if init:
+                init = yaml.safe_dump(init)
         except ProblemDataError as e:
             self.data.feedback = e.message
             self.data.save()
@@ -202,3 +233,60 @@ class ProblemDataCompiler(object):
     def generate(cls, *args, **kwargs):
         self = cls(*args, **kwargs)
         self.compile()
+
+def get_visible_content(archive, filename):
+    if archive.getinfo(filename).file_size <= settings.TESTCASE_VISIBLE_LENGTH:
+        data = archive.read(filename)
+    else:
+        data = archive.open(filename).read(settings.TESTCASE_VISIBLE_LENGTH) + b'...'
+    return data.decode('utf-8', errors='ignore')
+
+
+def get_testcase_data(archive, case):
+    return {
+        'input': get_visible_content(archive, case.input_file),
+        'answer': get_visible_content(archive, case.output_file),
+    }
+
+
+def get_problem_testcases_data(problem):
+    """ Read test data of a problem and store
+    result in a dictionary.
+    If an error occurs, this method will return an empty dict.
+    """
+    from judge.models import problem_data_storage
+
+    init_path = '%s/init.yml' % problem.code
+    if not problem_data_storage.exists(init_path):
+        return {}
+
+    init_content = yaml.safe_load(problem_data_storage.open(init_path).read())
+    archive_path = init_content.get('archive', None)
+    if not archive_path:
+        return {}
+
+    archive_path = '%s/%s' % (problem.code, archive_path)
+    if not problem_data_storage.exists(archive_path):
+        return {}
+
+    try:
+        archive = zipfile.ZipFile(problem_data_storage.open(archive_path))
+    except zipfile.BadZipfile:
+        return {}
+
+    testcases_data = {}
+
+    # TODO:
+    # - Support manually managed problems
+    # - Support pretest
+    order = 0
+    for case in problem.cases.all().order_by('order'):
+        try:
+            if not case.input_file:
+                continue
+            order += 1
+            testcases_data[order] = get_testcase_data(archive, case)
+        except Exception:
+            return {}
+
+    return testcases_data

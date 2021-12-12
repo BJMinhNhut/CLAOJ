@@ -23,6 +23,7 @@ from judge import event_poster as event
 from judge.highlight_code import highlight_code
 from judge.models import Contest, Language, Problem, ProblemTranslation, Profile, Submission
 from judge.utils.infinite_paginator import InfinitePaginationMixin
+from judge.utils.problem_data import get_problem_testcases_data
 from judge.utils.problems import get_result_data, user_completed_ids, user_editable_ids, user_tester_ids
 from judge.utils.raw_sql import join_sql_subquery, use_straight_join
 from judge.utils.views import DiggPaginatorMixin, TitleMixin
@@ -126,7 +127,11 @@ def group_test_cases(cases):
     buf = []
     max_execution_time = 0.0
     last = None
+    test_case_count = 0
     for case in cases:
+        # Don't use test_case_count = len(cases) because cases is a queryset
+        # `cases` is not a list.
+        test_case_count += 1
         if case.time:
             max_execution_time = max(max_execution_time, case.time)
         if case.batch != last and buf:
@@ -138,8 +143,7 @@ def group_test_cases(cases):
     if buf:
         result.append(make_batch(last, buf))
         status.extend(get_statuses(last, buf))
-    return result, status, max_execution_time
-
+    return result, status, max_execution_time, test_case_count
 
 class SubmissionStatus(SubmissionDetailBase):
     template_name = 'submission/status.html'
@@ -149,8 +153,16 @@ class SubmissionStatus(SubmissionDetailBase):
         submission = self.object
         context['last_msg'] = event.last()
 
-        context['batches'], statuses, context['max_execution_time'] = group_test_cases(submission.test_cases.all())
+        context['batches'], statuses, context['max_execution_time'], test_case_count \
+                = group_test_cases(submission.test_cases.all())
+        context['feedback_limit'] = min(3, test_case_count - 1)
         context['statuses'] = combine_statuses(statuses, submission)
+
+        context['can_view_test'] = submission.problem.is_testcase_accessible_by(self.request.user)
+        if context['can_view_test']:
+            context['cases_data'] = get_problem_testcases_data(submission.problem)
+        else:
+            context['cases_data'] = {}
 
         context['time_limit'] = submission.problem.time_limit
         try:
