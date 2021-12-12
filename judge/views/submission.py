@@ -145,6 +145,7 @@ def group_test_cases(cases):
         status.extend(get_statuses(last, buf))
     return result, status, max_execution_time, test_case_count
 
+
 class SubmissionStatus(SubmissionDetailBase):
     template_name = 'submission/status.html'
 
@@ -154,7 +155,7 @@ class SubmissionStatus(SubmissionDetailBase):
         context['last_msg'] = event.last()
 
         context['batches'], statuses, context['max_execution_time'], test_case_count \
-                = group_test_cases(submission.test_cases.all())
+            = group_test_cases(submission.test_cases.all())
         context['feedback_limit'] = min(3, test_case_count - 1)
         context['statuses'] = combine_statuses(statuses, submission)
 

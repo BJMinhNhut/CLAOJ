@@ -234,6 +234,7 @@ class ProblemDataCompiler(object):
         self = cls(*args, **kwargs)
         self.compile()
 
+
 def get_visible_content(archive, filename):
     if archive.getinfo(filename).file_size <= settings.TESTCASE_VISIBLE_LENGTH:
         data = archive.read(filename)
@@ -288,5 +289,4 @@ def get_problem_testcases_data(problem):
             testcases_data[order] = get_testcase_data(archive, case)
         except Exception:
             return {}
-
     return testcases_data

@@ -253,7 +253,7 @@ class Problem(models.Model):
         return user.is_staff and user.has_perm('judge.rejudge_submission') and self.is_editable_by(user)
 
     def is_testcase_accessible_by(self, user):
-         return True
+        return True
 #        if self.testcase_visibility_mode == ProblemTestcaseAccess.ALWAYS:
 #            return True
 
