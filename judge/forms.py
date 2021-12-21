@@ -6,6 +6,7 @@ import webauthn
 from django import forms
 from django.conf import settings
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db.models import Q
@@ -16,7 +17,8 @@ from django.utils.translation import gettext_lazy as _
 from django_ace import AceWidget
 from judge.models import Contest, Language, Organization, Problem, Profile, Submission, WebAuthnCredential
 from judge.utils.subscription import newsletter_id
-from judge.widgets import HeavyPreviewPageDownWidget, Select2MultipleWidget, Select2Widget
+from judge.widgets import HeavyPreviewPageDownWidget, \
+    Select2MultipleWidget, Select2Widget
 
 TOTP_CODE_LENGTH = 6
 
@@ -91,6 +93,12 @@ class ProfileForm(ModelForm):
             )
         if not self.fields['organizations'].queryset:
             self.fields.pop('organizations')
+
+
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name']
 
 
 class DownloadDataForm(Form):

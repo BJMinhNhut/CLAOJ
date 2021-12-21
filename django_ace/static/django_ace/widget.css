@@ -9,6 +9,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    font-size: 14px;
 }
 
 .django-ace-widget.loading {
@@ -16,15 +17,14 @@
 }
 
 .django-ace-toolbar {
-    font-size: 12px;
+    font-size: 14px;
     text-align: left;
     color: #555;
     text-shadow: 0 1px 0 #fff;
-    border-bottom: 1px solid #d8d8d8;
     background-color: #eaeaea;
-    background-image: -moz-linear-gradient(#fafafa, #eaeaea);
-    background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
-    background-image: linear-gradient(#fafafa, #eaeaea);
+    background-image: -moz-linear-gradient(#fafafa, #fafafa);
+    background-image: -webkit-linear-gradient(#fafafa, #fafafa);
+    background-image: linear-gradient(#fafafa, #fafafa);
     background-repeat: repeat-x;
     clear: both;
     overflow: hidden;

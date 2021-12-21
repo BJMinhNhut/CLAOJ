@@ -4,13 +4,19 @@
     {% if has_rating %}
         <th class="rating-column">{{ _('Rating') }}</th>
     {% endif %}
-    <th class="organization-column">{{ _('Organization') }}</th>
 {% endblock %}
 
 {% block after_rank %}
     {% if has_rating %}
         <td class="rating-column">{% if user.participation_rating %}{{ rating_number(user.participation_rating) }}{% endif %}</td>
     {% endif %}
+{% endblock %}
+
+{%block after_name_head %}
+    <th class="organization-column">{{ _('Organization') }}</th>
+{% endblock %}
+
+{%block after_name %}
     <td class="organization-column">
         {% if user.organization %}
             <span class="organization"><a href="{{ user.organization.get_absolute_url() }}">

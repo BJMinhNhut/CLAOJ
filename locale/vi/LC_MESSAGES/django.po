@@ -260,6 +260,11 @@ msgstr "Điểm"
 msgid "Limits"
 msgstr "Giới hạn"
 
+#: templates/user/edit-profile.html:288
+#: templates/user/base-users-table.html:21
+msgid "Full name"
+msgstr "Họ và tên"
+
 #: judge/admin/problem.py:134 judge/admin/submission.py:238
 #: templates/stats/base.html:14 templates/submission/list.html:331
 #: templates/user/edit-profile.html:292
@@ -910,7 +915,7 @@ msgstr "không xếp hạng"
 
 #: judge/models/contest.py:103
 msgid "private to specific users"
-msgstr "riêng tu cho thành viên cụ thể"
+msgstr "riêng tư cho thành viên cụ thể"
 
 #: judge/models/contest.py:104
 msgid "private contestants"

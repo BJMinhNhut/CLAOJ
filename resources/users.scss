@@ -43,14 +43,23 @@ th.header.rank {
 
 #users-table {
     .username {
-        width: 100%;
+        width: 50%;
     }
+
+    .fullname {
+        width: 50%;
+    }
+
+    .rank, .points, .problems {
+        width: 5%;
+    }
+
 
     .header {
         vertical-align: middle;
     }
 
-    .rank, .points, .problems, .username {
+    .rank, .points, .problems, .fullname, .username {
         white-space: nowrap;
     }
 
@@ -71,7 +80,8 @@ th.header.rank {
     }
 
     td:nth-child(2), th:nth-child(2) {
-            text-align: center;
+        text-align: center;
+	padding: 0 10px;
     }
 }
 
@@ -183,7 +193,7 @@ a.edit-profile {
 
 .user-sidebar {
     flex: 0 0 150px;
-    padding-left: 1em;
+    padding: 0 1em;
 }
 
 .user-content {

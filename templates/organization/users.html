@@ -1,10 +1,6 @@
 {% extends "user/base-users.html" %}
 {% block users_media %}
     <style>
-        #users-table td:nth-child(2), #users-table th:nth-child(2) {
-            text-align: center;
-        }
-
         .kick-form .button {
             margin: -8px 0;
         }
@@ -20,7 +16,7 @@
 
     {% if is_admin %}
 	<style>
-        #users-table td:nth-child(2), #users-table th:nth-child(2) {
+        #users-table td:nth-child(4), #users-table th:nth-child(4) {
             border-right: none;
         }
         </style>

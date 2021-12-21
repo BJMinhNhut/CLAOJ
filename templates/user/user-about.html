@@ -9,16 +9,21 @@
 
 {% block user_content %}
     <div class="content-description">
+	<p style="margin-top: 0">
+	{% if user.user.first_name %}
+		<b style="font-size: 17px">{{ user.user.first_name }}</b>  <br>
+	{% endif %}
         {% with orgs=user.organizations.all() %}
             {% if orgs %}
-                <p style="margin-top: 0"><b>{{ _('From') }}</b>
+                <b>{{ _('From') }}</b>
                     {% for org in orgs -%}
                         <a href="{{ org.get_absolute_url() }}">{{ org.name }}</a>
                         {%- if not loop.last %}, {% endif %}
                     {% endfor %}
-                </p>
+                
             {% endif %}
         {% endwith %}
+	</p>
         {% if perms.judge.change_profile %}
             {% with notes=user.notes %}
                 {% if notes %}

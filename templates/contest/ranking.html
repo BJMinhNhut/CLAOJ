@@ -9,8 +9,8 @@
 
 {% block users_media %}
     <style>
-        #users-table .username {
-            min-width: 20em;
+        #users-table .username, .fullname {
+            min-width: 18em;
         }
 
         #users-table .rating-column {
@@ -105,13 +105,11 @@
             position: relative;
         }
 
-        .organization-column {
+        .organization-column, .fullname {
             display: none;
-            text-align: left !important;
-            border-right: none !important;
         }
 
-        .organization-column a {
+        .organization-column a, .fullname a {
             color: gray !important;
             font-weight: 600;
         }
@@ -237,6 +235,17 @@
                 $('.organization-column').show();
                 $('#show-organizations-checkbox').prop('checked', true);
             }
+
+            if (localStorage.getItem('show-fullname') == 'true') {
+                $('.fullname').show();
+                $('#show-fullname-checkbox').prop('checked', true);
+            }
+
+            $('#show-fullname-checkbox').click(function () {
+                $('.fullname').toggle();
+                localStorage.setItem('show-fullname', $('.fullname').is(':visible') ? 'true' : 'false');
+            });
+
         });
     </script>
     {% include "contest/media-js.html" %}
@@ -251,6 +260,8 @@
         {% endif %}
         <input id="show-organizations-checkbox" type="checkbox" style="vertical-align: bottom">
         <label for="show-organizations-checkbox" style="vertical-align: bottom">{{ _('Show organizations') }}</label>
+        <input id="show-fullname-checkbox" type="checkbox" style="vertical-align: bottom">
+        <label for="show-fullname-checkbox" style="vertical-align: bottom">{{ _('Show full name') }}</label>
     </div>
 {% endblock %}
 
