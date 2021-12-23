@@ -4036,9 +4036,14 @@ msgstr ""
 msgid "View user participation"
 msgstr "Xem thành viên tham gia"
 
-#: templates/contest/ranking.html:250
+#: templates/contest/ranking.html:262
 msgid "Show organizations"
 msgstr "Hiển thị các tổ chức"
+
+#: templates/contest/ranking.html:264
+msgid "Show full name"
+msgstr "Hiển thị tên đầy đủ"
+
 
 #: templates/contest/stats.html:38
 msgid "Problem Status Distribution"

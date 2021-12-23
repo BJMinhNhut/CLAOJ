@@ -37,7 +37,7 @@
                     </a>
                 {% endif %}
                 {% if case.num_combined > 1 %}
-                    <sup class="case-{{ case.status }}">&times;{{ case.num_combined }}</sup>
+                    <sup class="scase-{{ case.status }}">&times;{{ case.num_combined }}</sup>
                 {% endif %}
             {% endfor %}
             {% if not submission.is_graded %}
@@ -62,59 +62,66 @@
                                              ((not request.in_contest and current_test_case_count <= feedback_limit)
                                               or can_view_test) %}
             {% set curr_data = cases_data.get(case.case, None) %}
-            {% set has_extended_data = print_case_ext_feedback or (print_case_output and curr_data and not request.in_contest) %}
+            {% set has_extended_data = (print_case_ext_feedback or curr_data) and not request.in_contest %}
             <tr id="{{ case.id }}" class="case-row toggle closed">
                 <td>
                     {%- if has_extended_data -%}
                         <i class="fa fa-chevron-right fa-fw"></i>
                     {%- endif -%}
                     {%- if batch.id -%}
-                        <b>{{ _('Case') }} #{{ loop.index }}:</b>
+                        <b>{{ _('Test') }} #{{ loop.index }}</b>
                     {%- elif is_pretest -%}
-                        <b>{{ _('Pretest') }} #{{ test_case_id() }}:</b>
+                        <b>{{ _('Pretest') }} #{{ test_case_id() }}</b>
                     {%- else -%}
-                        <b>{{ _('Test case') }} #{{ test_case_id() }}:</b>
+                        <b>{{ _('Test') }} #{{ test_case_id() }}</b>
                     {%- endif -%}
                 </td>
 
                 <td>
-                    <span title="{{ case.long_status }}" class="case-{{ case.status }}">
-                        {%- if case.status == 'SC' %}&mdash;{% else %}{{ case.status }}{% endif -%}
+                    <span title="{{ case.long_status }}" class="scase-{{ case.status }}">
+                        {%- if case.status == 'SC' %}&mdash;{% else %}{{ case.long_status }}{% endif -%}
                     </span>
                     {%- if case.feedback %}&nbsp;({{ case.feedback }}){% endif -%}
                 </td>
 
+                {% if not batch.id %}
+                    <td><strong>{{ _('Point') }}:&nbsp;</strong>{{ case.points|floatformat(0) }}/{{ case.total|floatformat(0) }}</td>
+                {% endif %}
+
                 <td>
                     {%- if case.status != 'SC' -%}
+			<strong>{{ _('Time') }}:&nbsp;</strong>
                         {%- if case.status == 'TLE' -%}
-                            &gt;<span>{{ time_limit|floatformat(3) }}s</span>
+                            &gt;<span>{{ (time_limit*1000)|floatformat(0) }}ms</span>
                         {%- else -%}
-                            <span title="{{ case.time }}s">{{ case.time|floatformat(3) }}s</span>
+                            <span title="{{ case.time*1000 }}ms">{{ (case.time*1000)|floatformat(0) }}ms</span>
                         {%- endif -%}
                     {%- endif -%}
                 </td>
 
-                <td>{% if case.status != 'SC' %}{{ case.memory|kbdetailformat }}{% endif %}</td>
+                <td>{% if case.status != 'SC' %}<strong>{{ _('Memory') }}:&nbsp;</strong>{{ case.memory|kbdetailformat }}{% endif %}</td>
 
-                {% if not batch.id %}
-                    <td>({{ case.points|floatformat(0) }}/{{ case.total|floatformat(0) }})</td>
-                {% endif %}
             </tr>
 
             {% if has_extended_data %}
                 <tr id="{{ case.id }}-output" style="display:none" class="case-feedback toggled">
 		    <td colspan="5" class="case-output">
-                    {% if print_case_output and curr_data and not request.in_contest%}
+                    {% if curr_data %}
                          <strong>{{ _('Input') }}</strong>
                          <div class="case-info"><pre class="case-output">{{ curr_data['input']|linebreaksbr }}</pre></div>
+		         
+			{% if print_case_output %}
 		         <strong>{{ _('Your output') }}</strong>
-                         <div class="case-info">
+                    	 <div class="case-info">
+
                                 {% if prefix_length is none %}
                                     <pre class="case-output">{{ case.output|linebreaksbr }}</pre>
                                 {% else %}
                                     <pre class="case-output">{{ case.output[:prefix_length]|linebreaksbr }}</pre>
                                 {% endif %}
-                         </div>
+                    	 </div>
+			 {% endif %}
+
                          <strong>{{ _('Answer') }}</strong>
                          <div class="case-info"><pre class="case-output">{{ curr_data['answer']|linebreaksbr }}</pre></div>
                     {% endif %}
@@ -144,13 +151,13 @@
                 {% if submission.result == "TLE" %}
                     <span>---,</span>
                 {% else %}
-                    <span title="{{ submission.time }}s">{{ submission.time|floatformat(3) }}s,</span>
+                    <span title="{{ submission.time*1000 }}ms">{{ (submission.time*1000)|floatformat(0) }}ms,</span>
                 {% endif %}
                 {{ submission.memory|kbdetailformat }}
                 <br>
                 {% if submission.result == "AC" %}
                     <b>{{ _('Maximum runtime on single test case:') }}</b>
-                    <span title="{{ max_execution_time }}s">{{ max_execution_time|floatformat(3) }}s</span>
+                    <span title="{{ max_execution_time*1000 }}ms">{{ (max_execution_time*1000)|floatformat(0) }}ms</span>
                     <br>
                 {% endif %}
                 {% if is_pretest %}

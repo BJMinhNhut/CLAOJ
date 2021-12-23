@@ -5,15 +5,6 @@
     font-size: 1em;
     font-family: $body_fonts;
 
-    .btn-clipboard {
-    	box-shadow: 0 0 4px #ccc;
-	border: none;
-	&:hover, &.active {
-		background-color: #009688;
-		color: white;
-	}
-    }
-
     p {
 	text-align: justify;
         margin: 1em 0 !important;

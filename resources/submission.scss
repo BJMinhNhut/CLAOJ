@@ -13,7 +13,6 @@
 .submissions-status-table {
     border-spacing: 0;
     width: 100%;
-    padding: 0 5em;
 }
 
 @media (max-width: 760px) {
@@ -26,7 +25,7 @@
     border-top: $border_gray 1px solid;
     border-left: $border_gray 1px solid;
     border-right: $border_gray 1px solid;
-    transition: background-color linear 0.2s;
+    transition: background-color linear 0.1s;
 
     &:first-child {
 	border-top-right-radius: $widget_border_radius;
@@ -272,6 +271,11 @@ label[for="language"], label[for="status"] {
 }
 
 #test-cases {
+    .fa {
+	padding: 2px;
+    	width: 1em;
+    	text-align: center;
+    }
     .toggle .fa {
         margin-left: -0.3em;
     }
@@ -287,23 +291,28 @@ label[for="language"], label[for="status"] {
 		border-right: 1px solid $border_gray;
 	}
     }
-
-    .batch-cases .case-row td b {
-        font-weight: 500;
+    .case-row {
+        transition: background-color linear 0.1s;
+    	&:hover {
+	    cursor: pointer;
+            background: #eaeaea;
+        }
     }
 
-    .case-row td:nth-child(3) {
+    .case-row td:last-child {
+       	border-right: 1px solid $border_gray;
     }
-
-    .case-row td:nth-child(3) span {
+    .case-row td:first-child {
+       	border-left: 1px solid $border_gray;
+	padding-left: 15px;
+	width: 5%;
     }
-
-    .case-row td:nth-child(5) {
-       border-right: 1px solid $border_gray;
+    .case-row td:nth-child(2) {
+	width: 35%;
+	text-align: center;
     }
 	
     tr:first-child td {
-	border-top: 1px solid $border_gray;
 	
 	&:first-child {
 		border-top-left-radius: $widget_border_radius;
@@ -316,7 +325,7 @@ label[for="language"], label[for="status"] {
     }
 	
     tr:last-child td, tr:nth-last-child(2) td {
-	
+	border-bottom: 1px solid $border_gray;
 	&:first-child {
 		border-bottom-left-radius: $widget_border_radius;
 	}
@@ -326,7 +335,6 @@ label[for="language"], label[for="status"] {
 	}
 
     }
-
 
     .case-info {
     	padding: 0.5em 1em;
@@ -345,6 +353,8 @@ label[for="language"], label[for="status"] {
 	text-align: left;
         padding: 0.5em 1em;
 	border-right: 1px solid $border_gray;
+	border-left: 1px solid $border_gray;
+	border-top: none;
 	pre {
 		border: none;
 		margin: 0;
@@ -353,13 +363,12 @@ label[for="language"], label[for="status"] {
     }
 
     table td {
-    	min-width: 2em;
+    	min-width: 6em;
+    	max-width: 10em;
         margin: 0;
-    	padding: 5px;
-    	border: 1px solid $border_gray;
-   	border-right: none;
-    	border-top: none;
-    	text-align: center;    
+    	padding: 8px;
+    	border-top: 1px solid $border_gray;
+    	text-align: left;    
     }
 
     .toggle {
@@ -380,33 +389,85 @@ label[for="language"], label[for="status"] {
 }
 
 .case-AC {
-    color: #4caf50;
+    color: white;
     font-weight: bold;
+    background: #4caf50;
+    border-radius: 3px;
+    padding: 1px 5px;
+
 }
 
 .case-_AC {
-    color: #f44336;
+    color: black;
     font-weight: bold;
+    background: #f44336;
+    border-radius: 3px;
+    padding: 1px 5px;
 }
 
 .case-WA {
-    color: #FF5252;
+    color: white;
     font-weight: bold;
+    background: #FF5252;
+    border-radius: 3px;
+    padding: 1px 4px;
 }
 
 .case-TLE, .case-SC {
-    color: #607d8b;
+    color: white;
     font-weight: bold;
+    background: #607d8b;
+    border-radius: 3px;
+    padding: 1px 3px;
 }
 
-.case-MLE, .case-OLE, .case-RTE, .case-IR {
-    color: #FFC107;
+.case-MLE, .case-OLE, .case-IR {
+    color: white;
     font-weight: bold;
+    background: #FFC107;
+    border-radius: 3px;
+    padding: 1px 4px;
 }
+
+.case-RTE {
+    color: black;
+    font-weight: bold;
+    background: #FFC107;
+    border-radius: 3px;
+    padding: 1px 4px;
+}
+
 
 .case-bad {
     text-decoration: underline;
 }
+
+
+.scase-AC {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.scase-_AC {
+    color: #f44336;
+    font-weight: bold;
+}
+
+.scase-WA {
+    color: #FF5252;
+    font-weight: bold;
+}
+
+.scase-TLE, .scase-SC {
+    color: #607d8b;
+    font-weight: bold;
+}
+
+.scase-MLE, .scase-OLE, .scase-RTE, .scase-IR {
+    color: #FFC107;
+    font-weight: bold;
+}
+
 
 .half-hr {
     float: left;

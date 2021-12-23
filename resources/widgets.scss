@@ -139,10 +139,15 @@ input {
     color: #767676;
     cursor: pointer;
     background-color: #FFF;
-    border: 1px solid #E1E1E8;
     border-radius: 0 $widget_border_radius;
     position: absolute;
     padding: 5px 8px;
+    	box-shadow: 0 0 4px #ccc;
+	border: none;
+	&:hover, &.active {
+		background-color: #009688;
+		color: white;
+	}
 }
 
 .copy-clipboard {
