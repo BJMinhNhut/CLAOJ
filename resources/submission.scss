@@ -13,6 +13,8 @@
 .submissions-status-table {
     border-spacing: 0;
     width: 100%;
+    border: $border_gray 1px solid;
+    border-radius: $widget_border_radius;
 }
 
 @media (max-width: 760px) {
@@ -286,11 +288,8 @@ label[for="language"], label[for="status"] {
         padding-top: 1em;
         display: inline-block;
 	width: 100%;
-
-	.case-row td:nth-child(4) {
-		border-right: 1px solid $border_gray;
-	}
     }
+
     .case-row {
         transition: background-color linear 0.1s;
     	&:hover {
@@ -299,43 +298,20 @@ label[for="language"], label[for="status"] {
         }
     }
 
-    .case-row td:last-child {
-       	border-right: 1px solid $border_gray;
-    }
     .case-row td:first-child {
-       	border-left: 1px solid $border_gray;
-	padding-left: 15px;
+	padding-left: 1.5em;
 	width: 5%;
     }
+
+    .case-row:first-child td {
+   	border-top: none;
+    }
+
     .case-row td:nth-child(2) {
 	width: 35%;
 	text-align: center;
     }
-	
-    tr:first-child td {
-	
-	&:first-child {
-		border-top-left-radius: $widget_border_radius;
-	}
-	
-	&:last-child {
-		border-top-right-radius: $widget_border_radius;
-	}
-
-    }
-	
-    tr:last-child td, tr:nth-last-child(2) td {
-	border-bottom: 1px solid $border_gray;
-	&:first-child {
-		border-bottom-left-radius: $widget_border_radius;
-	}
-	
-	&:last-child {
-		border-bottom-right-radius: $widget_border_radius;
-	}
-
-    }
-
+		
     .case-info {
     	padding: 0.5em 1em;
     	/* padding-bottom: 3px; */
@@ -352,8 +328,6 @@ label[for="language"], label[for="status"] {
     .case-output {
 	text-align: left;
         padding: 0.5em 1em;
-	border-right: 1px solid $border_gray;
-	border-left: 1px solid $border_gray;
 	border-top: none;
 	pre {
 		border: none;

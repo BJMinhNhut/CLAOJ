@@ -62,7 +62,7 @@
                                              ((not request.in_contest and current_test_case_count <= feedback_limit)
                                               or can_view_test) %}
             {% set curr_data = cases_data.get(case.case, None) %}
-            {% set has_extended_data = (print_case_ext_feedback or curr_data) and not request.in_contest %}
+            {% set has_extended_data = (not request.in_contest) and can_view_test and (print_case_ext_feedback or curr_data)%}
             <tr id="{{ case.id }}" class="case-row toggle closed">
                 <td>
                     {%- if has_extended_data -%}
@@ -94,7 +94,7 @@
                         {%- if case.status == 'TLE' -%}
                             &gt;<span>{{ (time_limit*1000)|floatformat(0) }}ms</span>
                         {%- else -%}
-                            <span title="{{ case.time*1000 }}ms">{{ (case.time*1000)|floatformat(0) }}ms</span>
+                            <span title="{{ case.time*1000 }}ms">{{ (case.time*1000)|floatformat(0) }} ms</span>
                         {%- endif -%}
                     {%- endif -%}
                 </td>
@@ -151,13 +151,13 @@
                 {% if submission.result == "TLE" %}
                     <span>---,</span>
                 {% else %}
-                    <span title="{{ submission.time*1000 }}ms">{{ (submission.time*1000)|floatformat(0) }}ms,</span>
+                    <span title="{{ submission.time*1000 }}ms">{{ (submission.time*1000)|floatformat(0) }} ms,</span>
                 {% endif %}
                 {{ submission.memory|kbdetailformat }}
                 <br>
                 {% if submission.result == "AC" %}
                     <b>{{ _('Maximum runtime on single test case:') }}</b>
-                    <span title="{{ max_execution_time*1000 }}ms">{{ (max_execution_time*1000)|floatformat(0) }}ms</span>
+                    <span title="{{ max_execution_time*1000 }}ms">{{ (max_execution_time*1000)|floatformat(0) }} ms</span>
                     <br>
                 {% endif %}
                 {% if is_pretest %}
