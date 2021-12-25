@@ -32,14 +32,15 @@
     {% if og_image %}
         <meta property="og:image" content="{{ request.build_absolute_uri(og_image) }}">
     {% else %}
-        <meta property="og:image" content="{{ request.build_absolute_uri("/og_img.png") }}">
+        <meta property="og:image" content="{{ request.build_absolute_uri("/logo.png") }}">
     {% endif %}    {% block og_title %}{% endblock %}
     <meta property="og:site_name" content="{{ SITE_LONG_NAME }}">
     <meta property="og:url"
           content="{{ DMOJ_SCHEME }}://{{ DMOJ_CANONICAL|default(site.domain) }}{{ request.get_full_path() }}">
-    {% if meta_description %}
+<!--    {% if meta_description %}
         <meta property="og:description" content="{{ meta_description }}">
-    {% endif %}
+    {% endif %} -->
+    <meta property="og:description" content="CLAOJ (Long An HSGS Online Judge) là một trang web chấm bài tự động được phát triển dựa trên nền tảng mã nguồn mở DMOJ. Được xây dựng từ tháng 6 năm 2021 với mục đích ban đầu là tạo ra một môi trường học tập cho học sinh đội tuyển Tin trường THPT chuyên Long An (Tỉnh Long An). Mọi ý kiến đóng góp và thắc mắc xin gửi về: claoj.edu.vn@gmail.com">
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script>window.bad_browser = true</script>
