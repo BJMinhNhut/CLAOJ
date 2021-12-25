@@ -259,6 +259,8 @@ label[for="language"], label[for="status"] {
 .source-wrap {
     overflow-x: auto;
     background: #eceff1;
+    line-height: 1.5;
+    border-radius: $widget_border_radius;
 }
 
 .statistics-table {
@@ -451,6 +453,7 @@ label[for="language"], label[for="status"] {
 .source-wrap {
     .line {
         position: relative;
+	padding-left: 1em;
     }
 
     .highlighter {

@@ -1499,19 +1499,19 @@ msgstr "giới hạn bộ nhớ"
 
 #: judge/models/problem.py:136
 msgid ""
-"The memory limit for this problem, in kilobytes (e.g. 64mb = 65536 "
+"The memory limit for this problem, in kilobytes (e.g. 256mb = 262144 "
 "kilobytes)."
 msgstr ""
-"Giới hạn bộ nhớ (kilobytes) cho bài tập này (chẳng hạn 64mb = 65536 "
+"Giới hạn bộ nhớ (kilobytes) cho bài tập này (chẳng hạn 256mb = 262144 "
 "kilobytes)."
 
 #: judge/models/problem.py:142
 msgid ""
 "Points awarded for problem completion. Points are displayed with a 'p' "
-"suffix if partial."
+"suffix if partial. 1-1.5: beginner problems; 1.5-2: simple algorithm (binary search, sieve, etc.); 2-3: advanced algorithm (dp, dijkstra, dsu, etc.); 2.5-3.5: 1st probs of VOI; 3.5-4.5: 2nd probs of VOI; 4.5-6: 3rd prob of VOI."
 msgstr ""
 "Điểm thưởng khi hoàn thành bài tập. Điểm được hiển thị với hậu tố 'p' nếu là "
-"bài từng phần."
+"bài từng phần. 1-1.5: bài nhập môn; 1.5-2: thuật toán cơ bản (chặt nhị phân, sàng nguyên tố, etc.); 2-3: thuật toán nâng cao (quy hoạch động, dijkstra, dsu, etc.); 2.5-3.5: bài 1 VOI; 3.5-4.5: bài 2 VOI; 4.5-6: bài 3 VOI."
 
 #: judge/models/problem.py:145
 msgid "allows partial points"
@@ -5117,8 +5117,8 @@ msgid "Resources:"
 msgstr "Tài nguyên:"
 
 #: templates/submission/status-testcases.html:138
-msgid "Maximum runtime on single test case:"
-msgstr "Thời gian chạy lâu nhất trong 1 test:"
+msgid "Maximum execution time:"
+msgstr "Thời gian chạy tối đa:"
 
 #: templates/submission/status-testcases.html:143
 msgid "Final pretest score:"
@@ -5136,6 +5136,10 @@ msgstr ""
 #: templates/submission/status-testcases.html:162
 msgid "Submission aborted!"
 msgstr "Bài nộp đã bị huỷ!"
+
+#: templates/submission/status-testcases.html:88
+msgid "Point"
+msgstr "Điểm"
 
 #: templates/submission/status.html:72
 msgid "View source"

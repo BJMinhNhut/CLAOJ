@@ -156,7 +156,7 @@
                 {{ submission.memory|kbdetailformat }}
                 <br>
                 {% if submission.result == "AC" %}
-                    <b>{{ _('Maximum runtime on single test case:') }}</b>
+                    <b>{{ _('Maximum execution time:') }}</b>
                     <span title="{{ max_execution_time*1000 }}ms">{{ (max_execution_time*1000)|floatformat(0) }} ms</span>
                     <br>
                 {% endif %}
