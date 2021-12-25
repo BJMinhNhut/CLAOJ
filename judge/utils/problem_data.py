@@ -10,6 +10,7 @@ from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
+
 if os.altsep:
     def split_path_first(path, repath=re.compile('[%s]' % re.escape(os.sep + os.altsep))):
         return repath.split(path, 1)

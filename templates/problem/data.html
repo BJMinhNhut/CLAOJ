@@ -73,7 +73,16 @@
                 }
             }
 
-            function checker_precision($checker) {
+            var $checker = $('#id_problem-data-checker');
+            var $args = $('#id_problem-data-checker_args');
+
+            var $custom_checker_file = $('#id_problem-data-custom_checker');
+            var $custom_checker_type = $('#id_problem-data-checker_type');
+            var $tr_custom_checker_file = $custom_checker_file.parent().parent();
+            var $tr_custom_checker_type = $custom_checker_type.parent().parent();
+            var init = true;
+
+            (function args_auto_fill() {
                 var $td = $checker.parent();
                 var $args = $td.find('input');
                 var $precision = $('<input>', {
@@ -84,14 +93,61 @@
                 }).change(function () {
                     if ($checker.val().startsWith('floats'))
                         $args.val(JSON.stringify({precision: parseInt($(this).val())}));
-                    else
-                        $args.val('');
                 }).appendTo($td);
 
+                // auto fill for custom checker
+                $custom_checker_file.change(function () {
+                    if ($checker.val().startsWith('bridged') && !init) {
+                        $file_name = $custom_checker_file.val().split('\\').pop();
+                        // Handle case that the current file is null but we have a file in database
+                        $old_file = $custom_checker_file.parent().find('a')[0];
+                        if ($old_file && $file_name == '') {
+                            $file_name = $old_file.innerText;
+                        }
+                        if (!($file_name == '')) {
+                            $file_name = $file_name.split('/').pop()
+                            $file_ext = $file_name.split('.').pop()
+                            if (!(['cpp', 'py'].includes($file_ext))) {
+                                alert("{{ _('Expected checker\'s extension must be in [cpp, py], found ') }}'" + $file_ext + "'");
+                            }
+                            else {
+                                $lang = $file_ext.toUpperCase();
+                                if ($lang == "CPP") $lang = "CPP17";
+                                $args.val(JSON.stringify({files: $file_name, lang: $lang, type: $custom_checker_type.find(":selected").val()}));
+                                if ($lang == "PY")
+                                    $args.val('');
+                            }
+                        }
+                    }
+                });
+
+                $custom_checker_type.change(function() {
+                    if (!$args.val() || init)
+                        return;
+                    var old_args = try_parse_json($args.val());
+                    if ("type" in old_args) {
+                        old_args["type"] = $custom_checker_type.find(":selected").val();
+                    }
+                    $args.val(JSON.stringify(old_args));
+                });
+
+                if (init && $args.val()) {
+                    var old_args = try_parse_json($args.val());
+                    if ("type" in old_args)
+                        $custom_checker_type.val(old_args["type"]);
+                }
+
                 $checker.change(function () {
+                    $custom_checker_file.toggle($checker.val().startsWith('bridged')).change();
+                    $custom_checker_type.toggle($checker.val().startsWith('bridged')).change();
+                    $tr_custom_checker_file.toggle($checker.val().startsWith('bridged'));
+                    $tr_custom_checker_type.toggle($checker.val().startsWith('bridged'));
                     $precision.toggle($checker.val().startsWith('floats')).change();
+                    if (!($checker.val().startsWith('bridged') || $checker.val().startsWith('floats')))
+                        $args.val('');
+                    init = false;
                 }).change();
-            }
+            })();
 
             var $file_test = $('#id_problem-data-zipfile');
             $("<br>").appendTo($file_test.parent());
@@ -113,8 +169,6 @@
                 $b.find('span.order').text($b_order.val());
                 handle_table_reorder();
             }
-
-            checker_precision($('#id_problem-data-checker'));
 
             $table.on('add-row', function (e, $tr) {
                 var $order = $tr.find('input').filter('[id$=order]').attr('type', 'hidden').val(++order);
@@ -178,7 +232,6 @@
                     }
                 });
 
-                checker_precision($tr.find('select[id$=checker]'));
             }).find('tbody:first').find('tr').each(function () {
                 $table.trigger('add-row', [$(this)]);
             });
@@ -339,6 +392,7 @@
 {% endblock %}
 
 {% block media %}
+    {{data_form.media.css}}
     <style>
         #case-table .select2 {
             text-align: initial;
@@ -457,10 +511,14 @@
                 Please modify the table below if needed and press the `Apply` button to save!
             {%- endtrans -%}
         </div>
+        {% if cases_formset._non_form_errors %}
+            {{ cases_formset._non_form_errors }}
+        {% endif %}
 	<br>
         <table id="case-table" class="table">
             <thead>
             <tr>
+                <th><a id="add-case-first-row" href="#"><i class="fa fa-plus"></i></a></th>
                 <th class="order-column"></th>
                 <th class="type-column">{{ _('Type') }}</th>
                 <th>{{ _('Input file') }}</th>
@@ -488,6 +546,7 @@
                     <tbody class="extra-row-body" style="display: none">
                 {% endif %}
                 <tr data-type="{{ form['type'].value() }}">
+                    <td><a class="add-case-row-below" href="#"><i class="fa fa-plus"></i></a></td>
                     <td>{{ form.id }}{{ form.order.errors }}{{ form.order }}</td>
                     <td class="type-column">{{ form.type.errors }}{{ form.type }}</td>
                     <td{% if not (form.empty_permitted or form['type'].value() != 'C' or
@@ -513,9 +572,9 @@
             {% endfor %}
             </tbody>
         </table>
-	<a id="add-case-row" href="#"><i class="fa fa-plus"></i> {{ _('Add new case') }}</a>
+	<a id="add-case-row" href="#" style="display: None;"><i class="fa fa-plus"></i> {{ _('Add new case') }}</a>
 
-	<br> <br>
+	<br> 
         <input type="submit" value="{{ _('Save test') }}" class="button">
     </form>
     <div style="display: none" class="generator-args-editor"><textarea></textarea><a class="button">{{ _('Save') }}</a></div>
