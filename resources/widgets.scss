@@ -22,6 +22,11 @@
     float: right;
 }
 
+.django-ace-widget>div {
+    border: 1px solid $border_gray;
+    font-size: 14px;
+}
+
 // Bootstrap-y buttons
 .button, button, input[type=submit] {
     color: white !important;
