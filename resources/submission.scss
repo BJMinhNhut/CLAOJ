@@ -244,9 +244,15 @@ label[for="language"], label[for="status"] {
             visibility: hidden;
         }
     }
+
+    pre {
+        margin: 0;
+        padding: 0 0 0 1em;
+        white-space: pre;
+    }
 }
 
-.source-code pre, .source-ln pre {
+.source-code pre {
     margin: 0;
     padding: 0;
     white-space: pre;
@@ -453,7 +459,6 @@ label[for="language"], label[for="status"] {
 .source-wrap {
     .line {
         position: relative;
-	padding-left: 1em;
     }
 
     .highlighter {

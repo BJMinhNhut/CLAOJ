@@ -96,7 +96,7 @@ class Profile(models.Model):
     points = models.FloatField(default=0, db_index=True)
     performance_points = models.FloatField(default=0, db_index=True)
     problem_count = models.IntegerField(default=0, db_index=True)
-    ace_theme = models.CharField(max_length=30, choices=ACE_THEMES, default='github')
+    ace_theme = models.CharField(max_length=30, choices=ACE_THEMES, default='tomorrow')
     last_access = models.DateTimeField(verbose_name=_('last access time'), default=now)
     ip = models.GenericIPAddressField(verbose_name=_('last IP'), blank=True, null=True)
     organizations = SortedManyToManyField(Organization, verbose_name=_('organization'), blank=True,
