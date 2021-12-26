@@ -83,8 +83,8 @@
             var init = true;
 
             (function args_auto_fill() {
+                // auto fill for float checker
                 var $td = $checker.parent();
-                var $args = $td.find('input');
                 var $precision = $('<input>', {
                     type: 'number',
                     value: try_parse_json($args.val()).precision || 6,
@@ -148,6 +148,14 @@
                     init = false;
                 }).change();
             })();
+
+            $td = $checker.parent();
+            var $sample = $("<a/>",{
+                text: "{{_('Instruction')}}",
+                style: "margin-left:3em;",
+                target: "_blank",
+                href: "/custom_checkers_instruction"
+            }).appendTo($td);
 
             var $file_test = $('#id_problem-data-zipfile');
             $("<br>").appendTo($file_test.parent());

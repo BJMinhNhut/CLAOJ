@@ -111,7 +111,7 @@
                          <strong>{{ _('Input') }}</strong>
                          <div class="case-info"><pre class="case-output">{{ curr_data['input']|linebreaksbr }}</pre></div>
 
-                         <strong>{{ _('Answer') }}</strong>
+                         <strong>{{ _('Correct output') }}</strong>
                          <div class="case-info">                                
                                 {% if prefix_length is none %}
                                     <pre class="case-output">{{ curr_data['answer']|linebreaksbr }}</pre>
@@ -120,10 +120,10 @@
                                 {% endif %}
                          </div>
 		        
-			 <strong>{{ _('Your output') }}</strong>
+			 <strong>{{ _("User's output") }}</strong>
                     	 <div class="case-info">
 			     {% if not case.output %}
-		                <pre class="case-output" style="color:gray; font-style: italic">({{_('empty')}})</pre> 
+		                <pre class="case-output" style="color:gray; font-style: italic">({{ _('empty') }})</pre> 
                              {% else %}
 				{% if prefix_length is none %}
                                     <pre class="case-output">{{ case.output|linebreaksbr }}</pre>

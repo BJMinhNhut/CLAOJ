@@ -5100,13 +5100,21 @@ msgstr ""
 msgid "Pretest"
 msgstr ""
 
+#: templates/submission/status-testcases.html:111
+msgid "Input"
+msgstr "Dữ liệu vào"
+
+#: templates/submission/status-testcases.html:126
+msgid "empty"
+msgstr "rỗng"
+
 #: templates/submission/status-testcases.html:112
-msgid "Your output"
-msgstr "Output của bạn"
+msgid "User's output"
+msgstr "Kết quả của thí sinh"
 
 #: templates/submission/status-testcases.html:122
-msgid "Answer"
-msgstr "Đáp án"
+msgid "Correct output"
+msgstr "Kết quả đúng"
 
 #: templates/submission/status-testcases.html:113
 msgid "Judge feedback"
