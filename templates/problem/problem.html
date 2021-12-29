@@ -279,10 +279,13 @@
     {% endif %}
 {% endblock %}
 
+
 {% block description %}
-    {% cache 86400 'problem_html' problem.id MATH_ENGINE LANGUAGE_CODE %}
-        {{ description|markdown(problem.markdown_style, MATH_ENGINE)|reference|str|safe }}
-    {% endcache %}
+    <div class="sidebox" style="padding: 0.5em 2em 1.5em 2em; margin-top: 0.7em">
+    	{% cache 86400 'problem_html' problem.id MATH_ENGINE LANGUAGE_CODE %}
+            {{ description|markdown(problem.markdown_style, MATH_ENGINE)|reference|str|safe }}
+    	{% endcache %}
+
 
     {% with license=problem.license %}
         {% if license %}
@@ -291,9 +294,13 @@
         </span>
         {% endif %}
     {% endwith %}
+    </div>
 {% endblock %}
 
 {% block post_description_end %}
+{% endblock %}
+
+{% block comments %}
     {% if request.user.is_authenticated and not request.profile.mute %}
         <a href="{{ url('new_problem_ticket', problem.code) }}" class="button clarify">
             {%- if contest_problem and contest_problem.contest.use_clarifications and request.profile.current_contest.live -%}
@@ -303,9 +310,7 @@
             {%- endif -%}
         </a>
     {% endif %}
-{% endblock %}
 
-{% block comments %}
     {% if contest_problem and contest_problem.contest.use_clarifications %}
         <div class="clarifications-area">
             <h2><i class="fa fa-question-circle"></i> {{ _('Clarifications') }}</h2>
