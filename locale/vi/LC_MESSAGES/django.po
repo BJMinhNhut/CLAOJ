@@ -2994,6 +2994,10 @@ msgstr "Tham số checker là một JSON không hợp lệ"
 msgid "Your zip file is invalid!"
 msgstr "File nén bị lỗi!"
 
+#: judge/views/problem_data.py:60
+msgid "Can be left blank. In case the output can be too long (over 20MB), please set this."
+msgstr "Có thể để trống. Nếu output có thể được user in ra quá dài (hơn 20MB), hãy điền vào đây."
+
 #: judge/views/problem_data.py:105
 #, python-brace-format
 msgid "Comparing submissions for {0}"
@@ -3017,7 +3021,7 @@ msgstr "Chỉnh sửa các dữ liệu cho %s"
 #: judge/views/problem_data.py:244 judge/views/problem_data.py:245
 #, python-format
 msgid "Generated init.yml for %s"
-msgstr "Tạo file Init.yml cho %s"
+msgstr "File Init.yml cho %s"
 
 #: judge/views/problem_manage.py:50 judge/views/problem_manage.py:53
 #, python-format

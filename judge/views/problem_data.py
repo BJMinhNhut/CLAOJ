@@ -23,7 +23,7 @@ from judge.utils.problem_data import ProblemDataCompiler
 from judge.utils.unicode import utf8text
 from judge.utils.views import TitleMixin, add_file_response
 from judge.views.problem import ProblemMixin
-# from judge.widgets import Select2Widget
+from judge.widgets import Select2Widget
 
 mimetypes.init()
 mimetypes.add_type('application/x-yaml', '.yml')
@@ -51,9 +51,14 @@ class ProblemDataForm(ModelForm):
 
     class Meta:
         model = ProblemData
-        fields = ['zipfile', 'checker', 'custom_checker', 'checker_args', 'output_limit', 'output_prefix']
+        fields = ['zipfile', 'checker', 'custom_checker', 'checker_args', 'output_limit']
         widgets = {
             'checker_args': HiddenInput,
+            'checker': Select2Widget(attrs={'style': 'width: 200px'}),
+            'output_limit': NumberInput(attrs={'style': 'max-width: 4.5em'}),
+        }
+        help_texts = {
+            'output_limit': _('Can be left blank. In case the output can be too long (over 20MB), please set this.'),
         }
 
 
