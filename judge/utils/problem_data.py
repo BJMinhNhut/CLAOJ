@@ -1,8 +1,8 @@
 import json
 import os
 import re
-import zipfile
 import shutil
+import zipfile
 
 import yaml
 from django.conf import settings
