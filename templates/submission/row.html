@@ -5,7 +5,7 @@
     </div>
     <div class="state">        
         {%- if submission.is_graded -%}
-            {%- if submission.short_status in ('IE', 'CE', 'AB', 'AC') -%}
+            {%- if submission.short_status in ('IE', 'CE', 'AB') -%}
             {%- else -%}
                 {{ submission.case_points|floatformat(0) }}/{{ submission.case_total|floatformat(0) }}&nbsp|&nbsp
             {%- endif -%}

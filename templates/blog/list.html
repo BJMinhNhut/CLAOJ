@@ -11,10 +11,6 @@
     <link rel="alternate" type="application/rss+xml" href="{{ url('problem_rss') }}" title="RSS Problem Feed">
     {% include "blog/media-css.html" %}
     <style>
-        .post {
-            margin: 0 1.4em;
-        }
-
         .comment-count {
             font-size: 12px;
         }
@@ -143,7 +139,6 @@
                         {% endif %}
                     </div>
                 </div>
-<br> <br>
             {% endif %}
             {% if current_contests %}
                 <div class="blog-sidebox sidebox">
@@ -161,7 +156,6 @@
                         {% endfor %}
                     </div>
                 </div>
-<br> <br>
             {% endif %}
 
             {% if future_contests %}
@@ -180,7 +174,6 @@
                         {% endfor %}
                     </div>
                 </div>
-<br> <br>
             {% endif %}
 
             <div class="blog-sidebox sidebox">
@@ -196,9 +189,13 @@
                             </li>
                         {% endfor %}
                     </ul>
+                        <span class="rssatom">
+                            <a href="{{ url('comment_rss') }}"><span><i class="fa fa-rss"></i></span> RSS</a>
+                            /
+                            <a href="{{ url('comment_atom') }}">Atom</a>
+                        </span>
                 </div>
             </div>
-<br> <br>
             <div class="blog-sidebox sidebox">
                 <h3>{{ _('New problems') }} <i class="fa fa-puzzle-piece"></i>
                 </h3>
@@ -208,9 +205,14 @@
                             <li><a href="{{ url('problem_detail', problem.code) }}">{{ problem.name }}</a></li>
                         {% endfor %}
                     </ul>
+                    <span class="rssatom">
+                        <a href="{{ url('problem_rss') }}"><span><i class="fa fa-rss"></i></span> RSS</a>
+                        /
+                        <a href="{{ url('problem_atom') }}">Atom</a>
+                    </span>
                 </div>
             </div>
-<br> <br>
+
             {% if perms.judge.test_site and own_open_tickets %}
                 <div class="blog-sidebox sidebox">
                     <h3>{{ _('My open tickets') }} <i class="fa fa-question-circle"></i></h3>
@@ -230,7 +232,6 @@
                         </ul>
                     </div>
                 </div>
-<br> <br>
             {% endif %}
 
             {% if perms.judge.test_site and open_tickets %}
@@ -253,7 +254,6 @@
                         </ul>
                     </div>
                 </div>
-<br> <br>
             {% endif %}
         </div>
     </div>

@@ -40,6 +40,8 @@
 }
 
 .blog-sidebox {
+    margin-bottom: 2em;
+
     h3 {
         padding-bottom: 0.25em;
         padding-left: 0.5em;
@@ -83,6 +85,7 @@
         overflow-y: auto;
         max-height: 23em;
     }
+    
 }
 
 @media (min-width: 800px) {
