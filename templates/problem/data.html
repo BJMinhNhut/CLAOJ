@@ -113,7 +113,7 @@
                             else {
                                 $lang = $file_ext.toUpperCase();
                                 if ($lang == "CPP") $lang = "CPP17";
-                                $args.val(JSON.stringify({files: $file_name, lang: $lang, type: "testlib"}));
+                                $args.val(JSON.stringify({files: $file_name, lang: $lang}));
                                 if ($lang == "PY")
                                     $args.val('');
                             }

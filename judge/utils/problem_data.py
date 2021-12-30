@@ -2,6 +2,7 @@ import json
 import os
 import re
 import zipfile
+import shutil
 
 import yaml
 from django.conf import settings
@@ -9,6 +10,9 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 from django.utils.translation import gettext as _
+
+
+WRAPPER_TEMPLATE_PATH = 'wrapper_checker_templates/cpp_template.py'
 
 
 if os.altsep:
@@ -74,6 +78,29 @@ class ProblemDataCompiler(object):
                 raise ProblemDataError(_('Empty batches not allowed.'))
             cases.append(batch)
 
+        def make_wrapper_checker_for_cpp_checker(case, custom_checker_path):
+            checker_name = "cpp_checker.py"
+
+            if len(custom_checker_path) != 2:
+                raise ProblemDataError(_('How did you corrupt the custom checker path?'))
+
+            checker = os.path.join(settings.DMOJ_PROBLEM_DATA_ROOT,
+                                   custom_checker_path[0],
+                                   checker_name)
+
+            custom_checker_name = custom_checker_path[1]
+
+            if not os.path.isfile(checker):
+                shutil.copy(WRAPPER_TEMPLATE_PATH, checker)
+
+            # replace {{filecpp}} and {{problemid}} in checker file
+            filedata = open(checker, 'r').read()
+            filedata = filedata.replace('{{filecpp}}', "\'%s\'" % custom_checker_name)
+            filedata = filedata.replace('{{problemid}}', "\'%s\'" % custom_checker_path[0])
+            open(checker, 'w').write(filedata)
+
+            return checker_name
+
         def make_checker(case):
             if (case.checker == 'bridged'):
                 custom_checker_path = split_path_first(case.custom_checker.name)
@@ -89,10 +116,11 @@ class ProblemDataCompiler(object):
                 if checker_ext == 'py':
                     return custom_checker_path[1]
 
+                # use wrapper to make cpp checker
                 if checker_ext != 'cpp':
                     raise ProblemDataError(_("Why don't you use a cpp/py checker?"))
-                # the cpp checker will be handled
-                # right below here, outside of this scope
+                else:
+                    return make_wrapper_checker_for_cpp_checker(case, custom_checker_path)
 
             if case.checker_args:
                 return {

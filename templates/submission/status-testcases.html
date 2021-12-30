@@ -86,7 +86,7 @@
                 </td>
 
                 {% if not batch.id %}
-                    <td><strong>{{ _('Point') }}:&nbsp;</strong>{{ case.points|floatformat(0) }}/{{ case.total|floatformat(0) }}</td>
+                    <td><strong>{{ _('Point') }}:&nbsp;</strong>{{ case.points }}/{{ case.total|floatformat(0) }}</td>
                 {% endif %}
 
                 <td>
@@ -134,16 +134,13 @@
 			 </div>
                     {% endif %}
 
-		    </td>
-
                     {% if print_case_ext_feedback %}
-                        <td colspan="5" class="case-ext-feedback">
+                            <strong>{{ _('Judge feedback') }}</strong>
                             <div class="case-info">
-                                <strong>{{ _('Judge feedback') }}</strong>
                                 <pre class="case-output">{{ case.extended_feedback|linebreaksbr }}</pre>
                             </div>
-                        </td>
                     {% endif %}
+		    </td>
                 </tr>
             {% endif %}
         {% endfor %}
@@ -173,7 +170,7 @@
                 {% else %}
                     <b>{{ _('Final score:') }}</b>
                 {% endif %}
-                {{ submission.case_points|floatformat(0) }}/{{ submission.case_total|floatformat(0) }}
+                {{ submission.case_points }}/{{ submission.case_total|floatformat(0) }}
                 {% if request.in_contest and submission.contest_or_none %}
                     {% with contest=submission.contest_or_none %}
                         ({{ _('%(points)s/%(total)s points', points=contest.points|roundfloat(3),
