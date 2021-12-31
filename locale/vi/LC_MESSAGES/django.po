@@ -1894,6 +1894,18 @@ msgstr "Người dùng bình thường"
 msgid "Problem Setter"
 msgstr "Người ra đề"
 
+#: templates/base.html:295
+msgid "Long An HSGS Online Judge"
+msgstr "Web chấm bài tự động trường THPT chuyên Long An"
+
+#: templates/base.html:296
+msgid "powered by"
+msgstr "dựa trên nền tảng"
+
+#: templates/base.html:297
+msgid "developed by"
+msgstr "phát triển bởi"
+
 #: judge/models/profile.py:126 templates/base.html:255
 #: templates/comments/list.html:100 templates/contest/contest-list-tabs.html:24
 #: templates/contest/ranking-table.html:62

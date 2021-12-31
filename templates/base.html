@@ -292,8 +292,9 @@
     <footer>
         <span id="footer-content">
             <br>
-	    <a style="color: #b0bec5"> Chuyên Long An Online Judge </a> <br>
-            <a style="color: #b0bec5" href="https://dmoj.ca"> dựa trên nền tảng <b>DMOJ</b></a> |
+	    <a style="color: #b0bec5"> {{ _('Long An HSGS Online Judge') }} </a> <br>
+            <a style="color: #b0bec5" href="https://dmoj.ca"> {{ _('powered by') }} <b>DMOJ</b></a> |
+	    <a style="color: #b0bec5" href="https://www.facebook.com/itclapro"> {{ _('developed by') }} <b>IT-CLA Productions</b></a> |
             {% if i18n_config.footer %}
                 {{ i18n_config.footer|safe }} |
             {% endif %}
