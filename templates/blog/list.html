@@ -11,6 +11,24 @@
     <link rel="alternate" type="application/rss+xml" href="{{ url('problem_rss') }}" title="RSS Problem Feed">
     {% include "blog/media-css.html" %}
     <style>
+        table.bottom td.left {
+            text-align: left;
+            border: none !important;
+        }
+
+        table.bottom td.right {
+            text-align: right;
+	    border: none !important;
+        }
+
+	table.ranking td:first-child, table.ranking th:first-child{
+	    	border-left: none !important;
+        }
+
+	table.ranking td:last-child, table.ranking th:last-child{
+	    	border-right: none !important;
+        }
+
         .comment-count {
             font-size: 12px;
         }
@@ -174,6 +192,10 @@
                         {% endfor %}
                     </div>
                 </div>
+            {% endif %}
+
+            {% if top_pp_users %}
+                {% include "blog/top-pp.html" %}
             {% endif %}
 
             <div class="blog-sidebox sidebox">
