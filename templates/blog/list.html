@@ -11,6 +11,33 @@
     <link rel="alternate" type="application/rss+xml" href="{{ url('problem_rss') }}" title="RSS Problem Feed">
     {% include "blog/media-css.html" %}
     <style>
+	table.problem-list tr td{
+		border-bottom: 1px solid #e0e0e0;
+		padding: 7px 0;
+	}
+	table.problem-list tr:last-child td {
+		border: none;
+	}
+
+	span.problem-points {
+		background: #777;
+    		color: white;
+    		padding: 3px 6px;
+    		font-weight: 700;
+    		border-radius: 10px;
+    		font-size: 12px;
+    		vertical-align: middle;
+    		text-align: center;
+    		line-height: 1;
+    		white-space: nowrap;
+    		min-width: 10px;
+    		display: inline-block;
+	}
+	table.bottom td {
+		padding-top: 11px;
+    		padding-bottom: 3px;
+	}
+
         table.bottom td.left {
             text-align: left;
             border: none !important;
@@ -113,7 +140,8 @@
                                 {%- endif -%}
                             {% endwith %}
                             {{ relative_time(post.publish_on, abs=_('posted on {time}'), rel=_('posted {time}')) -}}
-                        </span><span class="comment-data">
+                        </span>
+                        <span class="comment-data">
                             <a href="{{ url('blog_post', post.id, post.slug) }}#comments" class="comment-count-link">
                                 <i class="fa fa-comments comment-icon"></i><span class="comment-count">
                                     {{- post_comment_counts[post.id] or 0 -}}
@@ -197,6 +225,10 @@
             {% if top_pp_users %}
                 {% include "blog/top-pp.html" %}
             {% endif %}
+	    
+	    {% if new_problems %}
+	    	{% include "blog/new-problems-list.html" %}
+	    {% endif %}
 
             <div class="blog-sidebox sidebox">
                 <h3>{{ _('Comment stream') }} <i class="fa fa-comments"></i></h3>
@@ -216,22 +248,6 @@
                             /
                             <a href="{{ url('comment_atom') }}">Atom</a>
                         </span>
-                </div>
-            </div>
-            <div class="blog-sidebox sidebox">
-                <h3>{{ _('New problems') }} <i class="fa fa-puzzle-piece"></i>
-                </h3>
-                <div class="sidebox-content">
-                    <ul class="problem-list">
-                        {% for problem in new_problems %}
-                            <li><a href="{{ url('problem_detail', problem.code) }}">{{ problem.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-                    <span class="rssatom">
-                        <a href="{{ url('problem_rss') }}"><span><i class="fa fa-rss"></i></span> RSS</a>
-                        /
-                        <a href="{{ url('problem_atom') }}">Atom</a>
-                    </span>
                 </div>
             </div>
 
