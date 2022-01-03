@@ -4458,6 +4458,10 @@ msgstr "Tính lại điểm của mọi bài nộp"
 msgid "View as PDF"
 msgstr "Xem dạng PDF"
 
+#: templates/problem/problem.html:190
+msgid "Problem ID:"
+msgstr "Mã bài:"
+
 #: templates/problem/problem.html:101 templates/problem/problem.html:111
 #: templates/problem/problem.html:116
 msgid "Submit solution"
