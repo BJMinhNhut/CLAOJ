@@ -5,7 +5,7 @@
         <table class="problem-list">
             {% for problem in new_problems %}
                 <tr>
-	            <td style="padding-left:7px"><a href="{{ url('problem_detail', problem.code) }}">{{ problem.name }} </a></td>
+	            <td style="padding-right:7px"><a href="{{ url('problem_detail', problem.code) }}">{{ problem.name }} </a></td>
 		    <td style="text-align:right"><span class="problem-points">{{ problem.points|floatformat }}{% if problem.partial %}p{% endif %} </span></td>
                 </tr>
             {% endfor %}
