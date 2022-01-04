@@ -254,7 +254,11 @@ input {
 // Bootstrap-y pagination
 ul.pagination a:hover {
     color: #212121;
-    background: $background_light_gray;
+    background: $background_gray;
+}
+
+ul.pagination a {
+    transition: background ease-in-out 0.1s;
 }
 
 ul.pagination {
