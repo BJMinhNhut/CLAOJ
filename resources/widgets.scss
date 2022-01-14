@@ -169,7 +169,7 @@ input {
 }
 
 .tabs {
-    margin: 0 0 1em;
+    margin: 0 0 0.5em;
     width: 100%;
     display: flex;
     font-family: $title_fonts;
@@ -342,7 +342,7 @@ ul.pagination {
 }
 
 .bottom-pagination-bar {
-    margin-top: 10px;
+    margin-top: 7px;
 }
 
 .alert {
@@ -440,16 +440,17 @@ ul.select2-selection__rendered {
 
 .sidebox h3 {
     margin: 0 -5px;
-    background: white;
+    background: #f7f8f9;
     border-radius: $widget_border_radius $widget_border_radius 0 0;
-    color: #212121;
-    padding: 15px 15px 0px 15px;
+    border-bottom: 1px solid $border_gray;
+    color: #546e7a;
+    padding: 10px 12px;
     font-weight: 700;
     font-size: 1.3em;
 }
 
 .sidebox h3 .fa {
-    color: #212121;
+    color: #546e7a;
     float: left;
     margin: 0.1em 0.4em 0 0;
 }

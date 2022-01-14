@@ -1,6 +1,8 @@
 @import "vars";
 
 #problem-table {
+    margin-bottom: 0;
+
     td {
 	&:first-child {
 		width: 8%;	
@@ -88,7 +90,6 @@
 #content-right {
     &.problems {
         flex: 26.5%;
-        max-width: unset;
         padding-top: 0;
     }
 }

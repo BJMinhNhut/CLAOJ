@@ -18,6 +18,33 @@
                 visibility: visible;
             }
 
+	table.problem-list tr td{
+		border-bottom: 1px solid #e0e0e0;
+		padding: 7px 0;
+	}
+	table.problem-list tr:last-child td {
+		border: none;
+	}
+	table.problem-list {
+		border-spacing: 0;
+	}
+
+	span.problem-points {
+		background: #777;
+    		color: white;
+    		padding: 3px 6px;
+    		font-weight: 700;
+    		border-radius: 10px;
+    		font-size: 12px;
+    		vertical-align: middle;
+    		text-align: center;
+    		line-height: 1;
+    		white-space: nowrap;
+    		min-width: 10px;
+    		display: inline-block;
+	}
+
+
             span.hot-problem-count {
                 color: #555;
                 font-size: 0.75em;
@@ -167,6 +194,10 @@
 
 
 {% block body %}
+	{% if page_obj.has_other_pages() %}
+        <div class="top-pagination-bar">{% include "list-pages.html" %}</div>
+    	{% endif %}
+
     <div id="common-content">
         {% block before_table %}{% endblock %}
         {% if not request.in_contest %}
@@ -174,15 +205,17 @@
                 <div class="info-float">
                     {% include "problem/search-form.html" %}
                     {% if hot_problems %}
-			<br> <br>
-                        <div class="sidebox">
+                        <div class="sidebox" style="margin-top: 2em;">
                             <h3>{{ _('Hot problems') }} <i class="fa fa-fire"></i></h3>
                             <div class="sidebox-content">
-                                <ul class="problem-list">{% for problem in hot_problems %}
-                                    <li><a href="{{ url('problem_detail', problem.code) }}" class="hot-problem-link">
-                                        {{ problem.name }}
-                                    </a></li>
-                                {% endfor %}</ul>
+        			<table class="problem-list">
+            			{% for problem in hot_problems %}
+                			<tr>
+	            			<td style="padding-right:7px"><a href="{{ url('problem_detail', problem.code) }}">{{ problem.name }} </a></td>
+		    			<td style="text-align:right"><span class="problem-points">{{ problem.points|floatformat }}{% if problem.partial %}p{% endif %} </span></td>
+                			</tr>
+            			{% endfor %}
+       				</table>
                             </div>
                         </div>
                     {% endif %}
@@ -190,10 +223,6 @@
             </div>
         {% endif %}
         <div id="content-left" class="problems h-scrollable-table">
-		{% if page_obj.has_other_pages() %}
-        	<div class="top-pagination-bar">{% include "list-pages.html" %}</div>
-    		{% endif %}
-
 
             <table id="problem-table" class="table striped">
                 <thead>
@@ -301,10 +330,10 @@
                 {% endfor %}
                 </tbody>
             </table>
+        </div>
+    </div>
 		{% if page_obj.has_other_pages() %}
        		<div class="bottom-pagination-bar">{% include "list-pages.html" %}</div>
    		{% endif %}
 
-        </div>
-    </div>
 {% endblock %}
