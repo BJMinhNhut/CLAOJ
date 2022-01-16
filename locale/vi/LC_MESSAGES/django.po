@@ -5293,7 +5293,7 @@ msgstr "Đóng góp"
 
 #: templates/user/base-users.html:14 templates/user/base-users.html:71
 msgid "Search by handle..."
-msgstr "Tìm kiến bằng username"
+msgstr "Tìm kiếm bằng username"
 
 #: templates/user/edit-profile.html:109
 msgid "Are you sure you want to generate or regenerate your API token?"
