@@ -116,9 +116,14 @@ msgstr "Chi tiết"
 msgid "Format"
 msgstr ""
 
-#: judge/admin/contest.py:121 templates/contest/ranking-table.html:5
+#: judge/admin/contest.py:121 templates/contest/ranking-table.html:88
+msgid "Total AC"
+msgstr "Tổng AC"
+
+#: templates/contest/ranking-table.html:5
 msgid "Rating"
 msgstr ""
+
 
 #: judge/admin/contest.py:122
 msgid "Access"

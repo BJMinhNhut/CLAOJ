@@ -345,6 +345,10 @@
                 while ($total.val() < n_test) {
                     $('a#add-case-row').click();
                 }
+                // natsort
+                var collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
+                inFiles.sort(collator.compare);
+                outFiles.sort(collator.compare);
                 // fill cases
                 for (var i = 0; i < n_test; i++) {
                     $("#id_cases-" + i + "-input_file").append(new Option(inFiles[i], inFiles[i], true, true)).change();
@@ -488,6 +492,18 @@
 {% endblock %}
 
 {% block header %}
+    {% if problem.is_organization_private %}
+        <span class="organization-tags">
+            {% for org in problem.organizations.all() %}
+                <span class="organization-tag">
+                    <a href="{{ org.get_absolute_url() }}">
+                        <i class="fa fa-lock"></i> {{ org.name }}
+                    </a>
+                </span>
+            {% endfor %}
+        </span>
+    {% endif %}
+
     {% if data_form.instance.has_yml %}
         <div class="title-line-action">
             [<a href="{{ url('problem_data_init', problem.code) }}">{{ _('View YAML') }}</a>]

@@ -50,6 +50,9 @@
         <div class="sub-prop"><div>
             <a href="{{ url('submission_status', submission.id) }}">
                 <i class="fa fa-eye fa-fw"></i><span class="label">{{ _('view') }}</span>
+            </a> ·
+            <a href="{{ url('submission_source', submission.id) }}">
+                {{ _('source') }}
             </a>
             {% if perms.judge.rejudge_submission and can_edit %} ·
                 {% if not submission.is_locked %}
