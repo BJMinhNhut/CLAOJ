@@ -25,7 +25,12 @@
 	td {
        	    &:first-child {
             	border: 1px solid $border_gray;
+		border-bottom-left-radius: $widget_border_radius;
             }
+
+	    &:last-child {
+		border-bottom-right-radius: $widget_border_radius;
+	    }
 
        	    border-color: $border_gray;
             border-width: 1px 1px 1px 0;

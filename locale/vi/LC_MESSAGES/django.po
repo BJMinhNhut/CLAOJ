@@ -4635,6 +4635,26 @@ msgstr "Ngẫu nhiên"
 msgid "Your source code must contain at most 65536 characters."
 msgstr "Độ dài code không được vượt quá 65536 ký tự."
 
+#: templates/problem/submit.html:415
+msgid "Click to select a file or drag a file into this box"
+msgstr "Nhấp để chọn file hoặc kéo thả file vào ô này"
+
+#: templates/problem/submit.html:416
+msgid "Or patse your code into the editor"
+msgstr "Hoặc dán code của bạn vào editor ở trên"
+
+#: templates/problem/submit.html:206
+msgid "File name"
+msgstr "Tên file"
+
+#: templates/problem/submit.html:207
+msgid "File size"
+msgstr "Kích thước"
+
+#: templates/problem/submit.html:160
+msgid "Only accept %(file_ext) for this language. Maximum file size is %(file_size_limit)MB."
+msgstr "Chỉ cho phép file đuôi %(file_ext) cho ngôn ngữ này. Kích thước file tối đa là %(file_size_limit)MB."
+
 #: templates/problem/submit.html:204
 #, python-format
 msgid ""

@@ -208,7 +208,7 @@
                         <div class="sidebox" style="margin-top: 2em;">
                             <h3>{{ _('Hot problems') }} <i class="fa fa-fire"></i></h3>
                             <div class="sidebox-content">
-        			<table class="problem-list">
+        			<table class="problem-list" style="width:100%">
             			{% for problem in hot_problems %}
                 			<tr>
 	            			<td style="padding-right:7px"><a href="{{ url('problem_detail', problem.code) }}">{{ problem.name }} </a></td>

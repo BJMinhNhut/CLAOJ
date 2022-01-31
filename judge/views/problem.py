@@ -1,6 +1,7 @@
 import logging
 import os
 import shutil
+import zipfile
 from datetime import timedelta
 from operator import itemgetter
 from random import randrange
@@ -38,6 +39,7 @@ from judge.utils.problems import contest_attempted_ids, contest_completed_ids, h
 from judge.utils.strings import safe_float_or_none, safe_int_or_none
 from judge.utils.tickets import own_ticket_filter
 from judge.utils.views import QueryStringSortMixin, SingleObjectFormView, TitleMixin, add_file_response, generic_message
+from judge.views.widgets import submission_uploader
 
 
 def get_contest_problem(problem, profile):
@@ -643,6 +645,24 @@ class ProblemSubmit(LoginRequiredMixin, ProblemMixin, TitleMixin, SingleObjectFo
             else:
                 self.new_submission.save()
 
+            submission_file = form.files.get('submission_file', None)
+            if submission_file is not None:
+                if self.new_submission.language.key == 'SCRATCH':
+                    try:
+                        archive = zipfile.ZipFile(submission_file.file)
+                        submission_file.file = archive.open('project.json')
+                        submission_file.name = 'dummy.json'
+                    except (zipfile.BadZipFile, KeyError):
+                        pass
+
+                source_url = submission_uploader(
+                    submission_file=submission_file,
+                    problem_code=self.new_submission.problem.code,
+                    user_id=self.new_submission.user.user.id,
+                )
+            else:
+                source_url = ''
+
             source = SubmissionSource(submission=self.new_submission, source=form.cleaned_data['source'])
             source.save()
 
@@ -681,6 +701,8 @@ class ProblemSubmit(LoginRequiredMixin, ProblemMixin, TitleMixin, SingleObjectFo
                 Submission.objects.select_related('source', 'language'),
                 id=submission_id,
             )
+            if self.old_submission.language.file_only:
+                raise Http404()
             if not request.user.has_perm('judge.resubmit_other') and self.old_submission.user != request.profile:
                 raise PermissionDenied()
         else:

@@ -468,6 +468,9 @@ MARTOR_MARKDOWN_BASE_MENTION_URL = '/user/'
 MARTOR_UPLOAD_MEDIA_DIR = 'martor'
 MARTOR_UPLOAD_SAFE_EXTS = {'.jpg', '.png', '.gif'}
 
+SUBMISSION_FILE_UPLOAD_URL_PREFIX = '/submission_file'
+SUBMISSION_FILE_UPLOAD_MEDIA_DIR = 'submission_file'
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 

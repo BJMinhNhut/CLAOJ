@@ -538,7 +538,9 @@
         {% if cases_formset._non_form_errors %}
             {{ cases_formset._non_form_errors }}
         {% endif %}
-	<br>
+
+        <input type="submit" style="margin: 1em 0" value="{{ _('Save test') }}" class="button">
+
         <table id="case-table" class="table">
             <thead>
             <tr>
@@ -598,8 +600,7 @@
         </table>
 	<a id="add-case-row" href="#" style="display: None;"><i class="fa fa-plus"></i> {{ _('Add new case') }}</a>
 
-	<br> 
-        <input type="submit" value="{{ _('Save test') }}" class="button">
+        <input type="submit" style="margin: 1em 0" value="{{ _('Save test') }}" class="button">
     </form>
     <div style="display: none" class="generator-args-editor"><textarea></textarea><a class="button">{{ _('Save') }}</a></div>
 {% endblock %}
