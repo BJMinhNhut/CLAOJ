@@ -26,7 +26,7 @@ from judge.utils.infinite_paginator import InfinitePaginationMixin
 from judge.utils.problem_data import get_problem_testcases_data
 from judge.utils.problems import get_result_data, user_completed_ids, user_editable_ids, user_tester_ids
 from judge.utils.raw_sql import join_sql_subquery, use_straight_join
-from judge.utils.views import DiggPaginatorMixin, TitleMixin
+from judge.utils.views import DiggPaginatorMixin, TitleMixin, generic_message
 
 
 def submission_related(queryset):
@@ -82,6 +82,13 @@ class SubmissionSource(SubmissionDetailBase):
         context['raw_source'] = submission.source.source.rstrip('\n')
         context['highlighted_source'] = highlight_code(submission.source.source, submission.language.pygments)
         return context
+
+    def dispatch(self, request, *args, **kwargs):
+        submission = self.get_object()
+        if submission.language.file_only and not request.user.is_superuser:
+            return generic_message(request, 'Access denied', 'This source cannot be viewed by normal users.',
+                                   404)
+        return super(SubmissionSource, self).dispatch(request, *args, **kwargs)
 
 
 def make_batch(batch, cases):
