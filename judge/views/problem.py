@@ -21,7 +21,7 @@ from django.utils.functional import cached_property
 from django.utils.html import escape, format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _, gettext_lazy
-from django.views.generic import ListView, UpdateView, View
+from django.views.generic import CreateView, ListView, UpdateView, View
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.detail import SingleObjectMixin
 from reversion import revisions
@@ -32,6 +32,7 @@ from judge.models import ContestSubmission, Judge, Language, Problem, ProblemGro
     ProblemTranslation, ProblemType, RuntimeVersion, Solution, Submission, SubmissionSource, \
     TranslatedProblemForeignKeyQuerySet
 from judge.pdf_problems import DefaultPdfMaker, HAS_PDF
+from judge.template_context import misc_config
 from judge.utils.diggpaginator import DiggPaginator
 from judge.utils.opengraph import generate_opengraph
 from judge.utils.problems import contest_attempted_ids, contest_completed_ids, hot_problems, user_attempted_ids, \
@@ -742,6 +743,34 @@ class ProblemClone(ProblemMixin, PermissionRequiredMixin, TitleMixin, SingleObje
             revisions.set_comment(_('Cloned problem from %s') % old_code)
 
         return HttpResponseRedirect(reverse('admin:judge_problem_change', args=(problem.id,)))
+
+
+class ProblemCreate(PermissionRequiredMixin, TitleMixin, CreateView):
+    template_name = 'problem/create.html'
+    model = Problem
+    form_class = ProblemEditForm
+    permission_required = 'judge.add_problem'
+
+    def get_title(self):
+        return _('Creating new problem')
+
+    def get_content_title(self):
+        return _('Creating new problem')
+
+    def form_valid(self, form):
+        self.object = problem = form.save()
+        problem.authors.add(self.request.user.profile)
+        problem.allowed_languages.set(Language.objects.all())
+        problem.partial = True
+        problem.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_initial(self):
+        initial = super(ProblemCreate, self).get_initial()
+        initial = initial.copy()
+        initial['description'] = misc_config(self.request)['misc_config']['description_example']
+        initial['memory_limit'] = 262144  # 256 MB
+        return initial
 
 
 class ProblemEdit(ProblemMixin, TitleMixin, UpdateView):

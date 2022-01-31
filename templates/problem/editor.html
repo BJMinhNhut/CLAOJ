@@ -2,6 +2,44 @@
 
 {% block js_media %}
     {{ form.media.js }}
+
+    <script>
+        $(function() {
+            var noResults = function () {
+                return '{{ _('Press Enter to select multiple users...') }}';
+            };
+
+            $(document).one('click', '#id_testers + .select2', function (e) {
+                $('#id_testers').data().select2.options.get('translations').dict['noResults'] = noResults;
+            });
+
+            $(document).on('keyup', '#id_testers + .select2 .select2-search__field', function (e) {
+                if (e.keyCode === 13) {
+                    var $id_testers = $('#id_testers');
+                    var testers = $(this).val().split(/[\s,]+/);
+                    if (testers.length <= 1) {
+                        // Skip to let select2 handle this
+                        return;
+                    }
+
+                    $.ajax({
+                        type: 'GET',
+                        url: $id_testers.data().select2.dataAdapter.ajaxOptions.url,
+                        data: {
+                            multiple_terms: testers,
+                        },
+                        success: function (response) {
+                            for (const tester of response.results) {
+                                $id_testers.select2('trigger', 'select', {
+                                    data: tester,
+                                });
+                            }
+                        },
+                    });
+                }
+            });
+        })
+    </script>
 {% endblock %}
 
 {% block media %}
@@ -33,10 +71,8 @@
         }
         .errorlist {
             background: rgba(255, 0, 0, 0.3);
-            border: 3px solid red;
             border: 3px dashed red;
             border-right: none;
-            padding: 0 1em 0.1em 1em;
             border-left: solid red;
             padding: 0 1em 0.1em 2em;
             margin: 0.3em 0 0.5em 0;
@@ -49,18 +85,22 @@
             font-size: 13px !important;
             font-weight: 400;
         }
+        .required th::after {
+            content: "*";
+            color: red;
+        }
     </style>
 {% endblock %}
 
 {% block body %}
-
 <div>
-    <div class="alert alert-warning alert-dismissable">
-        <a class="close">x</a>
-        <a href="{{ url('admin:judge_problem_change', problem.id) }}">{{ _('Edit problem in admin panel for more options') }}</a>
-    </div>
-
-    <form action="" method="post" class="form-area" style="width: 100%; display: flex; justify-content: center; flex-direction: column;">
+    {% if request.user.is_staff %}
+        <div class="alert alert-warning alert-dismissable">
+            <a class="close">x</a>
+            <a href="{{ url('admin:judge_problem_change', object.id) }}">{{ _('Edit problem in admin panel for more options') }}</a>
+        </div>
+    {% endif %}
+    <form action="" method="post" class="form-area" enctype="multipart/form-data" style="display: flex; justify-content: center; flex-direction: column;">
         {% if form.errors or solution_formset.errors %}
             <p class="errornote"> {{ _('Please correct the error below.') }}</p>
         {% endif %}
@@ -68,7 +108,7 @@
         <table class="django-as-table">{{ form.as_table() }}</table>
         <hr>
 
-	<center><h3> {{ _('Editorial') }} </h3></center>
+        <center><h3> {{ _('Editorial') }} </h3></center>
         <table class="django-as-table">{{ solution_formset.as_table() }}</table>
 
         <table>

@@ -14,7 +14,7 @@ from django.db.models import Q
 from django.forms import BooleanField, CharField, ChoiceField, DateInput, Form, ModelForm, MultipleChoiceField, \
     inlineformset_factory
 from django.template.defaultfilters import filesizeformat
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from django_ace import AceWidget
@@ -117,14 +117,68 @@ class UserForm(ModelForm):
 
 
 class ProblemEditForm(ModelForm):
+    required_css_class = 'required'
+
+    def __init__(self, *args, **kwargs):
+        self.org_pk = org_pk = kwargs.pop('org_pk', None)
+        self.user = kwargs.pop('user', None)
+        super(ProblemEditForm, self).__init__(*args, **kwargs)
+
+        # Only allow to public/private problem in organization
+        if org_pk is None:
+            self.fields.pop('is_public')
+        else:
+            self.fields['testers'].label = _('Private users')
+            self.fields['testers'].help_text = _('If private, only these users may see the problem.')
+            self.fields['testers'].widget.data_view = None
+            self.fields['testers'].widget.data_url = reverse('organization_profile_select2',
+                                                             args=(org_pk, ))
+
+        self.fields['testers'].help_text = \
+            str(self.fields['testers'].help_text) + ' ' + \
+            str(_('You can paste a list of usernames into this box.'))
+
+    def clean_code(self):
+        code = self.cleaned_data['code']
+        if self.org_pk is None:
+            return code
+        org = Organization.objects.get(pk=self.org_pk)
+        prefix = ''.join(x for x in org.slug.lower() if x.isalpha()) + '_'
+        if not code.startswith(prefix):
+            raise forms.ValidationError(_('Problem id code must starts with `%s`') % (prefix, ),
+                                        'problem_id_invalid_prefix')
+        return code
+
     class Meta:
         model = Problem
-        fields = ['code', 'time_limit', 'memory_limit', 'points', 'authors', 'types', 'group', 'description']
+        fields = ['is_public', 'code', 'time_limit', 'memory_limit', 'points', 'partial',
+                  'authors', 'types', 'group', 'description', 'testers']
         widgets = {
             'authors': HeavySelect2MultipleWidget(data_view='profile_select2', attrs={'style': 'width: 100%'}),
             'types': Select2MultipleWidget(attrs={'style': 'width: 100%'}),
             'group': Select2Widget,
             'description': MartorWidget(attrs={'data-markdownfy-url': reverse_lazy('problem_preview')}),
+            'testers': HeavySelect2MultipleWidget(
+                data_view='profile_select2',
+                attrs={'style': 'width: 100%'},
+            ),
+        }
+        help_texts = {
+            'is_public': _(
+                'If public, all members in organization can view it. <strong>Set it as private '
+                'if you want to use it in a contest, otherwise, users can see the problem '
+                'even if they do not join the contest!</strong>'),
+            'code': _('Problem code, e.g: voi19_post'),
+            'name': _('The full name of the problem, '
+                      'as shown in the problem list. For example: VOI19 - A cong B'),
+            'points': _('Points awarded for problem completion. From 0 to 2. '
+                        'You can approximate: 0.5 is as hard as Problem 1 of VOI; 1 = Problem 2 of VOI; '
+                        '1.5 = Problem 3 of VOI.'),
+        }
+        error_messages = {
+            'code': {
+                'invalid': _('Only accept alphanumeric characters (a-z, 0-9) and underscore (_)'),
+            },
         }
 
 
