@@ -124,8 +124,14 @@
 
                     $(editor.container).on('drop', function (e) {
                         e.preventDefault();
-                        $('#file_select').prop('files', e.originalEvent.dataTransfer.files);
-                        handleFileSelect();
+                        var file = e.originalEvent.dataTransfer.files[0];
+                        if (window.FileReader) {
+                            var reader = new FileReader();
+                            reader.onload = function () {
+                                editor.session.setValue(reader.result);
+                            };
+                            reader.readAsText(file);
+                        }
                     });
                 });
 
