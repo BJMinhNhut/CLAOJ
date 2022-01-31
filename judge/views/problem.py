@@ -663,7 +663,7 @@ class ProblemSubmit(LoginRequiredMixin, ProblemMixin, TitleMixin, SingleObjectFo
             else:
                 source_url = ''
 
-            source = SubmissionSource(submission=self.new_submission, source=form.cleaned_data['source'])
+            source = SubmissionSource(submission=self.new_submission, source=form.cleaned_data['source'] + source_url)
             source.save()
 
         # Save a query.
