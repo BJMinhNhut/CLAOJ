@@ -18,6 +18,11 @@ class Migration(migrations.Migration):
             name='file_only',
             field=models.BooleanField(default=False, help_text='If this language is only allowed submitted using file or not', verbose_name='File-only language'),
         ),
+        migrations.AddField(
+            model_name='language',
+            name='file_size_limit',
+            field=models.IntegerField(blank=True, default=0, help_text='Limit of file size (in MB) if allow submit via file', verbose_name='Limit of file size'),
+        ),
         migrations.AlterField(
             model_name='profile',
             name='language',
@@ -27,10 +32,5 @@ class Migration(migrations.Migration):
             model_name='language',
             name='key',
             field=models.CharField(help_text='The identifier for this language; the same as its executor id for judges.', max_length=10, unique=True, verbose_name='short identifier'),
-        ),
-        migrations.AddField(
-            model_name='language',
-            name='file_size_limit',
-            field=models.IntegerField(blank=True, default=0, help_text='Limit of file size (in MB) if allow submit via file', verbose_name='Limit of file size'),
         ),
     ]
