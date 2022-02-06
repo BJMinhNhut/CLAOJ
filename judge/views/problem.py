@@ -2,8 +2,8 @@ import logging
 import os
 import shutil
 import zipfile
-from datetime import timedelta
 from datetime import date
+from datetime import timedelta
 from operator import itemgetter
 from random import randrange
 
