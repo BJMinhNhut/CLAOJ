@@ -79,7 +79,7 @@ button:hover, button:hover, input[type=submit]:hover {
 }
 
 input {
-    &[type=text], &[type=password], &[type=email], &[type=number] {
+    &[type=text], &[type=password], &[type=email], &[type=number], &[type=date] {
         padding: 4px 8px 3px 8px;
         color: #555;
         height: 2.2em;
@@ -95,7 +95,6 @@ input {
     }
 
     &[type=number] {
-        padding: 2px 0 2px 5px;
 	width: 100%;	
 	max-width: 300px;
     }
@@ -121,19 +120,19 @@ textarea:hover {
 }
 
 input {
-    &[type="text"]:hover, &[type="password"]:hover, &[type="email"]:hover, &[type="number"]:hover {
+    &[type="text"]:hover, &[type="password"]:hover, &[type="email"]:hover, &[type="number"]:hover, &[type="date"]:hover {
         box-shadow: 0 0 3px #bbb;
     }
 }
 
 textarea:focus {
-    box-shadow: 0 0 6px #a5a5a5;
+    box-shadow: 0 0 6px #aaa;
     outline: 0;
 }
 
 input {
-    &[type="text"]:focus, &[type="password"]:focus, &[type="email"]:focus, &[type="number"]:focus {
-        box-shadow: 0 0 6px #a5a5a5;
+    &[type="text"]:focus, &[type="password"]:focus, &[type="email"]:focus, &[type="number"]:focus, &[type="date"]:focus {
+        box-shadow: 0 0 6px #aaa;
         outline: 0;
     }
 }

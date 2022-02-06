@@ -149,13 +149,14 @@ class Problem(models.Model):
                                                            MaxValueValidator(settings.DMOJ_PROBLEM_MAX_MEMORY_LIMIT)])
     short_circuit = models.BooleanField(default=False)
     points = models.FloatField(verbose_name=_('points'),
-                               help_text=_('Points awarded for problem completion. '
+                               help_text=_("Points awarded for problem completion. "
                                            "Points are displayed with a 'p' suffix if partial. "
-                                           '1-1.5: beginner problems; 1.5-2: simple algorithm \
-                                            (binary search, sieve, etc.); 2-3: advanced algorithm \
-                                            (dp, dijkstra, dsu, etc.); '
-                                           '2.5-3.5: 1st probs of VOI; 3.5-4.5: 2nd probs of \
-                                            VOI; 4.5-6: 3rd prob of VOI.'),
+                                           "<strong>1-1.5:</strong> beginner problems; "
+                                           "<strong>1.5-2:</strong> simple algorithm "
+                                           "(binary search, sieve, etc.); <strong>2-3:</strong> advanced algorithm "
+                                           "(dp, dijkstra, dsu, etc.); "
+                                           "<strong>2.5-3.5: 1st probs of VOI; <strong>3.5-4.5:</strong> 2nd probs of "
+                                           "VOI; <strong>4.5-6:</strong> 3rd probs of VOI."),
                                validators=[MinValueValidator(settings.DMOJ_PROBLEM_MIN_PROBLEM_POINTS)])
     partial = models.BooleanField(verbose_name=_('allows partial points'), default=False)
     allowed_languages = models.ManyToManyField(Language, verbose_name=_('allowed languages'),

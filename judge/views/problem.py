@@ -3,6 +3,7 @@ import os
 import shutil
 import zipfile
 from datetime import timedelta
+from datetime import date
 from operator import itemgetter
 from random import randrange
 
@@ -415,9 +416,8 @@ class ProblemList(QueryStringSortMixin, TitleMixin, SolvedProblemMixin, ListView
         context['full_text'] = 0 if self.in_contest else int(self.full_text)
         context['category'] = self.category
         context['categories'] = ProblemGroup.objects.all()
-        if self.show_types:
-            context['selected_types'] = self.selected_types
-            context['problem_types'] = ProblemType.objects.all()
+        context['selected_types'] = self.selected_types
+        context['problem_types'] = ProblemType.objects.all()
         context['has_fts'] = settings.ENABLE_FTS
         context['search_query'] = self.search_query
         context['completed_problem_ids'] = self.get_completed_problems()
@@ -752,10 +752,10 @@ class ProblemCreate(PermissionRequiredMixin, TitleMixin, CreateView):
     permission_required = 'judge.add_problem'
 
     def get_title(self):
-        return _('Creating new problem')
+        return _('Create new problem')
 
     def get_content_title(self):
-        return _('Creating new problem')
+        return _('Create new problem')
 
     def form_valid(self, form):
         self.object = problem = form.save()
@@ -770,6 +770,8 @@ class ProblemCreate(PermissionRequiredMixin, TitleMixin, CreateView):
         initial = initial.copy()
         initial['description'] = misc_config(self.request)['misc_config']['description_example']
         initial['memory_limit'] = 262144  # 256 MB
+        initial['date'] = date.today()
+        initial['authors'] = self.request.user
         return initial
 
 

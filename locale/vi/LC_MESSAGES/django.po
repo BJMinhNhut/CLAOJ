@@ -676,6 +676,44 @@ msgstr "id kỳ thi phải bao gồm ^[a-z0-9_] + $"
 msgid "Contest with key already exists."
 msgstr "Mã kỳ thi đã tồn tại."
 
+#: judge/forms.py:154
+#: judge/forms.py:155
+#: judge/forms.py:156
+msgid ""
+"If public, all members in organization can view it. <strong>Set it as private "
+"if you want to use it in a contest, otherwise, users can see the problem "
+"even if they do not join the contest!</strong>"
+msgstr ""
+"Nếu công khai, tất cả user sẽ xem được bài tập. <strong>Hãy để riêng tư "
+"nếu bạn muốn bài tập chỉ hiển thị trong contest, nếu không, người dùng sẽ thấy bài tập "
+"kể cả khi họ không ở trong contest!</strong>"
+
+#: judge/forms.py:158
+#: judge/forms.py:159
+msgid ""
+"If choose, only users in the organizations below can view it. <strong>You also need to"
+" tick is public box to make the problem viewable.</strong>"
+msgstr ""
+"Nếu chọn, chỉ người dùng trong những tổ chức ở dưới có thể nhìn thấy bài. <strong>Bạn vẫn phải"
+" tick vào box công khai để người dùng có thể đọc đề bài.</strong>"
+
+
+#: judge/forms.py:128
+msgid "You can paste a list of usernames into this box."
+msgstr "Bạn có thể dán một danh sách username vào box này."
+
+#: judge/forms.py:160
+msgid "Problem code, e.g: voi19_post"
+msgstr "Mã bài, ví dụ: voi19_post"
+
+#: judge/forms.py:162
+msgid "The full name of the problem, as shown in the problem list. For example: VOI19 - A cong B."
+msgstr "Tên đầy đủ của bài, sẽ được hiển thị trong danh sách bài. Ví dụ: VOI19 - A cộng B."
+
+#: judge/forms.py:166
+msgid "Only accept alphanumeric characters (a-z, 0-9) and underscore (_)"
+msgstr "Chỉ cho phép các kí tự (a-z, 0-9) và gạch dưới (_)"
+
 #: judge/jinja2/datetime.py:26 templates/blog/dashboard.html:21
 msgid "N j, Y, g:i a"
 msgstr "j, M, Y, G:i"
@@ -1510,13 +1548,21 @@ msgstr ""
 "Giới hạn bộ nhớ (kilobytes) cho bài tập này (chẳng hạn 256mb = 262144 "
 "kilobytes)."
 
-#: judge/models/problem.py:142
+#: judge/models/problem.py:152
 msgid ""
-"Points awarded for problem completion. Points are displayed with a 'p' "
-"suffix if partial. 1-1.5: beginner problems; 1.5-2: simple algorithm (binary search, sieve, etc.); 2-3: advanced algorithm (dp, dijkstra, dsu, etc.); 2.5-3.5: 1st probs of VOI; 3.5-4.5: 2nd probs of VOI; 4.5-6: 3rd prob of VOI."
+"Points awarded for problem completion. "
+"Points are displayed with a 'p' suffix if partial. "
+"<strong>1-1.5:</strong> beginner problems; <strong>1.5-2:</strong> simple algorithm "
+"(binary search, sieve, etc.); <strong>2-3:</strong> advanced algorithm "
+"(dp, dijkstra, dsu, etc.); "
+"<strong>2.5-3.5: 1st probs of VOI; <strong>3.5-4.5:</strong> 2nd probs of "
+"VOI; <strong>4.5-6:</strong> 3rd probs of VOI."
 msgstr ""
 "Điểm thưởng khi hoàn thành bài tập. Điểm được hiển thị với hậu tố 'p' nếu là "
-"bài từng phần. 1-1.5: bài nhập môn; 1.5-2: thuật toán cơ bản (chặt nhị phân, sàng nguyên tố, etc.); 2-3: thuật toán nâng cao (quy hoạch động, dijkstra, dsu, etc.); 2.5-3.5: bài 1 VOI; 3.5-4.5: bài 2 VOI; 4.5-6: bài 3 VOI."
+"bài từng phần. <strong>1-1.5:</strong> bài nhập môn; "
+"<strong>1.5-2:</strong> thuật toán cơ bản (chặt nhị phân, sàng nguyên tố, etc.); "
+"<strong>2-3:</strong> thuật toán nâng cao (quy hoạch động, dijkstra, dsu, etc.); "
+"<strong>2.5-3.5:</strong> bài 1 VOI; <strong>3.5-4.5:</strong> bài 2 VOI; <strong>4.5-6:</strong> bài 3 VOI."
 
 #: judge/models/problem.py:145
 msgid "allows partial points"
@@ -2999,6 +3045,27 @@ msgstr "Nhân bản bài tập"
 msgid "Cloned problem from %s"
 msgstr "Clone từ bài %s"
 
+#: judge/views/problem.py:756
+#: judge/views/problem.py:759
+msgid "Create new problem"
+msgstr "Tạo bài mới"
+
+#: judge/views/problem.py:782
+msgid "Edit problem {0}"
+msgstr "Chỉnh sửa bài {0}"
+
+#: judge/views/problem.py:785
+msgid "Edit problem %s"
+msgstr "Chỉnh sửa bài %s"
+
+#: judge/views/problem.py:819
+msgid "Can't edit problem"
+msgstr "Không thể chỉnh sửa bài"
+
+#: judge/views/problem.py:820
+msgid "You are not allowed to edit this problem."
+msgstr "Bạn chưa được cấp quyền để chỉnh sửa bài tập này."
+
 #: judge/views/problem_data.py:37
 msgid "Checker arguments must be a JSON object"
 msgstr "Tham số checker phải là một JSON"
@@ -4306,7 +4373,7 @@ msgstr "Xem YAML"
 
 #: templates/problem/data.html:454 templates/problem/data.html:510
 msgid "Apply!"
-msgstr ""
+msgstr "Áp dụng!"
 
 #: templates/problem/data.html:459
 msgid "Type"
@@ -4505,7 +4572,7 @@ msgstr "Sửa đề bài"
 
 #: templates/problem/problem.html:142
 msgid "Edit test data"
-msgstr "Sửa đổi test"
+msgstr "Sửa dữ liệu test"
 
 #: templates/problem/problem.html:147
 msgid "My tickets"
@@ -4582,11 +4649,11 @@ msgstr "Chưa có làm rõ nào được đưa ra ở thời điểm này."
 
 #: templates/problem/raw.html:62
 msgid "Time Limit:"
-msgstr ""
+msgstr "Giới hạn thời gian:"
 
 #: templates/problem/raw.html:71
 msgid "Memory Limit:"
-msgstr ""
+msgstr "Giới hạn bộ nhớ:"
 
 #: templates/problem/search-form.html:2
 msgid "Problem search"
@@ -4644,12 +4711,12 @@ msgid "Or patse your code into the editor"
 msgstr "Hoặc dán code của bạn vào editor ở trên"
 
 #: templates/problem/submit.html:206
-msgid "File name"
-msgstr "Tên file"
+msgid "'File name'"
+msgstr "'Tên file'"
 
 #: templates/problem/submit.html:207
-msgid "File size"
-msgstr "Kích thước"
+msgid "'File size'"
+msgstr "'Kích thước'"
 
 #: templates/problem/submit.html:160
 msgid "Only accept %(file_ext) for this language. Maximum file size is %(file_size_limit)MB."

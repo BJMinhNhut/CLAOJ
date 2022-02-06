@@ -45,6 +45,9 @@
 {% block media %}
     {{ form.media.css }}
     <style>
+	.ace_editor {
+		font-size: 14px;
+	}
         .helptext {
             font-size: 13px;
             color: #999;
@@ -89,6 +92,10 @@
             content: "*";
             color: red;
         }
+
+	.form-area {
+		margin-top: 1em;
+	}
     </style>
 {% endblock %}
 
