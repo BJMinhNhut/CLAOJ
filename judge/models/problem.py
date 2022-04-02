@@ -122,7 +122,11 @@ class Problem(models.Model):
     name = models.CharField(max_length=100, verbose_name=_('problem name'), db_index=True,
                             help_text=_('The full name of the problem, '
                                         'as shown in the problem list.'))
-    description = models.TextField(verbose_name=_('problem body'), validators=[disallowed_characters_validator])
+    description = models.TextField(verbose_name=_('problem body'), blank=True,
+                                   validators=[disallowed_characters_validator])
+    pdf_url = models.CharField(max_length=200, verbose_name=_('PDF statement URL'), blank=True,
+                               help_text=_('URL to PDF statement. The PDF file must be embeddable (Mobile web browsers'
+                                           'may not support embedding). Fallback included.'))
     authors = models.ManyToManyField(Profile, verbose_name=_('creators'), blank=True, related_name='authored_problems',
                                      help_text=_('These users will be able to edit the problem, '
                                                  'and be listed as authors.'))
@@ -476,6 +480,7 @@ class Problem(models.Model):
             ('edit_public_problem', _('Edit all public problems')),
             ('problem_full_markup', _('Edit problems with full markup')),
             ('clone_problem', _('Clone problem')),
+            ('upload_file_statement', _('Upload file-type statement')),
             ('change_public_visibility', _('Change is_public field')),
             ('change_manually_managed', _('Change is_manually_managed field')),
             ('see_organization_problem', _('See organization-private problems')),

@@ -463,13 +463,19 @@ MARTOR_MARKDOWNIFY_URL = '/widgets/preview/default'
 MARTOR_SEARCH_USERS_URL = '/widgets/martor/search-user'
 MARTOR_UPLOAD_URL = '/widgets/martor/upload-image'
 MARTOR_MARKDOWN_BASE_MENTION_URL = '/user/'
+MARTOR_UPLOAD_URL_PREFIX = '/martor'
 
 # Directory under MEDIA_ROOT to use to store image uploaded through martor.
 MARTOR_UPLOAD_MEDIA_DIR = 'martor'
-MARTOR_UPLOAD_SAFE_EXTS = {'.jpg', '.png', '.gif'}
+MARTOR_UPLOAD_SAFE_EXTS = {'.jpg', '.png', '.gif', '.svg'}
 
 SUBMISSION_FILE_UPLOAD_URL_PREFIX = '/submission_file'
 SUBMISSION_FILE_UPLOAD_MEDIA_DIR = 'submission_file'
+
+PDF_STATEMENT_UPLOAD_URL_PREFIX = '/pdf'
+PDF_STATEMENT_UPLOAD_MEDIA_DIR = 'pdf'
+PDF_STATEMENT_SAFE_EXTS = {'pdf'}
+PDF_STATEMENT_MAX_FILE_SIZE = 5242880
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

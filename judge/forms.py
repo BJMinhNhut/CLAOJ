@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.core.validators import RegexValidator
+from django.core.validators import FileExtensionValidator, RegexValidator
 from django.db.models import Q
 from django.forms import BooleanField, CharField, ChoiceField, DateInput, Form, ModelForm, MultipleChoiceField, \
     inlineformset_factory
@@ -118,6 +118,24 @@ class UserForm(ModelForm):
 
 class ProblemEditForm(ModelForm):
     required_css_class = 'required'
+    statement_file = forms.FileField(
+        required=False,
+        validators=[FileExtensionValidator(allowed_extensions=settings.PDF_STATEMENT_SAFE_EXTS)],
+        help_text=_('Maximum file size is %s.') % filesizeformat(settings.PDF_STATEMENT_MAX_FILE_SIZE),
+        widget=forms.FileInput(attrs={'accept': 'application/pdf'}),
+    )
+    required_css_class = 'required'
+
+    def clean(self):
+        self.check_file()
+        return self.cleaned_data
+
+    def check_file(self):
+        content = self.files.get('statement_file', None)
+        if content is not None and content.size > settings.PDF_STATEMENT_MAX_FILE_SIZE:
+            raise forms.ValidationError(_("File size is too big! Maximum file size is %s") %
+                                        filesizeformat(settings.PDF_STATEMENT_MAX_FILE_SIZE))
+        return content
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -133,8 +151,8 @@ class ProblemEditForm(ModelForm):
 
     class Meta:
         model = Problem
-        fields = ['code', 'name', 'date', 'authors', 'testers', 'is_public', 'is_organization_private',
-                  'organizations', 'time_limit', 'memory_limit', 'points', 'partial', 'types', 'group', 'description']
+        fields = ['code', 'name', 'authors', 'testers', 'is_public', 'is_organization_private', 'organizations',
+                  'time_limit', 'memory_limit', 'points', 'partial', 'types', 'group', 'statement_file', 'description']
         widgets = {
             'authors': HeavySelect2MultipleWidget(data_view='profile_select2', attrs={'style': 'width: 100%'}),
             'organizations': HeavySelect2MultipleWidget(data_view='organization_select2',
