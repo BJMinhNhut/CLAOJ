@@ -40,7 +40,7 @@ from judge.utils.problems import contest_attempted_ids, contest_completed_ids, h
 from judge.utils.strings import safe_float_or_none, safe_int_or_none
 from judge.utils.tickets import own_ticket_filter
 from judge.utils.views import QueryStringSortMixin, SingleObjectFormView, TitleMixin, add_file_response, generic_message
-from judge.views.widgets import submission_uploader, pdf_statement_uploader
+from judge.views.widgets import pdf_statement_uploader, submission_uploader
 
 
 def get_contest_problem(problem, profile):
