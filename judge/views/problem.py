@@ -842,7 +842,6 @@ class ProblemEdit(ProblemMixin, TitleMixin, UpdateView):
             self.save_statement(form, problem)
             problem.save()
             form_edit.save()
-            
             return HttpResponseRedirect(reverse('problem_detail', args=[self.object.code]))
         return self.render_to_response(self.get_context_data(**kwargs))
 
