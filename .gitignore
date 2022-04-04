@@ -23,6 +23,7 @@ tmp_uwsgi.ini
 nginx_template.conf
 martor/
 logs/
+pdf/
 judge/fixtures/fixed*
 judge/fixtures/voj_*
 judge/fixtures/VOJ_*
@@ -40,3 +41,4 @@ db.json
 tmp.sh
 *.sql
 fc_*
+
