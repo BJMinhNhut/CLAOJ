@@ -89,12 +89,12 @@ def django_uploader(image):
     return json.dumps({'status': 200, 'name': '', 'link': urljoin(url_base, name)})
 
 
-def pdf_statement_uploader(statement):
+def pdf_uploader(statement):
     ext = os.path.splitext(statement.name)[1]
     name = str(uuid.uuid4()) + ext
-    default_storage.save(os.path.join(settings.PDF_STATEMENT_UPLOAD_MEDIA_DIR, name), statement)
-    url_base = getattr(settings, 'PDF_STATEMENT_UPLOAD_URL_PREFIX',
-                       urljoin(settings.MEDIA_URL, settings.PDF_STATEMENT_UPLOAD_MEDIA_DIR))
+    default_storage.save(os.path.join(settings.PDF_UPLOAD_MEDIA_DIR, name), statement)
+    url_base = getattr(settings, 'PDF_UPLOAD_URL_PREFIX',
+                       urljoin(settings.MEDIA_URL, settings.PDF_UPLOAD_MEDIA_DIR))
     if not url_base.endswith('/'):
         url_base += '/'
     return urljoin(url_base, name)

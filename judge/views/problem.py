@@ -40,7 +40,7 @@ from judge.utils.problems import contest_attempted_ids, contest_completed_ids, h
 from judge.utils.strings import safe_float_or_none, safe_int_or_none
 from judge.utils.tickets import own_ticket_filter
 from judge.utils.views import QueryStringSortMixin, SingleObjectFormView, TitleMixin, add_file_response, generic_message
-from judge.views.widgets import pdf_statement_uploader, submission_uploader
+from judge.views.widgets import pdf_uploader, submission_uploader
 
 
 def get_contest_problem(problem, profile):
@@ -756,18 +756,25 @@ class ProblemCreate(PermissionRequiredMixin, TitleMixin, CreateView):
     def get_content_title(self):
         return _('Create new problem')
 
+    def save_statement(self, form, problem):
+        statement_file = form.files.get('statement_file', None)
+        if statement_file is not None:
+            problem.pdf_url = pdf_uploader(statement_file)
+
+    def unique_code(self, form):
+        new_code = form.cleaned_data['code']
+        return not Problem.objects.filter(code=new_code).exists()
+
     def form_valid(self, form):
+        if not self.unique_code(form):
+            form.add_error('code', 'Another problem with this code already exists.')
+            return self.form_invalid(form)
+
         self.object = problem = form.save()
         problem.authors.add(self.request.user.profile)
         problem.allowed_languages.set(Language.objects.all())
-        problem.partial = True
         problem.date = datetime.now()
-        statement_file = form.files.get('statement_file', None)
-        if statement_file is not None:
-            if not self.request.user.has_perm('judge.upload_file_statement'):
-                form.add_error('statement_file', 'You don\'t have permission to upload file-type statement.')
-                return self.form_invalid(form)
-            problem.pdf_url = pdf_statement_uploader(statement_file)
+        self.save_statement(form, problem)
         problem.save()
         return HttpResponseRedirect(self.get_success_url())
 
@@ -777,6 +784,7 @@ class ProblemCreate(PermissionRequiredMixin, TitleMixin, CreateView):
         initial['description'] = misc_config(self.request)['misc_config']['description_example']
         initial['memory_limit'] = 262144  # 256 MB
         initial['authors'] = self.request.user
+        initial['partial'] = True
         return initial
 
 
@@ -809,20 +817,32 @@ class ProblemEdit(ProblemMixin, TitleMixin, UpdateView):
         data['solution_formset'] = self.get_solution_formset()
         return data
 
+    def save_statement(self, form, problem):
+        statement_file = form.files.get('statement_file', None)
+        if statement_file is not None:
+            problem.pdf_url = pdf_uploader(statement_file)
+
+    def unique_code(self, form):
+        new_code = form.cleaned_data['code']
+        if self.object.code != new_code:
+            return not Problem.objects.filter(code=new_code).exists()
+        return True
+
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
         form_edit = self.get_solution_formset()
+
         if form.is_valid() and form_edit.is_valid():
+            if not self.unique_code(form):
+                form.add_error('code', 'Another problem with this code already exists.')
+                return self.form_invalid(form)
+
             problem = form.save()
-            statement_file = form.files.get('statement_file', None)
-            if statement_file is not None:
-                if not self.request.user.has_perm('judge.upload_file_statement'):
-                    form.add_error('statement_file', 'You don\'t have permission to upload file-type statement.')
-                    return self.form_invalid(form)
-                problem.pdf_url = pdf_statement_uploader(statement_file)
+            self.save_statement(form, problem)
             problem.save()
             form_edit.save()
+            
             return HttpResponseRedirect(reverse('problem_detail', args=[self.object.code]))
         return self.render_to_response(self.get_context_data(**kwargs))
 

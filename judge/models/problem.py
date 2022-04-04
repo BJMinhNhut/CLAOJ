@@ -526,10 +526,13 @@ class LanguageLimit(models.Model):
 class Solution(models.Model):
     problem = models.OneToOneField(Problem, on_delete=SET_NULL, verbose_name=_('associated problem'),
                                    null=True, blank=True, related_name='solution')
+    pdf_url = models.CharField(max_length=200, verbose_name=_('PDF solution URL'), blank=True,
+                               help_text=_('URL to PDF solution. The PDF file must be embeddable (Mobile web browsers'
+                                           'may not support embedding). Fallback included.'))
     is_public = models.BooleanField(verbose_name=_('public visibility'), default=False)
     publish_on = models.DateTimeField(verbose_name=_('publish date'))
     authors = models.ManyToManyField(Profile, verbose_name=_('authors'), blank=True)
-    content = models.TextField(verbose_name=_('editorial content'))
+    content = models.TextField(verbose_name=_('editorial content'), blank=True)
 
     def get_absolute_url(self):
         problem = self.problem

@@ -100,9 +100,35 @@ class ProfileForm(ModelForm):
 
 
 class ProposeProblemSolutionForm(ModelForm):
+    solution_file = forms.FileField(
+        required=False,
+        validators=[FileExtensionValidator(allowed_extensions=settings.PDF_SAFE_EXTS)],
+        help_text=_('Maximum file size is %s.') % filesizeformat(settings.PDF_MAX_FILE_SIZE),
+        widget=forms.FileInput(attrs={'accept': 'application/pdf'}),
+        label=_('Solution file'),
+    )
+
+    def clean(self):
+        self.check_file()
+        return self.cleaned_data
+
+    def check_file(self):
+        content = self.files.get('solution_file', None)
+        if content is not None and content.size > settings.PDF_MAX_FILE_SIZE:
+            raise forms.ValidationError(_("File size is too big! Maximum file size is %s") %
+                                        filesizeformat(settings.PDF_MAX_FILE_SIZE))
+        return content
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(ProposeProblemSolutionForm, self).__init__(*args, **kwargs)
+
+        if self.user and not self.user.has_perm('judge.upload_file_statement'):
+            self.fields.pop('solution_file')
+
     class Meta:
         model = Solution
-        fields = ('is_public', 'publish_on', 'authors', 'content')
+        fields = ('is_public', 'publish_on', 'authors', 'solution_file', 'content')
         widgets = {
             'authors': HeavySelect2MultipleWidget(data_view='profile_select2', attrs={'style': 'width: 100%'}),
             'content': MartorWidget(attrs={'data-markdownfy-url': reverse_lazy('solution_preview')}),
@@ -120,11 +146,11 @@ class ProblemEditForm(ModelForm):
     required_css_class = 'required'
     statement_file = forms.FileField(
         required=False,
-        validators=[FileExtensionValidator(allowed_extensions=settings.PDF_STATEMENT_SAFE_EXTS)],
-        help_text=_('Maximum file size is %s.') % filesizeformat(settings.PDF_STATEMENT_MAX_FILE_SIZE),
+        validators=[FileExtensionValidator(allowed_extensions=settings.PDF_SAFE_EXTS)],
+        help_text=_('Maximum file size is %s.') % filesizeformat(settings.PDF_MAX_FILE_SIZE),
         widget=forms.FileInput(attrs={'accept': 'application/pdf'}),
+        label=_('Statement file'),
     )
-    required_css_class = 'required'
 
     def clean(self):
         self.check_file()
@@ -132,9 +158,9 @@ class ProblemEditForm(ModelForm):
 
     def check_file(self):
         content = self.files.get('statement_file', None)
-        if content is not None and content.size > settings.PDF_STATEMENT_MAX_FILE_SIZE:
+        if content is not None and content.size > settings.PDF_MAX_FILE_SIZE:
             raise forms.ValidationError(_("File size is too big! Maximum file size is %s") %
-                                        filesizeformat(settings.PDF_STATEMENT_MAX_FILE_SIZE))
+                                        filesizeformat(settings.PDF_MAX_FILE_SIZE))
         return content
 
     def __init__(self, *args, **kwargs):
@@ -144,6 +170,9 @@ class ProblemEditForm(ModelForm):
         self.fields['testers'].help_text = \
             str(self.fields['testers'].help_text) + ' ' + \
             str(_('You can paste a list of usernames into this box.'))
+
+        if self.user and not self.user.has_perm('judge.upload_file_statement'):
+            self.fields.pop('statement_file')
 
     def clean_code(self):
         code = self.cleaned_data['code']

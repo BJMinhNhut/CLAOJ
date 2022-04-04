@@ -472,10 +472,10 @@ MARTOR_UPLOAD_SAFE_EXTS = {'.jpg', '.png', '.gif', '.svg'}
 SUBMISSION_FILE_UPLOAD_URL_PREFIX = '/submission_file'
 SUBMISSION_FILE_UPLOAD_MEDIA_DIR = 'submission_file'
 
-PDF_STATEMENT_UPLOAD_URL_PREFIX = '/pdf'
-PDF_STATEMENT_UPLOAD_MEDIA_DIR = 'pdf'
-PDF_STATEMENT_SAFE_EXTS = {'pdf'}
-PDF_STATEMENT_MAX_FILE_SIZE = 5242880
+PDF_UPLOAD_URL_PREFIX = '/pdf'
+PDF_UPLOAD_MEDIA_DIR = 'pdf'
+PDF_SAFE_EXTS = {'pdf'}
+PDF_MAX_FILE_SIZE = 5242880
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
