@@ -116,11 +116,9 @@ class ProblemDataCompiler(object):
                 if checker_ext == 'py':
                     return custom_checker_path[1]
 
-                # use wrapper to make cpp checker
+                # no longer use wrapper to make cpp checker
                 if checker_ext != 'cpp':
                     raise ProblemDataError(_("Why don't you use a cpp/py checker?"))
-                else:
-                    return make_wrapper_checker_for_cpp_checker(case, custom_checker_path)
 
             if case.checker_args:
                 return {

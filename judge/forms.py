@@ -187,7 +187,7 @@ class ProblemEditForm(ModelForm):
             'authors': HeavySelect2MultipleWidget(data_view='profile_select2', attrs={'style': 'width: 100%'}),
             'organizations': HeavySelect2MultipleWidget(data_view='organization_select2',
                                                         attrs={'style': 'width: 100%'}),
-            'testcase_visibility_mode': Select2Widget,
+            'testcase_visibility_mode': Select2Widget(attrs={'style': 'min-width: 250px'}),
             'date': DateInput(attrs={'type': 'date'}),
             'types': Select2MultipleWidget(attrs={'style': 'width: 100%'}),
             'group': Select2Widget,

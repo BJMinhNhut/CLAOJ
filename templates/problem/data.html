@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block js_media %}
+    {{data_form.media.js}}
     <script type="text/javascript" src="{{ static('libs/jquery-sortable.js') }}"></script>
     <script type="text/javascript" src="{{ static('libs/featherlight/featherlight.min.js') }}"></script>
     <script type="text/javascript">
@@ -113,7 +114,7 @@
                             else {
                                 $lang = $file_ext.toUpperCase();
                                 if ($lang == "CPP") $lang = "CPP17";
-                                $args.val(JSON.stringify({files: $file_name, lang: $lang}));
+                                $args.val(JSON.stringify({files: $file_name, lang: $lang, type: $custom_checker_type.find(":selected").val()}));
                                 if ($lang == "PY")
                                     $args.val('');
                             }

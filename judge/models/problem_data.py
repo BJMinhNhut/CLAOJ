@@ -26,10 +26,17 @@ CHECKERS = (
     ('floats', _('Floats')),
     ('floatsabs', _('Floats (absolute)')),
     ('floatsrel', _('Floats (relative)')),
-    ('rstripped', _('Non-trailing spaces')),
     ('sorted', _('Unordered')),
     ('identical', _('Byte identical')),
     ('linecount', _('Line-by-line')),
+)
+
+CUSTOM_CHECKERS = (
+    ('testlib', _('Testlib checker')),
+    ('themis', _('Themis checker')),
+    ('cms', _('CMS checker')),
+    ('coci', _('COCI checker')),
+    ('peg', _('PEG checker')),
 )
 
 
