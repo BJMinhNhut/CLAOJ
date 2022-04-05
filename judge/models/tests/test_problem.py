@@ -2,16 +2,24 @@ from django.core.exceptions import ValidationError
 from django.test import SimpleTestCase, TestCase
 from django.utils import timezone
 
-from judge.models import Language, LanguageLimit, Problem
-from judge.models.problem import disallowed_characters_validator
-from judge.models.tests.util import CommonDataMixin, create_organization, create_problem, create_problem_type, \
-    create_solution, create_user
+from judge.models import ContestParticipation, Language, LanguageLimit, Problem
+from judge.models.problem import ProblemTestcaseAccess, disallowed_characters_validator
+from judge.models.tests.util import CommonDataMixin, create_contest, create_contest_participation, \
+    create_contest_problem, create_organization, create_problem, create_problem_type, create_solution, \
+    create_user
 
 
 class ProblemTestCase(CommonDataMixin, TestCase):
     @classmethod
     def setUpTestData(self):
         super().setUpTestData()
+        _now = timezone.now()
+
+        self.users.update({
+            'normal_in_contest': create_user(
+                username='normal_in_contest',
+            ),
+        })
 
         create_problem_type(name='type')
 
@@ -56,6 +64,46 @@ class ProblemTestCase(CommonDataMixin, TestCase):
             code='organization_admin',
             organizations=('problem organization',),
         )
+        self.testcase_allow_all = create_problem(
+            code='allow_all',
+            allowed_languages=Language.objects.values_list('key', flat=True),
+            types=('type',),
+            authors=('superuser',),
+            is_public=True,
+            testcase_visibility_mode=ProblemTestcaseAccess.ALWAYS,
+        )
+
+        self.testcase_allow_out_contest = create_problem(
+            code='allow_out_contest',
+            allowed_languages=Language.objects.values_list('key', flat=True),
+            types=('type',),
+            authors=('superuser',),
+            is_public=True,
+            testcase_visibility_mode=ProblemTestcaseAccess.OUT_CONTEST,
+        )
+
+        self.basic_contest = create_contest(
+            key='basic',
+            start_time=_now - timezone.timedelta(days=1),
+            end_time=_now + timezone.timedelta(days=100),
+            authors=('superuser', ),
+        )
+
+        create_contest_problem(
+            problem=self.testcase_allow_out_contest,
+            contest=self.basic_contest,
+        )
+
+        for user in (
+            'normal_in_contest', 'superuser', 'staff_problem_edit_own',
+                'staff_problem_see_all', 'staff_problem_edit_all'):
+            self.users[user].profile.current_contest = create_contest_participation(
+                contest='basic',
+                user=user,
+                real_start=_now - timezone.timedelta(hours=1),
+                virtual=ContestParticipation.LIVE,
+            )
+            self.users[user].profile.save()
 
     def test_basic_problem(self):
         self.assertEqual(str(self.basic_problem), self.basic_problem.name)
@@ -124,6 +172,76 @@ class ProblemTestCase(CommonDataMixin, TestCase):
             },
         }
         self._test_object_methods_with_users(self.basic_problem, data)
+
+    def test_testcase_visible(self):
+        data_basic = {
+            'superuser': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'staff_problem_edit_own': {
+                'is_testcase_accessible_by': self.assertFalse,
+            },
+            'staff_problem_see_all': {
+                'is_testcase_accessible_by': self.assertFalse,
+            },
+            'staff_problem_edit_all': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'normal': {
+                'is_testcase_accessible_by': self.assertFalse,
+            },
+            'anonymous': {
+                'is_testcase_accessible_by': self.assertFalse,
+            },
+        }
+        self._test_object_methods_with_users(self.basic_problem, data_basic)
+
+        data_all = {
+            'superuser': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'staff_problem_edit_own': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'staff_problem_see_all': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'staff_problem_edit_all': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'normal': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'anonymous': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+        }
+        self._test_object_methods_with_users(self.testcase_allow_all, data_all)
+
+        data_out_contest = {
+            'superuser': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'staff_problem_edit_own': {
+                'is_testcase_accessible_by': self.assertFalse,
+            },
+            'staff_problem_see_all': {
+                'is_testcase_accessible_by': self.assertFalse,
+            },
+            'staff_problem_edit_all': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'normal': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'normal_in_contest': {
+                'is_testcase_accessible_by': self.assertFalse,
+            },
+            'anonymous': {
+                'is_testcase_accessible_by': self.assertFalse,
+            },
+        }
+        self._test_object_methods_with_users(self.testcase_allow_out_contest, data_out_contest)
 
     def test_organization_private_problem_methods(self):
         self.assertFalse(self.organization_private_problem.is_accessible_by(self.users['normal']))

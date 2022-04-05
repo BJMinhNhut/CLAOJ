@@ -179,13 +179,15 @@ class ProblemEditForm(ModelForm):
 
     class Meta:
         model = Problem
-        fields = ['code', 'name', 'authors', 'testers', 'is_public', 'is_organization_private', 'organizations',
-                  'time_limit', 'memory_limit', 'points', 'partial', 'types', 'group', 'statement_file', 'description']
+        fields = ['code', 'name', 'authors', 'testers', 'is_public', 'is_organization_private',
+                  'organizations', 'time_limit', 'memory_limit', 'points', 'partial',
+                  'testcase_visibility_mode', 'types', 'group', 'statement_file', 'description']
         widgets = {
             'name': TextInput(attrs={'style': 'width: 100%'}),
             'authors': HeavySelect2MultipleWidget(data_view='profile_select2', attrs={'style': 'width: 100%'}),
             'organizations': HeavySelect2MultipleWidget(data_view='organization_select2',
                                                         attrs={'style': 'width: 100%'}),
+            'testcase_visibility_mode': Select2Widget,
             'date': DateInput(attrs={'type': 'date'}),
             'types': Select2MultipleWidget(attrs={'style': 'width: 100%'}),
             'group': Select2Widget,
