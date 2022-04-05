@@ -11,8 +11,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator, RegexValidator
 from django.db.models import Q
-from django.forms import BooleanField, CharField, ChoiceField, DateInput, Form, ModelForm, MultipleChoiceField, \
-    inlineformset_factory
+from django.forms import BooleanField, CharField, ChoiceField, DateInput, TextInput, Form, ModelForm, \
+    MultipleChoiceField, inlineformset_factory
 from django.template.defaultfilters import filesizeformat
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -131,6 +131,7 @@ class ProposeProblemSolutionForm(ModelForm):
             'authors': HeavySelect2MultipleWidget(data_view='profile_select2', attrs={'style': 'width: 100%'}),
             'content': MartorWidget(attrs={'data-markdownfy-url': reverse_lazy('solution_preview')}),
             'publish_on': DateInput(attrs={'type': 'date'}),
+            'pdf_url': TextInput(attrs={'style': 'width: 100%'}),
         }
 
 
@@ -181,6 +182,7 @@ class ProblemEditForm(ModelForm):
         fields = ['code', 'name', 'authors', 'testers', 'is_public', 'is_organization_private', 'organizations',
                   'time_limit', 'memory_limit', 'points', 'partial', 'types', 'group', 'statement_file', 'description']
         widgets = {
+            'name': TextInput(attrs={'style': 'width: 100%'}),
             'authors': HeavySelect2MultipleWidget(data_view='profile_select2', attrs={'style': 'width: 100%'}),
             'organizations': HeavySelect2MultipleWidget(data_view='organization_select2',
                                                         attrs={'style': 'width: 100%'}),
