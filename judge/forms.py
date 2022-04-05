@@ -11,8 +11,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator, RegexValidator
 from django.db.models import Q
-from django.forms import BooleanField, CharField, ChoiceField, DateInput, TextInput, Form, ModelForm, \
-    MultipleChoiceField, inlineformset_factory
+from django.forms import BooleanField, CharField, ChoiceField, DateInput, Form, ModelForm, \
+    MultipleChoiceField, TextInput, inlineformset_factory
 from django.template.defaultfilters import filesizeformat
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
