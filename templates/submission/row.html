@@ -1,13 +1,16 @@
 {% set can_view, can_edit = submission_layout(submission, profile_id, request.user, completed_problem_ids, editable_problem_ids, tester_problem_ids) %}
-<div class="sub-result {{ submission.result_class }}">
+{% set partial = (submission.short_status == 'AC' and submission.case_points < submission.case_total) %}
+<div class="sub-result {% if partial %}_AC {% else %}{{ submission.result_class }} {% endif %}">
     <div class="score">
-		<span title="{{ submission.long_status }}" class="status">{{ submission.short_status }}</span>
+        	<span title="{{ submission.long_status }}" class="status">
+            	{% if partial %} PA {% else %} {{ submission.short_status }} {% endif %}
+    	</span>
     </div>
     <div class="state">        
         {%- if submission.is_graded -%}
             {%- if submission.short_status in ('IE', 'CE', 'AB') -%}
             {%- else -%}
-                {{ submission.case_points|floatformat(0) }}/{{ submission.case_total|floatformat(0) }}&nbsp|&nbsp
+                {{ submission.case_points|floatformat(-1) }}/{{ submission.case_total|floatformat(0) }}&nbsp|&nbsp
             {%- endif -%}
         {%- else -%}
              <i class="fa fa-spinner fa-pulse"></i>

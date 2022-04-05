@@ -79,14 +79,15 @@
                 </td>
 
                 <td>
-                    <span title="{{ case.long_status }}" class="scase-{{ case.status }}">
-                        {%- if case.status == 'SC' %}&mdash;{% else %}{{ case.long_status }}{% endif -%}
+                    {% set partial = (case.status == 'AC' and  case.points < case.total) %}
+                    <span title="{{ case.long_status }}" class="scase-{%- if partial -%}_AC{% else %}{{- case.status -}}{%- endif -%}">
+                        {%- if case.status == 'SC' %}&mdash;{% elif partial %}{{_("Partial Accepted")}}{% else %}{{ case.long_status }}{% endif -%}
                     </span>
                     {%- if case.feedback %}&nbsp;({{ case.feedback }}){% endif -%}
                 </td>
 
                 {% if not batch.id %}
-                    <td><strong>{{ _('Point') }}:&nbsp;</strong>{{ case.points }}/{{ case.total|floatformat(0) }}</td>
+                    <td><strong>{{ _('Point') }}:&nbsp;</strong>{{ case.points|floatformat(-3) }}/{{ case.total|floatformat(0) }}</td>
                 {% endif %}
 
                 <td>
@@ -170,10 +171,10 @@
                 {% else %}
                     <b>{{ _('Final score:') }}</b>
                 {% endif %}
-                {{ submission.case_points }}/{{ submission.case_total|floatformat(0) }}
+                {{ submission.case_points|floatformat(-3) }}/{{ submission.case_total|floatformat(0) }}
                 {% if request.in_contest and submission.contest_or_none %}
                     {% with contest=submission.contest_or_none %}
-                        ({{ _('%(points)s/%(total)s points', points=contest.points|roundfloat(3),
+                        ({{ _('%(points)s/%(total)s points', points=contest.points|floatformat(-3),
                               total=contest.problem.points|floatformat(-1)) }})
                     {% endwith %}
                 {% else %}
