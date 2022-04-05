@@ -122,13 +122,11 @@ class ProposeProblemSolutionForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ProposeProblemSolutionForm, self).__init__(*args, **kwargs)
-
-        if self.user and not self.user.has_perm('judge.upload_file_statement'):
-            self.fields.pop('solution_file')
+        self.fields.pop('solution_file')
 
     class Meta:
         model = Solution
-        fields = ('is_public', 'publish_on', 'authors', 'solution_file', 'content')
+        fields = ('is_public', 'publish_on', 'authors', 'solution_file', 'pdf_url', 'content')
         widgets = {
             'authors': HeavySelect2MultipleWidget(data_view='profile_select2', attrs={'style': 'width: 100%'}),
             'content': MartorWidget(attrs={'data-markdownfy-url': reverse_lazy('solution_preview')}),
