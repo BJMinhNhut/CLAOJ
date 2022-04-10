@@ -35,7 +35,13 @@ GRADERS = (
     ('standard', _('Standard')),
     ('interactive', _('Interactive')),
     ('signature', _('Function Signature Grading (IOI-style)')),
+    ('output_only', _('Output Only')),
     ('custom_judge', _('Custom Grader')),
+)
+
+IO_METHODS = (
+    ('standard', _('Standard Input/Output')),
+    ('file', _('Via files')),
 )
 
 CUSTOM_CHECKERS = (

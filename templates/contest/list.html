@@ -145,6 +145,7 @@
     <div class="content-description">
         {% if active_participations %}
             <h4>{{ _('Active Contests') }}</h4>
+            <table class="contest-list table striped">
                 <thead>
                 <tr>
                     <th style="width:90%">{{ _('Contest') }}</th>
@@ -154,7 +155,7 @@
                     {% endif %}
                 </tr>
                 </thead>
-            <table class="contest-list table striped">
+
                 <tbody>
                 {% for participation in active_participations %}
                     {% with contest=participation.contest %}
