@@ -4,7 +4,7 @@ from django.core.exceptions import PermissionDenied
 from django.db import IntegrityError
 from django.db.models import F
 from django.forms.models import ModelForm
-from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotFound
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
@@ -43,9 +43,13 @@ def vote_comment(request, delta):
         comment_id = int(request.POST['id'])
     except ValueError:
         return HttpResponseBadRequest()
-    else:
-        if not Comment.objects.filter(id=comment_id, hidden=False).exists():
-            raise Http404()
+    try:
+        comment = Comment.objects.filter(id=comment_id, hidden=False).get()
+    except Comment.DoesNotExist:
+        return HttpResponseNotFound(_('Comment not found.'), content_type='text/plain')
+
+    if request.profile == comment.author:
+        return HttpResponseBadRequest(_('You cannot vote your own comment'), content_type='text/plain')
 
     vote = CommentVote()
     vote.comment_id = comment_id
