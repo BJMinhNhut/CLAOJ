@@ -595,6 +595,15 @@ msgstr "Bạn phải giải ít nhất một bài trước khi có thể bỏ th
 msgid "You may not be part of more than {count} public organizations."
 msgstr "Bạn không thể là thành viên của nhiều hơn {count} tổ chức công khai."
 
+#: judge/forms.py:108
+msgid "Solution file"
+msgstr "File lời giải"
+
+#: judge/forms.py:118 judge/forms.py:161
+#, python-format
+msgid "File size is too big! Maximum file size is %s"
+msgstr "Kích thước file quá to! Kích thước file tối đa là %s"
+
 #: judge/forms.py:94
 msgid "Download comments?"
 msgstr "Tải bình luận?"
@@ -610,6 +619,11 @@ msgstr "Lọc theo mã đề bài:"
 #: judge/forms.py:100
 msgid "Leave empty to include all submissions"
 msgstr "Bỏ trống để hiện tất cả bài nộp"
+
+#: judge/forms.py:106
+#, python-format
+msgid "Maximum file size is %s."
+msgstr "Kích thước file tối đa là %s."
 
 #: judge/forms.py:103 templates/problem/manage_submission.html:142
 msgid "Filter by result:"
@@ -630,6 +644,10 @@ msgstr "Bất kì máy chấm nào"
 #: templates/user/base-users-table.html:5
 msgid "Username"
 msgstr "Tên truy cập"
+
+#: judge/forms.py:151
+msgid "Statement file"
+msgstr "File đề bài"
 
 #: judge/forms.py:157 templates/registration/registration_form.html:149
 #: templates/registration/registration_form.html:163
@@ -803,6 +821,7 @@ msgid "comment votes"
 msgstr "đánh giá bình luận"
 
 #: judge/models/comment.py:207
+
 msgid "Override comment lock"
 msgstr "Ghi đè khóa nhận xét"
 
@@ -1236,7 +1255,7 @@ msgstr "ghi đè độ dài output prefix"
 #: judge/models/contest.py:513
 msgid ""
 "Maximum number of submissions for this problem, or leave blank for no limit."
-msgstr ""
+msgstr "Số lượt nộp tối đa cho bài này, hãy bỏ trống nếu không có giới hạn."
 
 #: judge/models/contest.py:516
 msgid "Why include a problem you can't submit to?"
@@ -1485,10 +1504,24 @@ msgid ""
 "URL to PDF statement. The PDF file must be embeddable (Mobile web "
 "browsersmay not support embedding). Fallback included."
 msgstr ""
+"URL tới file PDF đề bài. File phải nhúng được (một số "
+"trình duyệt mobile có thể không hỗ trợ nhúng)."
 
 #: judge/models/problem.py:114
 msgid "problem body"
 msgstr "bài toán"
+
+#: judge/models/problem.py:126
+msgid "Visible for authors"
+msgstr "Chỉ tác giả có thể xem"
+
+#: judge/models/problem.py:127
+msgid "Visible if user is not in a contest"
+msgstr "Có thể xem khi ở ngoài contest"
+
+#: judge/models/problem.py:128
+msgid "Always visible"
+msgstr "Luôn có thể xem"
 
 #: judge/models/problem.py:116
 msgid "creators"
@@ -1502,7 +1535,7 @@ msgstr ""
 
 #: judge/models/problem.py:119
 msgid "curators"
-msgstr "giám khảo"
+msgstr "người quản lí"
 
 #: judge/models/problem.py:120
 msgid ""
@@ -1513,7 +1546,7 @@ msgstr ""
 
 #: judge/models/problem.py:122
 msgid "testers"
-msgstr ""
+msgstr "Người kiểm thử"
 
 #: judge/models/problem.py:124
 msgid "These users will be able to view the private problem, but not edit it."
@@ -1621,6 +1654,10 @@ msgstr "tỉ lệ giải được"
 msgid "allow full markdown access"
 msgstr ""
 
+#: judge/models/problem.py:200
+msgid "Testcase visibility"
+msgstr "Chế độ hiển thị test"
+
 #: judge/models/problem.py:169
 msgid "If private, only these organizations may see the problem."
 msgstr "Nếu riêng tư, chỉ những tổ chức này có thể xem bài tập."
@@ -1726,6 +1763,30 @@ msgstr "lời giải"
 msgid "solutions"
 msgstr "lời giải"
 
+#: judge/models/problem.py:567
+msgid "PDF solution URL"
+msgstr "URL file lời giải PDF"
+
+#: judge/models/problem.py:568
+msgid ""
+"URL to PDF solution. The PDF file must be embeddable (Mobile web "
+"browsersmay not support embedding). Fallback included."
+msgstr ""
+"URL tới file PDF lời giải. File phải nhúng được (một số "
+"trình duyệt mobile có thể không hỗ trợ nhúng)."
+
+#: judge/models/problem_data.py:25
+msgid "Custom checker"
+msgstr "Trình chấm ngoài"
+
+#: judge/models/problem_data.py:43
+msgid "Standard Input/Output"
+msgstr "Đầu vào/ra chuẩn"
+
+#: judge/models/problem_data.py:44
+msgid "Via files"
+msgstr "Bằng file"
+
 #: judge/models/problem_data.py:24
 msgid "Standard"
 msgstr "Mặc định"
@@ -1750,13 +1811,9 @@ msgstr "So sánh byte"
 msgid "Line-by-line"
 msgstr "Dòng với dòng"
 
-#: judge/models/problem_data.py:30
-msgid "Custom checker"
-msgstr ""
-
 #: judge/models/problem_data.py:37
 msgid "data zip file"
-msgstr "tập tin dữ liệu nén dạng zip"
+msgstr "file test nén dạng zip"
 
 #: judge/models/problem_data.py:39
 msgid "generator file"
@@ -1776,7 +1833,7 @@ msgstr "phản hồi init.yml"
 
 #: judge/models/problem_data.py:44 judge/models/problem_data.py:100
 msgid "checker"
-msgstr ""
+msgstr "trình chấm"
 
 #: judge/models/problem_data.py:45 judge/models/problem_data.py:101
 msgid "checker arguments"
@@ -1788,11 +1845,27 @@ msgstr "tham số của checker là một JSON"
 
 #: judge/models/problem_data.py:48
 msgid "custom checker file"
-msgstr "File chấm custom"
+msgstr "file chấm ngoài"
+
+#: judge/models/problem_data.py:76
+msgid "custom grader file"
+msgstr "file grader"
+
+#: judge/models/problem_data.py:82
+msgid "custom header file"
+msgstr "file header"
+
+#: judge/models/problem_data.py:88
+msgid "grader arguments"
+msgstr "tham số của grader"
 
 #: judge/models/problem_data.py:85
 msgid "problem data set"
 msgstr "tập dữ liệu bài"
+
+#: judge/models/problem_data.py:89
+msgid "grader arguments as a JSON object"
+msgstr "tham số của grader là một JSON"
 
 #: judge/models/problem_data.py:87
 msgid "case position"
@@ -3070,17 +3143,41 @@ msgstr "Bạn chưa được cấp quyền để chỉnh sửa bài tập này."
 msgid "Checker arguments must be a JSON object"
 msgstr "Tham số checker phải là một JSON"
 
-#: judge/views/problem_data.py:39
+#: judge/views/problem_data.py:52
 msgid "Checker arguments is invalid JSON"
 msgstr "Tham số checker là một JSON không hợp lệ"
+
+#: judge/views/problem_data.py:54
+msgid "Grader arguments must be a JSON object"
+msgstr "Tham số grader phải là một JSON"
+
+#: judge/views/problem_data.py:39
+msgid "Grader arguments is invalid JSON"
+msgstr "Tham số grader là một JSON không hợp lệ"
 
 #: judge/views/problem_data.py:46
 msgid "Your zip file is invalid!"
 msgstr "File nén bị lỗi!"
 
+#: judge/views/problem_data.py:59 
+msgid "IO Method"
+msgstr "Phương thức nhập xuất"
+
+#: judge/views/problem_data.py:61 
+msgid "Input from file"
+msgstr "Nhập từ file"
+
+#: judge/views/problem_data.py:62  
+msgid "Output to file"
+msgstr "Xuất ra file"
+
 #: judge/views/problem_data.py:60
-msgid "Can be left blank. In case the output can be too long (over 20MB), please set this."
-msgstr "Có thể để trống. Nếu output có thể được user in ra quá dài (hơn 20MB), hãy điền vào đây."
+msgid ""
+"Can be left blank. In case the output can be too long (over 20MB), please "
+"set this."
+msgstr ""
+"Có thể để trống. Nếu output có thể bị in ra quá dài (hơn 20MB), "
+"hãy điền vào đây."
 
 #: judge/views/problem_data.py:105
 #, python-brace-format
@@ -3621,7 +3718,7 @@ msgstr "Kỳ thi đang diễn ra"
 #: templates/blog/list.html:186 templates/contest/list.html:170
 #: templates/contest/list.html:209
 #, python-format
-msgid "Ends in %(countdown)s"
+msgid "Ends in %(countdown)s."
 msgstr "Kết thúc trong %(countdown)s."
 
 #: templates/blog/list.html:196
@@ -3690,7 +3787,7 @@ msgstr "Phản hồi"
 
 #: templates/comments/list.html:96 templates/comments/votes.html:1
 msgid "Votes"
-msgstr ""
+msgstr "Bình chọn"
 
 #: templates/comments/list.html:97
 msgid "Hide"
@@ -3735,7 +3832,7 @@ msgstr "chỉnh sửa {edits}"
 
 #: templates/comments/media-js.html:94
 msgid "original"
-msgstr ""
+msgstr "gốc"
 
 #: templates/comments/votes.html:5
 msgid "Voter"
@@ -3976,7 +4073,7 @@ msgstr "riêng tư"
 
 #: templates/contest/list.html:83
 msgid "rated"
-msgstr ""
+msgstr "có xếp hạng"
 
 #: templates/contest/list.html:120
 #, python-format
@@ -4010,6 +4107,11 @@ msgstr "Thành viên"
 #, python-format
 msgid "Window ends in %(countdown)s"
 msgstr "Thời gian làm bài kết thúc trong %(countdown)s."
+
+#: templates/contest/list.html:171
+#, python-format
+msgid "Ends in %(countdown)s"
+msgstr "Kết thúc trong %(countdown)s"
 
 #: templates/contest/list.html:189
 msgid "Ongoing Contests"
@@ -4048,11 +4150,11 @@ msgstr ""
 
 #: templates/contest/moss.html:28
 msgid "Are you sure you want MOSS the contest?"
-msgstr ""
+msgstr "Bạn có chắc bạn muốn chạy MOSS cho kỳ thi không?"
 
 #: templates/contest/moss.html:33
 msgid "Are you sure you want to delete the MOSS results?"
-msgstr ""
+msgstr "Bạn có chắc bạn muốn xóa kết quả MOSS không?"
 
 #: templates/contest/moss.html:60
 msgid "No submissions"
@@ -4060,11 +4162,11 @@ msgstr "Không có bài nộp"
 
 #: templates/contest/moss.html:74
 msgid "Re-MOSS contest"
-msgstr ""
+msgstr "Chạy lại MOSS"
 
 #: templates/contest/moss.html:82
 msgid "Delete MOSS results"
-msgstr ""
+msgstr "Xóa kết quả MOSS"
 
 #: templates/contest/private.html:5
 msgid "This contest is private to specific users."
@@ -4106,19 +4208,19 @@ msgstr "Thời gian tham gia đã kết thúc."
 
 #: templates/contest/ranking-table.html:53
 msgid "Un-Disqualify"
-msgstr ""
+msgstr "Bỏ loại"
 
 #: templates/contest/ranking-table.html:56
 msgid "Disqualify"
-msgstr ""
+msgstr "Loại"
 
 #: templates/contest/ranking.html:169
 msgid "Are you sure you want to disqualify this participation?"
-msgstr ""
+msgstr "Bạn có chắc bạn muốn loại thí sinh này không?"
 
 #: templates/contest/ranking.html:174
 msgid "Are you sure you want to un-disqualify this participation?"
-msgstr ""
+msgstr "Bạn có chắc bạn muốn bỏ loại thí sinh này không?"
 
 #: templates/contest/ranking.html:246
 msgid "View user participation"
@@ -4389,7 +4491,7 @@ msgstr "Tập tin đầu ra"
 
 #: templates/problem/data.html:463
 msgid "Pretest?"
-msgstr ""
+msgstr "Có pretest?"
 
 #: templates/problem/data.html:464
 msgid "Generator args"
@@ -4486,7 +4588,7 @@ msgstr "Chấm lại bài nộp"
 
 #: templates/problem/manage_submission.html:120
 msgid "Filter by ID:"
-msgstr "Lọc bởi ID:"
+msgstr "Lọc theo ID:"
 
 #: templates/problem/manage_submission.html:123
 msgid "Starting ID:"
@@ -4502,7 +4604,7 @@ msgstr "Khoảng này chứa cả 2 đầu."
 
 #: templates/problem/manage_submission.html:134
 msgid "Filter by language:"
-msgstr "Lọc bởi ngôn ngữ:"
+msgstr "Lọc theo ngôn ngữ:"
 
 #: templates/problem/manage_submission.html:150
 msgid "Rejudge selected submissions"
@@ -4993,7 +5095,7 @@ msgstr ""
 
 #: templates/registration/totp_disable.html:48
 msgid "Disable Two Factor Authentication"
-msgstr ""
+msgstr "Vô hiệu hóa Xác thực hai yếu tố"
 
 #: templates/registration/totp_enable.html:75
 msgid "Scan this code with your authenticator app:"
@@ -5013,17 +5115,17 @@ msgstr "Nhập mã 6 chữ số sinh ra bởi ứng dụng của bạn:"
 
 #: templates/registration/totp_enable.html:91
 msgid "Enable Two Factor Authentication"
-msgstr ""
+msgstr "Cho phép Xác thực hai yếu tố"
 
 #: templates/registration/two_factor_auth.html:33
 #: templates/user/edit-profile.html:161
 msgid "WebAuthn is not supported by your browser."
-msgstr ""
+msgstr "WebAuthn không được hỗ trợ bởi trình duyệt của bạn."
 
 #: templates/registration/two_factor_auth.html:54
 #: templates/user/edit-profile.html:185
 msgid "Failed to contact server."
-msgstr ""
+msgstr "Không thể kết nối server."
 
 #: templates/registration/two_factor_auth.html:77
 msgid ""
@@ -5033,7 +5135,7 @@ msgstr ""
 
 #: templates/registration/two_factor_auth.html:83
 msgid "Use security key"
-msgstr ""
+msgstr "Dùng khóa bảo mật"
 
 #: templates/registration/two_factor_auth.html:89
 #, python-format
@@ -5267,7 +5369,7 @@ msgstr "Xem code"
 
 #: templates/submission/status.html:100
 msgid "Press Ctrl-Enter or Command-Enter to abort."
-msgstr ""
+msgstr "Nhấn Ctrl-Enter hoặc Command-Enter để hủy."
 
 #: templates/submission/status.html:102
 msgid "Abort"
@@ -5355,11 +5457,11 @@ msgstr "Không có gì ở đây."
 
 #: templates/ticket/ticket.html:419
 msgid "Upvote"
-msgstr ""
+msgstr "Ủng hộ"
 
 #: templates/ticket/ticket.html:421
 msgid "Undo vote"
-msgstr ""
+msgstr "Hủy bình chọn"
 
 #: templates/ticket/ticket.html:425
 msgid "Close ticket"
@@ -5647,7 +5749,7 @@ msgstr "Số bài đã giải:"
 
 #: templates/user/user-base.html:46
 msgid "Rank by points:"
-msgstr "Hạng điểm:"
+msgstr "Hạng theo điểm:"
 
 #: templates/user/user-base.html:49
 msgid "Total points:"
@@ -5665,7 +5767,7 @@ msgstr[0] "Đã tạo %(counter)s kỳ thi"
 
 #: templates/user/user-base.html:76
 msgid "Rank by rating:"
-msgstr "Hạng rating:"
+msgstr "Hạng theo rating:"
 
 #: templates/user/user-base.html:78
 msgid "Rating:"
@@ -5677,11 +5779,11 @@ msgstr "Độ biến động:"
 
 #: templates/user/user-base.html:80
 msgid "Min. rating:"
-msgstr ""
+msgstr "Rating thấp nhất"
 
 #: templates/user/user-base.html:81
 msgid "Max rating:"
-msgstr ""
+msgstr "Rating cao nhất"
 
 #: templates/user/user-problems.html:37
 msgid "Points breakdown"
@@ -5719,11 +5821,11 @@ msgstr ""
 
 #: templates/user/user-tabs.html:10
 msgid "Admin User"
-msgstr ""
+msgstr "Quản lí người dùng"
 
 #: templates/user/user-tabs.html:13
 msgid "Admin Profile"
-msgstr ""
+msgstr "Quản lí hồ sơ"
 
 #: templates/user/users-table.html:23
 msgid "Problems count"
