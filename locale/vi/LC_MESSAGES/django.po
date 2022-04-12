@@ -4774,6 +4774,10 @@ msgid "Hide solved problems"
 msgstr "Ẩn các bài đã AC"
 
 #: templates/problem/search-form.html:27
+msgid "Has editorial"
+msgstr "Có lời giải"
+
+#: templates/problem/search-form.html:30
 msgid "Show problem types"
 msgstr "Hiện dạng đề"
 
