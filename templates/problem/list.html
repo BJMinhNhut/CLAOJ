@@ -107,7 +107,7 @@
 
                 $('#go').click(clean_submit);
 
-                $('input#full_text, input#hide_solved, input#show_types').click(function () {
+                $('input#full_text, input#hide_solved, input#show_types, input#has_public_editorial').click(function () {
                     prep_form();
                     ($('<form>').attr('action', window.location.pathname + '?' + $form.serialize())
                         .append($('<input>').attr('type', 'hidden').attr('name', 'csrfmiddlewaretoken')
@@ -232,7 +232,11 @@
                 <tr>
                     {% if request.in_contest %}
                         {% if request.user.is_authenticated %}
-                            <th class="solved"><i class="fa fa-check"></i></th>
+                            <th class="solved">
+				<a href="{{ sort_links.solved }}">
+                                <i class="fa fa-check"></i>{{ sort_order.solved }}
+                            	</a>
+			    </th>
                         {% endif %}
                         <th class="problem">{{ _('Problem') }}</th>
                         <th class="category">{{ _('Category') }}</th>
@@ -265,8 +269,10 @@
                         <th class="ac-rate">
                             <a href="{{ sort_links.ac_rate }}">{{ _('%% AC') }}{{ sort_order.ac_rate }}</a>
                         </th>
-                    	<th class="editorial">
-                        	{{ _('Editorial') }}
+                        <th class="editorial" title="{{ _('Editorial') }}">
+                        	<a href="{{ sort_links.editorial }}">
+                            	<i class="fa fa-book"></i>{{ sort_order.editorial }}
+                        	</a>
                     	</th>
                         <th class="users">
                             <a href="{{ sort_links.user_count }}">{{ _('# AC') }}{{ sort_order.user_count }}</a>
@@ -324,11 +330,11 @@
                             <td class="ac-rate">{{ problem.ac_rate|floatformat(1) }}%</td>
                         {% endif %}
                         {% if problem.has_public_editorial %}
-                            <td editorial="1">
+                            <td>
                                 <i class="has-editorial-color fa fa-check-circle"></i>
                             </td>
                         {% else %}
-                            <td editorial="0">
+                            <td>
                                 <i class="no-editorial-color fa fa-minus-circle"></i>
                             </td>
                         {% endif %}
