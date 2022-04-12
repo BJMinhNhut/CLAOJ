@@ -72,7 +72,7 @@ jobs:
             echo "Changed: $file"
           else
             echo "No material change: $file"
-            git checkout "$file" > /dev/null 2>&1
+            git checkout "$i18n_head" -- "$file" > /dev/null 2>&1
           fi
         done < <(git ls-files -z 'locale/*/LC_MESSAGES/*.po')
     - name: Create pull request
