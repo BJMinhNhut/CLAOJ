@@ -158,8 +158,6 @@ class MathoidMathParser(object):
 
     def output_jax(self, result):
         return format_html('<span class="{4}">'
-                           '''<img class="tex-image" src="{0}" style="{2}" alt="{3}"'''
-                           ''' onerror="this.src='{1}';this.onerror=null">'''
                            '''<span class="tex-text" style="display:none">{5}{3}{5}</span>'''
                            '</span>',
                            result['svg'], result['png'], result['css'], result['tex'],
