@@ -232,11 +232,7 @@
                 <tr>
                     {% if request.in_contest %}
                         {% if request.user.is_authenticated %}
-                            <th class="solved">
-				<a href="{{ sort_links.solved }}">
-                                <i class="fa fa-check"></i>{{ sort_order.solved }}
-                            	</a>
-			    </th>
+                            <th class="solved"><i class="fa fa-check"></i></th>
                         {% endif %}
                         <th class="problem">{{ _('Problem') }}</th>
                         <th class="category">{{ _('Category') }}</th>
@@ -325,11 +321,10 @@
                                 {% endfor %}
                             </td>
                         {% endif %}
-                        <td class="p">{{ problem.points|floatformat(2) }}{% if problem.partial %}p{% endif %}</td>
+                        <td class="p">{{ problem.points|floatformat }}{% if problem.partial %}p{% endif %}</td>
                         {% if not request.in_contest %}
                             <td class="ac-rate">{{ problem.ac_rate|floatformat(1) }}%</td>
-                        {% endif %}
-                        <td>
+                            <td>
                             {% if problem.has_public_editorial %}
                                 <a href="{{ url('problem_editorial', problem.code) }}">
                                     <i class="has-editorial-color fa fa-check-circle"></i>
@@ -337,7 +332,8 @@
                             {% else %}
                                 <i class="no-editorial-color fa fa-minus-circle"></i>
                             {% endif %}
-                        </td>
+                            </td>
+                        {% endif %}
                         <td class="users">
                             <a href="{{ url('ranked_submissions', problem.code) }}">
                                 {% if not request.in_contest or not hide_contest_scoreboard %}
