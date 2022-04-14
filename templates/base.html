@@ -211,12 +211,8 @@
                         <a href="{{ url('user_page') }}">
                             <span>
                                 <img src="{{ gravatar(request.user, 32) }}" height="24" width="24">{# -#}
-                                <span>
-                                    {%- trans username=request.user.first_name or request.user.username -%}
-                                        Hello, <b>{{ username }}</b>.
-                                    {%- endtrans %}
-                                </span>
-                            </span>
+				<span>{{ _('Hello, %(username)s.', username=bold(request.user.first_name or request.user.username)) }}</span>
+                            </span>                                
                         </a>
                         <ul style="width: 150px">
                             {% if request.user.is_staff or request.user.is_superuser %}

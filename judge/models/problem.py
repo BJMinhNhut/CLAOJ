@@ -572,7 +572,8 @@ class Solution(models.Model):
     is_public = models.BooleanField(verbose_name=_('public visibility'), default=False)
     publish_on = models.DateTimeField(verbose_name=_('publish date'))
     authors = models.ManyToManyField(Profile, verbose_name=_('authors'), blank=True)
-    content = models.TextField(verbose_name=_('editorial content'), validators=[disallowed_characters_validator])
+    content = models.TextField(verbose_name=_('editorial content'), blank=True,
+                               validators=[disallowed_characters_validator])
 
     def get_absolute_url(self):
         problem = self.problem
