@@ -381,13 +381,14 @@ BLEACH_USER_SAFE_TAGS = [
     'table', 'thead', 'tbody', 'tfoot', 'tr', 'th', 'td', 'caption', 'colgroup', 'col', 'tfoot',
     'img', 'audio', 'video', 'source',
     'a',
-    'style', 'noscript', 'center',
+    'style', 'noscript', 'center', 'object', 'iframe',
 ]
 
 BLEACH_USER_SAFE_ATTRS = {
     '*': ['id', 'class', 'style'],
     'img': ['src', 'alt', 'title', 'width', 'height', 'data-src'],
     'a': ['href', 'alt', 'title'],
+    'iframe': ['src', 'height', 'width', 'allow'],
     'abbr': ['title'],
     'dfn': ['title'],
     'time': ['datetime'],
@@ -570,6 +571,8 @@ MOSS_API_KEY = None
 CELERY_WORKER_HIJACK_ROOT_LOGGER = False
 
 WEBAUTHN_RP_ID = None
+
+DESCRIPTION_MAX_LENGTH = 300
 
 try:
     with open(os.path.join(os.path.dirname(__file__), 'local_settings.py')) as f:

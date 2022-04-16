@@ -515,6 +515,7 @@ class Problem(models.Model):
         permissions = (
             ('see_private_problem', _('See hidden problems')),
             ('edit_own_problem', _('Edit own problems')),
+            ('create_organization_problem', _('Create organization problem')),
             ('edit_all_problem', _('Edit all problems')),
             ('edit_public_problem', _('Edit all public problems')),
             ('problem_full_markup', _('Edit problems with full markup')),

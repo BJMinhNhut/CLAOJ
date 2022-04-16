@@ -854,7 +854,7 @@ class CreateContest(PermissionRequiredMixin, TitleMixin, CreateView):
 
 
 class EditContest(ContestMixin, TitleMixin, UpdateView):
-    template_name = 'contest/edit.html'
+    template_name = 'contest/create.html'
     model = Contest
     form_class = ContestForm
 
@@ -882,13 +882,18 @@ class EditContest(ContestMixin, TitleMixin, UpdateView):
         data['contest_problem_formset'] = self.get_contest_problem_formset()
         return data
 
+    def save_contest_form(self, form):
+        self.object = form.save()
+        self.object.authors.add(self.request.profile)
+        self.object.save()
+
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
         form_set = self.get_contest_problem_formset()
 
         if form.is_valid() and form_set.is_valid():
-            form.save()
+            self.save_contest_form(form)
             problems = form_set.save(commit=False)
 
             for problem in form_set.deleted_objects:

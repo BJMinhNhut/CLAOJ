@@ -21,8 +21,8 @@ from judge.views.problem_data import ProblemDataView, ProblemSubmissionDiff, \
     problem_data_file, problem_init_view
 from judge.views.register import ActivationView, RegistrationView
 from judge.views.select2 import AssigneeSelect2View, CommentSelect2View, ContestSelect2View, \
-    ContestUserSearchSelect2View, OrganizationSelect2View, ProblemSelect2View, TicketUserSelect2View, \
-    UserSearchSelect2View, UserSelect2View
+    ContestUserSearchSelect2View, OrganizationSelect2View, ProblemSelect2View, \
+    TicketUserSelect2View, UserSearchSelect2View, UserSelect2View
 from judge.views.widgets import martor_image_uploader
 
 admin.autodiscover()
@@ -242,6 +242,9 @@ urlpatterns = [
         url(r'^/leave$', organization.LeaveOrganization.as_view(), name='leave_organization'),
         url(r'^/edit$', organization.EditOrganization.as_view(), name='edit_organization'),
         url(r'^/kick$', organization.KickUserWidgetView.as_view(), name='organization_user_kick'),
+        url(r'^/problem-create$', organization.ProblemCreateOrganization.as_view(), name='problem_create_organization'),
+        url(r'^/contest-create$', organization.ContestCreateOrganization.as_view(), name='contest_create_organization'),
+        url(r'^/problems$', organization.ListProblemOrganization.as_view(), name='list_problem_organization'),
 
         url(r'^/request$', organization.RequestJoinOrganization.as_view(), name='request_organization'),
         url(r'^/request/(?P<rpk>\d+)$', organization.OrganizationRequestDetail.as_view(),
