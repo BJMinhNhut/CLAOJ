@@ -93,6 +93,8 @@
 #banner {
     padding-top: 0.5em;
     padding-bottom: 2em;
+    color: rgb(85, 85, 85);
+    font-size: $base_font_size;
 
     a.date {
         display: block;
@@ -118,6 +120,14 @@
         display: block;
         color: rgb(85, 85, 85);
         font-size: $base_font_size;
+    }
+
+    div#details ul {
+        margin-bottom: 0;
+        list-style: none;
+        p {
+            margin: 0;
+        }
     }
 }
 

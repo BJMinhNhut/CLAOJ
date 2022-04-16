@@ -484,21 +484,142 @@ msgstr "Đăng bình luận"
 msgid "AtCoder"
 msgstr "AtCoder"
 
+#: judge/contest_format/atcoder.py:117 judge/contest_format/default.py:79
+#: judge/contest_format/icpc.py:209 judge/contest_format/legacy_ioi.py:97
+#: judge/contest_format/vnoj.py:119
+msgid "The maximum score submission for each problem will be used."
+msgstr "Điểm của bài sẽ là điểm của lần nộp bài có điểm lớn nhất."
+
+#: judge/contest_format/atcoder.py:122 judge/contest_format/icpc.py:214
+#: judge/contest_format/vnoj.py:124
+#, python-format
+msgid ""
+"Each submission before the first maximum score submission will incur a "
+"**penalty of %d minute**."
+msgid_plural ""
+"Each submission before the first maximum score submission will incur a "
+"**penalty of %d minutes**."
+msgstr[0] ""
+"Các lần nộp bài trước lần nộp bài có điểm lớn nhất sẽ tính **penalty %d "
+"phút**."
+
+#: judge/contest_format/atcoder.py:126
+msgid ""
+"Ties will be broken by the last score altering submission time (including "
+"penalty)."
+msgstr ""
+"Các thí sinh bằng điểm sẽ được phân định bằng thời gian của **lần nộp bài "
+"cuối cùng làm thay đổi kết quả** (cộng với penalty)."
+
+#: judge/contest_format/atcoder.py:128
+msgid "Ties will be broken by the last score altering submission time."
+msgstr ""
+"Các thí sinh bằng điểm sẽ được phân định bằng thời gian của **lần nộp bài "
+"cuối cùng làm thay đổi kết quả**."
+
 #: judge/contest_format/default.py:18
 msgid "Default"
 msgstr "Mặc định"
+
+#: judge/contest_format/default.py:80
+msgid ""
+"Ties will be broken by the sum of the last submission time on problems with "
+"a non-zero score."
+msgstr ""
+"Các thí sinh bằng điểm sẽ được phân định bằng tổng thời gian của **lần nộp "
+"bài cuối cùng** trong các bài tập có điểm lớn hơn 0."
 
 #: judge/contest_format/ecoo.py:18
 msgid "ECOO"
 msgstr "ECOO"
 
+#: judge/contest_format/ecoo.py:130
+msgid ""
+"The score on your **last** non-CE submission for each problem will be used."
+msgstr ""
+"Điểm của bài sẽ là điểm của lần nộp **cuối cùng** không bị Biên dịch gặp lỗi "
+"(Compile Error)."
+
+#: judge/contest_format/ecoo.py:135
+#, python-format
+msgid ""
+"There is a **%d bonus** for fully solving on your first non-CE submission."
+msgstr ""
+"Sẽ có **%d điểm thưởng** nếu bạn AC ở lần nộp đầu tiên không bị Biên dịch "
+"gặp lỗi (Compile Error)."
+
+#: judge/contest_format/ecoo.py:141
+#, python-format
+msgid ""
+"For every **%d minute** you submit before the end of your window, there will "
+"be a **1** point bonus."
+msgid_plural ""
+"For every **%d minutes** you submit before the end of your window, there "
+"will be a **1** point bonus."
+msgstr[0] ""
+"Bạn sẽ được thưởng **1** điểm với mỗi **%d phút** bạn nộp bài trước giờ kết "
+"thúc."
+
+#: judge/contest_format/ecoo.py:147
+msgid ""
+"Ties will be broken by the sum of the last submission time on **all** "
+"problems."
+msgstr ""
+"Các thí sinh bằng điểm sẽ được phân định bằng tổng thời gian của lần nộp bài "
+"cuối cùng trong **tất cả*** bài tập."
+
+#: judge/contest_format/ecoo.py:149 judge/contest_format/ioi.py:102
+#: judge/contest_format/legacy_ioi.py:103
+msgid "Ties by score will **not** be broken."
+msgstr "Các thí sinh bằng điểm bằng điểm sẽ có cùng thứ hạng."
+
 #: judge/contest_format/icpc.py:19
 msgid "ICPC"
 msgstr ""
 
+#: judge/contest_format/icpc.py:218 judge/contest_format/vnoj.py:128
+msgid ""
+"Ties will be broken by the sum of the last score altering submission time on "
+"problems with a non-zero score (including penalty), followed by the time of "
+"the last score altering submission."
+msgstr ""
+"Các thí sinh bằng điểm sẽ được phân định bằng tổng thời gian của **lần nộp "
+"bài cuối cùng làm thay đổi kết quả** trong các bài tập có điểm lớn hơn 0 "
+"(cộng với penalty). Nếu vẫn bằng nhau, phân định bằng **thời gian của lần "
+"nộp bài cuối cùng làm thay đổi kết quả**."
+
+#: judge/contest_format/icpc.py:221 judge/contest_format/vnoj.py:131
+msgid ""
+"Ties will be broken by the sum of the last score altering submission time on "
+"problems with a non-zero score, followed by the time of the last score "
+"altering submission."
+msgstr ""
+"Các thí sinh bằng điểm sẽ được phân định bằng tổng thời gian của **lần nộp "
+"bài cuối cùng làm thay đổi kết quả** trong các bài tập có điểm lớn hơn 0. "
+"Nếu vẫn bằng nhau, phân định bằng **lần nộp bài cuối cùng làm thay đổi kết "
+"quả**."
+
+#: judge/contest_format/icpc.py:226
+#, python-format
+msgid "The scoreboard will be frozen in the **last %d minute**."
+msgid_plural "The scoreboard will be frozen in the **last %d minutes**."
+msgstr[0] "Bảng điểm sẽ được đóng băng trong **%d phút cuối**."
+
 #: judge/contest_format/ioi.py:11
 msgid "IOI"
 msgstr "IOI"
+
+#: judge/contest_format/ioi.py:96
+msgid "The maximum score for each problem batch will be used."
+msgstr "Điểm của bài là tổng điểm của các subtask."
+
+#: judge/contest_format/ioi.py:99 judge/contest_format/legacy_ioi.py:100
+msgid ""
+"Ties will be broken by the sum of the last score altering submission time on "
+"problems with a non-zero score."
+msgstr ""
+"Các thí sinh bằng điểm sẽ được phân định bằng tổng thời gian của **lần nộp "
+"bài cuối cùng làm thay đổi kết quả** trong các bài tập có điểm lớn hơn 0."
 
 #: judge/contest_format/legacy_ioi.py:18
 msgid "IOI (pre-2016)"
@@ -1093,6 +1214,16 @@ msgstr ""
 "Một đối tượng JSON dùng để chọn cấu hình định dạng cho mô đun kỳ thi. Để "
 "trống nếu không dùng. Định dạng chính xác phụ thuộc vào định dạng kỳ thi "
 "được chọn."
+
+#: judge/models/contest.py:139
+msgid "show short form settings display"
+msgstr "Hiển thị các cài đặt của kỳ thi"
+
+#: judge/models/contest.py:140
+msgid ""
+"Whether to show a section containing contest settings on the contest page or "
+"not."
+msgstr "Hiện tóm tắt các cài đặt của kỳ thi ở trang kỳ thi."
 
 #: judge/models/contest.py:143
 msgid "contest lock"
@@ -3725,11 +3856,153 @@ msgstr "Kết thúc trong %(countdown)s."
 msgid "Upcoming contests"
 msgstr "Kỳ thi sắp tới"
 
-#: templates/blog/list.html:204 templates/contest/contest.html:41
-#: templates/contest/list.html:243
+#: templates/contest/contest.html:78
 #, python-format
-msgid "Starting in %(countdown)s."
-msgstr "Bắt đầu trong %(countdown)s."
+msgid "<b>%(length)s</b> long starting on <b>%(start_time)s</b>"
+msgstr "<b>%(length)s</b> tính từ <b>%(start_time)s</b>"
+
+#: templates/contest/contest.html:89
+#, python-format
+msgid "The author of this contest is %(link_authors)s."
+msgid_plural "The authors of this contest are %(link_authors)s."
+msgstr[0] "Các thành viên tổ chức kỳ thi: %(link_authors)s."
+
+#: templates/contest/contest.html:100
+#, python-format
+msgid ""
+"Special thanks to %(link_testers)s for testing and feedback on the problems."
+msgid_plural ""
+"Special thanks to %(link_testers)s for testing and feedback on the problems."
+msgstr[0] "Gửi ngàn lời cảm ơn đến với các tester %(link_testers)s."
+
+#: templates/contest/contest.html:112
+#, python-format
+msgid ""
+"This contest will be **rated** for **all** participants who have a rating "
+"between **%(rating_floor)d** and **%(rating_ceiling)d**, inclusive."
+msgstr ""
+"Kỳ thi này **tính rating** với **tất cả** thành viên tham gia kỳ thi, có "
+"rating từ **%(rating_floor)d** đến **%(rating_ceiling)d**."
+
+#: templates/contest/contest.html:114
+#, python-format
+msgid ""
+"This contest will be **rated** for **all** participants who have a rating of "
+"at least **%(rating_floor)d**."
+msgstr ""
+"Kỳ thi này **tính rating** với **tất cả** thành viên tham gia kỳ thi, có "
+"rating từ**%(rating_floor)d** trở lên."
+
+#: templates/contest/contest.html:116
+#, python-format
+msgid ""
+"This contest will be **rated** for **all** participants who have a rating of "
+"at most **%(rating_ceiling)d**."
+msgstr ""
+"Kỳ thi này **tính rating** với **tất cả** thành viên tham gia kỳ thi, có "
+"rating không quá **%(rating_ceiling)d**."
+
+#: templates/contest/contest.html:118
+msgid "This contest will be **rated** for **all** participants."
+msgstr ""
+"Kỳ thi này **tính rating** với **tất cả** thành viên có tham gia kỳ thi."
+
+#: templates/contest/contest.html:122
+#, python-format
+msgid ""
+"This contest will be **rated** for participants who submit at least once and "
+"have a rating between **%(rating_floor)d** and **%(rating_ceiling)d**, "
+"inclusive."
+msgstr ""
+"Kỳ thi này **tính rating** với các thành viên nộp bài ít nhất một lần trong "
+"kỳ thi, có rating từ **%(rating_floor)d** đến **%(rating_ceiling)d**."
+
+#: templates/contest/contest.html:124
+#, python-format
+msgid ""
+"This contest will be **rated** for participants who submit at least once and "
+"have a rating of at least **%(rating_floor)d**."
+msgstr ""
+"Kỳ thi này **tính rating** với các thành viên nộp bài ít nhất một lần trong "
+"kỳ thi, có rating từ**%(rating_floor)d** trở lên."
+
+#: templates/contest/contest.html:126
+#, python-format
+msgid ""
+"This contest will be **rated** for participants who submit at least once and "
+"have a rating of at most **%(rating_ceiling)d**."
+msgstr ""
+"Kỳ thi này **tính rating** với các thành viên nộp bài ít nhất một lần trong "
+"khi thi, có rating không quá **%(rating_ceiling)d**."
+
+#: templates/contest/contest.html:128
+msgid ""
+"This contest will be **rated** for participants who submit at least once."
+msgstr ""
+"Kỳ thi này **tính rating** với các thành viên nộp bài ít nhất một lần trong "
+"khi thi."
+
+#: templates/contest/contest.html:132
+msgid "This contest will **not** be rated."
+msgstr "Kỳ thi này **không** tính rating."
+
+#: templates/contest/contest.html:137
+#, python-format
+msgid "There is **%(count)s** problem in this contest."
+msgid_plural "There are **%(count)s** problems in this contest."
+msgstr[0] "Có **%(count)s** bài tập trong kỳ thi này."
+
+#: templates/contest/contest.html:146
+msgid "**Partial scoring is enabled** for some or all of these problems."
+msgstr ""
+"Một số (hoặc tất cả) bài tập cho phép bạn nhận điểm mà không cần phải đúng "
+"toàn bộ test."
+
+#: templates/contest/contest.html:148
+msgid "This contest **will not use partial scoring**."
+msgstr ""
+"Kỳ thi này yêu cầu bạn phải **đúng hết bộ test** của một bài để có điểm."
+
+#: templates/contest/contest.html:153
+msgid "The pretest system **will be used** for some or all of these problems."
+msgstr ""
+"Một số (hoặc tất cả) bài tập trong kỳ thi này sẽ dùng **pretest** trong lúc "
+"diễn ra kỳ thi."
+
+#: templates/contest/contest.html:155
+msgid "The pretest system **will not be used** for this contest."
+msgstr "Kỳ thi này **không** sử dụng pretest."
+
+#: templates/contest/contest.html:160
+msgid "Some or all of these problems **have a submission limit**."
+msgstr ""
+"Một số (hoặc tất cả) bài tập trong kỳ thi **có giới hạn số lần nộp bài**."
+
+#: templates/contest/contest.html:162
+msgid "There is **no submission limit** for any of these problems."
+msgstr "Kỳ thi này **không giới hạn** số lần nộp bài."
+
+#: templates/contest/contest.html:168
+#, python-format
+msgid "The contest format is **%(format)s**."
+msgstr "Kỳ thi sử dụng format **%(format)s**."
+
+#: templates/contest/contest.html:177
+msgid "The scoreboard will be **visible** for the duration of the contest."
+msgstr "Bảng điểm được hiển thị trong quá trình diễn ra kỳ thi."
+
+#: templates/contest/contest.html:179
+msgid "The scoreboard will be **hidden** until your window is over."
+msgstr "Bảng điểm sẽ bị ẩn trong quá bạn làm bài thi."
+
+#: templates/contest/contest.html:181
+msgid ""
+"The scoreboard will be **hidden** for the entire duration of the contest."
+msgstr "Bảng điểm sẽ bị ẩn trong toàn bộ kỳ thi."
+
+#: templates/contest/contest.html:186
+msgid "An **access code is required** to join the contest."
+msgstr "Kỳ thi này yêu cầu bạn phải có **mã truy cập** để tham gia."
 
 #: templates/blog/list.html:220
 msgid "Comment stream"
@@ -4011,11 +4284,6 @@ msgid ""
 "%(end_time)s</b>"
 msgstr ""
 "<b>%(time_limit)s</b> giữa <b>%(start_time)s</b> và <b>%(end_time)s</b>"
-
-#: templates/contest/contest.html:63
-#, python-format
-msgid "<b>%(length)s</b> long starting on <b>%(start_time)s</b>"
-msgstr "<b>%(length)s</b> tính từ <b>%(start_time)s</b>"
 
 #: templates/contest/contest.html:80
 #: dmoj/urls.py:108 templates/base.html:220
