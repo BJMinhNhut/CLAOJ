@@ -21,8 +21,8 @@ from judge.utils.cachedict import CacheDict
 
 __all__ = ['Comment', 'CommentLock', 'CommentVote']
 
-comment_validator = RegexValidator(r'^[pcs]:[a-z0-9]+$|^b:\d+$',
-                                   _(r'Page code must be ^[pcs]:[a-z0-9]+$|^b:\d+$'))
+comment_validator = RegexValidator(r'^\w+:[a-z0-9A-Z_]+$',
+                                   _(r'Page code must be ^\w+:[a-z0-9A-Z_]+$'))
 
 
 class VersionRelation(GenericRelation):

@@ -23,7 +23,7 @@ from django.utils.html import escape, format_html
 from django.utils.safestring import mark_safe
 from django.utils.timezone import make_aware
 from django.utils.translation import gettext as _, gettext_lazy
-from django.views.generic import ListView, TemplateView
+from django.views.generic import FormView, ListView, TemplateView
 from django.views.generic.detail import BaseDetailView, DetailView, SingleObjectMixin, View
 from django.views.generic.edit import CreateView, UpdateView
 from reversion import revisions
@@ -216,6 +216,8 @@ class ContestMixin(object):
             return render(request, 'contest/private.html', {
                 'error': e, 'title': _('Access to contest "%s" denied') % e.name,
             }, status=403)
+        except PermissionDenied as e:
+            return generic_message(request, _('Permission denied'), e)
 
 
 class ContestDetail(ContestMixin, TitleMixin, CommentedDetailView):
@@ -264,6 +266,13 @@ class ContestClone(ContestMixin, PermissionRequiredMixin, TitleMixin, SingleObje
     template_name = 'contest/clone.html'
     form_class = ContestCloneForm
     permission_required = 'judge.clone_contest'
+    permission_denied_message = _('You are not allowed to clone contests.')
+
+    def get_object(self, queryset=None):
+        contest = super().get_object(queryset)
+        if not contest.is_editable_by(self.request.user):
+            raise PermissionDenied(_('You are not allowed to edit this contest.'))
+        return contest
 
     def form_valid(self, form):
         contest = self.object
@@ -752,6 +761,7 @@ class ContestParticipationDisqualify(ContestMixin, SingleObjectMixin, View):
 
 class ContestMossMixin(ContestMixin, PermissionRequiredMixin):
     permission_required = 'judge.moss_contest'
+    permission_denied_message = _('You are not allowed to run MOSS.')
 
     def get_object(self, queryset=None):
         contest = super().get_object(queryset)
@@ -822,6 +832,7 @@ class CreateContest(PermissionRequiredMixin, TitleMixin, CreateView):
     model = Contest
     form_class = ContestForm
     permission_required = 'judge.add_contest'
+    permission_denied_message = _('You are not allowed to create contests.')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -857,6 +868,12 @@ class CreateContest(PermissionRequiredMixin, TitleMixin, CreateView):
         else:
             return self.render_to_response(self.get_context_data(*args, **kwargs))
 
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied as e:
+            return generic_message(request, _('Permission denied'), e)
+
 
 class EditContest(ContestMixin, TitleMixin, UpdateView):
     template_name = 'contest/edit.html'
@@ -866,7 +883,7 @@ class EditContest(ContestMixin, TitleMixin, UpdateView):
     def get_object(self, queryset=None):
         contest = super(EditContest, self).get_object(queryset)
         if not contest.is_editable_by(self.request.user):
-            raise PermissionDenied()
+            raise PermissionDenied(_('You are not allowed to edit this contest.'))
         return contest
 
     def get_form_kwargs(self):
