@@ -431,6 +431,9 @@ class ProblemList(QueryStringSortMixin, TitleMixin, SolvedProblemMixin, ListView
         else:
             return self.get_normal_queryset()
 
+    def get_hot_problems(self):
+        return hot_problems(timedelta(days=1), settings.DMOJ_PROBLEM_HOT_PROBLEM_COUNT)
+
     def get_context_data(self, **kwargs):
         context = super(ProblemList, self).get_context_data(**kwargs)
         context['hide_solved'] = 0 if self.in_contest else int(self.hide_solved)
@@ -446,16 +449,16 @@ class ProblemList(QueryStringSortMixin, TitleMixin, SolvedProblemMixin, ListView
         context['completed_problem_ids'] = self.get_completed_problems()
         context['attempted_problems'] = self.get_attempted_problems()
 
-        context.update(self.get_sort_paginate_context())
         if not self.in_contest:
-            context.update(self.get_sort_context())
-            context['hot_problems'] = hot_problems(timedelta(days=1), settings.DMOJ_PROBLEM_HOT_PROBLEM_COUNT)
+            context['hot_problems'] = self.get_hot_problems()
             context['point_start'], context['point_end'], context['point_values'] = self.get_noui_slider_points()
+            context.update(self.get_sort_context())
         else:
             context['hot_problems'] = None
             context['point_start'], context['point_end'], context['point_values'] = 0, 0, {}
             context['hide_contest_scoreboard'] = self.contest.scoreboard_visibility in \
                 (self.contest.SCOREBOARD_AFTER_CONTEST, self.contest.SCOREBOARD_AFTER_PARTICIPATION)
+        context.update(self.get_sort_paginate_context())
         return context
 
     def get_noui_slider_points(self):

@@ -36,4 +36,10 @@
     </script>
 {% endblock %}
 
+{% block title_row %}
+    {% set tab = 'users' %}
+    {% include "organization/tabs.html" %}
+{% endblock %}
+{% block title_ruler %}{% endblock %}
+
 {% block users_table %}{% include "organization/users-table.html" %}{% endblock %}
