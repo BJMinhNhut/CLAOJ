@@ -818,10 +818,15 @@ class ContestTagDetail(TitleMixin, ContestTagDetailAjax):
 
 
 class CreateContest(PermissionRequiredMixin, TitleMixin, CreateView):
-    template_name = 'contest/edit.html'
+    template_name = 'contest/create.html'
     model = Contest
     form_class = ContestForm
     permission_required = 'judge.add_contest'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     def get_title(self):
         return _('Create new contest')
@@ -854,7 +859,7 @@ class CreateContest(PermissionRequiredMixin, TitleMixin, CreateView):
 
 
 class EditContest(ContestMixin, TitleMixin, UpdateView):
-    template_name = 'contest/create.html'
+    template_name = 'contest/edit.html'
     model = Contest
     form_class = ContestForm
 
@@ -863,6 +868,17 @@ class EditContest(ContestMixin, TitleMixin, UpdateView):
         if not contest.is_editable_by(self.request.user):
             raise PermissionDenied()
         return contest
+
+    def get_form_kwargs(self):
+        kwargs = super(EditContest, self).get_form_kwargs()
+        # Due to some limitation with query set in select2
+        # We only support this if the contest is private for only
+        # 1 organization
+        if self.object.organizations.count() == 1:
+            kwargs['org_pk'] = self.object.organizations.values_list('pk', flat=True)[0]
+
+        kwargs['user'] = self.request.user
+        return kwargs
 
     def get_title(self):
         return _('Editing contest {0}').format(self.object.name)

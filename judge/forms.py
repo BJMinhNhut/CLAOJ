@@ -15,7 +15,7 @@ from django.forms import BooleanField, CharField, ChoiceField, DateInput, Form, 
     MultipleChoiceField, TextInput, inlineformset_factory
 from django.forms.widgets import DateTimeInput
 from django.template.defaultfilters import filesizeformat
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from django_ace import AceWidget
@@ -165,8 +165,13 @@ class ProblemEditForm(ModelForm):
         return content
 
     def __init__(self, *args, **kwargs):
+        self.org_pk = org_pk = kwargs.pop('org_pk', None)
         self.user = kwargs.pop('user', None)
         super(ProblemEditForm, self).__init__(*args, **kwargs)
+
+        # Only allow to public/private problem in organization
+        if org_pk is None:
+            self.fields.pop('is_public')
 
         self.fields['testers'].help_text = \
             str(self.fields['testers'].help_text) + ' ' + \
@@ -177,6 +182,13 @@ class ProblemEditForm(ModelForm):
 
     def clean_code(self):
         code = self.cleaned_data['code']
+        if self.org_pk is None:
+            return code
+        org = Organization.objects.get(pk=self.org_pk)
+        prefix = ''.join(x for x in org.slug.lower() if x.isalpha()) + '_'
+        if not code.startswith(prefix):
+            raise forms.ValidationError(_('Problem id code must starts with `%s`') % (prefix, ),
+                                        'problem_id_invalid_prefix')
         return code
 
     class Meta:
@@ -469,11 +481,53 @@ class ProposeContestProblemFormSet(
             form=ProposeContestProblemForm,
             can_delete=True,
         )):
-    pass
+
+    def clean(self) -> None:
+        """Checks that no Contest problems have the same order."""
+        super(ProposeContestProblemFormSet, self).clean()
+        if any(self.errors):
+            # Don't bother validating the formset unless each form is valid on its own
+            return
+        orders = []
+        for form in self.forms:
+            if self.can_delete and self._should_delete_form(form):
+                continue
+            order = form.cleaned_data.get('order')
+            if order and order in orders:
+                raise ValidationError(_("Problems must have distinct order."))
+            orders.append(order)
 
 
 class ContestForm(ModelForm):
     required_css_class = 'required'
+
+    def __init__(self, *args, **kwargs):
+        self.org_pk = org_pk = kwargs.pop('org_pk', None)
+        self.user = kwargs.pop('user', None)
+        super(ContestForm, self).__init__(*args, **kwargs)
+
+        # cannot use fields[].widget = ...
+        # because it will remove the old values
+        # just update the data url is fine
+        if org_pk:
+            self.fields['private_contestants'].widget.data_view = None
+            self.fields['private_contestants'].widget.data_url = reverse('organization_profile_select2',
+                                                                         args=(org_pk, ))
+
+        self.fields['private_contestants'].help_text = \
+            str(self.fields['private_contestants'].help_text) + ' ' + \
+            str(_('You can paste a list of usernames into this box.'))
+
+    def clean_key(self):
+        key = self.cleaned_data['key']
+        if self.org_pk is None:
+            return key
+        org = Organization.objects.get(pk=self.org_pk)
+        prefix = ''.join(x for x in org.slug.lower() if x.isalpha()) + '_'
+        if not key.startswith(prefix):
+            raise forms.ValidationError(_('Contest id must starts with `%s`') % (prefix, ),
+                                        'contest_id_invalid_prefix')
+        return key
 
     class Meta:
         model = Contest
@@ -498,8 +552,4 @@ class ContestForm(ModelForm):
                 data_view='profile_select2',
                 attrs={'style': 'width: 100%'},
             ),
-        }
-
-        help_texts = {
-            'og_image': _('This image will appear in link sharing embeds. For example: Facebook, etc'),
         }
