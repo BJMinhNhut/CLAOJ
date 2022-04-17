@@ -13,7 +13,7 @@
 	{% if user.user.first_name %}
 		<b style="font-size: 17px">{{ user.user.first_name }}</b>  <br>
 	{% endif %}
-        {% with orgs=user.organizations.all() %}
+        {% with orgs=user.organizations.filter(is_unlisted=False) %}
             {% if orgs %}
                 <b>{{ _('From') }}</b>
                     {% for org in orgs -%}

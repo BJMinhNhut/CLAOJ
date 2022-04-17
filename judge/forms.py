@@ -321,7 +321,7 @@ class ProblemSubmitForm(ModelForm):
 class EditOrganizationForm(ModelForm):
     class Meta:
         model = Organization
-        fields = ['name', 'is_open', 'about', 'logo_override_image', 'admins']
+        fields = ['name', 'is_open', 'is_unlisted', 'about', 'logo_override_image', 'admins']
         widgets = {'admins': Select2MultipleWidget(attrs={'style': 'width: 100%'})}
         if HeavyPreviewPageDownWidget is not None:
             widgets['about'] = HeavyPreviewPageDownWidget(preview=reverse_lazy('organization_preview'))
