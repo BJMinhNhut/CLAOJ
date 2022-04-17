@@ -23,7 +23,7 @@ from django.utils.html import escape, format_html
 from django.utils.safestring import mark_safe
 from django.utils.timezone import make_aware
 from django.utils.translation import gettext as _, gettext_lazy
-from django.views.generic import FormView, ListView, TemplateView
+from django.views.generic import ListView, TemplateView
 from django.views.generic.detail import BaseDetailView, DetailView, SingleObjectMixin, View
 from django.views.generic.edit import CreateView, UpdateView
 from reversion import revisions
