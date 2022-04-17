@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
-from django.db.models.signals import post_delete, post_save, pre_save
+from django.db.models.signals import m2m_changed, post_delete, post_save, pre_save
 from django.dispatch import receiver
 
 from .caching import finished_submission
@@ -51,9 +51,7 @@ def profile_update(sender, instance, **kwargs):
         return
 
     cache.delete_many([make_template_fragment_key('user_about', (instance.id, engine))
-                       for engine in EFFECTIVE_MATH_ENGINES] +
-                      [make_template_fragment_key('org_member_count', (org_id,))
-                       for org_id in instance.organizations.values_list('id', flat=True)])
+                       for engine in EFFECTIVE_MATH_ENGINES])
 
 
 @receiver(post_delete, sender=WebAuthnCredential)
@@ -162,3 +160,15 @@ def misc_config_delete(sender, instance, **kwargs):
 @receiver(post_save, sender=ContestSubmission)
 def contest_submission_update(sender, instance, **kwargs):
     Submission.objects.filter(id=instance.submission_id).update(contest_object_id=instance.participation.contest_id)
+
+
+@receiver(m2m_changed, sender=Profile.organizations.through)
+def profile_organization_update(sender, instance, action, **kwargs):
+    orgs_to_be_updated = []
+    if action == 'pre_clear':
+        orgs_to_be_updated = instance.organizations.get_queryset()
+    if action == 'post_remove' or action == 'post_add':
+        pks = kwargs.get('pk_set') or set()
+        orgs_to_be_updated = Organization.objects.filter(pk__in=pks)
+    for org in orgs_to_be_updated:
+        org.on_user_changes()

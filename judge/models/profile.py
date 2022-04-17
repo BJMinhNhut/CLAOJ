@@ -58,6 +58,7 @@ class Organization(models.Model):
                                            blank=True,
                                            help_text=_('This image will replace the default site logo for users '
                                                        'viewing the organization.'))
+    member_count = models.IntegerField(default=0)
 
     @cached_property
     def admins_list(self):
@@ -65,6 +66,13 @@ class Organization(models.Model):
 
     def is_admin(self, user):
         return user in self.admins_list
+
+    def on_user_changes(self):
+        self.calculate_points()
+        member_count = self.members.count()
+        if self.member_count != member_count:
+            self.member_count = member_count
+            self.save(update_fields=['member_count'])
 
     def __contains__(self, item):
         if isinstance(item, int):
