@@ -23,15 +23,16 @@
             color: #555;
         }
 
-        table.bottom td.left {
-            text-align: left;
-            border-right: none !important;
-            border-top: none !important;
+        table.problem-list tr td{
+            border-bottom: 1px solid #e0e0e0;
+            padding: 7px 0;
         }
-
-        table.bottom td.right {
-            text-align: right;
-            border-top: none !important;
+        table.problem-list tr:last-child td {
+            border: none;
+        }
+        table.problem-list {
+            border-spacing: 0;
+            width: 100%;
         }
     </style>
 {% endblock %}
@@ -74,22 +75,22 @@
         <div class="blog-sidebar">
             <div class="blog-sidebox sidebox">
                 <h3>{{ _('Controls') }} <i class="fa fa-question-circle"></i></h3>
-                <div class="sidebox-content" style="padding: 1em;">
+                <div class="sidebox-content" style="padding: 1em 2em;">
                     {% if request.user.is_authenticated %}
                         {% if is_member %}
-                            <form method="post" action="{{ url('leave_organization', organization.id, organization.slug) }}">
+                            <form method="post" action="{{ url('leave_organization', organization.id, organization.slug) }}" style="margin-bottom: 0.7em;">
                                 {% csrf_token %}
                                 <input type="submit" class="unselectable button full leave-organization" value="{{ _('Leave organization') }}">
                             </form>
 
                             {% elif organization.is_open %}
-                            <form method="post" action="{{ url('join_organization', organization.id, organization.slug) }}">
+                            <form method="post" action="{{ url('join_organization', organization.id, organization.slug) }}" style="margin-bottom: 0.7em;">
                                 {% csrf_token %}
                                 <input type="submit" class="unselectable button full" value="{{ _('Join organization') }}">
                             </form>
                         {% else %}
                             <a href="{{ url('request_organization', organization.id, organization.slug) }}"
-                            class="unselectable button full">{{ _('Request membership') }}</a>
+                            class="unselectable button full" style="margin-bottom: 0.7em;">{{ _('Request membership') }}</a>
                         {% endif %}
                     {% endif %}
 
@@ -116,8 +117,8 @@
                 <div class="blog-sidebox sidebox">
                     <h3>{{ _('New contests') }} <i class="fa fa-trophy"></i></h3>
                     <div class="sidebox-content">
-                        <ul class="problem-list">
-                            {% for contest in new_contests %}
+                        {% for contest in new_contests %}
+                            <div class="contest">
                                 <div class="contest-list-title">
                                     <a href="{{ url('contest_view', contest.key) }}">{{ contest.name }}</a>
                                 </div>
@@ -135,8 +136,8 @@
                                         {%- trans duration=contest.contest_window_length|timedelta('localized-no-seconds') -%}{{duration}} long{%- endtrans -%}
                                     {% endif %}
                                 </div>
-                            {% endfor %}
-                        </ul>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             {% endif %}
@@ -144,15 +145,15 @@
                 <div class="sidebox">
                     <h3>{{ _('New problems') }} <i class="fa fa-puzzle-piece"></i>
                     </h3>
-                    <div class="sidebox-content">
-                        <ul class="problem-list">
+                    <div class="sidebox-content" style="padding-bottom: 1em;">
+                        <table class="problem-list">
                             {% for problem in new_problems %}
-                                <li>
+                                <tr><td>
                                     <a href="{{ url('problem_detail', problem.code) }}">{{ problem.name }}</a>
                                     {{ problem.date|date(_("M j, Y, G:i")) }}
-                                </li>
+                                </td></tr>
                             {% endfor %}
-                        </ul>
+                        </table>
                     </div>
                 </div>
             {% endif %}

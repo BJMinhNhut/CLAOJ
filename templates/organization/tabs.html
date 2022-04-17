@@ -1,3 +1,22 @@
+{% block media %}
+    <style>
+        div.tabs.organization {
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+            background-color: #f7f8f9;
+            margin-top: 0.5em;
+        }
+
+        i.tab-icon.fa.fa-plus {
+            color: #009688;
+        } 
+
+        div.tabs.organization > ul > li {
+            margin-top: 0 !important;
+        }
+    </style>
+{% endblock %}
+
 {% macro make_tab(name, fa, url, text) %}
     <li class="tab{% if tab == name %} active{% endif %}">
         {%- if url %}<a href="{{ url }}">{% else %}<span>{% endif -%}
@@ -8,8 +27,7 @@
 
 <div class="page-title">
     <h2>{{ content_title or title }}</h2>
-    <br>
-    <div class="tabs">
+    <div class="tabs organization">
         <ul>
             {{ make_tab('home', 'fa-info-circle', url('organization_home', organization.pk, organization.slug), _('Home')) }}
             {{ make_tab('users', 'fa-university', organization.get_users_url(), _('Users')) }}
@@ -27,6 +45,7 @@
                     {{ make_tab('create', 'fa-plus', url('contest_create_organization', organization.id, organization.slug), _('Create new contest')) }}
                 {% endif %}
             {% endif %}
+            <li class="tabs"><a></a></li>
         </ul>
     </div>
 </div>

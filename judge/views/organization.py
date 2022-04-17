@@ -98,7 +98,7 @@ class OrganizationHome(OrganizationDetailView):
             context['new_contests'] = Contest.objects.filter(
                 is_visible=True, is_organization_private=True,
                 organizations=self.object) \
-                .order_by('-end_time', '-id')[:settings.DMOJ_BLOG_NEW_PROBLEM_COUNT]
+                .order_by('-end_time', '-id')[:settings.CLAOJ_ORG_NEW_CONTEST_COUNT]
 
         return context
 
