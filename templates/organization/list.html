@@ -22,6 +22,7 @@
         <thead>
             <tr>
                 <th style="width:70%">{{ _('Name') }}</th>
+                <th style="width:15%">{{ _('Points') }}</th>
                 <th>{{ _('Members') }}</th>
             </tr>
         </thead>
@@ -29,6 +30,7 @@
             {% for org in queryset %}
             <tr>
                 <td><a href="{{ org.get_absolute_url() }}">{{ org.name }}</a></td>
+                <td><a href="{{ org.get_users_url() }}">{{ org.performance_points|floatformat(2) }}</a></td>
                 <td><a href="{{ org.get_users_url() }}">{{ org.member_count }}</a></td>
             </tr>
         {% endfor %}
