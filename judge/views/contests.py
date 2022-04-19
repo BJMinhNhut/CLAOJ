@@ -60,8 +60,24 @@ def _find_contest(request, key, private_check=True):
 
 
 class ContestListMixin(object):
+    hide_private_contests = False
+
     def get_queryset(self):
+        if 'hide_private_contests' in self.request.GET:
+            self.hide_private_contests = self.request.session['hide_private_contests'] \
+                                       = self.request.GET.get('hide_private_contests').lower() == 'true'
+        else:
+            self.hide_private_contests = self.request.session.get('hide_private_contests', False)
+
+        if self.hide_private_contests:
+            return Contest.get_public_contests()
+
         return Contest.get_visible_contests(self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['hide_private_contests'] = self.hide_private_contests
+        return context
 
 
 class ContestList(QueryStringSortMixin, DiggPaginatorMixin, TitleMixin, ContestListMixin, ListView):
@@ -82,7 +98,13 @@ class ContestList(QueryStringSortMixin, DiggPaginatorMixin, TitleMixin, ContestL
         return super().get_queryset().prefetch_related('tags', 'organizations', 'authors', 'curators', 'testers')
 
     def get_queryset(self):
-        return self._get_queryset().order_by(self.order, 'key').filter(end_time__lt=self._now)
+        self.search_query = None
+        query_set = self._get_queryset().order_by(self.order, 'key').filter(end_time__lt=self._now)
+        if 'search' in self.request.GET:
+            self.search_query = search_query = ' '.join(self.request.GET.getlist('search')).strip()
+            if search_query:
+                query_set = query_set.filter(Q(key__icontains=search_query) | Q(name__icontains=search_query))
+        return query_set
 
     def get_context_data(self, **kwargs):
         context = super(ContestList, self).get_context_data(**kwargs)
@@ -112,6 +134,7 @@ class ContestList(QueryStringSortMixin, DiggPaginatorMixin, TitleMixin, ContestL
         context['now'] = self._now
         context['first_page_href'] = '.'
         context['page_suffix'] = '#past-contests'
+        context['search_query'] = self.search_query
         context.update(self.get_sort_context())
         context.update(self.get_sort_paginate_context())
         return context

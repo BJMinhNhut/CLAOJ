@@ -14,6 +14,10 @@
         .content-description ul {
             padding: 0 !important;
         }
+
+        .top-pagination-bar {
+            justify-content: space-between;
+        }
     </style>
 {% endblock %}
 
@@ -30,6 +34,16 @@
             $('.join-warning').click(function () {
                 return confirm('{{ _('Are you sure you want to join?') }}\n' +
                     '{{ _('Joining a contest for the first time starts your timer, after which it becomes unstoppable.') }}');
+            });
+
+            {% if hide_private_contests %}
+                $('#hide-private-contests-checkbox').prop('checked', true);
+            {% endif %}
+
+            $('#hide-private-contests-checkbox').click(function () {
+                const parser = new URL(window.location.href);
+                parser.searchParams.set('hide_private_contests', '{{ 'false' if hide_private_contests else 'true' }}');
+                window.location.href = parser.href;
             });
 
             // var tooltip_classes = 'tooltipped tooltipped-e';
@@ -257,11 +271,23 @@
         {% endif %}
         <br>
 
+        <h4 id="past-contests">{{ _('Past Contests') }}</h4>
+        {% if page_obj or search_query %}  
+            <div class="top-pagination-bar">
+                {% include "list-pages.html" %}
+                <div style="display: flex; align-items: center;">
+                    <div style="padding-right: 0.5em;">
+                        <input id="hide-private-contests-checkbox" type="checkbox">
+                        <label for="hide-private-contests-checkbox">{{ _('Hide private contests') }}</label>
+                    </div>
+                    <form id="search-form" name="form" action="" method="get">
+                        <input id="search" type="text" name="search" value="{{ search_query or '' }}"
+                            placeholder="{{ _('Search contest...') }}">
+                    </form>
+                </div>
+            </div>
+        {% endif %}
         {% if past_contests %}
-            <h4 id="past-contests">{{ _('Past Contests') }}</h4>
-            {% if page_obj and page_obj.has_other_pages() %}
-                <div class="top-pagination-bar">{% include "list-pages.html" %}</div>
-            {% endif %}
             <table class="contest-list table striped">
                 <thead>
                 <tr>
@@ -302,6 +328,9 @@
             {% if page_obj and page_obj.has_other_pages() %}
                 <div class="bottom-pagination-bar">{% include "list-pages.html" %}</div>
             {% endif %}
+        {% else %}
+            <i>{{ _('There are no past contests.') }}</i>
+            <br>
         {% endif %}
     </div>
 {% endblock %}
