@@ -391,10 +391,6 @@ class OrganizationHome(TitleMixin, CustomOrganizationMixin, PostListBase):
     # However, they cannot see the org blog
     allow_all_users = True
 
-    def get_content_title(self):
-        return format_html(_(u'<a href="{1}">{0}</a> Blog Post'), self.organization.name,
-                           reverse('organization_home', args=[self.organization.pk, self.organization.slug]))
-
     def get_queryset(self):
         queryset = BlogPost.objects.filter(organization=self.organization,
                                            publish_on__lte=timezone.now())
