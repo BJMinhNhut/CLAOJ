@@ -18,7 +18,7 @@ from reversion import revisions
 from judge.forms import EditOrganizationForm
 from judge.models import BlogPost, Comment, Contest, Language, Organization, OrganizationRequest, Problem, Profile
 from judge.utils.ranker import ranker
-from judge.utils.views import TitleMixin, generic_message
+from judge.utils.views import QueryStringSortMixin, TitleMixin, generic_message
 from judge.views.blog import BlogPostCreate, PostListBase
 from judge.views.contests import ContestList, CreateContest
 from judge.views.problem import ProblemCreate, ProblemList
@@ -79,18 +79,22 @@ class OrganizationList(TitleMixin, ListView):
         return Organization.objects.filter(is_unlisted=False)
 
 
-class OrganizationUsers(OrganizationDetailView):
+class OrganizationUsers(QueryStringSortMixin, OrganizationDetailView):
     template_name = 'organization/users.html'
+    all_sorts = frozenset(('points', 'problem_count', 'rating', 'performance_points'))
+    default_desc = all_sorts
+    default_sort = '-performance_points'
 
     def get_context_data(self, **kwargs):
         context = super(OrganizationUsers, self).get_context_data(**kwargs)
         context['title'] = self.object.name
         context['users'] = \
-            ranker(self.object.members.filter(is_unlisted=False).order_by('-performance_points', '-problem_count')
+            ranker(self.object.members.filter(is_unlisted=False).order_by(self.order)
                    .select_related('user').defer('about', 'user_script', 'notes'))
         context['partial'] = True
         context['is_admin'] = self.can_edit_organization()
         context['kick_url'] = reverse('organization_user_kick', args=[self.object.id, self.object.slug])
+        context.update(self.get_sort_context())
         return context
 
 
@@ -531,6 +535,12 @@ class SubmissionListOrganization(CustomOrganizationMixin, AllSubmissions):
 
 class ProblemCreateOrganization(CustomAdminOrganizationMixin, ProblemCreate):
     permission_required = 'judge.create_organization_problem'
+
+    def get_initial(self):
+        initial = super(ProblemCreateOrganization, self).get_initial()
+        initial = initial.copy()
+        initial['code'] = ''.join(x for x in self.organization.slug.lower() if x.isalpha()) + '_'
+        return initial
 
     def form_valid(self, form):
         self.object = problem = form.save()
