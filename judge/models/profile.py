@@ -70,7 +70,6 @@ class Organization(models.Model):
         return user in self.admins_list
 
     def on_user_changes(self):
-        self.calculate_points()
         member_count = self.members.count()
         if self.member_count != member_count:
             self.member_count = member_count
@@ -119,10 +118,7 @@ class Profile(models.Model):
     organizations = SortedManyToManyField(Organization, verbose_name=_('organization'), blank=True,
                                           related_name='members', related_query_name='member')
     display_rank = models.CharField(max_length=10, default='user', verbose_name=_('display rank'),
-                                    choices=(
-                                        ('user', _('Normal User')),
-                                        ('setter', _('Problem Setter')),
-                                        ('admin', _('Admin'))))
+                                    choices=settings.CLAOJ_DISPLAY_RANKS)
     mute = models.BooleanField(verbose_name=_('comment mute'), help_text=_('Some users are at their best when silent.'),
                                default=False)
     is_unlisted = models.BooleanField(verbose_name=_('unlisted user'), help_text=_('User will not be ranked.'),
