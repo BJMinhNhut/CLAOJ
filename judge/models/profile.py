@@ -76,6 +76,8 @@ class Organization(models.Model):
             self.save(update_fields=['member_count'])
 
     def __contains__(self, item):
+        if item is None:
+            return False
         if isinstance(item, int):
             return self.members.filter(id=item).exists()
         elif isinstance(item, Profile):
@@ -307,9 +309,9 @@ class OrganizationRequest(models.Model):
                                      on_delete=models.CASCADE)
     time = models.DateTimeField(verbose_name=_('request time'), auto_now_add=True)
     state = models.CharField(max_length=1, verbose_name=_('state'), choices=(
-        ('P', 'Pending'),
-        ('A', 'Approved'),
-        ('R', 'Rejected'),
+        ('P', _('Pending')),
+        ('A', _('Approved')),
+        ('R', _('Rejected')),
     ))
     reason = models.TextField(verbose_name=_('reason'))
 

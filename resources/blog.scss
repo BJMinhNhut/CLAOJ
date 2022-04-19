@@ -7,32 +7,33 @@
     margin-right: 0;
     
     .post {
-        padding-top: 1em;
-	padding-bottom: 1em;
-    	margin-bottom: 2em;
+        padding-top: 0.75em;
+        padding-bottom: 1em;
+        margin-bottom: 2em;
+        margin: 0.7em 1em 2em 1em;
         
-	.title {
-            font-weight: 600;
-            font-size: 1.7em;
-	    padding: 0.3em 1em 0;
+        .title {
+                font-weight: 600;
+                font-size: 1.7em;
+            padding: 0.3em 1em 0;
 
-            a {
-                color: #009688;
-    		font-weight: 700;
+                a {
+                    color: #009688;
+                font-weight: 700;
 
-                &:hover {
-                    color: #00897b;
+                    &:hover {
+                        color: #00897b;
+                    }
                 }
             }
+            .sidebox-content {
+                padding: 5px 2.5em 5px;
+            }
         }
-        .sidebox-content {
-		padding: 5px 2.5em 5px;
-	}
 
         &:last-child {
             border-bottom: none;
         }
-    }
 }
 
 .blog-sidebar {

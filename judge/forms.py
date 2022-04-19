@@ -19,8 +19,8 @@ from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from django_ace import AceWidget
-from judge.models import Contest, ContestProblem, Language, Organization, Problem, Profile, Solution, Submission, \
-    WebAuthnCredential
+from judge.models import BlogPost, Contest, ContestProblem, Language, Organization, Problem, Profile, Solution, \
+    Submission, WebAuthnCredential
 from judge.utils.subscription import newsletter_id
 from judge.widgets import HeavyPreviewPageDownWidget, HeavySelect2MultipleWidget, HeavySelect2Widget, MartorWidget, \
     Select2MultipleWidget, Select2Widget
@@ -169,9 +169,12 @@ class ProblemEditForm(ModelForm):
         self.user = kwargs.pop('user', None)
         super(ProblemEditForm, self).__init__(*args, **kwargs)
 
-        # Only allow to public/private problem in organization
-        if org_pk is None:
-            self.fields.pop('is_public')
+        if org_pk:
+            self.fields['testers'].label = _('Private users')
+            self.fields['testers'].help_text = _('If private, only these users may see the problem.')
+            self.fields['testers'].widget.data_view = None
+            self.fields['testers'].widget.data_url = reverse('organization_profile_select2',
+                                                             args=(org_pk, ))
 
         self.fields['testers'].help_text = \
             str(self.fields['testers'].help_text) + ' ' + \
@@ -193,14 +196,11 @@ class ProblemEditForm(ModelForm):
 
     class Meta:
         model = Problem
-        fields = ['code', 'name', 'authors', 'testers', 'is_public', 'is_organization_private',
-                  'organizations', 'time_limit', 'memory_limit', 'points', 'partial',
-                  'testcase_visibility_mode', 'types', 'group', 'statement_file', 'description']
+        fields = ['code', 'name', 'authors', 'testers', 'is_public', 'time_limit', 'memory_limit', 'points',
+                  'partial', 'testcase_visibility_mode', 'types', 'group', 'statement_file', 'description']
         widgets = {
             'name': TextInput(attrs={'style': 'width: 100%'}),
             'authors': HeavySelect2MultipleWidget(data_view='profile_select2', attrs={'style': 'width: 100%'}),
-            'organizations': HeavySelect2MultipleWidget(data_view='organization_select2',
-                                                        attrs={'style': 'width: 100%'}),
             'testcase_visibility_mode': Select2Widget(attrs={'style': 'min-width: 250px'}),
             'date': DateInput(attrs={'type': 'date'}),
             'types': Select2MultipleWidget(attrs={'style': 'width: 100%'}),
@@ -217,9 +217,6 @@ class ProblemEditForm(ModelForm):
                 'If public, all members in organization can view it. <strong>Set it as private '
                 'if you want to use it in a contest, otherwise, users can see the problem '
                 'even if they do not join the contest!</strong>'),
-            'is_organization_private': _(
-                'If choose, only users in the organizations below can view it. <strong>You also need to'
-                ' tick is public box to make the problem viewable.</strong>'),
             'code': _('Problem code, e.g: voi19_post'),
             'name': _('The full name of the problem, '
                       'as shown in the problem list. For example: VOI19 - A cong B.'),
@@ -496,6 +493,21 @@ class ProposeContestProblemFormSet(
             if order and order in orders:
                 raise ValidationError(_("Problems must have distinct order."))
             orders.append(order)
+
+
+class BlogPostForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        kwargs.pop('org_pk', None)
+        super(BlogPostForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = BlogPost
+        fields = ['title', 'publish_on', 'visible', 'content']
+        widgets = {
+            'content': MartorWidget(attrs={'data-markdownfy-url': reverse_lazy('blog_preview')}),
+            'summary': MartorWidget(attrs={'data-markdownfy-url': reverse_lazy('blog_preview')}),
+            'publish_on': DateTimeInput(format='%Y-%m-%d %H:%M:%S', attrs={'class': 'datetimefield'}),
+        }
 
 
 class ContestForm(ModelForm):

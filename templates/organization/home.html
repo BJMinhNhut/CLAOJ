@@ -62,15 +62,28 @@
 {% block body %}
     {% block before_posts %}{% endblock %}
     <div id="blog-container">
-        <div class="blog-content sidebox">
-            <h3>{{ _('About') }} {{ organization.name }} <i class="fa fa-info-circle"></i></h3>
-            <div class="sidebox-content">
-                <div style="margin: 1.4em;">
-                    {% cache 3600 'organization_html' organization.id MATH_ENGINE %}
-                        {{ organization.about|markdown('organization-about', MATH_ENGINE)|reference|str|safe }}
-                    {% endcache %}
+        <div class="blog-content">
+            <div class="sidebox" style="margin-bottom:2em;">
+                <h3>{{ _('About') }} {{ organization.name }} <i class="fa fa-info-circle"></i></h3>
+                <div class="sidebox-content">
+                    <div style="margin: 1.4em;">
+                        {% cache 3600 'organization_html' organization.id MATH_ENGINE %}
+                            {{ organization.about|markdown('organization-about', MATH_ENGINE)|reference|str|safe }}
+                        {% endcache %}
+                    </div>
                 </div>
             </div>
+            {% if posts %}
+                <div class="sidebox">
+                    <h3>{{ _('News') }} <i class="fa fa-terminal"></i></h3>
+                    {% for post in posts %}
+                        {% include "blog/blog-post.html" %}
+                    {% endfor %}
+                </div>
+                {% if page_obj.has_other_pages() %}
+                    <div class="bottom-pagination-bar">{% include "list-pages.html" %}</div>
+                {% endif %}
+            {% endif %}
         </div>
         <div class="blog-sidebar">
             <div class="blog-sidebox sidebox">
@@ -97,7 +110,15 @@
                     {% if can_edit %}
                         {% if not organization.is_open %}
                             <div>
-                                <a href="{{ url('organization_requests_pending', organization.id, organization.slug) }}">{{ _('View requests') }}</a>
+                                <a href="{{ url('organization_requests_pending', organization.id, organization.slug) }}">
+                                    {{ _('View requests') }}
+                                    {% if num_requests %}<span class="badge">{{ num_requests }}</span>{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if perms.judge.edit_organization_post %}
+                            <div>
+                                <a href="{{ url('blog_post_create_organization', organization.id, organization.slug) }}">{{ _('Create blog post') }}</a>
                             </div>
                         {% endif %}
                         <div>
