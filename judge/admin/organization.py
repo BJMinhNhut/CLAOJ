@@ -21,7 +21,7 @@ class OrganizationAdmin(VersionAdmin):
     readonly_fields = ('creation_date',)
     fields = ('name', 'slug', 'short_name', 'is_open', 'is_unlisted', 'about', 'logo_override_image', 'slots',
               'creation_date', 'admins')
-    list_display = ('name', 'short_name', 'is_open', 'slots', 'show_public')
+    list_display = ('name', 'short_name', 'is_open', 'is_unlisted', 'slots', 'show_public')
     prepopulated_fields = {'slug': ('name',)}
     actions = ('recalculate_points',)
     actions_on_top = True
@@ -52,7 +52,7 @@ class OrganizationAdmin(VersionAdmin):
             return False
         if request.user.has_perm('judge.edit_all_organization') or obj is None:
             return True
-        return obj.admins.filter(id=request.profile.id).exists()
+        return obj.is_admin(request.profile)
 
     def recalculate_points(self, request, queryset):
         count = 0

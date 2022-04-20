@@ -67,6 +67,10 @@ CLAOJ_DISPLAY_RANKS = (
     ('admin', _('Admin')),
 )
 
+# Maximum number of organization a single user can be admin, to be able to
+# create new organization, without the `spam_organization` permission
+CLAOJ_ORGANIZATION_ADMIN_LIMIT = 3
+
 DMOJ_CAMO_URL = None
 DMOJ_CAMO_KEY = None
 DMOJ_CAMO_HTTPS = False

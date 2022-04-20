@@ -153,16 +153,15 @@ class ProblemEditForm(ModelForm):
         label=_('Statement file'),
     )
 
-    def clean(self):
-        cleaned_data = super(ProblemEditForm, self).clean()
-        self.check_file()
-        return cleaned_data
-
-    def check_file(self):
+    def clean_statement_file(self):
         content = self.files.get('statement_file', None)
         if content is not None and content.size > settings.PDF_MAX_FILE_SIZE:
             raise forms.ValidationError(_("File size is too big! Maximum file size is %s") %
                                         filesizeformat(settings.PDF_MAX_FILE_SIZE))
+            if self.user and not self.user.has_perm('judge.upload_file_statement'):
+                raise forms.ValidationError(_("You don't have permission to upload file-type statement."),
+                                            'pdf_upload_permission_denined')
+
         return content
 
     def __init__(self, *args, **kwargs):
@@ -316,13 +315,13 @@ class ProblemSubmitForm(ModelForm):
         fields = ['language']
 
 
-class EditOrganizationForm(ModelForm):
+class OrganizationForm(ModelForm):
     class Meta:
         model = Organization
-        fields = ['name', 'is_open', 'is_unlisted', 'about', 'logo_override_image', 'admins']
+        fields = ['name', 'slug', 'is_open', 'about', 'logo_override_image']
         widgets = {'admins': Select2MultipleWidget(attrs={'style': 'width: 100%'})}
         if HeavyPreviewPageDownWidget is not None:
-            widgets['about'] = HeavyPreviewPageDownWidget(preview=reverse_lazy('organization_preview'))
+            widgets = {'about': HeavyPreviewPageDownWidget(preview=reverse_lazy('organization_preview'))}
 
 
 class CustomAuthenticationForm(AuthenticationForm):
