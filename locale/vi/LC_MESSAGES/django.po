@@ -5978,6 +5978,10 @@ msgid "Manage submissions"
 msgstr "Quản lí submissions"
 
 #: templates/problem/problem.html:204
+msgid "Problem ID:"
+msgstr "Mã bài:"
+
+#: templates/problem/problem.html:204
 msgid "Points:"
 msgstr "Điểm:"
 

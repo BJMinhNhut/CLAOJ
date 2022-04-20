@@ -858,6 +858,7 @@ class ProblemEdit(ProblemMixin, TitleMixin, UpdateView):
         if self.object.organizations.count() == 1:
             kwargs['org_pk'] = self.object.organizations.values_list('pk', flat=True)[0]
 
+        kwargs['user'] = self.request.user
         return kwargs
 
     def save_statement(self, form, problem):
