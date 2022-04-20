@@ -70,6 +70,12 @@ CLAOJ_DISPLAY_RANKS = (
 # Maximum number of organization a single user can be admin, to be able to
 # create new organization, without the `spam_organization` permission
 CLAOJ_ORGANIZATION_ADMIN_LIMIT = 3
+# Maximum timelimit (second) that a user can set for a problem
+# without the `high_problem_timelimit` permission
+CLAOJ_PROBLEM_TIMELIMIT_LIMIT = 5
+# Maximum contest duration (day) that a user can set for a contest
+# without the `long_contest_duration` permission
+CLAOJ_CONTEST_DURATION_LIMIT = 15
 
 DMOJ_CAMO_URL = None
 DMOJ_CAMO_KEY = None

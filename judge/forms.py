@@ -102,33 +102,13 @@ class ProfileForm(ModelForm):
 
 
 class ProposeProblemSolutionForm(ModelForm):
-    solution_file = forms.FileField(
-        required=False,
-        validators=[FileExtensionValidator(allowed_extensions=settings.PDF_SAFE_EXTS)],
-        help_text=_('Maximum file size is %s.') % filesizeformat(settings.PDF_MAX_FILE_SIZE),
-        widget=forms.FileInput(attrs={'accept': 'application/pdf'}),
-        label=_('Solution file'),
-    )
-
-    def clean(self):
-        self.check_file()
-        return self.cleaned_data
-
-    def check_file(self):
-        content = self.files.get('solution_file', None)
-        if content is not None and content.size > settings.PDF_MAX_FILE_SIZE:
-            raise forms.ValidationError(_("File size is too big! Maximum file size is %s") %
-                                        filesizeformat(settings.PDF_MAX_FILE_SIZE))
-        return content
-
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ProposeProblemSolutionForm, self).__init__(*args, **kwargs)
-        self.fields.pop('solution_file')
 
     class Meta:
         model = Solution
-        fields = ('is_public', 'publish_on', 'authors', 'solution_file', 'pdf_url', 'content')
+        fields = ('is_public', 'publish_on', 'authors', 'pdf_url', 'content')
         widgets = {
             'authors': HeavySelect2MultipleWidget(data_view='profile_select2', attrs={'style': 'width: 100%'}),
             'content': MartorWidget(attrs={'data-markdownfy-url': reverse_lazy('solution_preview')}),
@@ -163,6 +143,14 @@ class ProblemEditForm(ModelForm):
                                             'pdf_upload_permission_denined')
 
         return content
+
+    def clean_time_limit(self):
+        has_high_perm = self.user and self.user.has_perm('high_problem_timelimit')
+        if self.cleaned_data['time_limit'] > settings.CLAOJ_PROBLEM_TIMELIMIT_LIMIT and not has_high_perm:
+            raise forms.ValidationError(_('You cannot set time limit higher than %d seconds')
+                                        % settings.CLAOJ_PROBLEM_TIMELIMIT_LIMIT,
+                                        'problem_timelimit_too_long')
+        return self.cleaned_data['time_limit']
 
     def __init__(self, *args, **kwargs):
         self.org_pk = org_pk = kwargs.pop('org_pk', None)
@@ -530,6 +518,18 @@ class ContestForm(ModelForm):
             str(self.fields['private_contestants'].help_text) + ' ' + \
             str(_('You can paste a list of usernames into this box.'))
 
+    def clean(self):
+        cleaned_data = super().clean()
+        start_time = cleaned_data.get('start_time')
+        end_time = cleaned_data.get('end_time')
+
+        has_long_perm = self.user and self.user.has_perm('long_contest_duration')
+        if (end_time - start_time).days > settings.CLAOJ_CONTEST_DURATION_LIMIT and not has_long_perm:
+            raise forms.ValidationError(_('Contest duration cannot be longer than %d days')
+                                        % settings.CLAOJ_CONTEST_DURATION_LIMIT,
+                                        'contest_duration_too_long')
+        return cleaned_data
+
     def clean_key(self):
         key = self.cleaned_data['key']
         if self.org_pk is None:
@@ -565,7 +565,10 @@ class ContestForm(ModelForm):
                 attrs={'style': 'width: 100%'},
             ),
         }
-
+        help_texts = {
+            'end_time': _('Users are able to pratice contest problems even if the contest has ended, '
+                          "so don't set the contest time too high if you don't really need it."),
+        }
         error_messages = {
             'key': {
                 'invalid': _('Only accept alphanumeric characters (a-z, 0-9) and underscore (_)'),
