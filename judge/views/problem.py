@@ -3,7 +3,7 @@ import os
 import re
 import shutil
 import zipfile
-from datetime import datetime, timedelta
+from datetime import timedelta
 from operator import itemgetter
 from random import randrange
 
@@ -759,6 +759,7 @@ class ProblemClone(ProblemMixin, PermissionRequiredMixin, TitleMixin, SingleObje
         problem.ac_rate = 0
         problem.user_count = 0
         problem.code = form.cleaned_data['code']
+        problem.date = timezone.now()
         with revisions.create_revision(atomic=True):
             problem.save()
             problem.authors.add(self.request.profile)
@@ -799,16 +800,21 @@ class ProblemCreate(PermissionRequiredMixin, TitleMixin, CreateView):
         return not Problem.objects.filter(code=new_code).exists()
 
     def form_valid(self, form):
-        if not self.unique_code(form):
-            form.add_error('code', 'Another problem with this code already exists.')
-            return self.form_invalid(form)
+        with revisions.create_revision(atomic=True):
+            if not self.unique_code(form):
+                form.add_error('code', 'Another problem with this code already exists.')
+                return self.form_invalid(form)
 
-        self.object = problem = form.save()
-        problem.authors.add(self.request.user.profile)
-        problem.allowed_languages.set(Language.objects.all())
-        problem.date = datetime.now()
-        self.save_statement(form, problem)
-        problem.save()
+            self.object = problem = form.save()
+            problem.authors.add(self.request.user.profile)
+            problem.allowed_languages.set(Language.objects.all())
+            problem.date = timezone.now()
+            self.save_statement(form, problem)
+            problem.save()
+
+            revisions.set_comment(_('Created on site'))
+            revisions.set_user(self.request.user)
+
         return HttpResponseRedirect(self.get_success_url())
 
     def get_initial(self):
@@ -878,15 +884,21 @@ class ProblemEdit(ProblemMixin, TitleMixin, UpdateView):
         form_edit = self.get_solution_formset()
 
         if form.is_valid() and form_edit.is_valid():
-            if not self.unique_code(form):
-                form.add_error('code', 'Another problem with this code already exists.')
-                return self.form_invalid(form)
+            with revisions.create_revision(atomic=True):
+                if not self.unique_code(form):
+                    form.add_error('code', 'Another problem with this code already exists.')
+                    return self.form_invalid(form)
 
-            problem = form.save()
-            self.save_statement(form, problem)
-            problem.save()
-            form_edit.save()
+                problem = form.save()
+                self.save_statement(form, problem)
+                problem.save()
+                form_edit.save()
+
+                revisions.set_comment(_('Edited from site'))
+                revisions.set_user(self.request.user)
+
             return HttpResponseRedirect(reverse('problem_detail', args=[self.object.code]))
+
         return self.render_to_response(self.get_context_data(**kwargs))
 
     def dispatch(self, request, *args, **kwargs):

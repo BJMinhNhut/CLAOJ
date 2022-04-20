@@ -582,16 +582,19 @@ class ProblemCreateOrganization(CustomAdminOrganizationMixin, ProblemCreate):
         return kwargs
 
     def form_valid(self, form):
-        self.object = problem = form.save()
-        problem.authors.add(self.request.user.profile)
-        problem.allowed_languages.set(Language.objects.all())
-        problem.is_organization_private = True
-        problem.organizations.add(self.organization)
-        problem.date = timezone.now()
-        result = self.save_statement(form, problem)
-        if result is not None:
-            return result
-        problem.save()
+        with revisions.create_revision(atomic=True):
+            self.object = problem = form.save()
+            problem.authors.add(self.request.user.profile)
+            problem.allowed_languages.set(Language.objects.filter(include_in_problem=True))
+            problem.is_organization_private = True
+            problem.organizations.add(self.organization)
+            problem.date = timezone.now()
+            self.save_statement(form, problem)
+            problem.save()
+
+            revisions.set_comment(_('Created on site'))
+            revisions.set_user(self.request.user)
+
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -605,12 +608,16 @@ class BlogPostCreateOrganization(CustomAdminOrganizationMixin, PermissionRequire
         return initial
 
     def form_valid(self, form):
-        self.get_object = post = form.save(commit=False)
-        post.save()   # Presave to initialize the object id before using Many-to-Many relationship.
-        post.authors.add(self.request.user.profile)
-        post.slug = ''.join(x for x in self.organization.slug.lower() if x.isalpha())  # Initial post slug
-        post.organization = self.organization
-        post.save()
+        with revisions.create_revision(atomic=True):
+            self.get_object = post = form.save()
+            post.authors.add(self.request.user.profile)
+            post.slug = ''.join(x for x in self.organization.slug.lower() if x.isalpha())  # Initial post slug
+            post.organization = self.organization
+            post.save()
+
+            revisions.set_comment(_('Created on site'))
+            revisions.set_user(self.request.user)
+
         return HttpResponseRedirect(post.get_absolute_url())
 
 
