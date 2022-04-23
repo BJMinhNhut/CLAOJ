@@ -75,7 +75,7 @@ class BlogPost(models.Model):
     global_post = models.BooleanField(verbose_name=_('global post'), default=False,
                                       help_text=_('Display this blog post at the homepage.'))
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, verbose_name=_('organization'),
-                                     related_name=_('post_author_org'), blank=True, null=True, db_index=True)
+                                     related_name='post_author_org', blank=True, null=True, db_index=True)
 
     def __str__(self):
         return self.title
@@ -106,10 +106,10 @@ class BlogPost(models.Model):
         if user.has_perm('judge.edit_all_post'):
             return True
         if self.organization:
-            return self.organization.is_admin(user) and \
+            return self.organization.is_admin(user.profile) and \
                 user.has_perm('judge.edit_organization_post') and \
                 self.authors.filter(id=user.profile.id).exists()
-        return user.has_perm('judge.change_blogpost') and self.authors.filter(id=user.profile.id).exists()
+        return self.authors.filter(id=user.profile.id).exists()
 
     class Meta:
         permissions = (
