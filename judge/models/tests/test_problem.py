@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from django.test import SimpleTestCase, TestCase
+from django.test import SimpleTestCase, TestCase, override_settings
 from django.utils import timezone
 
 from judge.models import ContestParticipation, Language, LanguageLimit, Problem
@@ -16,19 +16,16 @@ class ProblemTestCase(CommonDataMixin, TestCase):
         _now = timezone.now()
 
         self.users.update({
-            'normal_in_contest': create_user(
-                username='normal_in_contest',
-            ),
-        })
-
-        self.users.update({
             'staff_problem_edit_only_all': create_user(
                 username='staff_problem_edit_only_all',
                 is_staff=True,
                 user_permissions=('edit_all_problem',),
             ),
+            'normal_in_contest': create_user(
+                username='normal_in_contest',
+            ),
         })
-
+        
         create_problem_type(name='type')
 
         self.basic_problem = create_problem(
@@ -39,39 +36,6 @@ class ProblemTestCase(CommonDataMixin, TestCase):
             testers=('staff_problem_edit_public',),
         )
 
-        limits = []
-        for lang in Language.objects.filter(common_name=Language.get_python3().common_name):
-            limits.append(
-                LanguageLimit(
-                    problem=self.basic_problem,
-                    language=lang,
-                    time_limit=100,
-                    memory_limit=131072,
-                ),
-            )
-        LanguageLimit.objects.bulk_create(limits)
-
-        self.organization_private_problem = create_problem(
-            code='organization_private',
-            time_limit=2,
-            is_public=True,
-            is_organization_private=True,
-            curators=('staff_problem_edit_own', 'staff_problem_edit_own_no_staff'),
-        )
-
-        self.problem_organization = create_organization(
-            name='problem organization',
-            admins=('normal', 'staff_problem_edit_public'),
-        )
-        self.organization_admin_private_problem = create_problem(
-            code='org_admin_private',
-            is_organization_private=True,
-            organizations=('problem organization',),
-        )
-        self.organization_admin_problem = create_problem(
-            code='organization_admin',
-            organizations=('problem organization',),
-        )
         self.testcase_allow_all = create_problem(
             code='allow_all',
             allowed_languages=Language.objects.values_list('key', flat=True),
@@ -112,6 +76,45 @@ class ProblemTestCase(CommonDataMixin, TestCase):
                 virtual=ContestParticipation.LIVE,
             )
             self.users[user].profile.save()
+
+        limits = []
+        for lang in Language.objects.filter(common_name=Language.get_python3().common_name):
+            limits.append(
+                LanguageLimit(
+                    problem=self.basic_problem,
+                    language=lang,
+                    time_limit=100,
+                    memory_limit=131072,
+                ),
+            )
+        LanguageLimit.objects.bulk_create(limits)
+
+        self.organization_private_problem = create_problem(
+            code='organization_private',
+            time_limit=2,
+            is_public=True,
+            is_organization_private=True,
+            curators=('staff_problem_edit_own', 'staff_problem_edit_own_no_staff'),
+        )
+
+        self.problem_organization = create_organization(
+            name='problem organization',
+            admins=('normal', 'staff_problem_edit_public'),
+        )
+        self.organization_admin_private_problem = create_problem(
+            code='org_admin_private',
+            is_organization_private=True,
+            organizations=('problem organization',),
+        )
+        self.organization_admin_problem = create_problem(
+            code='organization_admin',
+            organizations=('problem organization',),
+        )
+
+        self.suggesting_problem = create_problem(
+            code='suggesting',
+            suggester=self.users['suggester'].profile,
+        )
 
     def test_basic_problem(self):
         self.assertEqual(str(self.basic_problem), self.basic_problem.name)
@@ -316,8 +319,8 @@ class ProblemTestCase(CommonDataMixin, TestCase):
                 'is_editable_by': self.assertTrue,
             },
             'staff_problem_edit_public': {
-                'is_accessible_by': self.assertTrue,
-                'is_editable_by': self.assertTrue,
+                'is_accessible_by': self.assertFalse,
+                'is_editable_by': self.assertFalse,
             },
             'staff_problem_see_organization': {
                 'is_accessible_by': self.assertFalse,
@@ -391,6 +394,7 @@ class ProblemTestCase(CommonDataMixin, TestCase):
                     )
 
 
+@override_settings(LANGUAGE_CODE='en-US', LANGUAGES=(('en', 'English'),))
 class SolutionTestCase(CommonDataMixin, TestCase):
     @classmethod
     def setUpTestData(self):
