@@ -1,3 +1,4 @@
+import errno
 import json
 from operator import attrgetter
 
@@ -16,6 +17,7 @@ from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 
 from judge.fulltext import SearchQuerySet
+from judge.models.problem_data import problem_data_storage
 from judge.models.profile import Organization, Profile
 from judge.models.runtime import Language
 from judge.user_translations import gettext as user_gettext
@@ -208,11 +210,17 @@ class Problem(models.Model):
                                            help_text=_('If private, only these organizations may see the problem.'))
     is_organization_private = models.BooleanField(verbose_name=_('private to organizations'), default=False)
 
+    __original_points = None
+
     def __init__(self, *args, **kwargs):
         super(Problem, self).__init__(*args, **kwargs)
         self._translated_name_cache = {}
         self._i18n_name = None
         self.__original_code = self.code
+        # Since `points` may get defer()
+        # We only set original points it is not deferred
+        if 'points' in self.__dict__:
+            self.__original_points = self.points
 
     @cached_property
     def types_list(self):
@@ -232,8 +240,6 @@ class Problem(models.Model):
         if user.has_perm('judge.edit_all_problem') or user.has_perm('judge.edit_public_problem') and self.is_public:
             return True
         if user.profile.id in self.editor_ids:
-            return True
-        if self.is_organization_private and self.organizations.filter(admins=user.profile).exists():
             return True
         return False
 
@@ -512,9 +518,26 @@ class Problem(models.Model):
             try:
                 problem_data = self.data_files
             except AttributeError:
-                pass
+                try:
+                    problem_data_storage.rename(self.__original_code, self.code)
+                except OSError as e:
+                    if e.errno != errno.ENOENT:
+                        raise
             else:
                 problem_data._update_code(self.__original_code, self.code)
+            # Now the instance is saved, we need to update the original code to
+            # new code so that if the user uses .save() multiple time, it will not run
+            # update_code() multiple time
+            self.__original_code = self.code
+
+        # self.__original_points will be None if:
+        #   - create new instance (should ignore)
+        #   - The `points` field got deferred (not sure about this?)
+        # in both cases, we don't rescore submissions.
+        if self.__original_points is not None and self.points != self.__original_points:
+            self._rescore()
+            # same reason as update __original_code
+            self.__original_points = self.points
 
     save.alters_data = True
 
