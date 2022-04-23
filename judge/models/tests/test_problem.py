@@ -34,6 +34,7 @@ class ProblemTestCase(CommonDataMixin, TestCase):
             types=('type',),
             authors=('normal',),
             testers=('staff_problem_edit_public',),
+            testcase_visibility_mode=ProblemTestcaseAccess.OUT_CONTEST,
         )
 
         self.testcase_allow_all = create_problem(
@@ -52,6 +53,15 @@ class ProblemTestCase(CommonDataMixin, TestCase):
             authors=('superuser',),
             is_public=True,
             testcase_visibility_mode=ProblemTestcaseAccess.OUT_CONTEST,
+        )
+
+        self.testcase_allow_author = create_problem(
+            code='allow_author',
+            allowed_languages=Language.objects.values_list('key', flat=True),
+            types=('type',),
+            authors=('superuser',),
+            is_public=True,
+            testcase_visibility_mode=ProblemTestcaseAccess.AUTHOR_ONLY,
         )
 
         self.basic_contest = create_contest(
@@ -194,6 +204,9 @@ class ProblemTestCase(CommonDataMixin, TestCase):
                 'is_testcase_accessible_by': self.assertTrue,
             },
             'normal': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'normal_in_contest': {
                 'is_testcase_accessible_by': self.assertFalse,
             },
             'anonymous': {
@@ -248,6 +261,28 @@ class ProblemTestCase(CommonDataMixin, TestCase):
             },
         }
         self._test_object_methods_with_users(self.testcase_allow_out_contest, data_out_contest)
+
+        data_author = {
+            'superuser': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'staff_problem_edit_own': {
+                'is_testcase_accessible_by': self.assertFalse,
+            },
+            'staff_problem_see_all': {
+                'is_testcase_accessible_by': self.assertFalse,
+            },
+            'staff_problem_edit_all': {
+                'is_testcase_accessible_by': self.assertTrue,
+            },
+            'normal': {
+                'is_testcase_accessible_by': self.assertFalse,
+            },
+            'anonymous': {
+                'is_testcase_accessible_by': self.assertFalse,
+            },
+        }
+        self._test_object_methods_with_users(self.testcase_allow_author, data_author)
 
     def test_organization_private_problem_methods(self):
         self.assertFalse(self.organization_private_problem.is_accessible_by(self.users['normal']))

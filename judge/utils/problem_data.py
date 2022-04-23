@@ -1,7 +1,6 @@
 import json
 import os
 import re
-import shutil
 import zipfile
 
 import yaml
@@ -10,9 +9,6 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 from django.utils.translation import gettext as _
-
-
-WRAPPER_TEMPLATE_PATH = 'wrapper_checker_templates/cpp_template.py'
 
 
 if os.altsep:
@@ -51,6 +47,65 @@ class ProblemDataError(Exception):
         self.message = message
 
 
+def get_visible_content(archive, filename):
+    if archive.getinfo(filename).file_size <= settings.VNOJ_TESTCASE_VISIBLE_LENGTH:
+        data = archive.read(filename)
+    else:
+        data = archive.open(filename).read(settings.VNOJ_TESTCASE_VISIBLE_LENGTH) + b'...'
+    return data.decode('utf-8', errors='ignore')
+
+
+def get_testcase_data(archive, case):
+    return {
+        'input': get_visible_content(archive, case.input_file),
+        'answer': get_visible_content(archive, case.output_file),
+    }
+
+
+def get_problem_testcases_data(problem):
+    """ Read test data of a problem and store
+    result in a dictionary.
+
+    If an error occurs, this method will return an empty dict.
+    """
+    from judge.models import problem_data_storage
+
+    init_path = '%s/init.yml' % problem.code
+    if not problem_data_storage.exists(init_path):
+        return {}
+
+    init_content = yaml.safe_load(problem_data_storage.open(init_path).read())
+    archive_path = init_content.get('archive', None)
+    if not archive_path:
+        return {}
+
+    archive_path = '%s/%s' % (problem.code, archive_path)
+    if not problem_data_storage.exists(archive_path):
+        return {}
+
+    try:
+        archive = zipfile.ZipFile(problem_data_storage.open(archive_path))
+    except zipfile.BadZipfile:
+        return {}
+
+    testcases_data = {}
+
+    # TODO:
+    # - Support manually managed problems
+    # - Support pretest
+    order = 0
+    for case in problem.cases.all().order_by('order'):
+        try:
+            if not case.input_file:
+                continue
+            order += 1
+            testcases_data[order] = get_testcase_data(archive, case)
+        except Exception:
+            return {}
+
+    return testcases_data
+
+
 class ProblemDataCompiler(object):
     def __init__(self, problem, data, cases, files):
         self.problem = problem
@@ -77,29 +132,6 @@ class ProblemDataCompiler(object):
             if not batch['batched']:
                 raise ProblemDataError(_('Empty batches not allowed.'))
             cases.append(batch)
-
-        def make_wrapper_checker_for_cpp_checker(case, custom_checker_path):
-            checker_name = "cpp_checker.py"
-
-            if len(custom_checker_path) != 2:
-                raise ProblemDataError(_('How did you corrupt the custom checker path?'))
-
-            checker = os.path.join(settings.DMOJ_PROBLEM_DATA_ROOT,
-                                   custom_checker_path[0],
-                                   checker_name)
-
-            custom_checker_name = custom_checker_path[1]
-
-            if not os.path.isfile(checker):
-                shutil.copy(WRAPPER_TEMPLATE_PATH, checker)
-
-            # replace {{filecpp}} and {{problemid}} in checker file
-            filedata = open(checker, 'r').read()
-            filedata = filedata.replace('{{\'filecpp\'}}', "\'%s\'" % custom_checker_name)
-            filedata = filedata.replace('{{\'problemid\'}}', "\'%s\'" % custom_checker_path[0])
-            open(checker, 'w').write(filedata)
-
-            return checker_name
 
         def make_checker(case):
             if (case.checker == 'bridged'):
@@ -148,8 +180,12 @@ class ProblemDataCompiler(object):
 
             if case.grader == 'standard':
                 if grader_args.get('io_method') == 'file':
-                    if 'io_input_file' not in grader_args or 'io_output_file' not in grader_args:
+                    if grader_args.get('io_input_file', '') == '' or grader_args.get('io_output_file', '') == '':
                         raise ProblemDataError(_('You must specify both input and output files.'))
+
+                    if not isinstance(grader_args['io_input_file'], str) or \
+                            not isinstance(grader_args['io_output_file'], str):
+                        raise ProblemDataError(_('Input/Output file must be a string.'))
 
                     init['file_io'] = {}
                     init['file_io']['input'] = grader_args['io_input_file']
@@ -160,7 +196,7 @@ class ProblemDataCompiler(object):
             if case.grader == 'interactive':
                 file_name, file_ext = get_file_name_and_ext(case.custom_grader.name)
                 if file_ext != 'cpp':
-                    raise ProblemDataError(_("Only accept `.cpp` interactor"))
+                    raise ProblemDataError(_('Only accept `.cpp` interactor'))
 
                 init['interactive'] = {
                     'files': file_name,
@@ -168,13 +204,14 @@ class ProblemDataCompiler(object):
                     'lang': 'CPP17',
                 }
                 return
+
             if case.grader == 'signature':
                 file_name, file_ext = get_file_name_and_ext(case.custom_grader.name)
                 if file_ext != 'cpp':
-                    raise ProblemDataError(_("Only accept `.cpp` entry"))
+                    raise ProblemDataError(_('Only accept `.cpp` entry'))
                 header_name, file_ext = get_file_name_and_ext(case.custom_header.name)
                 if file_ext != 'h':
-                    raise ProblemDataError(_("Only accept `.h` header"))
+                    raise ProblemDataError(_('Only accept `.h` header'))
                 init['signature_grader'] = {
                     'entry': file_name,
                     'header': header_name,
@@ -190,7 +227,7 @@ class ProblemDataCompiler(object):
             if case.grader == 'custom_judge':
                 file_name, file_ext = get_file_name_and_ext(case.custom_grader.name)
                 if file_ext != 'py':
-                    raise ProblemDataError(_("Only accept `.py` custom judge"))
+                    raise ProblemDataError(_('Only accept `.py` custom judge'))
                 init['custom_judge'] = file_name
                 return
 
@@ -207,11 +244,11 @@ class ProblemDataCompiler(object):
 
                 if not self.generator:
                     if case.input_file not in self.files:
-                        raise ProblemDataError(_('Input file for case %d does not exist: %s') %
-                                               (i, case.input_file))
+                        raise ProblemDataError(_('Input file for case %(case)d does not exist: %(file)s') %
+                                               ({'case': i, 'file': case.input_file}))
                     if case.output_file not in self.files:
-                        raise ProblemDataError(_('Output file for case %d does not exist: %s') %
-                                               (i, case.output_file))
+                        raise ProblemDataError(_('Output file for case %(case)d does not exist: %(file)s') %
+                                               ({'case': i, 'file': case.output_file}))
 
                 if case.input_file:
                     data['in'] = case.input_file
@@ -329,60 +366,3 @@ class ProblemDataCompiler(object):
     def generate(cls, *args, **kwargs):
         self = cls(*args, **kwargs)
         self.compile()
-
-
-def get_visible_content(archive, filename):
-    if archive.getinfo(filename).file_size <= settings.TESTCASE_VISIBLE_LENGTH:
-        data = archive.read(filename)
-    else:
-        data = archive.open(filename).read(settings.TESTCASE_VISIBLE_LENGTH) + b'...'
-    return data.decode('utf-8', errors='ignore')
-
-
-def get_testcase_data(archive, case):
-    return {
-        'input': get_visible_content(archive, case.input_file),
-        'answer': get_visible_content(archive, case.output_file),
-    }
-
-
-def get_problem_testcases_data(problem):
-    """ Read test data of a problem and store
-    result in a dictionary.
-    If an error occurs, this method will return an empty dict.
-    """
-    from judge.models import problem_data_storage
-
-    init_path = '%s/init.yml' % problem.code
-    if not problem_data_storage.exists(init_path):
-        return {}
-
-    init_content = yaml.safe_load(problem_data_storage.open(init_path).read())
-    archive_path = init_content.get('archive', None)
-    if not archive_path:
-        return {}
-
-    archive_path = '%s/%s' % (problem.code, archive_path)
-    if not problem_data_storage.exists(archive_path):
-        return {}
-
-    try:
-        archive = zipfile.ZipFile(problem_data_storage.open(archive_path))
-    except zipfile.BadZipfile:
-        return {}
-
-    testcases_data = {}
-
-    # TODO:
-    # - Support manually managed problems
-    # - Support pretest
-    order = 0
-    for case in problem.cases.all().order_by('order'):
-        try:
-            if not case.input_file:
-                continue
-            order += 1
-            testcases_data[order] = get_testcase_data(archive, case)
-        except Exception:
-            return {}
-    return testcases_data
