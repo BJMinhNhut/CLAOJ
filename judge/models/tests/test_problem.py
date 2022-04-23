@@ -25,7 +25,7 @@ class ProblemTestCase(CommonDataMixin, TestCase):
                 username='normal_in_contest',
             ),
         })
-        
+
         create_problem_type(name='type')
 
         self.basic_problem = create_problem(
@@ -109,11 +109,6 @@ class ProblemTestCase(CommonDataMixin, TestCase):
         self.organization_admin_problem = create_problem(
             code='organization_admin',
             organizations=('problem organization',),
-        )
-
-        self.suggesting_problem = create_problem(
-            code='suggesting',
-            suggester=self.users['suggester'].profile,
         )
 
     def test_basic_problem(self):
