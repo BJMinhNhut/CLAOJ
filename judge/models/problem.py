@@ -203,6 +203,7 @@ class Problem(models.Model):
     testcase_visibility_mode = models.CharField(verbose_name=_('Testcase visibility'), max_length=1,
                                                 default=ProblemTestcaseAccess.OUT_CONTEST,
                                                 choices=PROBLEM_TESTCASE_ACCESS)
+
     objects = TranslatedProblemQuerySet.as_manager()
     tickets = GenericRelation('Ticket')
 
@@ -338,9 +339,6 @@ class Problem(models.Model):
                     Q(is_organization_private=True, organizations__in=user.profile.organizations.all())
                 )
 
-            if edit_own_problem:
-                q |= Q(is_organization_private=True, organizations__in=user.profile.admin_of.all())
-
             # Authors, curators, and testers should always have access, so OR at the very end.
             q |= Q(authors=user.profile)
             q |= Q(curators=user.profile)
@@ -361,7 +359,6 @@ class Problem(models.Model):
             return cls.objects.all()
 
         q = Q(authors=user.profile) | Q(curators=user.profile)
-        q |= Q(is_organization_private=True, organizations__in=user.profile.admin_of.all())
 
         if user.has_perm('judge.edit_public_problem'):
             q |= Q(is_public=True)
@@ -380,8 +377,9 @@ class Problem(models.Model):
 
     @cached_property
     def editor_ids(self):
-        return self.author_ids.union(
+        editors = self.author_ids.union(
             Problem.curators.through.objects.filter(problem=self).values_list('profile_id', flat=True))
+        return editors
 
     @cached_property
     def tester_ids(self):
@@ -513,16 +511,25 @@ class Problem(models.Model):
         return {'method': 'standard'}
 
     def save(self, *args, **kwargs):
+        is_clone = kwargs.pop('is_clone', False)
+        # if short_circuit = true the judge will stop judging
+        # as soon as the submission failed a test case
+        self.short_circuit = not self.partial
         super(Problem, self).save(*args, **kwargs)
+        # Ignore the custom save if we are cloning a problem
+        if is_clone:
+            return
         if self.code != self.__original_code:
             try:
                 problem_data = self.data_files
             except AttributeError:
-                try:
-                    problem_data_storage.rename(self.__original_code, self.code)
-                except OSError as e:
-                    if e.errno != errno.ENOENT:
-                        raise
+                # On create, self.__original_code is an empty string
+                if self.__original_code:
+                    try:
+                        problem_data_storage.rename(self.__original_code, self.code)
+                    except OSError as e:
+                        if e.errno != errno.ENOENT:
+                            raise
             else:
                 problem_data._update_code(self.__original_code, self.code)
             # Now the instance is saved, we need to update the original code to
