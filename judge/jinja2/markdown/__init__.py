@@ -1,6 +1,6 @@
 import logging
 import re
-from html import unescape
+from html.parser import HTMLParser
 from urllib.parse import urlparse
 
 import markdown2
@@ -15,7 +15,6 @@ from judge.jinja2.markdown.lazy_load import lazy_load as lazy_load_processor
 from judge.utils.camo import client as camo_client
 from judge.utils.texoid import TEXOID_ENABLED, TexoidRenderer
 from .bleach_whitelist import all_styles, mathml_attrs, mathml_tags
-from .math import extractLatexeq, recontructString
 from .. import registry
 
 logger = logging.getLogger('judge.html')
@@ -76,18 +75,29 @@ def fragment_tree_to_str(tree):
 
 
 def inc_header(text, level):
-    s = '#' * level
     pattern = re.compile(
-        r'^\#{1,10}',
+        r'<(\/?)h([1-9][0-9]*)>',
         re.X | re.M,
     )
+    return re.sub(pattern, lambda x: '<' + x.group(1) + 'h' + str(int(x.group(2)) + level) + '>', text)
 
-    return re.sub(pattern, lambda x: x.group() + s, text)
+
+def add_table_class(text):
+    return text.replace(r'<table>', r'<table class="table">')
 
 
 @registry.filter
-def markdown(value, style, math_engine=None, lazy_load=False, strip_paragraphs=False):
+def markdown(text, style, math_engine=None, lazy_load=False, strip_paragraphs=False):
     styles = settings.MARKDOWN_STYLES.get(style, settings.MARKDOWN_DEFAULT_STYLE)
+    if styles.get('safe_mode', True):
+        safe_mode = 'escape'
+    else:
+        safe_mode = None
+
+    extras = ['latex', 'spoiler', 'fenced-code-blocks', 'cuddled-lists', 'tables', 'strike']
+    if styles.get('nofollow', True):
+        extras.append('nofollow')
+
     bleach_params = styles.get('bleach', {})
 
     post_processors = []
@@ -96,10 +106,10 @@ def markdown(value, style, math_engine=None, lazy_load=False, strip_paragraphs=F
     if lazy_load:
         post_processors.append(lazy_load_processor)
 
-    preprocessed_value = inc_header(value, 2)
-    string, latexeqs = extractLatexeq(preprocessed_value)
-    string = markdown2.markdown(string, extras=['spoiler', 'fenced-code-blocks', 'cuddled-lists'])
-    result = recontructString(string, latexeqs)
+    result = markdown2.markdown(text, safe_mode=safe_mode, extras=extras)
+
+    result = add_table_class(result)
+    result = inc_header(result, 2)
 
     if post_processors or strip_paragraphs:
         tree = fragments_to_tree(result)
