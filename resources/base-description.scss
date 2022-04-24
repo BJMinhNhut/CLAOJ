@@ -5,6 +5,10 @@
     font-size: 1em;
     font-family: $body_fonts;
 
+    .sidebox.statement {
+        font-family: $problem_fonts !important;
+    }
+    
     p {
 	text-align: justify;
         margin: 1em 0 !important;
