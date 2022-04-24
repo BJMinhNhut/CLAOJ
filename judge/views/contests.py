@@ -30,6 +30,7 @@ from reversion import revisions
 
 from judge import event_poster as event
 from judge.comments import CommentedDetailView
+from judge.contest_format import IOIContestFormat, LegacyIOIContestFormat
 from judge.forms import ContestCloneForm, ContestForm, ProposeContestProblemFormSet
 from judge.models import Contest, ContestMoss, ContestParticipation, ContestProblem, ContestTag, \
     Problem, Profile, Submission
@@ -725,6 +726,8 @@ class ContestRanking(ContestRankingBase):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['has_rating'] = self.object.ratings.exists()
+        context['display_first_solves'] = self.object.format.name not in \
+            [IOIContestFormat.name, LegacyIOIContestFormat.name]
         return context
 
 
