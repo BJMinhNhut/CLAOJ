@@ -23,7 +23,7 @@ from judge.models import Problem, ProblemData, ProblemTestCase, Submission, prob
 from judge.models.problem_data import CUSTOM_CHECKERS, IO_METHODS
 from judge.utils.problem_data import ProblemDataCompiler
 from judge.utils.unicode import utf8text
-from judge.utils.views import TitleMixin, add_file_response
+from judge.utils.views import TitleMixin, add_file_response, generic_message
 from judge.views.problem import ProblemMixin
 from judge.widgets import Select2Widget
 
@@ -145,19 +145,22 @@ class ProblemSubmissionDiff(TitleMixin, ProblemMixin, DetailView):
 
     def get_object(self, queryset=None):
         problem = super(ProblemSubmissionDiff, self).get_object(queryset)
-        if self.request.user.is_superuser or problem.is_editable_by(self.request.user):
+        if problem.is_editable_by(self.request.user):
             return problem
         raise Http404()
 
     def get_context_data(self, **kwargs):
         context = super(ProblemSubmissionDiff, self).get_context_data(**kwargs)
-        try:
+
+        if 'username' in self.request.GET:
+            usernames = self.request.GET.getlist('username')
+            subs = Submission.objects.filter(problem=self.object, user__user__username__in=usernames)
+        elif 'id' in self.request.GET:
             ids = self.request.GET.getlist('id')
-            subs = Submission.objects.filter(id__in=ids)
-        except ValueError:
-            raise Http404
+            subs = Submission.objects.filter(problem=self.object, id__in=ids)
+
         if not subs:
-            raise Http404
+            raise Submission.DoesNotExist()
 
         context['submissions'] = subs
 
@@ -169,6 +172,12 @@ class ProblemSubmissionDiff(TitleMixin, ProblemMixin, DetailView):
             num_cases = subs.first().test_cases.count()
         context['num_cases'] = num_cases
         return context
+
+    def get(self, request, *args, **kwargs):
+        try:
+            return super(ProblemSubmissionDiff, self).get(request, *args, **kwargs)
+        except Submission.DoesNotExist:
+            return generic_message(self.request, _('No such submissions'), _('Could not find any submissions.'))
 
 
 class ProblemDataView(TitleMixin, ProblemManagerMixin):
