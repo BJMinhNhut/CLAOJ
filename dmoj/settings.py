@@ -171,7 +171,7 @@ JQUERY_JS = '//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'
 FONTAWESOME_CSS = '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
 DMOJ_CANONICAL = ''
 
-TESTCASE_VISIBLE_LENGTH = 64
+CLAOJ_TESTCASE_VISIBLE_LENGTH = 64
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 3500
 

@@ -173,7 +173,7 @@ def parse_tests(problem_meta, root, package):
 def pandoc_tex_to_markdown(tex):
     tmp_dir = tempfile.TemporaryDirectory()
     with open(os.path.join(tmp_dir.name, 'temp.tex'), 'w') as f:
-        f.write(tex).
+        f.write(tex)
     with open(os.path.join(tmp_dir.name, 'filter.lua'), 'w') as f:
         f.write(PANDOC_FILTER)
     subprocess.run(['pandoc', '--lua-filter=filter.lua', '-t', 'gfm', '-o', 'temp.md', 'temp.tex'], cwd=tmp_dir.name)

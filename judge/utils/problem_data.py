@@ -48,10 +48,10 @@ class ProblemDataError(Exception):
 
 
 def get_visible_content(archive, filename):
-    if archive.getinfo(filename).file_size <= settings.VNOJ_TESTCASE_VISIBLE_LENGTH:
+    if archive.getinfo(filename).file_size <= settings.CLAOJ_TESTCASE_VISIBLE_LENGTH:
         data = archive.read(filename)
     else:
-        data = archive.open(filename).read(settings.VNOJ_TESTCASE_VISIBLE_LENGTH) + b'...'
+        data = archive.open(filename).read(settings.CLAOJ_TESTCASE_VISIBLE_LENGTH) + b'...'
     return data.decode('utf-8', errors='ignore')
 
 

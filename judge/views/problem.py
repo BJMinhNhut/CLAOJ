@@ -807,7 +807,7 @@ class ProblemCreate(PermissionRequiredMixin, TitleMixin, CreateView):
 
             self.object = problem = form.save()
             problem.authors.add(self.request.user.profile)
-            problem.allowed_languages.set(Language.objects.all())
+            problem.allowed_languages.set(Language.objects.filter(include_in_problem=True))
             problem.date = timezone.now()
             self.save_statement(form, problem)
             problem.save()
