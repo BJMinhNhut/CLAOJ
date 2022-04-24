@@ -23,6 +23,11 @@ class Migration(migrations.Migration):
             name='file_size_limit',
             field=models.IntegerField(blank=True, default=0, help_text='Limit of file size (in MB) if allow submit via file', verbose_name='Limit of file size'),
         ),
+        migrations.AddField(
+            model_name='language',
+            name='include_in_problem',
+            field=models.BooleanField(default=False, help_text='If true, this language will be added to all problems', verbose_name='Include in problems'),
+        ),
         migrations.AlterField(
             model_name='profile',
             name='language',
