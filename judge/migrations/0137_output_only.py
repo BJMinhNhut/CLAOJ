@@ -10,6 +10,11 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.AddField(
+            model_name='language',
+            name='include_in_problem',
+            field=models.BooleanField(default=False, help_text='If true, this language will be added to all problems', verbose_name='Include in problems'),
+        ),
         migrations.AlterField(
             model_name='language',
             name='common_name',
