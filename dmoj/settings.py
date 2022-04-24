@@ -57,7 +57,7 @@ ACE_URL = '//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3'
 SELECT2_JS_URL = '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js'
 DEFAULT_SELECT2_CSS = '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css'
 
-CLAOJ_HOMEPAGE_TOP_USERS_COUNT = 10
+CLAOJ_HOMEPAGE_TOP_USERS_COUNT = 5
 CLAOJ_DISPLAY_RANKS = (
     ('user', _('Normal User')),
     ('setter', _('Problem Setter')),

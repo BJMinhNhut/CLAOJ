@@ -106,7 +106,8 @@ class PostList(PostListBase):
         context['current_contests'] = visible_contests.filter(start_time__lte=now, end_time__gt=now)
         context['future_contests'] = visible_contests.filter(start_time__gt=now)
 
-        context['top_pp_users'] = self.get_top_pp_users()
+        context['top_scorers'] = self.get_top_scorers()
+        context['top_rating_users'] = self.get_top_rating_users()
 
         if self.request.user.is_authenticated:
             context['own_open_tickets'] = (
@@ -125,8 +126,15 @@ class PostList(PostListBase):
             context['open_tickets'] = []
         return context
 
-    def get_top_pp_users(self):
+    def get_top_scorers(self):
         return (Profile.objects.order_by('-performance_points')
+                .filter(performance_points__gt=0, is_unlisted=False)
+                .only('user', 'performance_points', 'display_rank', 'rating')
+                .select_related('user')
+                [:settings.CLAOJ_HOMEPAGE_TOP_USERS_COUNT])
+
+    def get_top_rating_users(self):
+        return (Profile.objects.order_by('-rating')
                 .filter(performance_points__gt=0, is_unlisted=False)
                 .only('user', 'performance_points', 'display_rank', 'rating')
                 .select_related('user')

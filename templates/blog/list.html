@@ -205,8 +205,11 @@
                 </div>
             {% endif %}
 
-            {% if top_pp_users %}
-                {% include "blog/top-pp.html" %}
+            {% if top_rating_users%}
+                {% include "blog/top-rating.html" %}
+            {% endif %}
+            {% if top_scorers %}
+                {% include "blog/top-scorers.html" %}
             {% endif %}
 	    
 	    {% if new_problems %}
