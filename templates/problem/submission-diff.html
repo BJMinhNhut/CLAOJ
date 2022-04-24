@@ -109,10 +109,10 @@
             <th class="sub-check">1st</th>
             <th class="sub-check">2nd</th>
             <th class="sub-id">ID</th>
-            <th class="sub-username">Username</th>
-            <th class="sub-result">Result</th>
-            <th class="sub-language">Language</th>
-            <th class="sub-date">Date</th>
+            <th class="sub-username">{{ _('Username') }}</th>
+            <th class="sub-result">{{ _('Result') }}</th>
+            <th class="sub-language">{{ _('Language') }}</th>
+            <th class="sub-date">{{ _('Date') }}</th>
             {% for case in range(num_cases) %}
                 <th class="sub-case">{{ loop.index }}</th>
             {% endfor %}
@@ -151,7 +151,7 @@
 {% endblock %}
 
 {% block bodyend %}
-    <a id="diff" class="unselectable button full" href="#" style="width: 90%; margin: auto;">
+    <a id="diff" class="unselectable button full" href="#" style="width: 80%; margin: auto;">
         {{ _('Diff source code') }}
     </a>
 {% endblock %}
