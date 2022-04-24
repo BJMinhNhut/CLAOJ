@@ -55,7 +55,7 @@
                 <i class="fa fa-eye fa-fw"></i><span class="label">{{ _('view') }}</span>
             </a> ·
             <a href="{{ url('submission_source', submission.id) }}">
-                {{ _('source') }}
+                <i class="fa fa-file-code-o fa-fw"></i><span class="label">{{ _('source') }}</span>
             </a>
             {% if perms.judge.rejudge_submission and can_edit %} ·
                 {% if not submission.is_locked %}
