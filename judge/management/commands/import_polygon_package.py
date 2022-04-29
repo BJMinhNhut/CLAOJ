@@ -12,7 +12,7 @@ from django.core.files import File
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from django.urls import reverse
-from django.utils import translation
+from django.utils import timezone, translation
 from lxml import etree as ET
 
 from judge.models import Language, Problem, ProblemData, ProblemGroup, ProblemTestCase, ProblemType
@@ -252,6 +252,7 @@ def create_problem(problem_meta):
     problem = Problem(
         code=problem_meta['code'],
         name=problem_meta['name'],
+        date=timezone.now(),
         time_limit=problem_meta['time_limit'],
         memory_limit=problem_meta['memory_limit'],
         description=problem_meta['description'],
