@@ -24,6 +24,7 @@ nginx_template.conf
 martor/
 logs/
 pdf/
+moss/
 judge/fixtures/fixed*
 judge/fixtures/voj_*
 judge/fixtures/VOJ_*
