@@ -1,0 +1,58 @@
+
+<!-- saved from url=(0062)http://moss.stanford.edu/results/5/1389155798565/match1-1.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>nari0508</title>
+</head>
+<body bgcolor="white">
+<hr>
+techquick2006<p></p><pre>#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+long long abs2(long long a)
+{
+    return a&gt;0?a:-a;
+}
+
+int main()
+{
+<a name="0"></a><font color="#FF0000"><a href="http://moss.stanford.edu/results/5/1389155798565/match1-0.html#0" target="0"><img src="./tm_0_79.gif" alt="other" border="0" align="left"></a>
+
+    int n;
+    long long *a,*b;
+    cin&gt;&gt;n;
+    a = new long long[n];
+    b = new long long[n];
+
+    for(int i=0; i&lt;n; i++)
+        cin&gt;&gt;a[i];
+    for(int i=0; i&lt;n; i++)
+        cin&gt;&gt;b[i];
+
+
+    sort(a+0,a+n);
+    sort(b+0,b+n);
+
+    long long min = abs(a[0] + b[0]);
+
+    int dau = 0, cuoi = n-1;
+    while(dau &lt; n &amp;&amp; cuoi &gt;= 0)
+    {
+        if(abs2(a[dau] + b[cuoi]) &lt; min)
+            min = abs2(a[dau] + b[cuoi]);
+        if((a[dau] + b[cuoi]) &gt; 0)
+            cuoi--;
+        else dau++;
+</font>    }
+
+
+    cout&lt;&lt;min&lt;&lt;endl;
+    delete []a;
+    delete []b;
+
+    return 0;
+}</pre>
+
+
+
+</body></html>

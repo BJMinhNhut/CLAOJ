@@ -1,0 +1,33 @@
+
+<!-- saved from url=(0062)http://moss.stanford.edu/results/5/1389155798565/match2-0.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>minhnhut</title>
+</head>
+<body bgcolor="white">
+<hr>
+minhnhut<p></p><pre>#include &lt;bits/stdc++.h&gt;
+<a name="0"></a><font color="#FF0000"><a href="http://moss.stanford.edu/results/5/1389155798565/match2-1.html#0" target="1"><img src="./tm_0_98.gif" alt="other" border="0" align="left"></a>
+
+using namespace std;
+int n, a[100010],b[100010],k,minn;
+
+int main()
+{
+cin&gt;&gt;n;
+minn=INT_MAX;
+for (int i=1;i&lt;=n;i++) cin&gt;&gt;a[i];
+for (int i=1;i&lt;=n;i++) cin&gt;&gt;b[i];
+sort(a+1,a+1+n);
+for (int i=1;i&lt;=n;i++)
+{
+k=lower_bound(a+1,a+1+n,-b[i])-a;
+if (k!=1) minn=min(minn,abs(b[i]+a[k-1]));
+if (k!=n+1) minn=min(minn,abs(b[i]+a[k]));
+}
+cout&lt;&lt;minn;
+</font>return 0;
+}</pre>
+
+
+
+</body></html>
