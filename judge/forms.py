@@ -19,8 +19,8 @@ from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from django_ace import AceWidget
-from judge.models import BlogPost, Contest, ContestProblem, Language, Organization, Problem, Profile, Solution, \
-    Submission, WebAuthnCredential
+from judge.models import BlogPost, Contest, ContestAnnouncement, ContestProblem, Language, Organization, Problem, \
+    Profile, Solution, Submission, WebAuthnCredential
 from judge.utils.subscription import newsletter_id
 from judge.widgets import HeavyPreviewPageDownWidget, HeavySelect2MultipleWidget, HeavySelect2Widget, MartorWidget, \
     Select2MultipleWidget, Select2Widget
@@ -573,6 +573,15 @@ class ContestForm(ModelForm):
             'key': {
                 'invalid': _('Only accept alphanumeric characters (a-z, 0-9) and underscore (_)'),
             },
+        }
+
+
+class ContestAnnouncementForm(forms.ModelForm):
+    class Meta:
+        model = ContestAnnouncement
+        fields = ['title', 'description']
+        widgets = {
+            'description': MartorWidget(attrs={'style': 'width: 100%'}),
         }
 
 

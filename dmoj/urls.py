@@ -211,6 +211,7 @@ urlpatterns = [
         url(r'^/edit$', contests.EditContest.as_view(), name='contest_edit'),
         url(r'^/moss$', contests.ContestMossView.as_view(), name='contest_moss'),
         url(r'^/moss/delete$', contests.ContestMossDelete.as_view(), name='contest_moss_delete'),
+        url(r'^/announce', contests.ContestAnnounce.as_view(), name='contest_announce'),
         url(r'^/clone$', contests.ContestClone.as_view(), name='contest_clone'),
         url(r'^/ranking/$', contests.ContestRanking.as_view(), name='contest_ranking'),
         url(r'^/ranking/ajax$', contests.contest_ranking_ajax, name='contest_ranking_ajax'),
@@ -306,8 +307,8 @@ urlpatterns = [
             url(r'^edit$', blog.BlogPostEdit.as_view(), name='blog_post_edit'),
         ])),
         url(r'^new$', blog.BlogPostCreate.as_view(), name='blog_post_new'),
-        url('^upvote$', blog.upvote_blog, name='blog_upvote'),
-        url('^downvote$', blog.downvote_blog, name='blog_downvote'),
+        url(r'^upvote$', blog.upvote_blog, name='blog_upvote'),
+        url(r'^downvote$', blog.downvote_blog, name='blog_downvote'),
     ])),
 
     url(r'^license/(?P<key>[-\w.]+)$', license.LicenseDetail.as_view(), name='license'),
