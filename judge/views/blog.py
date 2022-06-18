@@ -149,14 +149,6 @@ class PostList(PostListBase):
                                          .order_by('-date', 'code')[:settings.DMOJ_BLOG_NEW_PROBLEM_COUNT]
         context['page_titles'] = CacheDict(lambda page: Comment.get_page_title(page))
 
-        context['has_clarifications'] = False
-        if self.request.user.is_authenticated:
-            participation = self.request.profile.current_contest
-            if participation:
-                clarifications = ProblemClarification.objects.filter(problem__in=participation.contest.problems.all())
-                context['has_clarifications'] = clarifications.count() > 0
-                context['clarifications'] = clarifications.order_by('-date')
-
         context['user_count'] = Profile.objects.count
         context['problem_count'] = Problem.get_public_problems().count
         context['submission_count'] = lambda: Submission.objects.aggregate(max_id=Max('id'))['max_id'] or 0

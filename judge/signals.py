@@ -9,8 +9,8 @@ from django.db.models.signals import m2m_changed, post_delete, post_save, pre_sa
 from django.dispatch import receiver
 
 from .caching import finished_submission
-from .models import BlogPost, Comment, Contest, ContestSubmission, EFFECTIVE_MATH_ENGINES, Judge, Language, License, \
-    MiscConfig, Organization, Problem, Profile, Submission, WebAuthnCredential
+from .models import BlogPost, Comment, Contest, ContestAnnouncement, ContestSubmission, EFFECTIVE_MATH_ENGINES, \
+    Judge, Language, License, MiscConfig, Organization, Problem, Profile, Submission, WebAuthnCredential
 
 
 def get_pdf_path(basename):
@@ -172,3 +172,11 @@ def profile_organization_update(sender, instance, action, **kwargs):
         orgs_to_be_updated = Organization.objects.filter(pk__in=pks)
     for org in orgs_to_be_updated:
         org.on_user_changes()
+
+
+@receiver(post_save, sender=ContestAnnouncement)
+def contest_announcement_create(sender, instance, created, **kwargs):
+    if not created:
+        return
+
+    instance.send()

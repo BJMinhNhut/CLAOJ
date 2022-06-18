@@ -28,11 +28,10 @@ from django.views.generic.detail import BaseDetailView, DetailView, SingleObject
 from django.views.generic.edit import CreateView, UpdateView
 from reversion import revisions
 
-from judge import event_poster as event
 from judge.comments import CommentedDetailView
 from judge.contest_format import IOIContestFormat, LegacyIOIContestFormat
 from judge.forms import ContestCloneForm, ContestForm, ProposeContestProblemFormSet
-from judge.models import Contest, ContestMoss, ContestParticipation, ContestProblem, ContestTag, \
+from judge.models import Contest, ContestAnnouncement, ContestMoss, ContestParticipation, ContestProblem, ContestTag, \
     Problem, Profile, Submission
 from judge.tasks import run_moss
 from judge.utils.celery import redirect_to_task_status
@@ -283,6 +282,11 @@ class ContestDetail(ContestMixin, TitleMixin, CommentedDetailView):
                 problem_count=Count('id'),
             ),
         )
+
+        announcements = ContestAnnouncement.objects.filter(contest=self.object)
+        context['has_announcements'] = announcements.count() > 0
+        context['announcements'] = announcements.order_by('-date')
+
         return context
 
 
@@ -701,7 +705,6 @@ class ContestRankingBase(ContestMixin, TitleMixin, DetailView):
         users, problems = self.get_ranking_list()
         context['users'] = users
         context['problems'] = problems
-        context['last_msg'] = event.last()
         context['tab'] = self.tab
         return context
 
