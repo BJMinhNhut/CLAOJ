@@ -32,7 +32,7 @@ from judge.comments import CommentedDetailView
 from judge.contest_format import IOIContestFormat, LegacyIOIContestFormat
 from judge.forms import ContestCloneForm, ContestForm, ProposeContestProblemFormSet
 from judge.models import Contest, ContestAnnouncement, ContestMoss, ContestParticipation, ContestProblem, ContestTag, \
-    Problem, Profile, Submission
+    Problem, ProblemClarification, Profile, Submission
 from judge.tasks import run_moss
 from judge.utils.celery import redirect_to_task_status
 from judge.utils.opengraph import generate_opengraph
@@ -282,6 +282,10 @@ class ContestDetail(ContestMixin, TitleMixin, CommentedDetailView):
                 problem_count=Count('id'),
             ),
         )
+
+        clarifications = ProblemClarification.objects.filter(problem__in=self.object.problems.all())
+        context['has_clarifications'] = clarifications.count() > 0
+        context['clarifications'] = clarifications.order_by('-date')
 
         announcements = ContestAnnouncement.objects.filter(contest=self.object)
         context['has_announcements'] = announcements.count() > 0
