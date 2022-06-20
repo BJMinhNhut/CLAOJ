@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dmoj\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-20 12:25+0700\n"
+"POT-Creation-Date: 2022-06-20 12:59+0700\n"
 "PO-Revision-Date: 2020-08-23 18:59\n"
 "Last-Translator: \n"
 "Language-Team: Vietnamese\n"
@@ -667,10 +667,6 @@ msgstr ""
 "B."
 
 #: judge/forms.py:217
-#, fuzzy
-#| msgid ""
-#| "The memory limit for this problem, in kilobytes (e.g. 64mb = 65536 "
-#| "kilobytes)."
 msgid "The memory limit for this problem, in KB (e.g. 512 MB = 524288 KB)."
 msgstr "Giới hạn bộ nhớ theo KILOBYTES. Bài 512 MB thì điền 524288."
 
@@ -1722,10 +1718,6 @@ msgid "memory limit"
 msgstr "giới hạn bộ nhớ"
 
 #: judge/models/problem.py:166
-#, fuzzy
-#| msgid ""
-#| "The memory limit for this problem, in kilobytes (e.g. 64mb = 65536 "
-#| "kilobytes)."
 msgid ""
 "The memory limit for this problem, in kilobytes (e.g. 256mb = 262144 "
 "kilobytes)."
@@ -1910,16 +1902,10 @@ msgid "associated problem"
 msgstr "bài liên quan"
 
 #: judge/models/problem.py:623
-#, fuzzy
-#| msgid "solution"
 msgid "PDF solution URL"
 msgstr "URL của file PDF lời giải"
 
 #: judge/models/problem.py:624
-#, fuzzy
-#| msgid ""
-#| "URL to PDF statement. The PDF file must be embeddable (Mobile web "
-#| "browsersmay not support embedding). Fallback included."
 msgid ""
 "URL to PDF solution. The PDF file must be embeddable (Mobile web browsersmay "
 "not support embedding). Fallback included."
@@ -2359,11 +2345,11 @@ msgstr ""
 
 #: judge/models/profile.py:288
 msgid "Can set high problem timelimit"
-msgstr ""
+msgstr "Được phép cài đặt giới hạn thời gian cao cho bài tập"
 
 #: judge/models/profile.py:289
 msgid "Can set long contest duration"
-msgstr ""
+msgstr "Được phép cài đặt thời gian dài cho contest"
 
 #: judge/models/profile.py:291
 msgid "user profile"
@@ -2803,7 +2789,7 @@ msgstr "mã nguồn"
 msgid "test case ID"
 msgstr "mã testcase"
 
-#: judge/models/submission.py:251feedback
+#: judge/models/submission.py:251
 msgid "status flag"
 msgstr "cờ trạng thái"
 
@@ -4171,10 +4157,8 @@ msgid "View all"
 msgstr "Xem đầy đủ"
 
 #: templates/blog/top-scorers.html:2
-#, fuzzy
-#| msgid "Top users"
 msgid "Top scorers"
-msgstr "Top thành viên"
+msgstr "Top điểm"
 
 #: templates/comments/list.html:2 templates/user/prepare-data.html:97
 msgid "Comments"
@@ -4490,7 +4474,7 @@ msgstr "riêng tư"
 
 #: templates/contest/list.html:99
 msgid "rated"
-msgstr ""
+msgstr "có xếp hạng"
 
 #: templates/contest/list.html:147
 msgid "Spectate"
@@ -5759,14 +5743,10 @@ msgid "Partial Accepted"
 msgstr "Kết quả đúng một phần"
 
 #: templates/submission/status-testcases.html:112
-#, fuzzy
-#| msgid "Input file"
 msgid "Input"
-msgstr "Tập tin đầu vào"
+msgstr "Dữ liệu vào"
 
 #: templates/submission/status-testcases.html:115
-#, fuzzy
-#| msgid "program output"
 msgid "Correct output"
 msgstr "Đáp án đúng"
 
@@ -6242,28 +6222,29 @@ msgstr "Chọn tất cả"
 #~ "Your password can't be too similar to your other personal information."
 #~ msgstr "Mật khẩu không được quá giống với các thông tin các nhân"
 
-#~ msgid "This password is entirely numeric."
-#~ msgstr "Mật khẩu này chỉ toàn các số."
+msgid "This password is entirely numeric."
+msgstr "Mật khẩu này chỉ toàn các số."
 
-#~ msgid "Your password can't be entirely numeric."
-#~ msgstr "Mật khẩu không được hoàn toàn bằng số."
+msgid "Your password can't be entirely numeric."
+msgstr "Mật khẩu không được hoàn toàn bằng số."
 
 #~ msgid "PRoblems"
 #~ msgstr "Danh sách bài"
 
-#~ msgid "posted {time}"
-#~ msgstr "đã đăng {time}"
+msgid "posted {time}"
+msgstr "đã đăng {time}"
 
-#~ msgid "commented {time}"
-#~ msgstr "đã bình luận {time}"
+msgid "commented {time}"
+msgstr "đã bình luận {time}"
 
-#~ msgid "%(duration)s long"
-#~ msgstr "Thời gian làm bài: %(duration)s"
+#: templates/contest/list.html:168
+msgid "%(duration)s long"
+msgstr "Thời gian làm bài: %(duration)s"
 
-#~ msgid "%(time_limit)s window"
-#~ msgstr ""
-#~ "Thời gian làm bài: %(time_limit)s (bắt đầu tính giờ khi nhấn tham gia kỳ "
-#~ "thi)"
+msgid "%(time_limit)s window"
+msgstr ""
+"Thời gian làm bài: %(time_limit)s (bắt đầu tính giờ khi nhấn tham gia kỳ "
+"thi)"
 
 #~ msgid "Problem URL"
 #~ msgstr "Link bài"
@@ -6423,8 +6404,8 @@ msgstr "Chọn tất cả"
 #~ msgid "Link to the issue"
 #~ msgstr "URL tới vấn đề"
 
-#~ msgid "Open new issue"
-#~ msgstr "Báo cáo vấn đề"
+msgid "Open new issue"
+msgstr "Báo cáo vấn đề mới"
 
 #~ msgid "You cannot change your password."
 #~ msgstr "Bạn không thể thay đổi mật khẩu."
@@ -6453,29 +6434,29 @@ msgstr "Chọn tất cả"
 #~ "Nếu bạn thấy lỗi này, hãy trở về trang chủ. ĐỪNG nhấn F5/tải lại trang, "
 #~ "vì nó sẽ tiếp tục gây ra lỗi này."
 
-#~ msgid "Are you sure you want to rescore ALL the submissions?"
-#~ msgstr "Bạn có chắc chắn muốn tính điểm lại lại TẤT CẢ các bài nộp?"
+msgid "Are you sure you want to rescore ALL the submissions?"
+msgstr "Bạn có chắc chắn muốn tính điểm lại lại TẤT CẢ các bài nộp?"
 
-#~ msgid "Report issue"
-#~ msgstr "Báo cáo vấn đề"
+msgid "Report issue"
+msgstr "Báo cáo vấn đề"
 
-#~ msgid "Hello, <b>%(username)s</b>."
-#~ msgstr "Xin chào, <b>%(username)s</b>."
+msgid "Hello, <b>%(username)s</b>."
+msgstr "Xin chào, <b>%(username)s</b>."
 
-#~ msgid "posted on {time}"
+msgid "posted on {time}"
 #~ msgstr "đã đăng vào {time}"
 
 #~ msgid "o{time}"
 #~ msgstr "o{time}"
 
-#~ msgid "N j, Y, G:i"
-#~ msgstr "j, M, Y, G:i"
+msgid "N j, Y, G:i"
+msgstr "j, M, Y, G:i"
 
-#~ msgid "posted on %(time)s"
-#~ msgstr "đã đăng vào %(time)s"
+msgid "posted on %(time)s"
+msgstr "đã đăng vào %(time)s"
 
-#~ msgid "on %(time)s"
-#~ msgstr "vào lúc %(time)s"
+msgid "on %(time)s"
+msgstr "vào lúc %(time)s"
 
 #~ msgid ""
 #~ "Please read the <a href=\"/about/blog/\">guidelines</a> before creating a "
@@ -6483,11 +6464,11 @@ msgstr "Chọn tất cả"
 #~ msgstr ""
 #~ "Hãy đọc <a href=\"/about/blog/\">nội quy blog</a> trước khi tạo blog mới."
 
-#~ msgid "Ends in %(countdown)s"
-#~ msgstr "Kết thúc trong %(countdown)s."
+msgid "Ends in %(countdown)s"
+msgstr "Kết thúc trong %(countdown)s."
 
-#~ msgid "Starting in %(countdown)s."
-#~ msgstr "Bắt đầu trong %(countdown)s."
+msgid "Starting in %(countdown)s."
+msgstr "Bắt đầu trong %(countdown)s."
 
 #~ msgid "Top contributors"
 #~ msgstr "Top đóng góp"
@@ -6501,11 +6482,11 @@ msgstr "Chọn tất cả"
 #~ msgstr ""
 #~ "Hãy đọc <a href=\"/about/comment/\">nội quy</a> trước khi bình luận."
 
-#~ msgid "commented on {time}"
-#~ msgstr "đã bình luận lúc {time}"
+msgid "commented on {time}"
+msgstr "đã bình luận lúc {time}"
 
-#~ msgid "edit %(edits)s"
-#~ msgstr "sửa %(edits)s"
+msgid "edit %(edits)s"
+msgstr "sửa %(edits)s"
 
 #~ msgid ""
 #~ "This comment is hidden due to too much negative feedback.\n"
@@ -6517,51 +6498,51 @@ msgstr "Chọn tất cả"
 #~ "\"javascript:comment_show_content(%(id)s)\">đây</a> để xem.\n"
 #~ "                                            "
 
-#~ msgid "Post!"
-#~ msgstr "Đăng!"
+msgid "Post!"
+msgstr "Đăng!"
 
-#~ msgid "Add new contest"
-#~ msgstr "Thêm kỳ thi"
+msgid "Add new contest"
+msgstr "Thêm kỳ thi"
 
-#~ msgid "List"
-#~ msgstr "Danh sách"
+msgid "List"
+msgstr "Danh sách"
 
-#~ msgid "Calendar"
-#~ msgstr "Lịch"
+msgid "Calendar"
+msgstr "Lịch"
 
-#~ msgid "Info"
-#~ msgstr "Thông tin"
+msgid "Info"
+msgstr "Thông tin"
 
-#~ msgid "Rankings"
-#~ msgstr "Bảng xếp hạng"
+msgid "Rankings"
+msgstr "Bảng xếp hạng"
 
 #~ msgid "Official Rankings"
 #~ msgstr "Bảng xếp hạng chính thức"
 
-#~ msgid "Stop spectating"
-#~ msgstr "Ngừng theo dõi"
+msgid "Stop spectating"
+msgstr "Ngừng theo dõi"
 
-#~ msgid "Spectating, contest ends in %(countdown)s."
-#~ msgstr "Đang theo dõi, kỳ thi sẽ kết thúc trong %(countdown)s."
+msgid "Spectating, contest ends in %(countdown)s."
+msgstr "Đang theo dõi, kỳ thi sẽ kết thúc trong %(countdown)s."
 
-#~ msgid "Participating virtually, %(countdown)s remaining."
-#~ msgstr "Đang tham gia ảo, còn lại %(countdown)s thời gian."
+msgid "Participating virtually, %(countdown)s remaining."
+msgstr "Đang tham gia ảo, còn lại %(countdown)s thời gian."
 
-#~ msgid "Participating virtually."
-#~ msgstr "Đang tham gia ảo"
+msgid "Participating virtually."
+msgstr "Đang tham gia ảo"
 
-#~ msgid "Contest is over."
-#~ msgstr "Kỳ thi đã kết thúc."
+msgid "Contest is over."
+msgstr "Kỳ thi đã kết thúc."
 
-#~ msgid "Your time is up! Contest ends in %(countdown)s."
-#~ msgstr ""
-#~ "Thời gian làm bài của bạn đã hết! Kỳ thi sẽ kết thúc sau %(countdown)s."
+msgid "Your time is up! Contest ends in %(countdown)s."
+msgstr ""
+"Thời gian làm bài của bạn đã hết! Kỳ thi sẽ kết thúc sau %(countdown)s."
 
-#~ msgid "You have %(countdown)s remaining."
-#~ msgstr "Bạn còn lại %(countdown)s thời gian."
+msgid "You have %(countdown)s remaining."
+msgstr "Bạn còn lại %(countdown)s thời gian."
 
-#~ msgid "Contest ends in %(countdown)s"
-#~ msgstr "Kỳ thi sẽ kết thúc sau %(countdown)s."
+msgid "Contest ends in %(countdown)s"
+msgstr "Kỳ thi sẽ kết thúc sau %(countdown)s."
 
 #~ msgid ""
 #~ "<b>%(time_limit)s</b> window between <b>%(start_time)s</b> and <b>"
