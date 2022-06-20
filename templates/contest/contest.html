@@ -28,11 +28,21 @@
         });
     </script>
     {% include "contest/media-js.html" %}
-    {% include "comments/media-js.html" %}
+    {% if not comment_lock %}
+        {% include "comments/media-js.html" %}
+    {% endif %}
 {% endblock %}
 
 {% block content_media %}
-    {% include "comments/media-css.html" %}
+    {% if not comment_lock %}
+        {% include "comments/media-css.html" %}
+    {% else %}
+        <style>
+            #content-body {
+                overflow: auto;
+            }
+        </style>
+    {% endif %}
 {% endblock %}
 
 {% block body %}
@@ -188,12 +198,6 @@
         {% endif %}
     </div>
 
-    <div class="content-description">
-        {% cache 3600 'contest_html' contest.id MATH_ENGINE %}
-            {{ contest.description|markdown('contest', MATH_ENGINE)|reference|str|safe }}
-        {% endcache %}
-    </div>
-
     {% if contest.ended or request.user.is_superuser or is_editor or is_tester %}
         <hr>
         <div class="contest-problems">
@@ -202,6 +206,9 @@
                 <thead>
                 <tr>
                     <th>#</th>
+                    {% if request.user.is_authenticated %}
+                        <th><i class="fa fa-check"></i></th>
+                    {% endif %}
                     <th>{{ _('Problem') }}</th>
                     <th>{{ _('Points') }}</th>
                     <th>{{ _('AC Rate') }}</th>
@@ -214,8 +221,39 @@
                 <tbody>
                 {% for problem in contest_problems %}
                     <tr>
-                        <td style="width: 1em;">{{loop.index}}</td>
-                        <td style="text-align: left; padding-left: 2em;">
+                        <td style="width: 2em;">{{loop.index}}</td>
+                        {% if request.user.is_authenticated %}
+                            {% if problem.id in completed_problem_ids %}
+                                <td solved="1" style="width: 2em;">
+                                    <a href="{{ url('user_submissions', problem.code, request.user.username) }}">
+                                        {% if problem.is_public or request.in_contest %}
+                                            <i class="solved-problem-color fa fa-check-circle"></i>
+                                        {% else %}
+                                            <i class="solved-problem-color fa fa-lock"></i>
+                                        {% endif %}
+                                    </a>
+                                </td>
+                            {% elif problem.id in attempted_problem_ids %}
+                                <td solved="0" style="width: 2em;">
+                                    <a href="{{ url('user_submissions', problem.code, request.user.username) }}">
+                                        {% if problem.is_public or request.in_contest %}
+                                            <i class="attempted-problem-color fa fa-minus-circle"></i>
+                                        {% else %}
+                                            <i class="attempted-problem-color fa fa-lock"></i>
+                                        {% endif %}
+                                    </a>
+                                </td>
+                            {% else %}
+                                <td solved="-1" style="width: 2em;">
+                                    {% if problem.is_public or request.in_contest %}
+                                        <i class="unsolved-problem-color fa fa-minus-circle"></i>
+                                    {% else %}
+                                        <i class="unsolved-problem-color fa fa-lock"></i>
+                                    {% endif %}
+                                </td>
+                            {% endif %}
+                        {% endif %}
+                        <td style="text-align: left; padding-left: 1em;">
                             {% if in_contest or problem.is_public or request.user.is_superuser or is_editor or is_tester %}
                                 <a href="{{ url('problem_detail', problem.code) }}">{{ problem.i18n_name or problem.name }}</a>
                             {% else %}
@@ -309,18 +347,28 @@
         {% endif %}
     {% endif %}
 
+    <div class="content-description">
+        {% cache 3600 'contest_html' contest.id MATH_ENGINE %}
+            {{ contest.description|markdown('contest', MATH_ENGINE)|reference|str|safe }}
+        {% endcache %}
+    </div>
+
     <hr>
     <span class="social">
         {{ post_to_facebook(request, contest, '<i class="fa fa-facebook-official"></i>') }}
         {{ post_to_twitter(request, SITE_NAME + ':', contest, '<i class="fa fa-twitter"></i>') }}
     </span>
 
-    {% include "comments/list.html" %}
+    {% if not comment_lock %}
+        {% include "comments/list.html" %}
+    {% endif %}
 {% endblock %}
 
 {% block description_end %}{% endblock %}
 
 {% block bodyend %}
     {{ super() }}
-    {% include "comments/math.html" %}
+    {% if not comment_lock %}
+        {% include "comments/math.html" %}
+    {% endif %}
 {% endblock %}

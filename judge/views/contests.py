@@ -13,7 +13,7 @@ from django.core.exceptions import ImproperlyConfigured, ObjectDoesNotExist, Per
 from django.db import IntegrityError
 from django.db.models import BooleanField, Case, Count, F, FloatField, IntegerField, Max, Min, Q, Sum, Value, When
 from django.db.models.expressions import CombinedExpression
-from django.http import Http404, HttpResponseBadRequest, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template.defaultfilters import date as date_filter
 from django.urls import reverse
@@ -36,14 +36,14 @@ from judge.models import Contest, ContestAnnouncement, ContestMoss, ContestParti
 from judge.tasks import run_moss
 from judge.utils.celery import redirect_to_task_status
 from judge.utils.opengraph import generate_opengraph
-from judge.utils.problems import _get_result_data
+from judge.utils.problems import _get_result_data, user_attempted_ids, user_completed_ids
 from judge.utils.ranker import ranker
 from judge.utils.stats import get_bar_chart, get_pie_chart
 from judge.utils.views import DiggPaginatorMixin, QueryStringSortMixin, SingleObjectFormView, TitleMixin, \
     generic_message
 
 __all__ = ['ContestList', 'ContestDetail', 'ContestRanking', 'ContestJoin', 'ContestLeave', 'ContestCalendar',
-           'ContestClone', 'ContestStats', 'ContestMossView', 'ContestMossDelete', 'contest_ranking_ajax',
+           'ContestClone', 'ContestStats', 'ContestMossView', 'ContestMossDelete',
            'ContestParticipationList', 'ContestParticipationDisqualify', 'get_contest_ranking_list',
            'base_contest_ranking_list']
 
@@ -247,6 +247,15 @@ class ContestMixin(object):
 class ContestDetail(ContestMixin, TitleMixin, CommentedDetailView):
     template_name = 'contest/contest.html'
 
+    def is_comment_locked(self):
+        if self.object.use_clarifications:
+            now = timezone.now()
+            if self.object.is_in_contest(self.request.user) or \
+                    (self.object.start_time <= now and now <= self.object.end_time):
+                return True
+
+        return super(ContestDetail, self).is_comment_locked()
+
     def get_comment_page(self):
         return 'c:%s' % self.object.key
 
@@ -291,6 +300,10 @@ class ContestDetail(ContestMixin, TitleMixin, CommentedDetailView):
         context['has_announcements'] = announcements.count() > 0
         context['announcements'] = announcements.order_by('-date')
         context['can_announce'] = self.object.is_editable_by(self.request.user)
+
+        authenticated = self.request.user.is_authenticated
+        context['completed_problem_ids'] = user_completed_ids(self.request.profile) if authenticated else []
+        context['attempted_problem_ids'] = user_attempted_ids(self.request.profile) if authenticated else []
 
         return context
 
@@ -693,23 +706,6 @@ def get_contest_ranking_list(request, contest, participation=None, ranking_list=
     return users, problems
 
 
-def contest_ranking_ajax(request, contest, participation=None):
-    contest, exists = _find_contest(request, contest)
-    if not exists:
-        return HttpResponseBadRequest('Invalid contest', content_type='text/plain')
-
-    if not contest.can_see_full_scoreboard(request.user):
-        raise Http404()
-
-    users, problems = get_contest_ranking_list(request, contest, participation)
-    return render(request, 'contest/ranking-table.html', {
-        'users': users,
-        'problems': problems,
-        'contest': contest,
-        'has_rating': contest.ratings.exists(),
-    })
-
-
 class ContestRankingBase(ContestMixin, TitleMixin, DetailView):
     template_name = 'contest/ranking.html'
     tab = None
@@ -734,6 +730,17 @@ class ContestRankingBase(ContestMixin, TitleMixin, DetailView):
         context['problems'] = problems
         context['tab'] = self.tab
         return context
+
+    def get(self, request, *args, **kwargs):
+        if 'raw' in request.GET:
+            self.object = self.get_object()
+
+            if not self.object.can_see_own_scoreboard(self.request.user):
+                raise Http404()
+
+            return HttpResponse(self.get_rendered_ranking_table(), content_type='text/plain')
+
+        return super().get(request, *args, **kwargs)
 
 
 class ContestRanking(ContestRankingBase):
