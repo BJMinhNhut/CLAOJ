@@ -137,7 +137,7 @@ class ContestAdmin(NoBatchDeleteMixin, VersionAdmin):
         (_('Settings'), {'fields': ('is_visible', 'use_clarifications', 'push_announcements',
                                     'hide_problem_tags', 'hide_problem_authors', 'show_short_display',
                                     'run_pretests_only', 'locked_after', 'scoreboard_visibility',
-                                    'points_precision', 'scoreboard_cache_timeout',)}),
+                                    'points_precision', 'scoreboard_cache_timeout')}),
         (_('Scheduling'), {'fields': ('start_time', 'end_time', 'time_limit')}),
         (_('Details'), {'fields': ('description', 'og_image', 'logo_override_image', 'tags', 'summary')}),
         (_('Format'), {'fields': ('format_name', 'format_config', 'problem_label_script')}),

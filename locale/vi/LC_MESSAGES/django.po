@@ -6773,8 +6773,8 @@ msgstr "Chọn tất cả"
 #~ msgid "PRoblems"
 #~ msgstr "Danh sách bài"
 
-#~ msgid "posted {time}"
-#~ msgstr "đã đăng {time}"
+msgid "posted {time}"
+msgstr "đã đăng {time}"
 
 #~ msgid "commented {time}"
 #~ msgstr "đã bình luận {time}"
@@ -6988,8 +6988,8 @@ msgstr "Chọn tất cả"
 #~ msgstr ""
 #~ "Hãy đọc <a href=\"/about/blog/\">nội quy blog</a> trước khi tạo blog mới."
 
-#~ msgid "Ends in %(countdown)s"
-#~ msgstr "Kết thúc trong %(countdown)s."
+msgid "Ends in %(countdown)s"
+msgstr "Kết thúc trong %(countdown)s."
 
 #~ msgid "Top contributors"
 #~ msgstr "Top đóng góp"
