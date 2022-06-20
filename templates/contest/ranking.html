@@ -273,6 +273,18 @@
                 localStorage.setItem('show-fullname', $('.fullname').is(':visible') ? 'true' : 'false');
             });
 
+            var contest_key = '{{contest.key}}';
+
+            $("a#cache_alert").click(function () {
+                var $closer = $(this);
+                $closer.parent().hide();
+                localStorage.setItem(`hide-cache-alert-${contest_key}`, 'true');
+            });
+
+            if (localStorage.getItem(`hide-cache-alert-${contest_key}`) == 'true') {
+                $("a#cache_alert").click();
+            }
+
             function timeComparison(sub1, sub2) {
                 if (!sub2) return;
                 return sub1['time'] < sub2['time'];
@@ -307,7 +319,6 @@
                     firstSolves[problem]['td'].addClass('first-solve');
                 }
             }
-
             {% if display_first_solves %}
                 firstSolve();
             {% endif %}
@@ -413,5 +424,19 @@
 {% endblock %}
 
 {% block users_table %}
-    {% include "contest/ranking-table.html" %}
+    {{ rendered_ranking_table }}
+{% endblock %}
+
+{% block body %}
+    {% if not contest.ended and cache_timeout %}
+        <div class="alert-warning alert-dismissable">
+            <p style="padding: 10px; text-align: center">
+            <a class="close" id="cache_alert">x</a>
+            {%- trans -%}
+                The scoreboard is cached for {{cache_timeout}} seconds, your submission might takes some time before it appears here.
+            {%- endtrans -%}
+            </p>
+        </div>
+    {% endif %}
+    {{ super() }}
 {% endblock %}

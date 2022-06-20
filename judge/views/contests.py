@@ -3,18 +3,21 @@ from calendar import Calendar, SUNDAY
 from collections import defaultdict, namedtuple
 from datetime import date, datetime, time, timedelta
 from functools import partial
-from itertools import chain
 from operator import attrgetter, itemgetter
 
 from django import forms
 from django.conf import settings
+from django.contrib.auth.context_processors import PermWrapper
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.cache import cache
 from django.core.exceptions import ImproperlyConfigured, ObjectDoesNotExist, PermissionDenied
 from django.db import IntegrityError
 from django.db.models import BooleanField, Case, Count, F, FloatField, IntegerField, Max, Min, Q, Sum, Value, When
 from django.db.models.expressions import CombinedExpression
+from django.db.models.query import Prefetch
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.template import loader
 from django.template.defaultfilters import date as date_filter
 from django.urls import reverse
 from django.utils import timezone
@@ -32,7 +35,7 @@ from judge.comments import CommentedDetailView
 from judge.contest_format import IOIContestFormat, LegacyIOIContestFormat
 from judge.forms import ContestAnnouncementForm, ContestCloneForm, ContestForm, ProposeContestProblemFormSet
 from judge.models import Contest, ContestAnnouncement, ContestMoss, ContestParticipation, ContestProblem, ContestTag, \
-    Problem, ProblemClarification, Profile, Submission
+    Organization, Problem, ProblemClarification, Profile, Submission
 from judge.tasks import run_moss
 from judge.utils.celery import redirect_to_task_status
 from judge.utils.opengraph import generate_opengraph
@@ -679,6 +682,14 @@ def make_contest_ranking_profile(contest, participation, contest_problems):
     )
 
 
+def base_contest_ranking_queryset(contest):
+    return contest.users.filter(virtual__gt=ContestParticipation.SPECTATE) \
+        .prefetch_related(Prefetch('user__organizations',
+                                   queryset=Organization.objects.filter(is_unlisted=False))) \
+        .annotate(submission_count=Count('submission')) \
+        .order_by('is_disqualified', '-score', 'cumtime', 'tiebreaker', '-submission_count')
+
+
 def base_contest_ranking_list(contest, problems, queryset):
     return [make_contest_ranking_profile(contest, participation, problems) for participation in
             queryset.select_related('user__user', 'rating').defer('user__about', 'user__organizations__about')]
@@ -690,24 +701,16 @@ def contest_ranking_list(contest, problems):
                                      .order_by('is_disqualified', '-score', 'cumtime', 'tiebreaker'))
 
 
-def get_contest_ranking_list(request, contest, participation=None, ranking_list=contest_ranking_list,
-                             show_current_virtual=True, ranker=ranker):
+def get_contest_ranking_list(request, contest, participation=None, ranking_list=contest_ranking_list, ranker=ranker):
     problems = list(contest.contest_problems.select_related('problem').defer('problem__description').order_by('order'))
-
     users = ranker(ranking_list(contest, problems), key=attrgetter('points', 'cumtime', 'tiebreaker'))
 
-    if show_current_virtual:
-        if participation is None and request.user.is_authenticated:
-            participation = request.profile.current_contest
-            if participation is None or participation.contest_id != contest.id:
-                participation = None
-        if participation is not None and participation.virtual:
-            users = chain([('-', make_contest_ranking_profile(contest, participation, problems))], users)
     return users, problems
 
 
 class ContestRankingBase(ContestMixin, TitleMixin, DetailView):
     template_name = 'contest/ranking.html'
+    ranking_table_template_name = 'contest/ranking-table.html'
     tab = None
 
     def get_title(self):
@@ -719,15 +722,25 @@ class ContestRankingBase(ContestMixin, TitleMixin, DetailView):
     def get_ranking_list(self):
         raise NotImplementedError()
 
+    def get_rendered_ranking_table(self):
+        users, problems = self.get_ranking_list()
+
+        return loader.render_to_string(self.ranking_table_template_name, {
+            'users': users,
+            'problems': problems,
+            'contest': self.object,
+            'has_rating': self.object.ratings.exists(),
+            'perms': PermWrapper(self.request.user),
+            'can_edit': self.can_edit,
+        })
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         if not self.object.can_see_own_scoreboard(self.request.user):
             raise Http404()
 
-        users, problems = self.get_ranking_list()
-        context['users'] = users
-        context['problems'] = problems
+        context['rendered_ranking_table'] = self.get_rendered_ranking_table()
         context['tab'] = self.tab
         return context
 
@@ -749,6 +762,23 @@ class ContestRanking(ContestRankingBase):
     def get_title(self):
         return _('%s Rankings') % self.object.name
 
+    @property
+    def cache_key(self):
+        return f'contest_ranking_cache_{self.object.key}'
+
+    @property
+    def bypass_cache_ranking(self):
+        return self.object.scoreboard_cache_timeout == 0 or self.can_edit
+
+    def get_ranking_queryset(self):
+        # if self.is_frozen:
+        #     queryset = base_contest_frozen_ranking_queryset(self.object)
+        # else:
+        queryset = base_contest_ranking_queryset(self.object)
+        # if not self.show_virtual:
+        queryset = queryset.filter(virtual=ContestParticipation.LIVE)
+        return queryset
+
     def get_ranking_list(self):
         if not self.object.can_see_full_scoreboard(self.request.user):
             queryset = self.object.users.filter(user=self.request.profile, virtual=ContestParticipation.LIVE)
@@ -758,11 +788,28 @@ class ContestRanking(ContestRankingBase):
                 ranker=lambda users, key: ((_('???'), user) for user in users),
             )
 
-        return get_contest_ranking_list(self.request, self.object)
+        queryset = self.get_ranking_queryset()
+
+        return get_contest_ranking_list(
+            self.request, self.object,
+            ranking_list=partial(base_contest_ranking_list, queryset=queryset),
+        )
+
+    def get_rendered_ranking_table(self):
+        if self.bypass_cache_ranking:
+            return super().get_rendered_ranking_table()
+
+        rendered_ranking_table = cache.get(self.cache_key, None)
+        if rendered_ranking_table is None:
+            rendered_ranking_table = super().get_rendered_ranking_table()
+            cache.set(self.cache_key, rendered_ranking_table, self.object.scoreboard_cache_timeout)
+
+        return rendered_ranking_table
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['has_rating'] = self.object.ratings.exists()
+        context['cache_timeout'] = self.object.scoreboard_cache_timeout
         context['display_first_solves'] = self.object.format.name not in \
             [IOIContestFormat.name, LegacyIOIContestFormat.name]
         return context
@@ -785,7 +832,7 @@ class ContestParticipationList(LoginRequiredMixin, ContestRankingBase):
                                 reverse('contest_ranking', args=[self.object.key]))
 
         return get_contest_ranking_list(
-            self.request, self.object, show_current_virtual=False,
+            self.request, self.object,
             ranking_list=partial(base_contest_ranking_list, queryset=queryset),
             ranker=lambda users, key: ((user.participation.virtual or live_link, user) for user in users))
 

@@ -255,12 +255,14 @@
             {% with authors=problem.authors.all() %}
                 {% if authors %}
                     <div class="problem-info-entry">
-                        <i class="fa fa-pencil-square-o fa-fw"></i><span
-                            class="pi-name">{% trans trimmed count=authors|length %}
-                        Author:
-                        {% pluralize count %}
-                        Authors:
-                    {% endtrans %}</span>
+                        <i class="fa fa-pencil-square-o fa-fw"></i>
+                        <span class="pi-name">
+                            {% trans trimmed count=authors|length %}
+                                Author:
+                            {% pluralize count %}
+                                Authors:
+                            {% endtrans %}
+                        </span>
                         <div class="pi-value authors-value">{{ link_users(authors) }}</div>
                     </div>
                 {% endif %}
