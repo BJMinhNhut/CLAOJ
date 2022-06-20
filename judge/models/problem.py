@@ -210,6 +210,7 @@ class Problem(models.Model):
     organizations = models.ManyToManyField(Organization, blank=True, verbose_name=_('organizations'),
                                            help_text=_('If private, only these organizations may see the problem.'))
     is_organization_private = models.BooleanField(verbose_name=_('private to organizations'), default=False)
+    suggester = models.ForeignKey(Profile, blank=True, null=True, related_name='suggested_problems', on_delete=SET_NULL)
 
     __original_points = None
 
@@ -233,6 +234,10 @@ class Problem(models.Model):
     def is_editor(self, profile):
         return (self.authors.filter(id=profile.id) | self.curators.filter(id=profile.id)).exists()
 
+    @property
+    def is_suggesting(self):
+        return self.suggester is not None and not self.is_public
+
     def is_editable_by(self, user):
         if not user.is_authenticated:
             return False
@@ -255,7 +260,7 @@ class Problem(models.Model):
                     return True
 
         # Problem is public.
-        if self.is_public:
+        if self.is_public and not self.is_suggesting:
             # Problem is not private to an organization.
             if not self.is_organization_private:
                 return True
@@ -284,6 +289,9 @@ class Problem(models.Model):
         # If user is a tester.
         if self.testers.filter(id=user.profile.id).exists():
             return True
+
+        if self.is_suggesting:
+            return False
 
         return False
 
@@ -379,6 +387,9 @@ class Problem(models.Model):
     def editor_ids(self):
         editors = self.author_ids.union(
             Problem.curators.through.objects.filter(problem=self).values_list('profile_id', flat=True))
+        if self.suggester is not None:
+            editors = list(editors)
+            editors.append(self.suggester.id)
         return editors
 
     @cached_property
@@ -559,6 +570,7 @@ class Problem(models.Model):
             ('create_organization_problem', _('Create organization problem')),
             ('edit_all_problem', _('Edit all problems')),
             ('edit_public_problem', _('Edit all public problems')),
+            ('suggest_new_problem', _('Suggest new problem')),
             ('problem_full_markup', _('Edit problems with full markup')),
             ('clone_problem', _('Clone problem')),
             ('upload_file_statement', _('Upload file-type statement')),

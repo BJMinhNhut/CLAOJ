@@ -536,6 +536,45 @@ class ProblemList(QueryStringSortMixin, TitleMixin, SolvedProblemMixin, ListView
         return HttpResponseRedirect(request.get_full_path())
 
 
+class SuggestList(ProblemList):
+    template_name = 'problem/suggest-list.html'
+    permission_required = "superuser"
+
+    def get_normal_queryset(self):
+        filter = Q(is_public=False)
+
+        # Only super user can see all suggesting problems
+        if self.request.user.is_superuser:
+            filter &= ~Q(suggester=None)
+        else:
+            filter &= Q(suggester=self.profile)
+        queryset = Problem.objects.filter(filter).select_related('group').defer('description', 'summary')
+        if self.show_types:
+            queryset = queryset.prefetch_related('types')
+        if self.category is not None:
+            queryset = queryset.filter(group__id=self.category)
+        if self.selected_types:
+            queryset = queryset.filter(types__in=self.selected_types)
+        if 'search' in self.request.GET:
+            self.search_query = query = ' '.join(self.request.GET.getlist('search')).strip()
+            if query:
+                if settings.ENABLE_FTS and self.full_text:
+                    queryset = queryset.search(query, queryset.BOOLEAN).extra(order_by=['-relevance'])
+                else:
+                    queryset = queryset.filter(
+                        Q(code__icontains=query) | Q(name__icontains=query) | Q(source__icontains=query) |
+                        Q(translations__name__icontains=query, translations__language=self.request.LANGUAGE_CODE))
+        self.prepoint_queryset = queryset
+        if self.point_start is not None:
+            queryset = queryset.filter(points__gte=self.point_start)
+        if self.point_end is not None:
+            queryset = queryset.filter(points__lte=self.point_end)
+        return queryset.distinct()
+
+    def get(self, request, *args, **kwargs):
+        return super(SuggestList, self).get(request, *args, **kwargs)
+
+
 class LanguageTemplateAjax(View):
     def get(self, request, *args, **kwargs):
         try:
@@ -828,7 +867,7 @@ class ProblemCreate(PermissionRequiredMixin, TitleMixin, CreateView):
         initial = super(ProblemCreate, self).get_initial()
         initial = initial.copy()
         initial['description'] = misc_config(self.request)['misc_config']['description_example']
-        initial['memory_limit'] = 262144  # 256 MB
+        initial['memory_limit'] = 524288  # 512 MB
         initial['authors'] = self.request.user
         initial['partial'] = True
         return initial
@@ -914,3 +953,35 @@ class ProblemEdit(ProblemMixin, TitleMixin, UpdateView):
         except PermissionDenied:
             return generic_message(request, _("Can't edit problem"),
                                    _('You are not allowed to edit this problem.'), status=403)
+
+
+class ProblemSuggest(ProblemCreate):
+    permission_required = 'judge.suggest_new_problem'
+
+    def get_title(self):
+        return _('Suggesting new problem')
+
+    def get_content_title(self):
+        return _('Suggesting new problem')
+
+    def get_initial(self):
+        initial = super(ProblemCreate, self).get_initial()
+        initial = initial.copy()
+        initial['description'] = misc_config(self.request)['misc_config']['description_example']
+        initial['memory_limit'] = 524288  # 512 MB
+        initial['partial'] = True
+        return initial
+
+    def form_valid(self, form):
+        with revisions.create_revision(atomic=True):
+            self.object = problem = form.save()
+            problem.suggester = self.request.user.profile
+            problem.allowed_languages.set(Language.objects.filter(include_in_problem=True))
+            problem.date = timezone.now()
+            self.save_statement(form, problem)
+            problem.save()
+
+            revisions.set_comment(_('Created on site'))
+            revisions.set_user(self.request.user)
+
+        return HttpResponseRedirect(self.get_success_url())

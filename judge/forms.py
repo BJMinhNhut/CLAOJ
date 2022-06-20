@@ -171,6 +171,12 @@ class ProblemEditForm(ModelForm):
         if self.user and not self.user.has_perm('judge.upload_file_statement'):
             self.fields.pop('statement_file')
 
+        if self.user and not self.user.has_perm('judge.change_public_visibility') and not org_pk:
+            self.fields.pop('is_public')
+
+        if self.user and not self.user.has_perm('judge.add_problem') and not org_pk:
+            self.fields.pop('authors')
+
     def clean_code(self):
         code = self.cleaned_data['code']
         if self.org_pk is None:
@@ -208,6 +214,7 @@ class ProblemEditForm(ModelForm):
             'code': _('Problem code, e.g: voi19_post'),
             'name': _('The full name of the problem, '
                       'as shown in the problem list. For example: VOI19 - A cong B.'),
+            'memory_limit': _('The memory limit for this problem, in KB (e.g. 512 MB = 524288 KB).'),
         }
         error_messages = {
             'code': {
