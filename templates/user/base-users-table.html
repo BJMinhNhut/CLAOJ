@@ -21,7 +21,7 @@
     <tr id="user-{{ user.user.username }}" {% block row_extra scoped %}{% endblock %}>
         <td>{{ rank }}</td>
 	{% block after_rank scoped %}{% endblock %}
-        <td class="user-name">
+        <td class="user-name" style="height: 2.5em;">
             <div>
                 <div style="float:left">
                     {% block user_name_display scoped %} {{ link_user(user) }} {% endblock %}

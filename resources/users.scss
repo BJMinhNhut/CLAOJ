@@ -12,8 +12,8 @@ td.user-name, td.personal-info, td.organization-name {
     text-align: left;
 }
 
-td.user-name {
-    height: 2.5em;
+td.rating {
+    padding: 0 1em;
 }
 
 tr {
@@ -48,6 +48,10 @@ tr {
         color: white;
     }
 
+    .username {
+        width: 100%;
+        height: 2.5em;
+    }
 
     .header {
         vertical-align: middle;

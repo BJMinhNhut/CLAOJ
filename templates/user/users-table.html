@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block after_rank %}
-    <td>{% if user.rating %}{{ rating_number(user) }}{% endif %}</td>
+    <td class="rating">{% if user.rating %}{{ rating_number(user) }}{% endif %}</td>
 {% endblock %}
 
 {% block after_point_head %}
