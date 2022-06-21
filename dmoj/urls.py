@@ -237,6 +237,8 @@ urlpatterns = [
         url(r'^/$', lambda _, contest: HttpResponsePermanentRedirect(reverse('contest_view', args=[contest]))),
     ])),
 
+    url(r'^contributors/$', user.ContribList.as_view(), name='contributors_list'),
+
     url(r'^organizations/$', organization.OrganizationList.as_view(), name='organization_list'),
     url(r'^organizations/create/$', organization.CreateOrganization.as_view(), name='organization_create'),
     url(r'^organization/(?P<pk>\d+)-(?P<slug>[\w-]*)', include([

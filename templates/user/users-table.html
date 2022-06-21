@@ -1,7 +1,7 @@
 {% extends "user/base-users-table.html" %}
 
 {% block after_rank_head %}
-    <th class="header rank">
+    <th class="header rank" style="width: 5%;">
         {% if sort_links %}<a href="{{ sort_links.rating }}">{% endif %}
         <span class="rate-group">
             <svg class="rate-box" viewBox="0 0 16 16">
@@ -25,18 +25,6 @@
     </th>
 {% endblock %}
 
-{% block contribution_head %}
-    <th class="header">
-        {% if sort_links %}<a href="{{ sort_links.contribution_points }}">{% endif %}
-        {{ _('Contribution points') }}
-        {%- if sort_links %}{{ sort_order.contribution_points }}</a>{% endif %}
-    </th>
-{% endblock %}
-
 {% block after_point %}
     <td>{{ user.problem_count }}</td>
-{% endblock %}
-
-{% block contribution %}
-    <td>{{ user.contribution_points }}</td>
 {% endblock %}

@@ -1,0 +1,24 @@
+{% extends "user/base-users.html" %}
+
+{% block title_ruler %}{% endblock %}
+
+{% block title_row %}
+    {% set tab = 'contributor' %}
+    {% set title = _('Contributors') %}
+    {% include "user/user-list-tabs.html" %}
+{% endblock %}
+
+{% block users_table %}
+    {% include "user/contrib-table.html" %}
+{% endblock %}
+
+{% block user_data scoped %}
+    {% if user.organizations.all() %}  
+        <em style="font-size: 0.75em; color:grey;"> 
+        {{ user.organizations.all()[0].name }}
+        {% for organization in user.organizations.all()[1:] %}
+            | {{ organization.name }}
+        {% endfor %}
+        </em> 
+    {% endif %}
+{% endblock %}

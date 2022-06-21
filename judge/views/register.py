@@ -76,9 +76,11 @@ class RegistrationView(OldRegistrationView):
         })
 
         cleaned_data = form.cleaned_data
+        user.first_name = cleaned_data['full_name']
         profile.timezone = cleaned_data['timezone']
         profile.language = cleaned_data['language']
         profile.organizations.add(*cleaned_data['organizations'])
+
         with transaction.atomic():
             user.save()
             profile.save()

@@ -15,10 +15,10 @@
     </style>
 
     {% if is_admin %}
-	<style>
-        #users-table td:nth-child(4), #users-table th:nth-child(4) {
-            border-right: none;
-        }
+        <style>
+            th.personal-info, td.personal-info {
+                border-right: none;
+            }
         </style>
     {% endif %}
 {% endblock %}

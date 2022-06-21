@@ -7,8 +7,9 @@
     }
 }
 
-td.user-name {
-    text-align: center;
+td.user-name, td.personal-info, td.organization-name {
+    padding-left: 1em;
+    text-align: left;
 }
 
 tr {
@@ -17,9 +18,6 @@ tr {
     &:target {
         background: #fff897;
     }
-}
-
-th.header.rank {
 }
 
 #search-handle {
@@ -41,17 +39,9 @@ th.header.rank {
     padding-left: 0.5em;
 }
 
-#users-table {
-    .username {
-        width: 50%;
-    }
-
-    .fullname {
-        width: 50%;
-    }
-
-    .rank, .points, .problems {
-        width: 5%;
+#users-table, #organization-table {
+    th a {
+        color: white;
     }
 
 
@@ -81,7 +71,6 @@ th.header.rank {
 
     td:nth-child(2), th:nth-child(2) {
         text-align: center;
-	padding: 0 10px;
     }
 }
 

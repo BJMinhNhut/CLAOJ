@@ -238,7 +238,6 @@ class Profile(models.Model):
             self.save(update_fields=['contribution_points'])
         return new_pp
 
-
     calculate_contribution_points.alters_data = True
 
     def update_contribution_points(self, delta):
