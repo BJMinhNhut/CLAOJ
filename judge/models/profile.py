@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.db import models
-from django.db.models import F, Max
+from django.db.models import F, Max, Sum
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.encoding import force_bytes
@@ -128,6 +128,7 @@ class Profile(models.Model):
                                  default=Language.get_default_language_pk)
     points = models.FloatField(default=0, db_index=True)
     performance_points = models.FloatField(default=0, db_index=True)
+    contribution_points = models.IntegerField(default=0, db_index=True)
     problem_count = models.IntegerField(default=0, db_index=True)
     ace_theme = models.CharField(max_length=30, choices=ACE_THEMES, default='tomorrow')
     last_access = models.DateTimeField(verbose_name=_('last access time'), default=now)
@@ -215,6 +216,39 @@ class Profile(models.Model):
         return points
 
     calculate_points.alters_data = True
+
+    def calculate_contribution_points(self):
+        from judge.models import BlogPost, Comment, Ticket
+        old_pp = self.contribution_points
+        # Because the aggregate function can return None
+        # So we use `X or 0` to get 0 if X is None
+        # Please note that `0 or X` will return None if X is None
+        total_comment_scores = Comment.objects.filter(author=self.id) \
+            .aggregate(sum=Sum('score'))['sum'] or 0
+        total_blog_scores = BlogPost.objects.filter(authors=self.id, visible=True, organization=None) \
+            .aggregate(sum=Sum('score'))['sum'] or 0
+        count_good_tickets = Ticket.objects.filter(user=self.id, is_contributive=True) \
+            .count()
+        count_suggested_problem = self.suggested_problems.filter(is_public=True).count()
+        new_pp = (total_comment_scores + total_blog_scores) * settings.CLAOJ_CP_COMMENT + \
+            count_good_tickets * settings.CLAOJ_CP_TICKET + \
+            count_suggested_problem * settings.CLAOJ_CP_PROBLEM
+        if new_pp != old_pp:
+            self.contribution_points = new_pp
+            self.save(update_fields=['contribution_points'])
+        return new_pp
+
+
+    calculate_contribution_points.alters_data = True
+
+    def update_contribution_points(self, delta):
+        # this is just for testing the contribution
+        # we should not use this function to update contribution points
+        self.contribution_points += delta
+        self.save(update_fields=['contribution_points'])
+        return self.contribution_points
+
+    update_contribution_points.alters_data = True
 
     def generate_api_token(self):
         secret = secrets.token_bytes(32)

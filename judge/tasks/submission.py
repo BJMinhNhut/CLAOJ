@@ -40,15 +40,20 @@ def rejudge_problem_filter(self, problem_id, id_range=None, languages=None, resu
 
 
 @shared_task(bind=True)
-def rescore_problem(self, problem_id):
+def rescore_problem(self, problem_id, publicy_changed):
     problem = Problem.objects.get(id=problem_id)
     submissions = Submission.objects.filter(problem_id=problem_id)
+    if publicy_changed and problem.suggester is not None:
+        points = settings.CLAOJ_CP_PROBLEM
+        if problem.is_public is False:
+            points = -points
+        problem.suggester.update_contribution_points(points)
 
     with Progress(self, submissions.count(), stage=_('Modifying submissions')) as p:
         rescored = 0
         for submission in submissions.iterator():
-            submission.points = round(submission.case_points / submission.case_total * problem.points
-                                      if submission.case_total else 0, 1)
+            submission.points = round(submission.case_points / submission.case_total
+                                      if submission.case_total else 0, 3) * problem.points
             if not problem.partial and submission.points < problem.points:
                 submission.points = 0
             submission.save(update_fields=['points'])

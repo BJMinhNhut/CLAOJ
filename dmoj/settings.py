@@ -51,6 +51,12 @@ CLAOJ_ORG_PP_STEP = 0.95
 CLAOJ_ORG_PP_ENTRIES = 100
 CLAOJ_ORG_PP_SCALE = 1
 
+# Contribution points function
+# Both should be int
+CLAOJ_CP_COMMENT = 1  # Each comment vote equals 1 CP
+CLAOJ_CP_TICKET = 10  # Each good ticket equals 10 CP
+CLAOJ_CP_PROBLEM = 20 # Each suggested problem equals 20 CP
+
 NODEJS = '/usr/bin/node'
 EXIFTOOL = '/usr/bin/exiftool'
 ACE_URL = '//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3'

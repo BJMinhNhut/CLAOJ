@@ -57,6 +57,13 @@
                 </span>
             </div>
 
+            <div>
+                <b class="semibold">{{ _('Contribution points:') }}</b>
+                <span title="{{ user.contribution_points }}">
+                    {{ user.contribution_points }}
+                </span>
+            </div>
+        
             <br>
             <div>
                 <a href="{{ url('all_user_submissions', user.user.username) }}">{{ _('View submissions') }}</a>
