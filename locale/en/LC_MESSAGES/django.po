@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-21 12:59+0000\n"
+"POT-Creation-Date: 2022-06-21 16:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Banned User"
 msgstr ""
 
-#: dmoj/settings.py:73 templates/base.html:256 templates/comments/list.html:99
+#: dmoj/settings.py:73 templates/base.html:261 templates/comments/list.html:99
 #: templates/contest/contest-list-tabs.html:33
 #: templates/contest/ranking-table.html:41
 #: templates/problem/problem-list-tabs.html:16
@@ -192,7 +192,7 @@ msgstr ""
 msgid "username"
 msgstr ""
 
-#: judge/admin/contest.py:380 templates/base.html:295
+#: judge/admin/contest.py:380 templates/base.html:300
 msgid "virtual"
 msgstr ""
 
@@ -457,7 +457,7 @@ msgid "Comment body"
 msgstr ""
 
 #: judge/comments.py:47 judge/views/blog.py:46 judge/views/comment.py:39
-#: judge/views/ticket.py:47
+#: judge/views/ticket.py:55
 msgid "Your part is silent, little toad."
 msgstr ""
 
@@ -2769,59 +2769,59 @@ msgstr ""
 msgid "submission test cases"
 msgstr ""
 
-#: judge/models/ticket.py:10
+#: judge/models/ticket.py:20
 msgid "ticket title"
 msgstr ""
 
-#: judge/models/ticket.py:11
+#: judge/models/ticket.py:21
 msgid "ticket creator"
 msgstr ""
 
-#: judge/models/ticket.py:13
+#: judge/models/ticket.py:23
 msgid "creation time"
 msgstr ""
 
-#: judge/models/ticket.py:14
+#: judge/models/ticket.py:24
 msgid "assignees"
 msgstr ""
 
-#: judge/models/ticket.py:16
+#: judge/models/ticket.py:26
 msgid "quick notes"
 msgstr ""
 
-#: judge/models/ticket.py:17
+#: judge/models/ticket.py:27
 msgid "Staff notes for this issue to aid in processing."
 msgstr ""
 
-#: judge/models/ticket.py:18
+#: judge/models/ticket.py:28
 msgid "linked item type"
 msgstr ""
 
-#: judge/models/ticket.py:20
+#: judge/models/ticket.py:30
 msgid "linked item ID"
 msgstr ""
 
-#: judge/models/ticket.py:22
+#: judge/models/ticket.py:32
 msgid "is ticket contributive?"
 msgstr ""
 
-#: judge/models/ticket.py:23
+#: judge/models/ticket.py:33
 msgid "is ticket open?"
 msgstr ""
 
-#: judge/models/ticket.py:27
+#: judge/models/ticket.py:37
 msgid "ticket"
 msgstr ""
 
-#: judge/models/ticket.py:29
+#: judge/models/ticket.py:39
 msgid "poster"
 msgstr ""
 
-#: judge/models/ticket.py:31
+#: judge/models/ticket.py:41
 msgid "message body"
 msgstr ""
 
-#: judge/models/ticket.py:32
+#: judge/models/ticket.py:42
 msgid "message time"
 msgstr ""
 
@@ -3752,56 +3752,64 @@ msgid ""
 "</a>"
 msgstr ""
 
-#: judge/views/ticket.py:34 judge/views/ticket.py:40
+#: judge/views/ticket.py:35 judge/views/ticket.py:42
 msgid "Ticket title"
 msgstr ""
 
-#: judge/views/ticket.py:41
+#: judge/views/ticket.py:43
+msgid "Link to the issue"
+msgstr ""
+
+#: judge/views/ticket.py:44
 msgid "Issue description"
 msgstr ""
 
-#: judge/views/ticket.py:49
+#: judge/views/ticket.py:57
 msgid "You must solve at least one problem before you can create a ticket."
 msgstr ""
 
-#: judge/views/ticket.py:92 judge/views/ticket.py:95
+#: judge/views/ticket.py:100 judge/views/ticket.py:103
+msgid "Open new issue"
+msgstr ""
+
+#: judge/views/ticket.py:133 judge/views/ticket.py:136
 #, python-format
 msgid "New ticket for %s"
 msgstr ""
 
-#: judge/views/ticket.py:149
+#: judge/views/ticket.py:190
 #, python-format
 msgid "%(title)s - Ticket %(id)d"
 msgstr ""
 
-#: judge/views/ticket.py:182
+#: judge/views/ticket.py:223
 msgid "You cannot vote your own ticket."
 msgstr ""
 
-#: judge/views/ticket.py:264
+#: judge/views/ticket.py:305
 #, python-format
 msgid "Tickets - Page %(number)d of %(total)d"
 msgstr ""
 
-#: judge/views/ticket.py:315
+#: judge/views/ticket.py:356
 #, python-format
 msgid "New Ticket: %s"
 msgstr ""
 
-#: judge/views/ticket.py:316
+#: judge/views/ticket.py:357
 #, python-format
 msgid "#%(id)d, assigned to: %(users)s"
 msgstr ""
 
-#: judge/views/ticket.py:318
+#: judge/views/ticket.py:359
 msgid ", "
 msgstr ""
 
-#: judge/views/ticket.py:318
+#: judge/views/ticket.py:359
 msgid "no one"
 msgstr ""
 
-#: judge/views/ticket.py:338
+#: judge/views/ticket.py:379
 #, python-format
 msgid "New Ticket Message For: %s"
 msgstr ""
@@ -3873,7 +3881,7 @@ msgid "Updated on site"
 msgstr ""
 
 #: judge/views/user.py:401 templates/admin/auth/user/change_form.html:14
-#: templates/admin/auth/user/change_form.html:17 templates/base.html:258
+#: templates/admin/auth/user/change_form.html:17 templates/base.html:263
 #: templates/user/user-tabs.html:16
 msgid "Edit profile"
 msgstr ""
@@ -3960,53 +3968,57 @@ msgstr ""
 msgid "Rejudge"
 msgstr ""
 
-#: templates/base.html:250
+#: templates/base.html:238
+msgid "Report issue"
+msgstr ""
+
+#: templates/base.html:255
 #, python-format
 msgid "Hello, <b>%(username)s</b>."
 msgstr ""
 
-#: templates/base.html:265
+#: templates/base.html:270
 msgid "Log out"
 msgstr ""
 
-#: templates/base.html:274
+#: templates/base.html:279
 #: templates/registration/password_reset_complete.html:4
 msgid "Log in"
 msgstr ""
 
-#: templates/base.html:275 templates/registration/registration_form.html:179
+#: templates/base.html:280 templates/registration/registration_form.html:179
 msgid "or"
 msgstr ""
 
-#: templates/base.html:276
+#: templates/base.html:281
 msgid "Sign up"
 msgstr ""
 
-#: templates/base.html:289
+#: templates/base.html:294
 msgid "spectating"
 msgstr ""
 
-#: templates/base.html:300
+#: templates/base.html:305
 msgid "Go to Rankings"
 msgstr ""
 
-#: templates/base.html:307
+#: templates/base.html:312
 msgid "This site works best with JavaScript enabled."
 msgstr ""
 
-#: templates/base.html:334
+#: templates/base.html:339
 msgid "Long An HSGS Online Judge"
 msgstr ""
 
-#: templates/base.html:335
+#: templates/base.html:340
 msgid "powered by"
 msgstr ""
 
-#: templates/base.html:336
+#: templates/base.html:341
 msgid "and"
 msgstr ""
 
-#: templates/base.html:337
+#: templates/base.html:342
 msgid "developed by"
 msgstr ""
 
@@ -4050,7 +4062,6 @@ msgstr ""
 #: templates/blog/edit.html:39 templates/contest/edit.html:139
 #: templates/organization/edit.html:53 templates/organization/new.html:10
 #: templates/problem/create.html:9 templates/problem/suggest.html:19
-#: templates/ticket/new.html:39
 msgid "Create"
 msgstr ""
 
@@ -6066,11 +6077,11 @@ msgstr ""
 msgid "%(user)s's"
 msgstr ""
 
-#: templates/ticket/list.html:134 templates/ticket/ticket.html:295
+#: templates/ticket/list.html:134 templates/ticket/ticket.html:296
 msgid "Reopened: "
 msgstr ""
 
-#: templates/ticket/list.html:137 templates/ticket/ticket.html:296
+#: templates/ticket/list.html:137 templates/ticket/ticket.html:297
 msgid "Closed: "
 msgstr ""
 
@@ -6090,7 +6101,7 @@ msgstr ""
 msgid "Filing user"
 msgstr ""
 
-#: templates/ticket/list.html:242 templates/ticket/ticket.html:397
+#: templates/ticket/list.html:242 templates/ticket/ticket.html:398
 msgid "Assignee"
 msgid_plural "Assignees"
 msgstr[0] ""
@@ -6105,6 +6116,10 @@ msgstr ""
 msgid "messaged on {time}"
 msgstr ""
 
+#: templates/ticket/new.html:52
+msgid "Create!"
+msgstr ""
+
 #: templates/ticket/new_problem.html:7
 msgid "Thanks for opening a ticket!"
 msgstr ""
@@ -6116,39 +6131,39 @@ msgid ""
 "a problem, ask in the comments instead."
 msgstr ""
 
-#: templates/ticket/ticket.html:382
+#: templates/ticket/ticket.html:383
 msgid "Post"
 msgstr ""
 
-#: templates/ticket/ticket.html:390
+#: templates/ticket/ticket.html:391
 msgid "Associated object"
 msgstr ""
 
-#: templates/ticket/ticket.html:407
+#: templates/ticket/ticket.html:408
 msgid "No one is assigned."
 msgstr ""
 
-#: templates/ticket/ticket.html:414
+#: templates/ticket/ticket.html:415
 msgid "Assignee notes"
 msgstr ""
 
-#: templates/ticket/ticket.html:421 templates/widgets/select_all.html:4
+#: templates/ticket/ticket.html:422 templates/widgets/select_all.html:4
 msgid "Nothing here."
 msgstr ""
 
-#: templates/ticket/ticket.html:428
+#: templates/ticket/ticket.html:429
 msgid "Upvote"
 msgstr ""
 
-#: templates/ticket/ticket.html:430
+#: templates/ticket/ticket.html:431
 msgid "Undo vote"
 msgstr ""
 
-#: templates/ticket/ticket.html:434
+#: templates/ticket/ticket.html:435
 msgid "Close ticket"
 msgstr ""
 
-#: templates/ticket/ticket.html:436
+#: templates/ticket/ticket.html:437
 msgid "Reopen ticket"
 msgstr ""
 

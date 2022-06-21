@@ -85,6 +85,7 @@ wss_receiver.on('connection', function (socket) {
     socket.on('message', function (request) {
         try {
             request = JSON.parse(request);
+			request.command = request.command.replace(/-/g, '_');
         } catch (err) {
             socket.send(JSON.stringify({
                 status: 'error',
@@ -93,7 +94,6 @@ wss_receiver.on('connection', function (socket) {
             }));
             return;
         }
-        request.command = request.command.replace(/-/g, '_');
         if (request.command in commands)
             commands[request.command](request);
         else
@@ -132,6 +132,7 @@ wss_sender.on('connection', function (socket) {
     socket.on('message', function (request) {
         try {
             request = JSON.parse(request);
+			request.command = request.command.replace(/-/g, '_');
         } catch (err) {
             socket.send(JSON.stringify({
                 status: 'error',
@@ -140,7 +141,6 @@ wss_sender.on('connection', function (socket) {
             }));
             return;
         }
-        request.command = request.command.replace(/-/g, '_');
         if (request.command in commands)
             socket.send(JSON.stringify(commands[request.command](request)));
         else

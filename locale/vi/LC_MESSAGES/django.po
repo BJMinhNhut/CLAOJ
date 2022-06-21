@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dmoj\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-21 12:59+0000\n"
+"POT-Creation-Date: 2022-06-21 16:10+0000\n"
 "PO-Revision-Date: 2020-08-23 18:59\n"
 "Last-Translator: \n"
 "Language-Team: Vietnamese\n"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Banned User"
 msgstr ""
 
-#: dmoj/settings.py:73 templates/base.html:256 templates/comments/list.html:99
+#: dmoj/settings.py:73 templates/base.html:261 templates/comments/list.html:99
 #: templates/contest/contest-list-tabs.html:33
 #: templates/contest/ranking-table.html:41
 #: templates/problem/problem-list-tabs.html:16
@@ -183,7 +183,7 @@ msgstr "Tính lại kết quả"
 msgid "username"
 msgstr "tên người dùng"
 
-#: judge/admin/contest.py:380 templates/base.html:295
+#: judge/admin/contest.py:380 templates/base.html:300
 msgid "virtual"
 msgstr "ảo"
 
@@ -445,7 +445,7 @@ msgid "Comment body"
 msgstr "Bình luận"
 
 #: judge/comments.py:47 judge/views/blog.py:46 judge/views/comment.py:39
-#: judge/views/ticket.py:47
+#: judge/views/ticket.py:55
 msgid "Your part is silent, little toad."
 msgstr "Im lặng đi, bạn không có quyền nói ở đây."
 
@@ -2841,61 +2841,61 @@ msgstr "test case của bài"
 msgid "submission test cases"
 msgstr "các test case của bài"
 
-#: judge/models/ticket.py:10
+#: judge/models/ticket.py:20
 msgid "ticket title"
 msgstr "tên vấn đề"
 
-#: judge/models/ticket.py:11
+#: judge/models/ticket.py:21
 msgid "ticket creator"
 msgstr "người báo cáo vấn đề"
 
-#: judge/models/ticket.py:13
+#: judge/models/ticket.py:23
 msgid "creation time"
 msgstr "thời gian tạo"
 
-#: judge/models/ticket.py:14
+#: judge/models/ticket.py:24
 msgid "assignees"
 msgstr "người được phân công"
 
-#: judge/models/ticket.py:16
+#: judge/models/ticket.py:26
 msgid "quick notes"
 msgstr "ghi chú"
 
-#: judge/models/ticket.py:17
+#: judge/models/ticket.py:27
 msgid "Staff notes for this issue to aid in processing."
 msgstr ""
 
-#: judge/models/ticket.py:18
+#: judge/models/ticket.py:28
 msgid "linked item type"
 msgstr ""
 
-#: judge/models/ticket.py:20
+#: judge/models/ticket.py:30
 msgid "linked item ID"
 msgstr ""
 
-#: judge/models/ticket.py:22
+#: judge/models/ticket.py:32
 #, fuzzy
 #| msgid "ticket title"
 msgid "is ticket contributive?"
 msgstr "tên vấn đề"
 
-#: judge/models/ticket.py:23
+#: judge/models/ticket.py:33
 msgid "is ticket open?"
 msgstr ""
 
-#: judge/models/ticket.py:27
+#: judge/models/ticket.py:37
 msgid "ticket"
 msgstr ""
 
-#: judge/models/ticket.py:29
+#: judge/models/ticket.py:39
 msgid "poster"
 msgstr ""
 
-#: judge/models/ticket.py:31
+#: judge/models/ticket.py:41
 msgid "message body"
 msgstr "nội dung"
 
-#: judge/models/ticket.py:32
+#: judge/models/ticket.py:42
 msgid "message time"
 msgstr ""
 
@@ -3864,60 +3864,68 @@ msgstr ""
 "Danh sách bài nộp của <a href=\"{1}\">{0}</a> cho bài {2} trong <a href="
 "\"{4}\">{3}</a>"
 
-#: judge/views/ticket.py:34 judge/views/ticket.py:40
+#: judge/views/ticket.py:35 judge/views/ticket.py:42
 msgid "Ticket title"
 msgstr "Tiêu đề của vấn đề"
 
-#: judge/views/ticket.py:41
+#: judge/views/ticket.py:43
+msgid "Link to the issue"
+msgstr "URL tới vấn đề"
+
+#: judge/views/ticket.py:44
 msgid "Issue description"
 msgstr "Mô tả vấn đề"
 
-#: judge/views/ticket.py:49
+#: judge/views/ticket.py:57
 #, fuzzy
 #| msgid "You must solve at least one problem before you can vote."
 msgid "You must solve at least one problem before you can create a ticket."
 msgstr "Bạn phải giải ít nhất một bài trước khi có thể bỏ biết"
 
-#: judge/views/ticket.py:92 judge/views/ticket.py:95
+#: judge/views/ticket.py:100 judge/views/ticket.py:103
+msgid "Open new issue"
+msgstr "Báo cáo vấn đề mới"
+
+#: judge/views/ticket.py:133 judge/views/ticket.py:136
 #, python-format
 msgid "New ticket for %s"
 msgstr "Báo cáo vấn đề cho %s"
 
-#: judge/views/ticket.py:149
+#: judge/views/ticket.py:190
 #, python-format
 msgid "%(title)s - Ticket %(id)d"
 msgstr "%(title)s - Vấn đề %(id)d"
 
-#: judge/views/ticket.py:182
+#: judge/views/ticket.py:223
 #, fuzzy
 #| msgid "You cannot vote your own ticket."
 msgid "You cannot vote your own ticket."
 msgstr "Bạn không thể tự đánh giá"
 
-#: judge/views/ticket.py:264
+#: judge/views/ticket.py:305
 #, python-format
 msgid "Tickets - Page %(number)d of %(total)d"
 msgstr "Các vấn đề - Trang %(number)d /%(total)d"
 
-#: judge/views/ticket.py:315
+#: judge/views/ticket.py:356
 #, python-format
 msgid "New Ticket: %s"
 msgstr "Vấn đề mới: %s"
 
-#: judge/views/ticket.py:316
+#: judge/views/ticket.py:357
 #, python-format
 msgid "#%(id)d, assigned to: %(users)s"
 msgstr "#%(id)d, phân công cho: %(users)s"
 
-#: judge/views/ticket.py:318
+#: judge/views/ticket.py:359
 msgid ", "
 msgstr ", "
 
-#: judge/views/ticket.py:318
+#: judge/views/ticket.py:359
 msgid "no one"
 msgstr "không ai cả"
 
-#: judge/views/ticket.py:338
+#: judge/views/ticket.py:379
 #, python-format
 msgid "New Ticket Message For: %s"
 msgstr "Tin nhắn mới cho vấn đề: %s"
@@ -3989,7 +3997,7 @@ msgid "Updated on site"
 msgstr "Cập Nhật trên trang web"
 
 #: judge/views/user.py:401 templates/admin/auth/user/change_form.html:14
-#: templates/admin/auth/user/change_form.html:17 templates/base.html:258
+#: templates/admin/auth/user/change_form.html:17 templates/base.html:263
 #: templates/user/user-tabs.html:16
 msgid "Edit profile"
 msgstr "Chỉnh sửa hồ sơ"
@@ -4076,55 +4084,59 @@ msgstr "Cập nhật người dùng"
 msgid "Rejudge"
 msgstr "Chấm lại"
 
-#: templates/base.html:250
+#: templates/base.html:238
+msgid "Report issue"
+msgstr "Báo cáo vấn đề"
+
+#: templates/base.html:255
 #, python-format
 msgid "Hello, <b>%(username)s</b>."
 msgstr "Xin chào, <b>%(username)s</b>."
 
-#: templates/base.html:265
+#: templates/base.html:270
 msgid "Log out"
 msgstr "Đăng xuất"
 
-#: templates/base.html:274
+#: templates/base.html:279
 #: templates/registration/password_reset_complete.html:4
 msgid "Log in"
 msgstr "Đăng nhập"
 
-#: templates/base.html:275 templates/registration/registration_form.html:179
+#: templates/base.html:280 templates/registration/registration_form.html:179
 msgid "or"
 msgstr "hoặc"
 
-#: templates/base.html:276
+#: templates/base.html:281
 msgid "Sign up"
 msgstr "Đăng ký"
 
-#: templates/base.html:289
+#: templates/base.html:294
 msgid "spectating"
 msgstr "spectating"
 
-#: templates/base.html:300
+#: templates/base.html:305
 msgid "Go to Rankings"
 msgstr "Tới bảng xếp hạng"
 
-#: templates/base.html:307
+#: templates/base.html:312
 msgid "This site works best with JavaScript enabled."
 msgstr "Trang web này hoạt động tốt nhất khi JavaScript được cho phép."
 
-#: templates/base.html:334
+#: templates/base.html:339
 msgid "Long An HSGS Online Judge"
 msgstr "Web chấm bài tự động trường THPT chuyên Long An"
 
-#: templates/base.html:335
+#: templates/base.html:340
 msgid "powered by"
 msgstr "dựa trên nền tảng"
 
-#: templates/base.html:336
+#: templates/base.html:341
 #, fuzzy
 #| msgid "Random"
 msgid "and"
 msgstr "Ngẫu nhiên"
 
-#: templates/base.html:337
+#: templates/base.html:342
 msgid "developed by"
 msgstr "phát triển bởi"
 
@@ -4177,7 +4189,6 @@ msgstr "Cập nhật"
 #: templates/blog/edit.html:39 templates/contest/edit.html:139
 #: templates/organization/edit.html:53 templates/organization/new.html:10
 #: templates/problem/create.html:9 templates/problem/suggest.html:19
-#: templates/ticket/new.html:39
 msgid "Create"
 msgstr "Tạo"
 
@@ -5295,6 +5306,7 @@ msgid ""
 "Submitting an official solution before solving the problem yourself is a "
 "bannable offence."
 msgstr ""
+"Nộp code mẫu trước khi tự giải được bài tập là một hành vi có thể bị ban."
 
 #: templates/problem/editorial.html:30 templates/problem/problem.html:260
 msgid "Author:"
@@ -6314,11 +6326,11 @@ msgstr "Tốt nhất"
 msgid "%(user)s's"
 msgstr "%(user)s's"
 
-#: templates/ticket/list.html:134 templates/ticket/ticket.html:295
+#: templates/ticket/list.html:134 templates/ticket/ticket.html:296
 msgid "Reopened: "
 msgstr "Đã mở lại: "
 
-#: templates/ticket/list.html:137 templates/ticket/ticket.html:296
+#: templates/ticket/list.html:137 templates/ticket/ticket.html:297
 msgid "Closed: "
 msgstr "Đã đóng: "
 
@@ -6338,7 +6350,7 @@ msgstr "Chỉ hiện báo cáo của tôi"
 msgid "Filing user"
 msgstr "Filing user"
 
-#: templates/ticket/list.html:242 templates/ticket/ticket.html:397
+#: templates/ticket/list.html:242 templates/ticket/ticket.html:398
 #, fuzzy
 #| msgid "Assignee"
 #| msgid_plural "Assignees"
@@ -6355,6 +6367,10 @@ msgstr "Phân công"
 msgid "messaged on {time}"
 msgstr "đã nhắn lúc {time}"
 
+#: templates/ticket/new.html:52
+msgid "Create!"
+msgstr "Tạo!"
+
 #: templates/ticket/new_problem.html:7
 msgid "Thanks for opening a ticket!"
 msgstr "Cám ơn bạn đã báo cáo!"
@@ -6369,43 +6385,43 @@ msgstr ""
 "không dành cho việc hỏi bài. Nếu bạn cần hỗ trợ về việc giải bài, hãy hỏi "
 "trong phần bình luận."
 
-#: templates/ticket/ticket.html:382
+#: templates/ticket/ticket.html:383
 msgid "Post"
 msgstr "Bài viết"
 
-#: templates/ticket/ticket.html:390
+#: templates/ticket/ticket.html:391
 msgid "Associated object"
 msgstr "Đối tượng"
 
-#: templates/ticket/ticket.html:407
+#: templates/ticket/ticket.html:408
 msgid "No one is assigned."
 msgstr "Chưa có ai được phân công"
 
-#: templates/ticket/ticket.html:414
+#: templates/ticket/ticket.html:415
 msgid "Assignee notes"
 msgstr "Ghi chú"
 
-#: templates/ticket/ticket.html:421 templates/widgets/select_all.html:4
+#: templates/ticket/ticket.html:422 templates/widgets/select_all.html:4
 msgid "Nothing here."
 msgstr "Không có gì ở đây."
 
-#: templates/ticket/ticket.html:428
+#: templates/ticket/ticket.html:429
 #, fuzzy
 #| msgid "votes"
 msgid "Upvote"
 msgstr "đánh giá"
 
-#: templates/ticket/ticket.html:430
+#: templates/ticket/ticket.html:431
 #, fuzzy
 #| msgid "blog post"
 msgid "Undo vote"
 msgstr "bài đăng blog"
 
-#: templates/ticket/ticket.html:434
+#: templates/ticket/ticket.html:435
 msgid "Close ticket"
 msgstr "Đóng vấn đề"
 
-#: templates/ticket/ticket.html:436
+#: templates/ticket/ticket.html:437
 msgid "Reopen ticket"
 msgstr "Mở lại vấn đề"
 
@@ -6990,12 +7006,6 @@ msgstr "Chọn tất cả"
 #~ msgid "Assigned new tag %s from site"
 #~ msgstr "Thêm tag %s từ trang web"
 
-#~ msgid "Link to the issue"
-#~ msgstr "URL tới vấn đề"
-
-#~ msgid "Open new issue"
-#~ msgstr "Báo cáo vấn đề mới"
-
 #~ msgid "You cannot change your password."
 #~ msgstr "Bạn không thể thay đổi mật khẩu."
 
@@ -7022,9 +7032,6 @@ msgstr "Chọn tất cả"
 
 #~ msgid "Are you sure you want to rescore ALL the submissions?"
 #~ msgstr "Bạn có chắc chắn muốn tính điểm lại lại TẤT CẢ các bài nộp?"
-
-#~ msgid "Report issue"
-#~ msgstr "Báo cáo vấn đề"
 
 #~ msgid "o{time}"
 #~ msgstr "o{time}"
@@ -7316,9 +7323,6 @@ msgstr "Chọn tất cả"
 
 #~ msgid "Filter by online judge..."
 #~ msgstr "Lọc theo online judge..."
-
-#~ msgid "Create!"
-#~ msgstr "Tạo!"
 
 #~ msgid "#(cnt)d total submission"
 #~ msgstr "Số lượng bài nộp: #(cnt)d"
