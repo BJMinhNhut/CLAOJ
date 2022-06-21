@@ -217,6 +217,7 @@
                 });
 
                 var $body = $(document.body);
+				
                 event_dispatcher.on('submissions', function (message) {
                         if (dynamic_user_id && message.user != dynamic_user_id ||
                             dynamic_problem_id && message.problem != dynamic_problem_id ||
@@ -236,6 +237,7 @@
                         }
                     }
                 );
+				
                 event_dispatcher.onwsclose(function (event) {
                     if (event.code == 1001) {
                         console.log('Navigated away');

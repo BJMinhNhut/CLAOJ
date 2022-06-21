@@ -35,9 +35,9 @@ function WSEventDispatcher(websocket_path, polling_base, last_msg) {
                     long_poll();
                 },
                 error: function (jqXHR, status, error) {
-                    if (jqXHR.status == 504)
+                    if (jqXHR.status == 504) {
                         long_poll();
-                    else {
+                    } else if (jqXHR.statusText !== 'abort') {
                         console.log('Long poll failure: ' + status);
                         console.log(jqXHR);
                         setTimeout(long_poll, 2000);
@@ -49,91 +49,94 @@ function WSEventDispatcher(websocket_path, polling_base, last_msg) {
         long_poll();
     }
 
-    function setup_connection() {
-        if (window.WebSocket) {
-            receiver.websocket = new WebSocket(websocket_path);
-            var timeout = setTimeout(function () {
-                receiver.websocket.close();
-                receiver.websocket = null;
-                init_poll();
-            }, 2000);
-            receiver.websocket.onopen = function (event) {
-                clearTimeout(timeout);
-                receiver.websocket.send(JSON.stringify({
-                    command: 'start-msg',
-                    start: receiver.last_msg,
-                }));
-            };
-            receiver.websocket.onmessage = function (event) {
-                var data = JSON.parse(event.data);
-                receiver.dispatch(data.channel, data.message);
-                receiver.last_msg = data.id;
-            };
-            receiver.websocket.onclose = function (event) {
-                if (receiver.auto_reconnect) {
-                    console.log('Lost websocket connection! Reconnecting...');
-                    setup_connection();
-
-                    clearTimeout(filter_timeout);
-                    set_filters();
-                } else if (event.code !== 1000 && receiver.onwsclose !== null) {
-                    receiver.dispatch(onwsclose_secret, event)
-                }
-            }
-        } else {
-            receiver.websocket = null;
-            init_poll();
-        }
-
-        var filter_timeout = null;
-        function set_filters() {
-            if (receiver.websocket) {
-                filter_timeout = setTimeout(function () {
-                    if (receiver.websocket.readyState === WebSocket.OPEN) {
-                        receiver.websocket.send(JSON.stringify({
-                            command: 'set-filter',
-                            filter: receiver.channels,
-                        }));
-                    } else {
-                        set_filters();
-                    }
-                }, 200);
-            } else {
-                if (receiver.polling_request) {
-                    receiver.polling_request.abort();
-                }
-                receiver.polling_path = polling_base + receiver.channels.join('|');
-                init_poll();
-            }
-        }
-    
-        this.dispatch = function (event_name, data) {
-            var event = this.events[event_name];
-            if (event) {
-                event.fire(data);
-            }
+    function init_websocket() {
+        receiver.websocket = new WebSocket(websocket_path);
+        receiver.websocket.onopen = function () {
+            receiver.websocket.send(JSON.stringify({
+                command: 'start-msg',
+                start: receiver.last_msg,
+            }));
+            receiver.websocket.readyForData = true;
         };
-    
-        this.on = function (event_name, callback) {
-            if (!this.connected) {
-                this.connected = true;
-                setup_connection();
-            }
-            if (!this.events[event_name]) {
-                this.events[event_name] = new Event();
-                this.channels.push(event_name);
-    
+        receiver.websocket.onmessage = function (event) {
+            var data = JSON.parse(event.data);
+            receiver.dispatch(data.channel, data.message);
+            receiver.last_msg = data.id;
+        };
+        receiver.websocket.onclose = function (event) {
+            if (receiver.auto_reconnect) {
+                console.log('Lost websocket connection! Attempt reconnecting in 1 second...');
+
+                receiver.websocket = null;
+                setTimeout(init_websocket, 1000);
+
                 clearTimeout(filter_timeout);
                 set_filters();
+            } else if (event.code !== 1000) {
+                receiver.dispatch(onwsclose_secret, event)
             }
-            this.events[event_name].registerCallback(callback);
-        };
-    
-        this.onwsclose = function (callback) {
-            if (!this.events[onwsclose_secret]) {
-                this.events[onwsclose_secret] = new Event();
-            }
-            this.events[onwsclose_secret].registerCallback(callback);
-        };
+        }
     }
+
+    function init_connection() {
+        if (window.WebSocket) {
+            init_websocket();
+        } else {
+            init_poll();
+        }
+    }
+
+    var filter_timeout = null;
+    function set_filters() {
+        if (window.WebSocket) {
+            filter_timeout = setTimeout(function () {
+                if (receiver.websocket &&
+                    receiver.websocket.readyState === WebSocket.OPEN &&
+                    receiver.websocket.readyForData === true) {
+                    receiver.websocket.send(JSON.stringify({
+                        command: 'set-filter',
+                        filter: receiver.channels,
+                    }));
+                } else {
+                    set_filters();
+                }
+            }, 200);
+        } else {
+            if (receiver.polling_request) {
+                receiver.polling_request.abort();
+                receiver.polling_request = null;
+            }
+            receiver.polling_path = polling_base + receiver.channels.join('|');
+            init_poll();
+        }
+    }
+
+    this.dispatch = function (event_name, data) {
+        var event = this.events[event_name];
+        if (event) {
+            event.fire(data);
+        }
+    };
+
+    this.on = function (event_name, callback) {
+        if (!this.connected) {
+            this.connected = true;
+            init_connection();
+        }
+        if (!this.events[event_name]) {
+            this.events[event_name] = new Event();
+            this.channels.push(event_name);
+
+            clearTimeout(filter_timeout);
+            set_filters();
+        }
+        this.events[event_name].registerCallback(callback);
+    };
+
+    this.onwsclose = function (callback) {
+        if (!this.events[onwsclose_secret]) {
+            this.events[onwsclose_secret] = new Event();
+        }
+        this.events[onwsclose_secret].registerCallback(callback);
+    };
 }
