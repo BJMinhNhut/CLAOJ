@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-20 16:22+0000\n"
+"POT-Creation-Date: 2022-06-21 05:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,29 +18,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: dmoj/settings.py:67
+#: dmoj/settings.py:68
 msgid "Normal User"
 msgstr ""
 
-#: dmoj/settings.py:68
+#: dmoj/settings.py:69
 msgid "Problem Setter"
 msgstr ""
 
-#: dmoj/settings.py:69
+#: dmoj/settings.py:70
 msgid "Teacher"
 msgstr ""
 
-#: dmoj/settings.py:70
+#: dmoj/settings.py:71
 msgid "Staff"
 msgstr ""
 
-#: dmoj/settings.py:71
+#: dmoj/settings.py:72
 msgid "Banned User"
 msgstr ""
 
-#: dmoj/settings.py:72 templates/base.html:241 templates/comments/list.html:99
+#: dmoj/settings.py:73 templates/base.html:241 templates/comments/list.html:99
 #: templates/contest/contest-list-tabs.html:33
-#: templates/contest/ranking-table.html:55
+#: templates/contest/ranking-table.html:41
 #: templates/problem/problem-list-tabs.html:16
 #: templates/submission/info-base.html:13
 #: templates/submission/submission-list-tabs.html:15
@@ -48,11 +48,11 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: dmoj/settings.py:399
+#: dmoj/settings.py:400
 msgid "English"
 msgstr ""
 
-#: dmoj/settings.py:400
+#: dmoj/settings.py:401
 msgid "Vietnamese"
 msgstr ""
 
@@ -209,8 +209,8 @@ msgid "Summary"
 msgstr ""
 
 #: judge/admin/interface.py:117 judge/models/contest.py:462
-#: judge/models/contest.py:591 judge/models/profile.py:322
-#: judge/models/profile.py:353
+#: judge/models/contest.py:591 judge/models/profile.py:329
+#: judge/models/profile.py:360
 msgid "user"
 msgstr ""
 
@@ -251,7 +251,7 @@ msgstr ""
 #: templates/organization/list.html:25 templates/problem/data.html:644
 #: templates/problem/list.html:242 templates/problem/list.html:263
 #: templates/submission/status-testcases.html:90
-#: templates/user/base-users-table.html:12 templates/user/user-problems.html:60
+#: templates/user/base-users-table.html:11 templates/user/user-problems.html:60
 msgid "Points"
 msgstr ""
 
@@ -714,6 +714,7 @@ msgstr ""
 
 #: judge/forms.py:325 judge/views/register.py:26
 #: templates/blog/top-rating.html:8 templates/blog/top-scorers.html:8
+#: templates/contest/ranking.html:316
 #: templates/problem/submission-diff.html:112
 #: templates/registration/registration_form.html:141
 #: templates/user/base-users-table.html:5
@@ -1483,7 +1484,7 @@ msgid "Display this blog post at the homepage."
 msgstr ""
 
 #: judge/models/interface.py:80 judge/models/profile.py:118
-#: judge/models/profile.py:136 judge/models/profile.py:354
+#: judge/models/profile.py:136 judge/models/profile.py:361
 msgid "organization"
 msgstr ""
 
@@ -2292,83 +2293,83 @@ msgstr ""
 msgid "last data download time"
 msgstr ""
 
-#: judge/models/profile.py:312
+#: judge/models/profile.py:319
 msgid "Shows in-progress development stuff"
 msgstr ""
 
-#: judge/models/profile.py:313
+#: judge/models/profile.py:320
 msgid "Edit TOTP settings"
 msgstr ""
 
-#: judge/models/profile.py:314
+#: judge/models/profile.py:321
 msgid "Can set high problem timelimit"
 msgstr ""
 
-#: judge/models/profile.py:315
+#: judge/models/profile.py:322
 msgid "Can set long contest duration"
 msgstr ""
 
-#: judge/models/profile.py:317
+#: judge/models/profile.py:324
 msgid "user profile"
 msgstr ""
 
-#: judge/models/profile.py:318
+#: judge/models/profile.py:325
 msgid "user profiles"
 msgstr ""
 
-#: judge/models/profile.py:324
+#: judge/models/profile.py:331
 msgid "device name"
 msgstr ""
 
-#: judge/models/profile.py:325
+#: judge/models/profile.py:332
 msgid "credential ID"
 msgstr ""
 
-#: judge/models/profile.py:326
+#: judge/models/profile.py:333
 msgid "public key"
 msgstr ""
 
-#: judge/models/profile.py:327
+#: judge/models/profile.py:334
 msgid "sign counter"
 msgstr ""
 
-#: judge/models/profile.py:348
+#: judge/models/profile.py:355
 msgid "WebAuthn credential"
 msgstr ""
 
-#: judge/models/profile.py:349
+#: judge/models/profile.py:356
 msgid "WebAuthn credentials"
 msgstr ""
 
-#: judge/models/profile.py:356
+#: judge/models/profile.py:363
 msgid "request time"
 msgstr ""
 
-#: judge/models/profile.py:357
+#: judge/models/profile.py:364
 msgid "state"
 msgstr ""
 
-#: judge/models/profile.py:358 templates/organization/requests/tabs.html:4
+#: judge/models/profile.py:365 templates/organization/requests/tabs.html:4
 msgid "Pending"
 msgstr ""
 
-#: judge/models/profile.py:359 templates/organization/requests/tabs.html:10
+#: judge/models/profile.py:366 templates/organization/requests/tabs.html:10
 msgid "Approved"
 msgstr ""
 
-#: judge/models/profile.py:360 templates/organization/requests/tabs.html:13
+#: judge/models/profile.py:367 templates/organization/requests/tabs.html:13
 msgid "Rejected"
 msgstr ""
 
-#: judge/models/profile.py:362
+#: judge/models/profile.py:369
 msgid "reason"
 msgstr ""
 
-#: judge/models/profile.py:365
+#: judge/models/profile.py:372
 msgid "organization join request"
 msgstr ""
 
-#: judge/models/profile.py:366
+#: judge/models/profile.py:373
 msgid "organization join requests"
 msgstr ""
 
@@ -2842,11 +2843,11 @@ msgstr ""
 msgid "Running MOSS"
 msgstr ""
 
-#: judge/tasks/submission.py:47
+#: judge/tasks/submission.py:53
 msgid "Modifying submissions"
 msgstr ""
 
-#: judge/tasks/submission.py:60
+#: judge/tasks/submission.py:66
 msgid "Recalculating user points"
 msgstr ""
 
@@ -3251,7 +3252,7 @@ msgstr ""
 
 #: judge/views/organization.py:76 judge/views/register.py:35
 #: templates/blog/top-rating.html:36 templates/blog/top-scorers.html:31
-#: templates/organization/list.html:15 templates/user/user-list-tabs.html:5
+#: templates/organization/list.html:15 templates/user/user-list-tabs.html:6
 msgid "Organizations"
 msgstr ""
 
@@ -3594,7 +3595,7 @@ msgid "A username must contain letters, numbers, or underscores"
 msgstr ""
 
 #: judge/views/register.py:29 templates/registration/registration_form.html:135
-#: templates/user/base-users-table.html:7 templates/user/edit-profile.html:289
+#: templates/user/edit-profile.html:289
 msgid "Full name"
 msgstr ""
 
@@ -3619,11 +3620,11 @@ msgid ""
 "reputable email provider."
 msgstr ""
 
-#: judge/views/register.py:58 judge/views/register.py:98
+#: judge/views/register.py:58 judge/views/register.py:100
 msgid "Registration"
 msgstr ""
 
-#: judge/views/register.py:109
+#: judge/views/register.py:111
 msgid "Authentication failure"
 msgstr ""
 
@@ -3889,12 +3890,17 @@ msgstr ""
 msgid "Generated scratch codes for user"
 msgstr ""
 
-#: judge/views/user.py:444 templates/user/list.html:13
+#: judge/views/user.py:444 templates/user/list.html:7
 #: templates/user/user-list-tabs.html:4
 msgid "Leaderboard"
 msgstr ""
 
-#: judge/views/user.py:505
+#: judge/views/user.py:475 templates/user/contrib-list.html:7
+#: templates/user/user-list-tabs.html:5
+msgid "Contributors"
+msgstr ""
+
+#: judge/views/user.py:535
 msgid "You have been successfully logged out."
 msgstr ""
 
@@ -4675,56 +4681,56 @@ msgstr ""
 msgid "Only the following organizations may access this contest:"
 msgstr ""
 
-#: templates/contest/ranking-table.html:16 templates/submission/list.html:334
-msgid "Organization"
-msgstr ""
-
-#: templates/contest/ranking-table.html:33
+#: templates/contest/ranking-table.html:19
 #, python-brace-format
 msgid "Started on {time}"
 msgstr ""
 
-#: templates/contest/ranking-table.html:36
+#: templates/contest/ranking-table.html:22
 msgid "Participation ended."
 msgstr ""
 
-#: templates/contest/ranking-table.html:46
+#: templates/contest/ranking-table.html:32
 msgid "Un-Disqualify"
 msgstr ""
 
-#: templates/contest/ranking-table.html:49
+#: templates/contest/ranking-table.html:35
 msgid "Disqualify"
 msgstr ""
 
-#: templates/contest/ranking.html:174
+#: templates/contest/ranking-table.html:83
+msgid "Total AC"
+msgstr ""
+
+#: templates/contest/ranking.html:121
 msgid "Are you sure you want to disqualify this participation?"
 msgstr ""
 
-#: templates/contest/ranking.html:179
+#: templates/contest/ranking.html:126
 msgid "Are you sure you want to un-disqualify this participation?"
 msgstr ""
 
-#: templates/contest/ranking.html:413
+#: templates/contest/ranking.html:317
+msgid "Full Name"
+msgstr ""
+
+#: templates/contest/ranking.html:373
 msgid "View user participation"
 msgstr ""
 
-#: templates/contest/ranking.html:417
-msgid "Show organizations"
+#: templates/contest/ranking.html:377
+msgid "Show full name, organization"
 msgstr ""
 
-#: templates/contest/ranking.html:419
-msgid "Show full name"
-msgstr ""
-
-#: templates/contest/ranking.html:421
+#: templates/contest/ranking.html:380
 msgid "Download as CSV"
 msgstr ""
 
-#: templates/contest/ranking.html:435
+#: templates/contest/ranking.html:395
 #, python-format
 msgid ""
 "The scoreboard is cached for %(cache_timeout)s seconds, your submission "
-"might takes some time before it appears here."
+"might take some time before it appears here."
 msgstr ""
 
 #: templates/contest/stats.html:38
@@ -5874,6 +5880,10 @@ msgstr ""
 msgid "Filter submissions"
 msgstr ""
 
+#: templates/submission/list.html:334
+msgid "Organization"
+msgstr ""
+
 #: templates/submission/list.html:360
 msgid "Total:"
 msgstr ""
@@ -6135,6 +6145,10 @@ msgstr ""
 
 #: templates/user/base-users.html:14 templates/user/base-users.html:71
 msgid "Search by handle..."
+msgstr ""
+
+#: templates/user/contrib-table.html:5
+msgid "Contribution points"
 msgstr ""
 
 #: templates/user/edit-profile.html:116
@@ -6443,10 +6457,6 @@ msgstr ""
 
 #: templates/user/user-tabs.html:13
 msgid "Admin Profile"
-msgstr ""
-
-#: templates/user/users-table.html:31
-msgid "Contribution points"
 msgstr ""
 
 #: templates/widgets/select_all.html:8
