@@ -184,6 +184,14 @@
         <script type="text/javascript">{{ request.profile.user_script|safe }}</script>
     {% endif %}
 
+    <script>
+        function submmit_language(lang) {
+            if (lang != "{{ LANGUAGE_CODE }}" ) {
+                $("input[name=language]").val(lang)
+                $("#set_language").submit()
+            }
+        }
+    </script>
     <noscript>
         <style>
             #content {
@@ -202,6 +210,7 @@
         <clipPath id="rating-clip"><circle cx="8" cy="8" r="7"/></clipPath>
     </defs>
 </svg>
+<div id="nav-background"></div>
 <nav id="navigation" class="unselectable">
     <div id="nav-container">
         <a id="navicon" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
@@ -225,6 +234,12 @@
         </ul>
 
         <span id="user-links">
+            <a id="flag_vi" href="#" onclick="submmit_language('vi')" style="margin-right: 3px;">
+                <img src="{{ static('icons/vi_flag.svg') }}" alt="VI" height="24">
+            </a>
+            <a id="flag_en" href="#" onclick="submmit_language('en')" style="margin-right: 3px;">
+                <img src="{{ static('icons/gb_flag.svg') }}" alt="EN" height="24">
+            </a>
             {% if request.user.is_authenticated %}
                 <ul>
                     <li>
@@ -318,23 +333,18 @@
     <footer>
         <span id="footer-content">
             <br>
-	    <a style="color: #b0bec5"> {{ _('Long An HSGS Online Judge') }} </a> <br>
-            <a style="color: #b0bec5" href="https://dmoj.ca"> {{ _('powered by') }} <b>DMOJ</b></a> |
-	    <a style="color: #b0bec5" href="https://www.facebook.com/itclapro"> {{ _('developed by') }} <b>IT-CLA Productions</b></a> |
+	        <a style="color: #b0bec5"> {{ _('Long An HSGS Online Judge') }} </a> <br>
+            <a style="color: #b0bec5" href="https://dmoj.ca"> {{ _('powered by') }} <b>DMOJ</b></a>
+            <a style="color: #b0bec5" href="https://oj.vnoi.info"> {{ _('and') }} <b>VNOJ</b></a> |
+	        <a style="color: #b0bec5" href="https://www.facebook.com/itclapro"> {{ _('developed by') }} <b>IT-CLA Productions</b></a>
             {% if i18n_config.footer %}
                 {{ i18n_config.footer|safe }} |
             {% endif %}
-            <form action="{{ url('set_language') }}" method="post" style="display: inline">
+            <form id="set_language" action="{{ url('set_language') }}" method="post" style="display: inline">
                 {% csrf_token %}
-            <input name="next" type="hidden" value="{{ request.get_full_path() }}">
-            <select name="language" onchange="form.submit()" style="height: 1.5em">
-                {% for language in language_info_list(LANGUAGES) %}
-                    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
-                        {{ language.name_local }} ({{ language.code }})
-                    </option>
-                {% endfor %}
-            </select>
-          </form>
+                <input name="next" type="hidden" value="{{ request.get_full_path() }}">
+                <input name="language" type="hidden" value="{{LANGUAGE_CODE}}">
+            </form>
         </span>
     </footer>
 </div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-21 05:36+0000\n"
+"POT-Creation-Date: 2022-06-21 12:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Banned User"
 msgstr ""
 
-#: dmoj/settings.py:73 templates/base.html:241 templates/comments/list.html:99
+#: dmoj/settings.py:73 templates/base.html:256 templates/comments/list.html:99
 #: templates/contest/contest-list-tabs.html:33
 #: templates/contest/ranking-table.html:41
 #: templates/problem/problem-list-tabs.html:16
@@ -56,7 +56,7 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
-#: dmoj/urls.py:104 templates/base.html:211 templates/organization/tabs.html:32
+#: dmoj/urls.py:104 templates/base.html:220 templates/organization/tabs.html:32
 msgid "Home"
 msgstr ""
 
@@ -192,7 +192,7 @@ msgstr ""
 msgid "username"
 msgstr ""
 
-#: judge/admin/contest.py:380 templates/base.html:280
+#: judge/admin/contest.py:380 templates/base.html:295
 msgid "virtual"
 msgstr ""
 
@@ -713,8 +713,8 @@ msgid "Any judge"
 msgstr ""
 
 #: judge/forms.py:325 judge/views/register.py:26
-#: templates/blog/top-rating.html:8 templates/blog/top-scorers.html:8
-#: templates/contest/ranking.html:316
+#: templates/blog/top-contrib.html:8 templates/blog/top-rating.html:8
+#: templates/blog/top-scorers.html:8 templates/contest/ranking.html:316
 #: templates/problem/submission-diff.html:112
 #: templates/registration/registration_form.html:141
 #: templates/user/base-users-table.html:5
@@ -3020,22 +3020,22 @@ msgstr ""
 msgid "Page %d of Posts"
 msgstr ""
 
-#: judge/views/blog.py:248 judge/views/blog.py:251
+#: judge/views/blog.py:256 judge/views/blog.py:259
 msgid "Creating new blog post"
 msgstr ""
 
-#: judge/views/blog.py:260 judge/views/contests.py:986
+#: judge/views/blog.py:268 judge/views/contests.py:986
 #: judge/views/organization.py:288 judge/views/organization.py:595
 #: judge/views/organization.py:618 judge/views/problem.py:861
 #: judge/views/problem.py:984
 msgid "Created on site"
 msgstr ""
 
-#: judge/views/blog.py:272 judge/views/blog.py:275
+#: judge/views/blog.py:280 judge/views/blog.py:283
 msgid "Updating blog post"
 msgstr ""
 
-#: judge/views/blog.py:284 judge/views/comment.py:130
+#: judge/views/blog.py:292 judge/views/comment.py:130
 #: judge/views/contests.py:1057 judge/views/organization.py:331
 #: judge/views/problem.py:943
 msgid "Edited from site"
@@ -3873,7 +3873,7 @@ msgid "Updated on site"
 msgstr ""
 
 #: judge/views/user.py:401 templates/admin/auth/user/change_form.html:14
-#: templates/admin/auth/user/change_form.html:17 templates/base.html:243
+#: templates/admin/auth/user/change_form.html:17 templates/base.html:258
 #: templates/user/user-tabs.html:16
 msgid "Edit profile"
 msgstr ""
@@ -3895,12 +3895,12 @@ msgstr ""
 msgid "Leaderboard"
 msgstr ""
 
-#: judge/views/user.py:475 templates/user/contrib-list.html:7
+#: judge/views/user.py:475 templates/user/contrib-list.html:60
 #: templates/user/user-list-tabs.html:5
 msgid "Contributors"
 msgstr ""
 
-#: judge/views/user.py:535
+#: judge/views/user.py:550
 msgid "You have been successfully logged out."
 msgstr ""
 
@@ -3960,49 +3960,53 @@ msgstr ""
 msgid "Rejudge"
 msgstr ""
 
-#: templates/base.html:235
+#: templates/base.html:250
 #, python-format
 msgid "Hello, <b>%(username)s</b>."
 msgstr ""
 
-#: templates/base.html:250
+#: templates/base.html:265
 msgid "Log out"
 msgstr ""
 
-#: templates/base.html:259
+#: templates/base.html:274
 #: templates/registration/password_reset_complete.html:4
 msgid "Log in"
 msgstr ""
 
-#: templates/base.html:260 templates/registration/registration_form.html:179
+#: templates/base.html:275 templates/registration/registration_form.html:179
 msgid "or"
 msgstr ""
 
-#: templates/base.html:261
+#: templates/base.html:276
 msgid "Sign up"
 msgstr ""
 
-#: templates/base.html:274
+#: templates/base.html:289
 msgid "spectating"
 msgstr ""
 
-#: templates/base.html:285
+#: templates/base.html:300
 msgid "Go to Rankings"
 msgstr ""
 
-#: templates/base.html:292
+#: templates/base.html:307
 msgid "This site works best with JavaScript enabled."
 msgstr ""
 
-#: templates/base.html:319
+#: templates/base.html:334
 msgid "Long An HSGS Online Judge"
 msgstr ""
 
-#: templates/base.html:320
+#: templates/base.html:335
 msgid "powered by"
 msgstr ""
 
-#: templates/base.html:321
+#: templates/base.html:336
+msgid "and"
+msgstr ""
+
+#: templates/base.html:337
 msgid "developed by"
 msgstr ""
 
@@ -4070,15 +4074,15 @@ msgstr ""
 msgid "Upcoming contests"
 msgstr ""
 
-#: templates/blog/list.html:194
+#: templates/blog/list.html:197
 msgid "Comment stream"
 msgstr ""
 
-#: templates/blog/list.html:216
+#: templates/blog/list.html:219
 msgid "My open tickets"
 msgstr ""
 
-#: templates/blog/list.html:237
+#: templates/blog/list.html:240
 msgid "New tickets"
 msgstr ""
 
@@ -4086,12 +4090,21 @@ msgstr ""
 msgid "New problems"
 msgstr ""
 
-#: templates/blog/top-rating.html:2
-msgid "Top ratings"
+#: templates/blog/top-contrib.html:2
+msgid "Top contributors"
 msgstr ""
 
-#: templates/blog/top-rating.html:37 templates/blog/top-scorers.html:32
+#: templates/blog/top-contrib.html:9
+msgid "Contrib."
+msgstr ""
+
+#: templates/blog/top-contrib.html:33 templates/blog/top-rating.html:37
+#: templates/blog/top-scorers.html:32
 msgid "View all"
+msgstr ""
+
+#: templates/blog/top-rating.html:2
+msgid "Top ratings"
 msgstr ""
 
 #: templates/blog/top-scorers.html:2
@@ -6144,6 +6157,7 @@ msgid "Rank"
 msgstr ""
 
 #: templates/user/base-users.html:14 templates/user/base-users.html:71
+#: templates/user/contrib-list.html:14
 msgid "Search by handle..."
 msgstr ""
 
