@@ -52,16 +52,16 @@
 
         table.bottom td.right {
             text-align: right;
-	    border: none !important;
+	        border: none !important;
         }
 
-	table.ranking td:first-child, table.ranking th:first-child{
-	    	border-left: none !important;
-        }
+        table.ranking td:first-child, table.ranking th:first-child{
+                border-left: none !important;
+            }
 
-	table.ranking td:last-child, table.ranking th:last-child{
-	    	border-right: none !important;
-        }
+        table.ranking td:last-child, table.ranking th:last-child{
+                border-right: none !important;
+            }
 
         .comment-count {
             font-size: 12px;
@@ -184,6 +184,9 @@
             {% endif %}
             {% if top_scorers %}
                 {% include "blog/top-scorers.html" %}
+            {% endif %}
+            {% if top_contrib %}
+                {% include "blog/top-contrib.html" %}
             {% endif %}
 	    
 	    {% if new_problems %}

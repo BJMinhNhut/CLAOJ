@@ -174,6 +174,7 @@ class PostList(PostListBase):
 
         context['top_scorers'] = self.get_top_scorers()
         context['top_rating_users'] = self.get_top_rating_users()
+        context['top_contrib'] = self.get_top_contributors()
 
         if self.request.user.is_authenticated:
             context['own_open_tickets'] = (
@@ -203,6 +204,13 @@ class PostList(PostListBase):
         return (Profile.objects.order_by('-rating')
                 .filter(performance_points__gt=0, is_unlisted=False)
                 .only('user', 'performance_points', 'display_rank', 'rating')
+                .select_related('user')
+                [:settings.CLAOJ_HOMEPAGE_TOP_USERS_COUNT])
+
+    def get_top_contributors(self):
+        return (Profile.objects.order_by('-contribution_points')
+                .filter(contribution_points__gt=0, is_unlisted=False)
+                .only('user', 'contribution_points', 'display_rank', 'rating')
                 .select_related('user')
                 [:settings.CLAOJ_HOMEPAGE_TOP_USERS_COUNT])
 
