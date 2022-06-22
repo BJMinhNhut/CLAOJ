@@ -2,18 +2,20 @@ import itertools
 import json
 import os
 from datetime import datetime
+from datetime import timedelta
 from operator import attrgetter, itemgetter
 
+import pytz
 from django.conf import settings
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Permission, User
 from django.contrib.auth.views import LoginView, PasswordChangeView, redirect_to_login
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
-from django.core.exceptions import PermissionDenied, ValidationError
-from django.db.models import Count, Max, Min
+from django.core.exceptions import ImproperlyConfigured, PermissionDenied, ValidationError
+from django.db.models import Count, F, Max, Min, Prefetch
 from django.db.models.fields import DateField
 from django.db.models.functions import Cast, ExtractYear
 from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
@@ -29,7 +31,7 @@ from django.views.generic import DetailView, FormView, ListView, TemplateView, V
 from reversion import revisions
 
 from judge.forms import CustomAuthenticationForm, DownloadDataForm, ProfileForm, UserForm, newsletter_id
-from judge.models import Profile, Rating, Submission
+from judge.models import BlogPost, Organization, Profile, Rating, Submission
 from judge.performance_points import get_pp_breakdown
 from judge.ratings import rating_class, rating_progress
 from judge.tasks import prepare_user_data
@@ -40,6 +42,7 @@ from judge.utils.ranker import ranker
 from judge.utils.subscription import Subscription
 from judge.utils.unicode import utf8text
 from judge.utils.views import DiggPaginatorMixin, QueryStringSortMixin, TitleMixin, add_file_response, generic_message
+from judge.views.blog import PostListBase
 from .contests import ContestRanking
 
 __all__ = ['UserPage', 'UserAboutPage', 'UserProblemsPage', 'UserDownloadData', 'UserPrepareData',
@@ -58,6 +61,23 @@ class UserMixin(object):
 
     def render_to_response(self, context, **response_kwargs):
         return super(UserMixin, self).render_to_response(context, **response_kwargs)
+
+
+# This is almost the same as UserMixin
+# However, I need to write a new class because
+# the current mixin is for Profile DetailView.
+class CustomUserMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.user
+        return context
+
+    def dispatch(self, request, *args, **kwargs):
+        if 'user' not in kwargs:
+            raise ImproperlyConfigured('must pass an username')
+        self.user = get_object_or_404(Profile, user__username=kwargs['user'])
+        self.object = self.user
+        return super(CustomUserMixin, self).dispatch(request, *args, **kwargs)
 
 
 class UserPage(TitleMixin, UserMixin, DetailView):
@@ -183,9 +203,14 @@ class UserAboutPage(UserPage):
             context['max_graph'] = max_user + ratio * delta
             context['min_graph'] = min_user + ratio * delta - delta
 
+        user_timezone = settings.DEFAULT_USER_TIME_ZONE
+        if self.request is not None and self.request.profile is not None:
+            user_timezone = user_timezone or self.request.profile.timezone
+        timezone_offset = pytz.timezone(user_timezone).utcoffset(datetime.utcnow()).seconds
+
         submissions = (
             self.object.submission_set
-            .annotate(date_only=Cast('date', DateField()))
+            .annotate(date_only=Cast(F('date') + timedelta(seconds=timezone_offset), DateField()))
             .values('date_only').annotate(cnt=Count('id'))
         )
 
@@ -200,6 +225,18 @@ class UserAboutPage(UserPage):
             ),
         }))
         return context
+
+
+class UserBlogPage(CustomUserMixin, PostListBase):
+    template_name = 'user/blog.html'
+
+    def get_queryset(self):
+        queryset = BlogPost.objects.filter(authors=self.user, organization=None)
+
+        if self.request.user != self.user.user:
+            queryset = queryset.filter(visible=True, publish_on__lte=timezone.now())
+
+        return queryset.order_by('-sticky', '-publish_on').prefetch_related('authors__user')
 
 
 class UserProblemsPage(UserPage):
@@ -450,9 +487,11 @@ class UserList(QueryStringSortMixin, DiggPaginatorMixin, TitleMixin, ListView):
     default_sort = '-performance_points'
 
     def get_queryset(self):
-        return (Profile.objects.filter(is_unlisted=False).order_by(self.order).select_related('user')
-                .only('display_rank', 'user__username', 'points', 'rating', 'performance_points',
-                      'problem_count'))
+        return (Profile.objects.filter(is_unlisted=False).order_by(self.order)
+                .prefetch_related(Prefetch('user', queryset=User.objects.only('username', 'first_name')))
+                .prefetch_related(Prefetch('organizations', queryset=Organization.objects.only('name', 'id', 'slug')))
+                .only('display_rank', 'user', 'points', 'rating', 'performance_points',
+                      'problem_count', 'organizations'))
 
     def get_context_data(self, **kwargs):
         context = super(UserList, self).get_context_data(**kwargs)
@@ -481,8 +520,10 @@ class ContribList(QueryStringSortMixin, DiggPaginatorMixin, TitleMixin, ListView
     default_sort = '-contribution_points'
 
     def get_queryset(self):
-        return (Profile.objects.filter(is_unlisted=False).order_by(self.order).select_related('user')
-                .only('display_rank', 'user__username', 'contribution_points'))
+        return (Profile.objects.filter(is_unlisted=False).order_by(self.order)
+                .prefetch_related(Prefetch('user', queryset=User.objects.only('username', 'first_name')))
+                .prefetch_related(Prefetch('organizations', queryset=Organization.objects.only('name', 'id', 'slug')))
+                .only('display_rank', 'user', 'organizations', 'rating', 'contribution_points'))
 
     def get_context_data(self, **kwargs):
         context = super(ContribList, self).get_context_data(**kwargs)

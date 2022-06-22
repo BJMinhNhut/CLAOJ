@@ -141,6 +141,7 @@ th {
 
 .form-area {
     display: inline-block;
+    margin-top: 1em;
     background: white;
     padding: 10px 15px;
     border-radius: $widget_border_radius;
@@ -610,9 +611,9 @@ noscript #noscript {
 
             a {
                 display: block;
-                padding: 5px 0;
+                padding: 3px 0;
                 height: 100%;
-		font-weight: 400;
+		        font-weight: 400;
             }
         }
     }
