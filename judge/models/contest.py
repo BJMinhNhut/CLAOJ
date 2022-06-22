@@ -114,7 +114,7 @@ class Contest(models.Model):
                                           related_name='rate_exclude+')
     is_private = models.BooleanField(verbose_name=_('private to specific users'), default=False)
     private_contestants = models.ManyToManyField(Profile, blank=True, verbose_name=_('private contestants'),
-                                                 help_text=_('If private, only these users may see the contest'),
+                                                 help_text=_('If private, only these users may see the contest.'),
                                                  related_name='private_contestants+')
     hide_problem_tags = models.BooleanField(verbose_name=_('hide problem tags'),
                                             help_text=_('Whether problem tags should be hidden by default.'),
@@ -536,10 +536,13 @@ class ContestParticipation(models.Model):
 
     def __str__(self):
         if self.spectate:
-            return gettext('%s spectating in %s') % (self.user.username, self.contest.name)
+            return gettext('%(user)s spectating in %(contest)s') % \
+                ({'user': self.user.username, 'contest': self.contest.name})
         if self.virtual:
-            return gettext('%s in %s, v%d') % (self.user.username, self.contest.name, self.virtual)
-        return gettext('%s in %s') % (self.user.username, self.contest.name)
+            return gettext('%(user)s in %(contest)s, v%(virtual)d') % \
+                ({'user': self.user.username, 'contest': self.contest.name, 'virtual': self.virtual})
+        return gettext('%(user)s in %(contest)s') % \
+            ({'user': self.user.username, 'contest': self.contest.name})
 
     class Meta:
         verbose_name = _('contest participation')

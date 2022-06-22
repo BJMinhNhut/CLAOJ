@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dmoj\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-21 16:10+0000\n"
+"POT-Creation-Date: 2022-06-22 16:05+0000\n"
 "PO-Revision-Date: 2020-08-23 18:59\n"
 "Last-Translator: \n"
 "Language-Team: Vietnamese\n"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Banned User"
 msgstr ""
 
-#: dmoj/settings.py:73 templates/base.html:261 templates/comments/list.html:99
+#: dmoj/settings.py:73 templates/base.html:267 templates/comments/list.html:99
 #: templates/contest/contest-list-tabs.html:33
 #: templates/contest/ranking-table.html:41
 #: templates/problem/problem-list-tabs.html:16
@@ -47,11 +47,11 @@ msgstr ""
 msgid "Admin"
 msgstr "Quản trị"
 
-#: dmoj/settings.py:400
+#: dmoj/settings.py:401
 msgid "English"
 msgstr "Tiếng Anh"
 
-#: dmoj/settings.py:401
+#: dmoj/settings.py:402
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
@@ -183,7 +183,7 @@ msgstr "Tính lại kết quả"
 msgid "username"
 msgstr "tên người dùng"
 
-#: judge/admin/contest.py:380 templates/base.html:300
+#: judge/admin/contest.py:380 templates/base.html:306
 msgid "virtual"
 msgstr "ảo"
 
@@ -200,7 +200,7 @@ msgid "Summary"
 msgstr "Tóm tắt"
 
 #: judge/admin/interface.py:117 judge/models/contest.py:462
-#: judge/models/contest.py:591 judge/models/profile.py:329
+#: judge/models/contest.py:594 judge/models/profile.py:329
 #: judge/models/profile.py:360
 msgid "user"
 msgstr "thành viên"
@@ -251,7 +251,7 @@ msgstr "Giới hạn"
 
 #: judge/admin/problem.py:136 judge/admin/submission.py:239
 #: templates/problem/submission-diff.html:114 templates/stats/base.html:14
-#: templates/submission/list.html:324 templates/user/edit-profile.html:313
+#: templates/submission/list.html:326 templates/user/edit-profile.html:314
 msgid "Language"
 msgstr "Ngôn ngữ"
 
@@ -310,7 +310,7 @@ msgstr "Địa chỉ email"
 
 #: judge/admin/profile.py:108 judge/views/register.py:30
 #: templates/registration/registration_form.html:175
-#: templates/user/edit-profile.html:309
+#: templates/user/edit-profile.html:310
 msgid "Timezone"
 msgstr "Múi giờ"
 
@@ -383,10 +383,7 @@ msgid "Rejudge the selected submissions"
 msgstr "Chấm lại các bài đã chọn"
 
 #: judge/admin/submission.py:200 judge/views/problem_manage.py:131
-#, fuzzy, python-format
-#| msgid "%d submission was successfully rescored."
-#| msgid_plural "%d submissions were successfully rescored."
-msgid "%d submission were successfully rescored."
+msgid "%d submission was successfully rescored."
 msgid_plural "%d submissions were successfully rescored."
 msgstr[0] "%d bài đã được tính điểm lại."
 
@@ -608,7 +605,7 @@ msgstr ""
 "Bạn phải giải ít nhất một bài trước khi có thể bỏ thay đổi thông tin người "
 "dùng"
 
-#: judge/forms.py:89 judge/views/organization.py:125
+#: judge/forms.py:89 judge/views/organization.py:129
 #, python-brace-format
 msgid "You may not be part of more than {count} public organizations."
 msgstr "Bạn không thể là thành viên của nhiều hơn {count} tổ chức công khai."
@@ -1072,9 +1069,7 @@ msgid "private contestants"
 msgstr "Các thành viên có thể tham gia kỳ thi"
 
 #: judge/models/contest.py:117
-#, fuzzy
-#| msgid "If private, only these users may see the contest."
-msgid "If private, only these users may see the contest"
+msgid "If private, only these users may see the contest."
 msgstr "Nếu kỳ thi riêng tư, chỉ người thành viên này có thể tham gia kỳ thi."
 
 #: judge/models/contest.py:119
@@ -1258,8 +1253,8 @@ msgstr ""
 msgid "Change lock status of contest"
 msgstr ""
 
-#: judge/models/contest.py:439 judge/models/contest.py:553
-#: judge/models/contest.py:592 judge/models/contest.py:616
+#: judge/models/contest.py:439 judge/models/contest.py:556
+#: judge/models/contest.py:595 judge/models/contest.py:619
 #: judge/models/submission.py:87
 msgid "contest"
 msgstr "kỳ thi"
@@ -1322,125 +1317,125 @@ msgstr "định dạng dữ liệu của kỳ thi"
 
 #: judge/models/contest.py:539
 #, python-format
-msgid "%s spectating in %s"
-msgstr "%s spectating trong %s"
-
-#: judge/models/contest.py:541
-#, python-format
-msgid "%s in %s, v%d"
-msgstr "%s trong %s, v%d"
+msgid "%(user)s spectating in %(contest)s"
+msgstr "%(user)s spectating trong %(contest)s"
 
 #: judge/models/contest.py:542
 #, python-format
-msgid "%s in %s"
-msgstr "%s trong %s"
+msgid "%(user)s in %(contest)s, v%(virtual)d"
+msgstr "%(user)s trong %(contest)s, v%(virtual)d"
 
-#: judge/models/contest.py:545
+#: judge/models/contest.py:544
+#, python-format
+msgid "%(user)s in %(contest)s"
+msgstr "%(user)s trong %(contest)s"
+
+#: judge/models/contest.py:548
 msgid "contest participation"
 msgstr "tham gia kỳ thi"
 
-#: judge/models/contest.py:546
+#: judge/models/contest.py:549
 msgid "contest participations"
 msgstr "tham gia kỳ thi"
 
-#: judge/models/contest.py:552 judge/models/contest.py:576
-#: judge/models/contest.py:617 judge/models/problem.py:581
+#: judge/models/contest.py:555 judge/models/contest.py:579
+#: judge/models/contest.py:620 judge/models/problem.py:581
 #: judge/models/problem.py:586 judge/models/problem.py:605
 #: judge/models/problem_data.py:57
 msgid "problem"
 msgstr "vấn đề"
 
-#: judge/models/contest.py:554 judge/models/contest.py:580
+#: judge/models/contest.py:557 judge/models/contest.py:583
 #: judge/models/problem.py:171
 msgid "points"
 msgstr "điểm"
 
-#: judge/models/contest.py:555
+#: judge/models/contest.py:558
 msgid "partial"
 msgstr "một phần"
 
-#: judge/models/contest.py:556 judge/models/contest.py:581
+#: judge/models/contest.py:559 judge/models/contest.py:584
 msgid "is pretested"
 msgstr "có pretest?"
 
-#: judge/models/contest.py:557 judge/models/interface.py:45
+#: judge/models/contest.py:560 judge/models/interface.py:45
 msgid "order"
 msgstr "thứ tự"
 
-#: judge/models/contest.py:558
+#: judge/models/contest.py:561
 msgid "output prefix length override"
 msgstr "ghi đè độ dài output prefix"
 
-#: judge/models/contest.py:560
+#: judge/models/contest.py:563
 msgid ""
 "Maximum number of submissions for this problem, or leave blank for no limit."
 msgstr ""
 
-#: judge/models/contest.py:563
+#: judge/models/contest.py:566
 msgid "Why include a problem you can't submit to?"
 msgstr "Tại sao lại thêm bài mà bạn không thể nộp?"
 
-#: judge/models/contest.py:568
+#: judge/models/contest.py:571
 msgid "contest problem"
 msgstr "bài của kỳ thi"
 
-#: judge/models/contest.py:569
+#: judge/models/contest.py:572
 msgid "contest problems"
 msgstr "bài của kỳ thi"
 
-#: judge/models/contest.py:574 judge/models/submission.py:231
+#: judge/models/contest.py:577 judge/models/submission.py:231
 msgid "submission"
 msgstr "nộp bài"
 
-#: judge/models/contest.py:578 judge/models/contest.py:593
+#: judge/models/contest.py:581 judge/models/contest.py:596
 msgid "participation"
 msgstr "tham dự"
 
-#: judge/models/contest.py:582
+#: judge/models/contest.py:585
 msgid "Whether this submission was ran only on pretests."
 msgstr "Bài nộp này chỉ chạy trên pretest."
 
-#: judge/models/contest.py:586
+#: judge/models/contest.py:589
 msgid "contest submission"
 msgstr "bài nộp của contest"
 
-#: judge/models/contest.py:587
+#: judge/models/contest.py:590
 msgid "contest submissions"
 msgstr "bài nộp của contest"
 
-#: judge/models/contest.py:595
+#: judge/models/contest.py:598
 msgid "rank"
 msgstr "hạng"
 
-#: judge/models/contest.py:596
+#: judge/models/contest.py:599
 msgid "rating"
 msgstr ""
 
-#: judge/models/contest.py:597
+#: judge/models/contest.py:600
 msgid "raw rating"
 msgstr ""
 
-#: judge/models/contest.py:598
+#: judge/models/contest.py:601
 msgid "contest performance"
 msgstr ""
 
-#: judge/models/contest.py:599
+#: judge/models/contest.py:602
 msgid "last rated"
 msgstr "lần xếp hạng cuối"
 
-#: judge/models/contest.py:603
+#: judge/models/contest.py:606
 msgid "contest rating"
 msgstr "xếp hạng kỳ thi"
 
-#: judge/models/contest.py:604
+#: judge/models/contest.py:607
 msgid "contest ratings"
 msgstr "xếp hạng kỳ thi"
 
-#: judge/models/contest.py:624
+#: judge/models/contest.py:627
 msgid "contest moss result"
 msgstr "kết quả moss"
 
-#: judge/models/contest.py:625
+#: judge/models/contest.py:628
 msgid "contest moss results"
 msgstr "kết quả moss"
 
@@ -1542,21 +1537,17 @@ msgid "blog posts"
 msgstr "bài đăng blog"
 
 #: judge/models/interface.py:143
-#, fuzzy
-#| msgid "blog post"
 msgid "blog vote"
-msgstr "bài đăng blog"
+msgstr "bình chọn blog"
 
 #: judge/models/interface.py:144
-#, fuzzy
-#| msgid "blog posts"
 msgid "blog votes"
-msgstr "bài đăng blog"
+msgstr "bình chọn blog"
 
 #: judge/models/problem.py:33
 #, python-format
 msgid "Disallowed characters: %(value)s"
-msgstr ""
+msgstr "Ký tự không được cho phép: %(value)s"
 
 #: judge/models/problem.py:38
 msgid "problem category ID"
@@ -1974,10 +1965,8 @@ msgid "Floats (relative)"
 msgstr "Số thực (tương đối)"
 
 #: judge/models/problem_data.py:29
-#, fuzzy
-#| msgid "order"
 msgid "Unordered"
-msgstr "thứ tự"
+msgstr ""
 
 #: judge/models/problem_data.py:30
 msgid "Byte identical"
@@ -2535,10 +2524,8 @@ msgid "File-only language"
 msgstr ""
 
 #: judge/models/runtime.py:48
-#, fuzzy
-#| msgid "If this language is submitted using file or not"
 msgid "If this language is only allowed submitted using file or not"
-msgstr "Ngôn ngữ chỉ có thể nộp bằng file"
+msgstr "Ngôn ngữ chỉ có thể nộp bằng file hay không"
 
 #: judge/models/runtime.py:49
 msgid "Limit of file size"
@@ -2874,18 +2861,16 @@ msgid "linked item ID"
 msgstr ""
 
 #: judge/models/ticket.py:32
-#, fuzzy
-#| msgid "ticket title"
 msgid "is ticket contributive?"
-msgstr "tên vấn đề"
+msgstr "Báo cáo có hữu ích không?"
 
 #: judge/models/ticket.py:33
 msgid "is ticket open?"
-msgstr ""
+msgstr "báo cáo có đang mở không?"
 
 #: judge/models/ticket.py:37
 msgid "ticket"
-msgstr ""
+msgstr "báo cáo"
 
 #: judge/models/ticket.py:39
 msgid "poster"
@@ -2897,7 +2882,7 @@ msgstr "nội dung"
 
 #: judge/models/ticket.py:42
 msgid "message time"
-msgstr ""
+msgstr "thời điểm gửi tin"
 
 #: judge/pdf_problems.py:148 judge/pdf_problems.py:199
 #: judge/pdf_problems.py:266
@@ -2905,9 +2890,8 @@ msgid "Page [page] of [topage]"
 msgstr "Trang [page] /[topage]"
 
 #: judge/pdf_problems.py:288
-#, python-format
-msgid "Page %s of %s"
-msgstr "Trang %s /%s"
+msgid "Page %(current)s of %(total)s"
+msgstr "Trang %(current)s / %(total)s"
 
 #: judge/tasks/contest.py:19
 msgid "Recalculating contest scores"
@@ -2915,7 +2899,7 @@ msgstr "Tính lại điểm của kỳ thi"
 
 #: judge/tasks/contest.py:40
 msgid "Running MOSS"
-msgstr ""
+msgstr "Đang chạy MOSS"
 
 #: judge/tasks/submission.py:53
 msgid "Modifying submissions"
@@ -2946,10 +2930,8 @@ msgid "How did you corrupt the custom checker path?"
 msgstr "Phá kiểu gì mà mất tiêu checker rồi?"
 
 #: judge/utils/problem_data.py:153
-#, fuzzy
-#| msgid "Why don't you use a cpp/pas/py checker?"
 msgid "Why don't you use a cpp/py checker?"
-msgstr "Tại sao không dùng checker C++, Pascal hoặc Python?"
+msgstr "Tại sao bạn không dùng checker C++ hoặc Python?"
 
 #: judge/utils/problem_data.py:165
 msgid "How did you corrupt the custom grader path?"
@@ -3077,43 +3059,49 @@ msgid " Reason: "
 msgstr " Lý Do:"
 
 #: judge/views/blog.py:56
-#, fuzzy
-#| msgid "Comment not found."
 msgid "Blog post not found."
-msgstr "không tìm thấy bình luận"
+msgstr "không tìm thấy bài đăng"
 
 #: judge/views/blog.py:59
-#, fuzzy
-#| msgid "You cannot vote your own ticket."
 msgid "You cannot vote your own blog"
-msgstr "Bạn không thể tự đánh giá"
+msgstr "Bạn không thể tự bình chọn bài đăng của mình"
 
-#: judge/views/blog.py:76 judge/views/comment.py:69
-msgid "You cannot vote twice."
-msgstr ""
-
-#: judge/views/blog.py:125
+#: judge/views/blog.py:143
 #, python-format
 msgid "Page %d of Posts"
 msgstr "Trang %d của bài viết"
 
-#: judge/views/blog.py:256 judge/views/blog.py:259
+#: judge/views/blog.py:298 judge/views/blog.py:301
 msgid "Creating new blog post"
 msgstr "Tạo blog mới"
 
-#: judge/views/blog.py:268 judge/views/contests.py:986
-#: judge/views/organization.py:288 judge/views/organization.py:595
-#: judge/views/organization.py:618 judge/views/problem.py:861
+#: judge/views/blog.py:310 judge/views/contests.py:987
+#: judge/views/organization.py:293 judge/views/organization.py:606
+#: judge/views/organization.py:629 judge/views/problem.py:861
 #: judge/views/problem.py:984
 msgid "Created on site"
 msgstr "Tạo trên trang web"
 
-#: judge/views/blog.py:280 judge/views/blog.py:283
+#: judge/views/blog.py:321 judge/views/contests.py:247
+#: judge/views/contests.py:998
+msgid "Permission denied"
+msgstr "Từ chối quyền"
+
+#: judge/views/blog.py:322
+#, python-format
+msgid ""
+"You cannot create blog post.\n"
+"Note: You need to solve at least %d problems to create new blog post."
+msgstr ""
+"Không thể tạo blog.\n"
+"Lưu ý: Bạn cần giải ít nhất %d bài để có thể tạo blog."
+
+#: judge/views/blog.py:334 judge/views/blog.py:337
 msgid "Updating blog post"
 msgstr "Cập nhật blog"
 
-#: judge/views/blog.py:292 judge/views/comment.py:130
-#: judge/views/contests.py:1057 judge/views/organization.py:331
+#: judge/views/blog.py:346 judge/views/comment.py:146
+#: judge/views/contests.py:1058 judge/views/organization.py:336
 #: judge/views/problem.py:943
 msgid "Edited from site"
 msgstr "Biên tập từ trang web"
@@ -3123,12 +3111,14 @@ msgid "Comment not found."
 msgstr "không tìm thấy bình luận"
 
 #: judge/views/comment.py:52
-#, fuzzy
-#| msgid "You cannot vote your own ticket."
 msgid "You cannot vote on your own comments."
-msgstr "Bạn không thể tự đánh giá"
+msgstr "Bạn không thể tự bình chọn bình luận của mình"
 
-#: judge/views/comment.py:151
+#: judge/views/comment.py:85
+msgid "You cannot vote twice."
+msgstr "Bạn không thể vote hai lần."
+
+#: judge/views/comment.py:167
 msgid "Editing comment"
 msgstr "Đang chỉnh sửa bình luận"
 
@@ -3155,25 +3145,17 @@ msgstr "Không thể tìm thấy kỳ thi nào."
 msgid "Access to contest \"%s\" denied"
 msgstr "Bị từ chối truy cập vào kỳ thi \"%s\""
 
-#: judge/views/contests.py:247 judge/views/contests.py:997
-msgid "Permission denied"
-msgstr "Từ chối quyền"
-
 #: judge/views/contests.py:315
 msgid "Clone Contest"
 msgstr ""
 
 #: judge/views/contests.py:319
-#, fuzzy
-#| msgid "You are not allowed to create new organizations."
 msgid "You are not allowed to clone contests."
-msgstr "Bạn không có quyền thêm mới tổ chức."
+msgstr "Bạn không có quyền clone tổ chức."
 
-#: judge/views/contests.py:324 judge/views/contests.py:1008
-#, fuzzy
-#| msgid "You are not allowed to edit this problem."
+#: judge/views/contests.py:324 judge/views/contests.py:1009
 msgid "You are not allowed to edit this contest."
-msgstr "Bạn không có quyền chỉnh sửa bài tập này."
+msgstr "Bạn không có quyền chỉnh sửa kỳ thi này."
 
 #: judge/views/contests.py:356
 #, python-format
@@ -3247,55 +3229,51 @@ msgstr "Các lần tham gia %s của bạn"
 
 #: judge/views/contests.py:825
 #, python-format
-msgid "%s's participation in %s"
-msgstr "%s tham gia vào %s"
+msgid "%(user)s's participation in %(contest)s"
+msgstr "Các lần tham gia %(contest)s của %(user)s"
 
-#: judge/views/contests.py:832
+#: judge/views/contests.py:833
 msgid "Live"
 msgstr "Trực tuyến"
 
-#: judge/views/contests.py:844 templates/contest/contest-tabs.html:13
+#: judge/views/contests.py:845 templates/contest/contest-tabs.html:13
 msgid "Participation"
 msgstr "Tham gia"
 
-#: judge/views/contests.py:876
-#, fuzzy
-#| msgid "You are not allowed to tag problem."
+#: judge/views/contests.py:877
 msgid "You are not allowed to run MOSS."
-msgstr "Bạn không có quyền tag bài tập."
+msgstr "Bạn không có quyền chạy MOSS."
 
-#: judge/views/contests.py:889
+#: judge/views/contests.py:890
 #, python-format
 msgid "%s MOSS Results"
-msgstr ""
+msgstr "%s kết quả MOSS"
 
-#: judge/views/contests.py:916
+#: judge/views/contests.py:917
 #, python-format
 msgid "Running MOSS for %s..."
-msgstr ""
+msgstr "Chạy MOSS trong %s"
 
-#: judge/views/contests.py:939
+#: judge/views/contests.py:940
 #, python-format
 msgid "Contest tag: %s"
 msgstr "Thẻ kỳ thi %s"
 
-#: judge/views/contests.py:947
-#, fuzzy
-#| msgid "You are not allowed to create new organizations."
+#: judge/views/contests.py:948
 msgid "You are not allowed to create contests."
-msgstr "Bạn không có quyền thêm mới tổ chức."
+msgstr "Bạn không có quyền tạo kỳ thi mới."
 
-#: judge/views/contests.py:955 judge/views/contests.py:958
+#: judge/views/contests.py:956 judge/views/contests.py:959
 #: templates/organization/tabs.html:45
 msgid "Create new contest"
 msgstr "Tạo kỳ thi mới"
 
-#: judge/views/contests.py:1023
+#: judge/views/contests.py:1024
 #, python-brace-format
 msgid "Editing contest {0}"
 msgstr "Sửa kỳ thi {0}"
 
-#: judge/views/contests.py:1026
+#: judge/views/contests.py:1027
 #, python-format
 msgid "Editing contest %s"
 msgstr "Sửa kỳ thi %s"
@@ -3324,142 +3302,138 @@ msgstr "trang lỗi %s"
 msgid "Runtimes"
 msgstr "Các ngôn ngữ"
 
-#: judge/views/organization.py:48 judge/views/organization.py:51
+#: judge/views/organization.py:52 judge/views/organization.py:55
 msgid "No such organization"
 msgstr "Không có tổ chức như vậy"
 
-#: judge/views/organization.py:49
+#: judge/views/organization.py:53
 #, python-format
 msgid "Could not find an organization with the key \"%s\"."
 msgstr "Không thể tìm thấy một tổ chức với khóa \"%s\"."
 
-#: judge/views/organization.py:52
+#: judge/views/organization.py:56
 msgid "Could not find such organization."
 msgstr "Không thể tìm thấy các tổ chức như vậy."
 
-#: judge/views/organization.py:76 judge/views/register.py:35
+#: judge/views/organization.py:80 judge/views/register.py:35
 #: templates/blog/top-rating.html:36 templates/blog/top-scorers.html:31
 #: templates/organization/list.html:15 templates/user/user-list-tabs.html:6
 msgid "Organizations"
 msgstr "Tổ chức"
 
-#: judge/views/organization.py:116 judge/views/organization.py:119
-#: judge/views/organization.py:124
+#: judge/views/organization.py:120 judge/views/organization.py:123
+#: judge/views/organization.py:128
 msgid "Joining organization"
 msgstr "Đang tham gia tổ chức"
 
-#: judge/views/organization.py:116
+#: judge/views/organization.py:120
 msgid "You are already in the organization."
 msgstr "Bạn đã trong tổ chức."
 
-#: judge/views/organization.py:119
+#: judge/views/organization.py:123
 msgid "This organization is not open."
 msgstr "Tổ chức này không phải là mở."
 
-#: judge/views/organization.py:135
+#: judge/views/organization.py:139
 msgid "Leaving organization"
 msgstr "Rời khỏi tổ chức"
 
-#: judge/views/organization.py:135
+#: judge/views/organization.py:139
 #, python-format
 msgid "You are not in \"%s\"."
 msgstr "Bạn đang không ở trong \"%s\"."
 
-#: judge/views/organization.py:153
+#: judge/views/organization.py:157
 #, python-format
 msgid "Can't request to join %s"
 msgstr "Không thể yêu cầu tham gia %s"
 
-#: judge/views/organization.py:154
+#: judge/views/organization.py:158
 #, python-format
 msgid "You already have a pending request to join %s."
 msgstr ""
 
-#: judge/views/organization.py:161
+#: judge/views/organization.py:165
 #, python-format
 msgid "Request to join %s"
 msgstr "Yêu cầu tham gia %s"
 
-#: judge/views/organization.py:179
+#: judge/views/organization.py:183
 msgid "Join request detail"
 msgstr "Chi tiết yêu cầu tham gia"
 
-#: judge/views/organization.py:207 judge/views/organization.py:208
+#: judge/views/organization.py:211 judge/views/organization.py:212
 #, python-format
 msgid "Managing join requests for %s"
 msgstr "Quản lý các yêu cầu tham gia %s"
 
-#: judge/views/organization.py:241
-#, fuzzy, python-format
-#| msgid ""
-#| "Your organization can only receive %(can_add)d more members. You cannot "
-#| "approve %(to_approve)d users."
+#: judge/views/organization.py:245
 msgid ""
-"Your organization can only receive %d more members. You cannot approve %d "
-"users."
+"Your organization can only receive %(can_add)d more members. You cannot "
+"approve %(to_approve)d users."
 msgstr ""
 "Tổ chức của bạn chỉ có thể nhận thêm %(can_add)d thành viên. Bạn không thể "
 "nhận thêm %(to_approve)d thành viên."
 
-#: judge/views/organization.py:253
+#: judge/views/organization.py:258
 #, python-format
 msgid "Approved %d user."
 msgid_plural "Approved %d users."
 msgstr[0] "Chấp nhận %d thành viên."
 
-#: judge/views/organization.py:254
+#: judge/views/organization.py:259
 #, python-format
 msgid "Rejected %d user."
 msgid_plural "Rejected %d users."
 msgstr[0] "Từ chối %d thành viên."
 
-#: judge/views/organization.py:284 templates/organization/list-tabs.html:5
+#: judge/views/organization.py:289 templates/organization/list-tabs.html:5
 msgid "Create new organization"
 msgstr "Tạo tổ chức mới"
 
-#: judge/views/organization.py:307 judge/views/organization.py:311
+#: judge/views/organization.py:312 judge/views/organization.py:316
 msgid "Can't create organization"
 msgstr "Không thể tạo tổ chức"
 
-#: judge/views/organization.py:312
+#: judge/views/organization.py:317
 msgid "You are not allowed to create new organizations."
 msgstr "Bạn không có quyền thêm mới tổ chức."
 
-#: judge/views/organization.py:321
+#: judge/views/organization.py:326
 #, python-format
 msgid "Editing %s"
 msgstr "Đang chỉnh sửa %s"
 
-#: judge/views/organization.py:339 judge/views/organization.py:347
+#: judge/views/organization.py:344 judge/views/organization.py:352
 msgid "Can't edit organization"
 msgstr "Không thể chỉnh sửa tổ chức"
 
-#: judge/views/organization.py:340
+#: judge/views/organization.py:345
 msgid "You are not allowed to edit this organization."
 msgstr "Bạn không có quyền chỉnh sửa tổ chức này."
 
-#: judge/views/organization.py:348
+#: judge/views/organization.py:353
 msgid "You are not allowed to kick people from this organization."
 msgstr "Bạn không có quyền loại người từ tổ chức này."
 
-#: judge/views/organization.py:353 judge/views/organization.py:357
+#: judge/views/organization.py:358 judge/views/organization.py:362
 msgid "Can't kick user"
 msgstr "Không thể loại thành viên"
 
-#: judge/views/organization.py:354
+#: judge/views/organization.py:359
 msgid "The user you are trying to kick does not exist!"
 msgstr "Thành viên bạn muốn loại không tồn tại!"
 
-#: judge/views/organization.py:358
+#: judge/views/organization.py:363
 #, python-format
 msgid "The user you are trying to kick is not in organization: %s."
 msgstr "Thành viên mà bạn muốn loại không thuộc tổ chức: %s."
 
-#: judge/views/organization.py:394
+#: judge/views/organization.py:399
 msgid "Cannot view organization's private data"
 msgstr "Không thể xem các dữ liệu riêng tư của tổ chức"
 
-#: judge/views/organization.py:395
+#: judge/views/organization.py:400
 msgid "You must join the organization to view its private data."
 msgstr "Bạn phải tham gia tổ chức để xem các dữ liệu riêng tư của tổ chức."
 
@@ -3493,7 +3467,7 @@ msgstr "Không thể tìm thấy lời giải của bài tập \"%s\"."
 
 #: judge/views/problem.py:303 templates/contest/contest.html:204
 #: templates/contest/edit.html:110 templates/contest/edit.html:114
-#: templates/user/user-tabs.html:5 templates/user/users-table.html:23
+#: templates/user/user-tabs.html:8 templates/user/users-table.html:23
 msgid "Problems"
 msgstr "Bài tập"
 
@@ -3537,14 +3511,10 @@ msgid "Create new problem"
 msgstr "Tạo bài mới"
 
 #: judge/views/problem.py:882
-#, fuzzy, python-brace-format
-#| msgid "Editing problem {0}"
 msgid "Edit problem {0}"
 msgstr "Sửa đề bài {0}"
 
 #: judge/views/problem.py:885
-#, fuzzy, python-format
-#| msgid "Editing problem %s"
 msgid "Edit problem %s"
 msgstr "Sửa đề bài %s"
 
@@ -3691,7 +3661,7 @@ msgid "A username must contain letters, numbers, or underscores"
 msgstr "Tên người dùng phải chứa chữ cái, số hoặc dấu gạch chân"
 
 #: judge/views/register.py:29 templates/registration/registration_form.html:135
-#: templates/user/edit-profile.html:289
+#: templates/user/edit-profile.html:290
 msgid "Full name"
 msgstr "Họ và tên"
 
@@ -3732,7 +3702,7 @@ msgstr "Xác thực không thành công"
 msgid "Language statistics"
 msgstr "Thống kê theo ngôn ngữ"
 
-#: judge/views/status.py:23 templates/submission/list.html:315
+#: judge/views/status.py:23 templates/submission/list.html:317
 msgid "Status"
 msgstr "Trạng thái"
 
@@ -3746,16 +3716,12 @@ msgid "Permission denied. Solve %(problem)s in order to view it."
 msgstr ""
 
 #: judge/views/submission.py:76 judge/views/submission.py:78
-#, fuzzy
-#| msgid "contest submission"
 msgid "Can't access submission"
-msgstr "bài nộp của contest"
+msgstr "Không truy cập được bài nộp"
 
 #: judge/views/submission.py:78
-#, fuzzy
-#| msgid "Permission denied"
 msgid "Permission denied."
-msgstr "Từ chối quyền"
+msgstr "Không được cho phép"
 
 #: judge/views/submission.py:82 judge/views/submission.py:89
 #, python-format
@@ -3791,10 +3757,8 @@ msgid "All submissions for %s"
 msgstr "Danh sách bài nộp %s"
 
 #: judge/views/submission.py:486
-#, fuzzy
-#| msgid "All submissions for %s"
 msgid "All submissions for"
-msgstr "Danh sách bài nộp %s"
+msgstr "Danh sách bài nộp"
 
 #: judge/views/submission.py:506
 msgid "Must pass a problem"
@@ -3877,10 +3841,8 @@ msgid "Issue description"
 msgstr "Mô tả vấn đề"
 
 #: judge/views/ticket.py:57
-#, fuzzy
-#| msgid "You must solve at least one problem before you can vote."
 msgid "You must solve at least one problem before you can create a ticket."
-msgstr "Bạn phải giải ít nhất một bài trước khi có thể bỏ biết"
+msgstr "Bạn phải giải ít nhất một bài trước khi có thể báo cáo."
 
 #: judge/views/ticket.py:100 judge/views/ticket.py:103
 msgid "Open new issue"
@@ -3897,10 +3859,8 @@ msgid "%(title)s - Ticket %(id)d"
 msgstr "%(title)s - Vấn đề %(id)d"
 
 #: judge/views/ticket.py:223
-#, fuzzy
-#| msgid "You cannot vote your own ticket."
 msgid "You cannot vote your own ticket."
-msgstr "Bạn không thể tự đánh giá"
+msgstr "Bạn không thể tự bình chọn báo cáo của mình."
 
 #: judge/views/ticket.py:305
 #, python-format
@@ -3958,73 +3918,73 @@ msgstr ""
 msgid "Perform Two-factor Authentication"
 msgstr ""
 
-#: judge/views/user.py:78
+#: judge/views/user.py:100
 msgid "No such user"
 msgstr "Không có người dùng"
 
-#: judge/views/user.py:78
+#: judge/views/user.py:100
 #, python-format
 msgid "No user handle \"%s\"."
 msgstr "Không có người dùng \"%s\"."
 
-#: judge/views/user.py:82
+#: judge/views/user.py:104
 msgid "My account"
 msgstr "Tài khoản của tôi"
 
-#: judge/views/user.py:83
+#: judge/views/user.py:105
 #, python-format
 msgid "User %s"
 msgstr "Người dùng %s"
 
-#: judge/views/user.py:130
+#: judge/views/user.py:152
 msgid "Login"
 msgstr "Đăng nhập"
 
-#: judge/views/user.py:171
+#: judge/views/user.py:193
 msgid "M j, Y, G:i"
 msgstr "j M, Y, G:i"
 
-#: judge/views/user.py:305
+#: judge/views/user.py:349
 msgid "Preparing your data..."
 msgstr ""
 
-#: judge/views/user.py:309 templates/user/edit-profile.html:357
+#: judge/views/user.py:353 templates/user/edit-profile.html:358
 msgid "Download your data"
 msgstr ""
 
-#: judge/views/user.py:367
+#: judge/views/user.py:411
 msgid "Updated on site"
 msgstr "Cập Nhật trên trang web"
 
-#: judge/views/user.py:401 templates/admin/auth/user/change_form.html:14
-#: templates/admin/auth/user/change_form.html:17 templates/base.html:263
-#: templates/user/user-tabs.html:16
+#: judge/views/user.py:445 templates/admin/auth/user/change_form.html:14
+#: templates/admin/auth/user/change_form.html:17 templates/base.html:269
+#: templates/user/user-tabs.html:20
 msgid "Edit profile"
 msgstr "Chỉnh sửa hồ sơ"
 
-#: judge/views/user.py:416
+#: judge/views/user.py:460
 msgid "Generated API token for user"
 msgstr ""
 
-#: judge/views/user.py:428
+#: judge/views/user.py:472
 msgid "Removed API token for user"
 msgstr ""
 
-#: judge/views/user.py:438
+#: judge/views/user.py:482
 msgid "Generated scratch codes for user"
 msgstr ""
 
-#: judge/views/user.py:444 templates/user/list.html:7
+#: judge/views/user.py:488 templates/user/list.html:7
 #: templates/user/user-list-tabs.html:4
 msgid "Leaderboard"
 msgstr "Bảng xếp hạng"
 
-#: judge/views/user.py:475 templates/user/contrib-list.html:60
+#: judge/views/user.py:521 templates/user/contrib-list.html:60
 #: templates/user/user-list-tabs.html:5
 msgid "Contributors"
 msgstr "Đóng góp"
 
-#: judge/views/user.py:550
+#: judge/views/user.py:598
 msgid "You have been successfully logged out."
 msgstr "Bạn đã đăng xuất thành công."
 
@@ -4084,66 +4044,70 @@ msgstr "Cập nhật người dùng"
 msgid "Rejudge"
 msgstr "Chấm lại"
 
-#: templates/base.html:238
+#: templates/base.html:244
 msgid "Report issue"
 msgstr "Báo cáo vấn đề"
 
-#: templates/base.html:255
+#: templates/base.html:261
 #, python-format
 msgid "Hello, <b>%(username)s</b>."
 msgstr "Xin chào, <b>%(username)s</b>."
 
-#: templates/base.html:270
+#: templates/base.html:276
 msgid "Log out"
 msgstr "Đăng xuất"
 
-#: templates/base.html:279
+#: templates/base.html:285
 #: templates/registration/password_reset_complete.html:4
 msgid "Log in"
 msgstr "Đăng nhập"
 
-#: templates/base.html:280 templates/registration/registration_form.html:179
+#: templates/base.html:286 templates/registration/registration_form.html:179
 msgid "or"
 msgstr "hoặc"
 
-#: templates/base.html:281
+#: templates/base.html:287
 msgid "Sign up"
 msgstr "Đăng ký"
 
-#: templates/base.html:294
+#: templates/base.html:300
 msgid "spectating"
 msgstr "spectating"
 
-#: templates/base.html:305
+#: templates/base.html:311
 msgid "Go to Rankings"
 msgstr "Tới bảng xếp hạng"
 
-#: templates/base.html:312
+#: templates/base.html:318
 msgid "This site works best with JavaScript enabled."
 msgstr "Trang web này hoạt động tốt nhất khi JavaScript được cho phép."
 
-#: templates/base.html:339
+#: templates/base.html:345
 msgid "Long An HSGS Online Judge"
 msgstr "Web chấm bài tự động trường THPT chuyên Long An"
 
-#: templates/base.html:340
+#: templates/base.html:346
 msgid "powered by"
 msgstr "dựa trên nền tảng"
 
-#: templates/base.html:341
-#, fuzzy
-#| msgid "Random"
+#: templates/base.html:347
 msgid "and"
-msgstr "Ngẫu nhiên"
+msgstr "và"
 
-#: templates/base.html:342
+#: templates/base.html:348
 msgid "developed by"
 msgstr "phát triển bởi"
 
+#: templates/blog/blog-list-tabs.html:4
+msgid "Newsfeed"
+msgstr "Tin tức"
+
+#: templates/blog/blog-list-tabs.html:5 templates/user/user-tabs.html:9
+msgid "Blogs"
+msgstr "Blogs"
+
 #: templates/blog/blog-post.html:10 templates/blog/blog-post.html:19
 #: templates/blog/content.html:22 templates/blog/content.html:31
-#, fuzzy
-#| msgid "Please login to vote"
 msgid "Please log in to vote"
 msgstr "Hãy đăng nhập để bình chọn"
 
@@ -4161,19 +4125,9 @@ msgid "Edit"
 msgstr "Chỉnh sửa"
 
 #: templates/blog/dashboard.html:21
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    posted on %(time)s\n"
-#| "                "
-msgid ""
-"\n"
-"                                    on %(time)s\n"
-"                                "
-msgstr ""
-"\n"
-"                    đăng vào lúc %(time)s\n"
-"                "
+#, python-format
+msgid "on %(time)s"
+msgstr "vào lúc %(time)s"
 
 #: templates/blog/edit.html:31
 msgid "Edit blog post in admin panel for more options"
@@ -4192,39 +4146,35 @@ msgstr "Cập nhật"
 msgid "Create"
 msgstr "Tạo"
 
-#: templates/blog/list.html:127
+#: templates/blog/list.html:128
 msgid "Blog"
 msgstr "Blog"
 
-#: templates/blog/list.html:129
+#: templates/blog/list.html:130
 msgid "Events"
 msgstr "Sự kiện"
 
-#: templates/blog/list.html:135 templates/organization/home.html:78
-msgid "News"
-msgstr "Tin tức"
-
-#: templates/blog/list.html:148
-msgid "Ongoing contests"
-msgstr "Kỳ thi đang diễn ra"
-
-#: templates/blog/list.html:166
-msgid "Upcoming contests"
-msgstr "Kỳ thi sắp tới"
-
-#: templates/blog/list.html:197
-msgid "Comment stream"
-msgstr "Dòng bình luận"
-
-#: templates/blog/list.html:219
+#: templates/blog/list.html:149
 msgid "My open tickets"
 msgstr "Báo cáo của tôi"
 
-#: templates/blog/list.html:240
+#: templates/blog/list.html:170
 msgid "New tickets"
 msgstr "Báo cáo mới"
 
-#: templates/blog/new-problems-list.html:2 templates/organization/home.html:165
+#: templates/blog/list.html:192
+msgid "Ongoing contests"
+msgstr "Kỳ thi đang diễn ra"
+
+#: templates/blog/list.html:210
+msgid "Upcoming contests"
+msgstr "Kỳ thi sắp tới"
+
+#: templates/blog/list.html:241
+msgid "Comment stream"
+msgstr "Dòng bình luận"
+
+#: templates/blog/new-problems-list.html:2 templates/organization/home.html:170
 msgid "New problems"
 msgstr "Bài mới"
 
@@ -4242,10 +4192,8 @@ msgid "View all"
 msgstr "Xem đầy đủ"
 
 #: templates/blog/top-rating.html:2
-#, fuzzy
-#| msgid "contest ratings"
 msgid "Top ratings"
-msgstr "xếp hạng kỳ thi"
+msgstr ""
 
 #: templates/blog/top-scorers.html:2
 msgid "Top scorers"
@@ -4290,11 +4238,6 @@ msgid "Hide"
 msgstr "Ẩn"
 
 #: templates/comments/list.html:111
-#, fuzzy, python-format
-#| msgid ""
-#| "This comment is hidden due to too much negative feedback.\n"
-#| "                                                    Click <a href="
-#| "\"javascript:comment_show_content(%(id)s)\">here</a> to view it."
 msgid ""
 "\n"
 "                                                This comment is hidden due "
@@ -4303,7 +4246,9 @@ msgid ""
 "comment_show_content(%(id)s)\">here</a> to view it.\n"
 "                                            "
 msgstr ""
-"Bình luận này đã bị ẩn vì có quá nhiều phản ứng tiêu cực.\n"
+"\n"
+"                                                Bình luận này đã bị ẩn vì "
+"có quá nhiều phản ứng tiêu cực.\n"
 "                                                Nhấn vào <a href="
 "\"javascript:comment_show_content(%(id)s)\">đây</a> để xem.\n"
 "                                            "
@@ -4431,7 +4376,7 @@ msgid "Info"
 msgstr "Thông tin"
 
 #: templates/contest/contest-tabs.html:6 templates/stats/base.html:9
-#: templates/submission/list.html:354
+#: templates/submission/list.html:356
 msgid "Statistics"
 msgstr "Thống kê"
 
@@ -4440,10 +4385,8 @@ msgid "Rankings"
 msgstr "Bảng xếp hạng"
 
 #: templates/contest/contest-tabs.html:16
-#, fuzzy
-#| msgid "Rankings"
 msgid "Hidden Rankings"
-msgstr "Bảng xếp hạng"
+msgstr "Bảng xếp hạng bị ẩn"
 
 #: templates/contest/contest-tabs.html:21
 msgid "MOSS"
@@ -4744,7 +4687,7 @@ msgstr "Số lần nộp bài"
 msgid "or leave blank for no limit."
 msgstr "hoặc để trống để không giới hạn."
 
-#: templates/contest/edit.html:126 templates/user/edit-profile.html:421
+#: templates/contest/edit.html:126 templates/user/edit-profile.html:422
 msgid "Delete"
 msgstr "Xoá"
 
@@ -5042,66 +4985,70 @@ msgstr ""
 "<br>\n"
 "Dưới đây là danh sách các tổ chức mà bạn là admin:<br>"
 
-#: templates/organization/home.html:44
+#: templates/organization/home.html:48
 msgid "Are you sure you want to leave this organization?"
 msgstr "Bạn có chắc muốn rời khỏi tổ chức này?"
 
-#: templates/organization/home.html:46
+#: templates/organization/home.html:50
 msgid "You will have to rejoin to show up on the organization leaderboard."
 msgstr "Bạn sẽ phải tham gia lại để có hiện trên bảng xếp hạng của tổ chức."
 
-#: templates/organization/home.html:48
+#: templates/organization/home.html:52
 msgid "You will have to request membership in order to join again."
 msgstr "Bạn sẽ phải yêu cầu tư cách thành viên nếu muốn tham gia lại."
 
-#: templates/organization/home.html:67 templates/user/user-about.html:39
-#: templates/user/user-tabs.html:4
+#: templates/organization/home.html:71 templates/user/user-about.html:39
+#: templates/user/user-tabs.html:7
 msgid "About"
 msgstr "Thông tin"
 
-#: templates/organization/home.html:90
+#: templates/organization/home.html:82
+msgid "News"
+msgstr "Tin tức"
+
+#: templates/organization/home.html:95
 msgid "Controls"
 msgstr "Quản lý"
 
-#: templates/organization/home.html:96
+#: templates/organization/home.html:101
 msgid "Leave organization"
 msgstr "Rời khỏi tổ chức"
 
-#: templates/organization/home.html:102
+#: templates/organization/home.html:107
 msgid "Join organization"
 msgstr "Tham gia tổ chức"
 
-#: templates/organization/home.html:106
+#: templates/organization/home.html:111
 msgid "Request membership"
 msgstr "Yêu cầu tư cách thành viên"
 
-#: templates/organization/home.html:114
+#: templates/organization/home.html:119
 msgid "View requests"
 msgstr "Xem yêu cầu"
 
-#: templates/organization/home.html:121
+#: templates/organization/home.html:126
 msgid "Create blog post"
 msgstr "Tạo blog"
 
-#: templates/organization/home.html:125
+#: templates/organization/home.html:130
 msgid "Edit organization"
 msgstr "Chỉnh sửa tổ chức"
 
-#: templates/organization/home.html:131
+#: templates/organization/home.html:136
 msgid "Admin organization"
 msgstr "Quản trị tổ chức"
 
-#: templates/organization/home.html:139
+#: templates/organization/home.html:144
 msgid "New contests"
 msgstr "Kỳ thi mới"
 
-#: templates/organization/home.html:155
+#: templates/organization/home.html:160
 #, python-format
 msgid "%(time_limit)s window"
 msgstr ""
 "Thời gian làm bài: %(time_limit)s (bắt đầu tính giờ khi nhấn tham gia kỳ thi)"
 
-#: templates/organization/home.html:156
+#: templates/organization/home.html:161
 #, python-format
 msgid "%(duration)s long"
 msgstr "Thời gian làm bài: %(duration)s"
@@ -5203,10 +5150,8 @@ msgid "Enter a new code for the cloned problem:"
 msgstr "Nhập mã bài cho bài mới:"
 
 #: templates/problem/data.html:114
-#, fuzzy
-#| msgid "Expected checker's extension must be in [cpp, py, pas], found "
 msgid "Expected checker's extension must be in [cpp, py], found "
-msgstr "Trình chấm ngoài phải có đuôi file là cpp, py hoặc pas, không phải "
+msgstr "Trình chấm ngoài phải có đuôi file là cpp, py, không phải "
 
 #: templates/problem/data.html:233
 msgid "Instruction"
@@ -5555,11 +5500,11 @@ msgstr[1] "Các máy chấm"
 msgid "none available"
 msgstr "không có máy chấm nào"
 
-#: templates/problem/problem.html:347
+#: templates/problem/problem.html:346
 msgid "This problem is only a suggestion!"
 msgstr "Bài tập này đang được đề xuất!"
 
-#: templates/problem/problem.html:349
+#: templates/problem/problem.html:348
 msgid ""
 "This problem cannot be accessed by normal users until it is approved by an "
 "admin or staff. Please make sure that all the data for this problem is "
@@ -5625,7 +5570,7 @@ msgid "Show problem types"
 msgstr "Hiện dạng đề"
 
 #: templates/problem/search-form.html:38 templates/problem/search-form.html:40
-#: templates/submission/list.html:336
+#: templates/submission/list.html:338
 #: templates/submission/submission-list-tabs.html:4
 msgid "All"
 msgstr "Tất cả"
@@ -5638,7 +5583,7 @@ msgstr "Dạng bài tập"
 msgid "Point range"
 msgstr "Khoảng điểm"
 
-#: templates/problem/search-form.html:66 templates/submission/list.html:346
+#: templates/problem/search-form.html:66 templates/submission/list.html:348
 #: templates/ticket/list.html:250
 msgid "Go"
 msgstr "Tìm"
@@ -5731,24 +5676,16 @@ msgid "Thanks for suggesting problem!"
 msgstr "Cảm ơn bạn đã đề xuất!"
 
 #: templates/problem/suggest.html:10
-#, fuzzy
-#| msgid ""
-#| "Please keep in mind that this form is only for creating new problems. "
-#| "Spamming and using for wrong purposes is not allowed.<br>If you don't "
-#| "know how to suggest a problem, please read <a href=\"/about/suggest_guide/"
-#| "\">this</a>."
 msgid ""
 "Please keep in mind that this form is only for creating new problems. "
 "Spamming and using for wrong purposes is not allowed."
 msgstr ""
 "Hãy lưu ý rằng form này chỉ dùng để đề xuất bài tập mới. Spam hoặc dùng nó "
-"không đúng mục đích là không được cho phép.<br> Nếu bạn không biết cách đề "
-"xuất bài tập mới, hãy tham khảo <a href=\"/about/suggest_guide/\">hướng dẫn "
-"này</a>."
+"không đúng mục đích là không được cho phép."
 
 #: templates/problem/suggest.html:12
 msgid "If you don't know how to suggest a problem, please read [guide][0]."
-msgstr ""
+msgstr "Nếu bạn không biết cách đề xuất một bài tập, hãy đọc [quide][0]."
 
 #: templates/registration/activate.html:3
 #, python-format
@@ -5781,14 +5718,10 @@ msgid "See you later!"
 msgstr "Hẹn gặp lại!"
 
 #: templates/registration/password_change_done.html:3
-#, fuzzy
-#| msgid "Your password was sucessfully changed."
 msgid "Your password was successfully changed."
 msgstr "Mật khẩu của bạn đã được thay đổi."
 
 #: templates/registration/password_change_form.html:7
-#, fuzzy
-#| msgid "Your password can't be a commonly used password."
 msgid "We found your password in [a database of compromised passwords][0]."
 msgstr "Không được đặt mật khẩu quá phổ biến."
 
@@ -5931,12 +5864,12 @@ msgid "Default language"
 msgstr "Ngôn ngữ mặc định"
 
 #: templates/registration/registration_form.html:188
-#: templates/user/edit-profile.html:398
+#: templates/user/edit-profile.html:399
 msgid "Affiliated organizations"
 msgstr "Tổ chức đại diện"
 
 #: templates/registration/registration_form.html:194
-#: templates/user/edit-profile.html:333
+#: templates/user/edit-profile.html:334
 msgid "Notify me about upcoming contests"
 msgstr "Thông báo cho tôi về các kỳ thi sắp tới"
 
@@ -6027,12 +5960,12 @@ msgid ""
 msgstr ""
 
 #: templates/registration/two_factor_auth.html:33
-#: templates/user/edit-profile.html:168
+#: templates/user/edit-profile.html:169
 msgid "WebAuthn is not supported by your browser."
 msgstr ""
 
 #: templates/registration/two_factor_auth.html:54
-#: templates/user/edit-profile.html:192
+#: templates/user/edit-profile.html:193
 msgid "Failed to contact server."
 msgstr ""
 
@@ -6147,15 +6080,15 @@ msgstr "Lọc theo trạng thái..."
 msgid "Filter by language..."
 msgstr "Lọc theo ngôn ngữ..."
 
-#: templates/submission/list.html:311
+#: templates/submission/list.html:313
 msgid "Filter submissions"
 msgstr "Lọc các bài nộp"
 
-#: templates/submission/list.html:334
+#: templates/submission/list.html:336
 msgid "Organization"
 msgstr "Tổ chức"
 
-#: templates/submission/list.html:360
+#: templates/submission/list.html:362
 msgid "Total:"
 msgstr "Tổng:"
 
@@ -6283,10 +6216,8 @@ msgstr "Điểm cuối cùng:"
 
 #: templates/submission/status-testcases.html:179
 #: templates/submission/status-testcases.html:183
-#, fuzzy, python-format
-#| msgid "test case total points"
 msgid "%(points)s/%(total)s points"
-msgstr "tổng điểm test case"
+msgstr "%(points)s/%(total)s points"
 
 #: templates/submission/status-testcases.html:188
 msgid "Passing pretests does not guarantee a full score on system tests."
@@ -6351,9 +6282,6 @@ msgid "Filing user"
 msgstr "Filing user"
 
 #: templates/ticket/list.html:242 templates/ticket/ticket.html:398
-#, fuzzy
-#| msgid "Assignee"
-#| msgid_plural "Assignees"
 msgid "Assignee"
 msgid_plural "Assignees"
 msgstr[0] "Người được phân công"
@@ -6406,16 +6334,12 @@ msgid "Nothing here."
 msgstr "Không có gì ở đây."
 
 #: templates/ticket/ticket.html:429
-#, fuzzy
-#| msgid "votes"
 msgid "Upvote"
-msgstr "đánh giá"
+msgstr ""
 
 #: templates/ticket/ticket.html:431
-#, fuzzy
-#| msgid "blog post"
 msgid "Undo vote"
-msgstr "bài đăng blog"
+msgstr "Hủy bình chọn"
 
 #: templates/ticket/ticket.html:435
 msgid "Close ticket"
@@ -6434,136 +6358,137 @@ msgstr "Hạng"
 msgid "Search by handle..."
 msgstr "Tìm kiếm bằng username"
 
+#: templates/user/blog.html:46
+msgid "User doesn't have any posts."
+msgstr ""
+
 #: templates/user/contrib-table.html:5
 msgid "Contribution points"
 msgstr "Đóng góp"
 
-#: templates/user/edit-profile.html:116
+#: templates/user/edit-profile.html:117
 msgid "Are you sure you want to generate or regenerate your API token?"
 msgstr "Bạn có chắc muốn tạo mới / tạo lại API token?"
 
-#: templates/user/edit-profile.html:117
+#: templates/user/edit-profile.html:118
 msgid "This will invalidate any previous API tokens."
 msgstr "Việc này sẽ làm mọi API token trước trở nên không hợp lệ."
 
-#: templates/user/edit-profile.html:118
+#: templates/user/edit-profile.html:119
 msgid ""
 "It also allows access to your account without Two-factor Authentication."
 msgstr ""
 "Việc này sẽ khiến tài khoản của bạn có thể truy cập mà không cần xác thực 2 "
 "bước."
 
-#: templates/user/edit-profile.html:119
+#: templates/user/edit-profile.html:120
 msgid "You will not be able to view your api token after you leave this page!"
 msgstr "Bạn sẽ không thể xem API token nếu thoát trang này"
 
-#: templates/user/edit-profile.html:120 templates/user/edit-profile.html:214
+#: templates/user/edit-profile.html:121 templates/user/edit-profile.html:215
 msgid "Generating..."
 msgstr "Đang tạo..."
 
-#: templates/user/edit-profile.html:128 templates/user/edit-profile.html:250
-#: templates/user/edit-profile.html:378
+#: templates/user/edit-profile.html:129 templates/user/edit-profile.html:251
+#: templates/user/edit-profile.html:379
 msgid "Regenerate"
 msgstr "Tạo lại"
 
-#: templates/user/edit-profile.html:134
+#: templates/user/edit-profile.html:135
 msgid "Remove"
 msgstr "Xoá"
 
-#: templates/user/edit-profile.html:144
+#: templates/user/edit-profile.html:145
 msgid "Are you sure you want to remove your API token?"
 msgstr "Bạn có chắc muốn xoá API token?"
 
-#: templates/user/edit-profile.html:151 templates/user/edit-profile.html:382
+#: templates/user/edit-profile.html:152 templates/user/edit-profile.html:383
 msgid "Generate"
 msgstr "Tạo"
 
-#: templates/user/edit-profile.html:197
+#: templates/user/edit-profile.html:198
 msgid "Are you sure you want to delete this security key?"
 msgstr "Bạn có chắc muốn xoá khoá bảo mật này?"
 
-#: templates/user/edit-profile.html:299
+#: templates/user/edit-profile.html:300
 msgid "Self-description"
 msgstr "Tự giới thiệu"
 
-#: templates/user/edit-profile.html:308
+#: templates/user/edit-profile.html:309
 msgid "Select your closest major city"
 msgstr "Chọn thành phố của bạn"
 
-#: templates/user/edit-profile.html:317
+#: templates/user/edit-profile.html:318
 msgid "Editor theme"
 msgstr "Giao diện khung code"
 
-#: templates/user/edit-profile.html:322
+#: templates/user/edit-profile.html:323
 msgid "Math engine"
 msgstr ""
 
-#: templates/user/edit-profile.html:344 templates/user/edit-profile.html:346
+#: templates/user/edit-profile.html:345 templates/user/edit-profile.html:347
 msgid "Change your avatar"
 msgstr "Đổi ảnh đại diện của bạn"
 
-#: templates/user/edit-profile.html:351
+#: templates/user/edit-profile.html:352
 msgid "Change your password"
 msgstr "Đổi mật khẩu của bạn"
 
-#: templates/user/edit-profile.html:364
+#: templates/user/edit-profile.html:365
 msgid "Two-factor Authentication is enabled"
 msgstr "Xác thực 2 yếu tố đã bật"
 
-#: templates/user/edit-profile.html:367 templates/user/edit-profile.html:370
+#: templates/user/edit-profile.html:368 templates/user/edit-profile.html:371
 msgid "Disable"
 msgstr "Tắt"
 
-#: templates/user/edit-profile.html:372
+#: templates/user/edit-profile.html:373
 msgid "Refresh"
 msgstr ""
 
-#: templates/user/edit-profile.html:375
+#: templates/user/edit-profile.html:376
 msgid "Scratch Codes:"
 msgstr ""
 
-#: templates/user/edit-profile.html:379
+#: templates/user/edit-profile.html:380
 msgid "Hidden"
 msgstr "Ẩn"
 
-#: templates/user/edit-profile.html:389
+#: templates/user/edit-profile.html:390
 msgid "Two-factor Authentication is disabled"
 msgstr "Xác thực 2 yếu tố đã tắt"
 
-#: templates/user/edit-profile.html:390
+#: templates/user/edit-profile.html:391
 msgid "Enable"
 msgstr "Bật"
 
-#: templates/user/edit-profile.html:411
+#: templates/user/edit-profile.html:412
 msgid "Security keys"
 msgstr "Khoá bảo mật"
 
-#: templates/user/edit-profile.html:428
+#: templates/user/edit-profile.html:429
 msgid "Enter a name for this key"
 msgstr "Đặt tên cho khoá này"
 
-#: templates/user/edit-profile.html:429
+#: templates/user/edit-profile.html:430
 msgid "Add"
 msgstr "Thêm"
 
-#: templates/user/edit-profile.html:438
+#: templates/user/edit-profile.html:439
 msgid "Update profile"
 msgstr "Cập nhật"
 
 #: templates/user/pp-row.html:24
 #, python-format
-msgid ""
-"\n"
-"            weighted <b>%(weight)s%%</b>\n"
-"        "
+msgid "weighted <b>%(weight)s%%</b>"
 msgstr ""
 
-#: templates/user/pp-row.html:29
+#: templates/user/pp-row.html:27
 #, python-format
 msgid "%(pp).1fpp"
 msgstr ""
 
-#: templates/user/pp-row.html:31
+#: templates/user/pp-row.html:29
 #, python-format
 msgid "%(pp).0fpp"
 msgstr ""
@@ -6579,6 +6504,14 @@ msgstr ""
 #: templates/user/prepare-data.html:81
 msgid "Track progress"
 msgstr "Theo dõi quá trình"
+
+#: templates/user/prepare-data.html:84
+#, python-format
+msgid ""
+"You may only prepare a new data download for this contest once every "
+"%(ratelimit)s."
+msgstr ""
+"Bạn chỉ được chuẩn bị dữ liệu mới cho kỳ thi này một lần trong %(ratelimit)s."
 
 #: templates/user/prepare-data.html:86
 msgid "Once your data is ready, you will find a download link on this page."
@@ -6599,6 +6532,11 @@ msgstr "Tải dữ liệu đã chuẩn bị"
 #: templates/user/prepare-data.html:132
 msgid "Your data is ready!"
 msgstr "Dữ liệu của bạn đã sẵn sàng!"
+
+#: templates/user/prepare-data.html:134
+#, python-format
+msgid "You will need to wait %(countdown)s to prepare a new data download."
+msgstr "Bạn phải đợi %(countdown)s để chuẩn bị dữ liệu mới."
 
 #: templates/user/prepare-data.html:136
 msgid "Download data"
@@ -6665,15 +6603,13 @@ msgid "past year"
 msgstr "năm vừa qua"
 
 #: templates/user/user-base.html:43
-#, fuzzy, python-format
-#| msgid "contest problems"
 msgid "%(counter)s problem solved"
 msgid_plural "%(counter)s problems solved"
-msgstr[0] "bài của kỳ thi"
+msgstr[0] "Đã giải %(counter)s bài tập"
 
 #: templates/user/user-base.html:51
 msgid "Rank by points:"
-msgstr "Hạng điểm:"
+msgstr "Hạng theo điểm:"
 
 #: templates/user/user-base.html:54
 msgid "Total points:"
@@ -6731,32 +6667,64 @@ msgid "%(points).1f points"
 msgstr ""
 
 #: templates/user/user-problems.html:112
-#, fuzzy, python-format
-#| msgid "Page %(current)s of %(total)s"
 msgid "%(points)s / %(total)s"
-msgstr "Trang %(current)s / %(total)s"
+msgstr ""
 
-#: templates/user/user-tabs.html:7
-#, fuzzy
-#| msgid "personae non gratae"
+#: templates/user/user-tabs.html:5
+msgid "Create new blog post"
+msgstr "Tạo blog mới"
+
+#: templates/user/user-tabs.html:11
 msgid "Impersonate"
-msgstr "các người dùng bị cấm"
+msgstr ""
 
-#: templates/user/user-tabs.html:10
-#, fuzzy
-#| msgid "Admin"
+#: templates/user/user-tabs.html:14
 msgid "Admin User"
-msgstr "Quản trị"
+msgstr "Quản trị người dùng"
 
-#: templates/user/user-tabs.html:13
-#, fuzzy
-#| msgid "Edit profile"
+#: templates/user/user-tabs.html:17
 msgid "Admin Profile"
-msgstr "Chỉnh sửa hồ sơ"
+msgstr "Quản trị hồ sơ"
 
 #: templates/widgets/select_all.html:8
 msgid "Check all"
 msgstr "Chọn tất cả"
+
+#, fuzzy
+#~| msgid "%d submission was successfully rescored."
+#~| msgid_plural "%d submissions were successfully rescored."
+#~ msgid "%d submission were successfully rescored."
+#~ msgid_plural "%d submissions were successfully rescored."
+#~ msgstr[0] "%d bài đã được tính điểm lại."
+
+#~ msgid "%s spectating in %s"
+#~ msgstr "%s spectating trong %s"
+
+#~ msgid "%s in %s, v%d"
+#~ msgstr "%s trong %s, v%d"
+
+#~ msgid "%s in %s"
+#~ msgstr "%s trong %s"
+
+#~ msgid "Page %s of %s"
+#~ msgstr "Trang %s /%s"
+
+#~ msgid "%s's participation in %s"
+#~ msgstr "%s tham gia vào %s"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                    posted on %(time)s\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                                    on %(time)s\n"
+#~ "                                "
+#~ msgstr ""
+#~ "\n"
+#~ "                    đăng vào lúc %(time)s\n"
+#~ "                "
 
 #, fuzzy
 #~| msgid "organizations"
@@ -6890,15 +6858,6 @@ msgstr "Chọn tất cả"
 #~ msgid "Bans the selected judges from judging this contest."
 #~ msgstr "Các máy chấm không được phép chấm kỳ thi này"
 
-#~ msgid "%(user)s spectating in %(contest)s"
-#~ msgstr "%(user)s spectating trong %(contest)s"
-
-#~ msgid "%(user)s in %(contest)s, v%(virtual)d"
-#~ msgstr "%(user)s trong %(contest)s, v%(virtual)d"
-
-#~ msgid "%(user)s in %(contest)s"
-#~ msgstr "%(user)s trong %(contest)s"
-
 #~ msgid "Problem source"
 #~ msgstr "Nguồn bài tập"
 
@@ -6945,21 +6904,11 @@ msgstr "Chọn tất cả"
 #~ msgid "Preparing contest data"
 #~ msgstr "Đang chuẩn bị dữ liệu kỳ thi"
 
-#~ msgid ""
-#~ "You cannot create blog post.\n"
-#~ "Note: You need to solve at least %d problems to create new blog post."
-#~ msgstr ""
-#~ "Không thể tạo blog.\n"
-#~ "Lưu ý: Bạn cần giải ít nhất %d bài để có thể tạo blog."
-
 #~ msgid "You cannot edit blog post."
 #~ msgstr "Bạn không thể chỉnh sửa blog."
 
 #~ msgid "%s Official Rankings"
 #~ msgstr "Bảng xếp hạng chính thức của %s"
-
-#~ msgid "%(user)s's participation in %(contest)s"
-#~ msgstr "Các lần tham gia %(contest)s của %(user)s"
 
 #~ msgid "Please wait until the contest has ended to download data."
 #~ msgstr "Vui lòng đợi sau khi kỳ thi kết thúc để tải dữ liệu."
@@ -7042,9 +6991,6 @@ msgstr "Chọn tất cả"
 #~ msgid "posted on %(time)s"
 #~ msgstr "đã đăng vào %(time)s"
 
-#~ msgid "on %(time)s"
-#~ msgstr "vào lúc %(time)s"
-
 #~ msgid ""
 #~ "Please read the <a href=\"/about/blog/\">guidelines</a> before creating a "
 #~ "new blog post."
@@ -7081,21 +7027,11 @@ msgstr "Chọn tất cả"
 #~ msgstr "Đang chuẩn bị dữ liệu kỳ thi."
 
 #~ msgid ""
-#~ "You may only prepare a new data download for this contest once every "
-#~ "%(ratelimit)s."
-#~ msgstr ""
-#~ "Bạn chỉ được chuẩn bị dữ liệu mới cho kỳ thi này một lần trong "
-#~ "%(ratelimit)s."
-
-#~ msgid ""
 #~ "Once the contest data is ready, you will find a download link on this "
 #~ "page."
 #~ msgstr ""
 #~ "Khi dữ liệu kỳ thi đã chuẩn bị xong, bạn sẽ tìm thấy liên kết tải tại "
 #~ "trang này."
-
-#~ msgid "You will need to wait %(countdown)s to prepare a new data download."
-#~ msgstr "Bạn phải đợi %(countdown)s để chuẩn bị dữ liệu mới."
 
 #~ msgid "%(cnt)s virtual participation of this user"
 #~ msgstr "Lần tham gia ảo thứ %(cnt)s của người dùng"
@@ -7350,12 +7286,6 @@ msgstr "Chọn tất cả"
 
 #~ msgid "Problems solved:"
 #~ msgstr "Số bài đã giải:"
-
-#~ msgid "Create new blog post"
-#~ msgstr "Tạo blog mới"
-
-#~ msgid "Blogs"
-#~ msgstr "Blogs"
 
 #~ msgid "Ban this user"
 #~ msgstr "Ban người dùng này"
