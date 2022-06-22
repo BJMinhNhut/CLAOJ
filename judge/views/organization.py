@@ -5,9 +5,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.db.models import Count, Q
 from django.db.models.expressions import Value
+from django.db.models.functions import Coalesce
 from django.forms import Form, modelformset_factory
 from django.http import Http404, HttpResponsePermanentRedirect, HttpResponseRedirect
-from django.db.models.functions import Coalesce
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
@@ -21,8 +21,8 @@ from judge.forms import OrganizationForm
 from judge.models import BlogPost, BlogVote, Comment, Contest, Language, Organization, \
     OrganizationRequest, Problem, Profile
 from judge.utils.ranker import ranker
-from judge.utils.views import QueryStringSortMixin, TitleMixin, generic_message
 from judge.utils.raw_sql import RawSQLColumn, unique_together_left_join
+from judge.utils.views import QueryStringSortMixin, TitleMixin, generic_message
 from judge.views.blog import BlogPostCreate, PostListBase
 from judge.views.contests import ContestList, CreateContest
 from judge.views.problem import ProblemCreate, ProblemList
