@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block js_media %}
+    {% include "blog/media-js.html" %}
+{% endblock %}
+
 {% block media %}
     {% include "blog/media-css.html" %}
     <style>
@@ -76,8 +80,9 @@
             {% if posts %}
                 <div class="sidebox">
                     <h3>{{ _('News') }} <i class="fa fa-terminal"></i></h3>
-                    {% for post in posts %}
-                        {% include "blog/blog-post.html" %}
+					
+                    {% for post in posts %}                
+						{% include "blog/blog-post.html" %}
                     {% endfor %}
                 </div>
                 {% if page_obj.has_other_pages() %}

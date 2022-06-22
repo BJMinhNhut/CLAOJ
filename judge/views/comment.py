@@ -60,11 +60,11 @@ def vote_comment(request, delta):
                 Comment.objects.get(id=comment_id).vote(2)
             vote.score = delta
             vote.save()
-            return HttpResponse(f'vote success', content_type='text/plain')
+            return HttpResponse('vote success', content_type='text/plain')
         else:
             Comment.objects.get(id=comment_id).vote(-delta)
             vote.delete()
-            return HttpResponse(f'unvote success', content_type='text/plain')
+            return HttpResponse('unvote success', content_type='text/plain')
     except CommentVote.DoesNotExist:
         pass
     vote = CommentVote()

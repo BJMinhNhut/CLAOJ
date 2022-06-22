@@ -67,11 +67,11 @@ def vote_blog(request, delta):
                 BlogPost.objects.get(id=blog_id).vote(2)
             vote.score = delta
             vote.save()
-            return HttpResponse(f'vote success', content_type='text/plain')
+            return HttpResponse('vote success', content_type='text/plain')
         else:
             BlogPost.objects.get(id=blog_id).vote(-delta)
             vote.delete()
-            return HttpResponse(f'unvote success', content_type='text/plain')
+            return HttpResponse('unvote success', content_type='text/plain')
     except BlogVote.DoesNotExist:
         pass
 
