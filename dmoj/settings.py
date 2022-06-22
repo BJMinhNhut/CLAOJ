@@ -82,6 +82,7 @@ CLAOJ_PROBLEM_TIMELIMIT_LIMIT = 5
 # Maximum contest duration (day) that a user can set for a contest
 # without the `long_contest_duration` permission
 CLAOJ_CONTEST_DURATION_LIMIT = 15
+CLAOJ_BLOG_MIN_PROBLEM_COUNT = 10
 
 DMOJ_CAMO_URL = None
 DMOJ_CAMO_KEY = None

@@ -23,7 +23,7 @@ from judge.utils.diggpaginator import DiggPaginator
 from judge.utils.problems import user_completed_ids
 from judge.utils.raw_sql import RawSQLColumn, unique_together_left_join
 from judge.utils.tickets import filter_visible_tickets
-from judge.utils.views import TitleMixin
+from judge.utils.views import TitleMixin, generic_message
 
 
 @login_required
@@ -130,7 +130,7 @@ class PostListBase(ListView):
 
     def get_queryset(self):
         queryset = (BlogPost.objects.filter(visible=True, publish_on__lte=timezone.now())
-                    .order_by('-sticky', '-publish_on').prefetch_related('authors__user'))
+                    .prefetch_related('authors__user'))
         if self.request.user.is_authenticated:
             queryset = queryset.annotate(vote_score=Coalesce(RawSQLColumn(BlogVote, 'score'), Value(0)))
             profile = self.request.profile
@@ -152,15 +152,35 @@ class PostListBase(ListView):
 
 class PostList(PostListBase):
     template_name = 'blog/list.html'
+    show_all_blogs = False
+    tab = 'home'
 
     def get_queryset(self):
         queryset = super(PostList, self).get_queryset()
-        queryset = queryset.filter(global_post=True)
+
+        queryset = queryset.filter(organization=None)
+
+        if 'show_all_blogs' in self.request.GET:
+            self.show_all_blogs = self.request.session['show_all_blogs'] = self.request.GET['show_all_blogs'] == 'true'
+        else:
+            self.show_all_blogs = self.request.session.get('show_all_blogs', False)
+
+        if self.show_all_blogs:
+            self.tab = 'blog_list'
+            queryset = queryset.order_by('-publish_on')
+        else:
+            queryset = queryset.filter(global_post=True).order_by('-sticky', '-publish_on')
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super(PostList, self).get_context_data(**kwargs)
         context['first_page_href'] = reverse('home')
+
+        context['newsfeed_link'] = f"{reverse('home')}?show_all_blogs=false"
+        context['all_blogs_link'] = f"{reverse('home')}?show_all_blogs=true"
+
+        context['show_all_blogs'] = self.show_all_blogs
+
         context['page_prefix'] = reverse('blog_post_list')
         context['comments'] = Comment.most_recent(self.request.user, 10)
         context['new_problems'] = Problem.get_public_problems() \
@@ -209,6 +229,10 @@ class PostList(PostListBase):
             context['open_tickets'] = filter_visible_tickets(tickets, self.request.user)[:10]
         else:
             context['open_tickets'] = []
+
+        context['tab'] = self.tab
+        context['left_align_tabs'] = True
+
         return context
 
     def get_top_scorers(self):
@@ -287,6 +311,18 @@ class BlogPostCreate(TitleMixin, CreateView):
             revisions.set_user(self.request.user)
 
         return HttpResponseRedirect(post.get_absolute_url())
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            raise PermissionDenied()
+        # hasattr(self, 'organization') -> admin org
+        if request.user.profile.problem_count < settings.CLAOJ_BLOG_MIN_PROBLEM_COUNT \
+                and not request.user.is_superuser and not hasattr(self, 'organization'):
+            return generic_message(request, _('Permission denied'),
+                                   _('You cannot create blog post.\n'
+                                     'Note: You need to solve at least %d problems to create new blog post.')
+                                   % settings.CLAOJ_BLOG_MIN_PROBLEM_COUNT)
+        return super().dispatch(request, *args, **kwargs)
 
 
 class BlogPostEdit(BlogPostMixin, TitleMixin, UpdateView):
