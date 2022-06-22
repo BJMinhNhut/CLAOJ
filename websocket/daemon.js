@@ -84,7 +84,6 @@ wss_receiver.on('connection', function (socket) {
 
     socket.on('message', function (request) {
         try {
-			console.log(request)
             request = JSON.parse(request);
 			request.command = request.command.replace(/-/g, '_');
         } catch (err) {
@@ -132,7 +131,6 @@ wss_sender.on('connection', function (socket) {
     };
     socket.on('message', function (request) {
         try {			
-			console.log(request)
             request = JSON.parse(request);
 			request.command = request.command.replace(/-/g, '_');
         } catch (err) {

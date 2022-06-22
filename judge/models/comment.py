@@ -60,7 +60,7 @@ class Comment(MPTTModel):
     def vote(self, delta):
         self.score += delta
         self.save(update_fields=['score'])
-        self.author.update_contribution_points(delta * settings.VNOJ_CP_COMMENT)
+        self.author.update_contribution_points(delta * settings.CLAOJ_CP_COMMENT)
 
     @classmethod
     def most_recent(cls, user, n, batch=None):
