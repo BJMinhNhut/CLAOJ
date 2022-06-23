@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-22 16:05+0000\n"
+"POT-Creation-Date: 2022-06-23 04:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,6 +54,22 @@ msgstr ""
 
 #: dmoj/settings.py:402
 msgid "Vietnamese"
+msgstr ""
+
+#: dmoj/urls.py:33
+msgid "Activation Successful!"
+msgstr ""
+
+#: dmoj/urls.py:40
+msgid "Activation key invalid"
+msgstr ""
+
+#: dmoj/urls.py:47
+msgid "Registration Completed"
+msgstr ""
+
+#: dmoj/urls.py:51
+msgid "Registration not allowed"
 msgstr ""
 
 #: dmoj/urls.py:104 templates/base.html:220 templates/organization/tabs.html:32
@@ -570,6 +586,70 @@ msgstr ""
 msgid "IOI (pre-2016)"
 msgstr ""
 
+#: judge/custom_translations.py:11
+#, python-format
+msgid ""
+"This password is too short. It must contain at least %(min_length)d "
+"character."
+msgid_plural ""
+"This password is too short. It must contain at least %(min_length)d "
+"characters."
+msgstr[0] ""
+msgstr[1] ""
+
+#: judge/custom_translations.py:15
+#, python-format
+msgid "Your password must contain at least %(min_length)d character."
+msgid_plural "Your password must contain at least %(min_length)d characters."
+msgstr[0] ""
+msgstr[1] ""
+
+#: judge/custom_translations.py:18
+#, python-format
+msgid "The password is too similar to the %(verbose_name)s."
+msgstr ""
+
+#: judge/custom_translations.py:19
+msgid "Your password can't be too similar to your other personal information."
+msgstr ""
+
+#: judge/custom_translations.py:20
+msgid "This password is entirely numeric."
+msgstr ""
+
+#: judge/custom_translations.py:21
+msgid "Your password can't be entirely numeric."
+msgstr ""
+
+#: judge/custom_translations.py:24
+msgid "PRoblems"
+msgstr ""
+
+#: judge/custom_translations.py:25
+#, python-brace-format
+msgid "posted {time}"
+msgstr ""
+
+#: judge/custom_translations.py:28
+#, python-brace-format
+msgid "commented {time}"
+msgstr ""
+
+#: judge/custom_translations.py:31 templates/organization/home.html:161
+#, python-format
+msgid "%(duration)s long"
+msgstr ""
+
+#: judge/custom_translations.py:32 templates/organization/home.html:160
+#, python-format
+msgid "%(time_limit)s window"
+msgstr ""
+
+#: judge/custom_translations.py:33
+#, python-format
+msgid "Ends in %(countdown)s"
+msgstr ""
+
 #: judge/forms.py:35
 #, python-brace-format
 msgid ""
@@ -1045,7 +1125,7 @@ msgid "private contestants"
 msgstr ""
 
 #: judge/models/contest.py:117
-msgid "If private, only these users may see the contest"
+msgid "If private, only these users may see the contest."
 msgstr ""
 
 #: judge/models/contest.py:119
@@ -4928,16 +5008,6 @@ msgstr ""
 msgid "New contests"
 msgstr ""
 
-#: templates/organization/home.html:160
-#, python-format
-msgid "%(time_limit)s window"
-msgstr ""
-
-#: templates/organization/home.html:161
-#, python-format
-msgid "%(duration)s long"
-msgstr ""
-
 #: templates/organization/list.html:24 templates/status/language-list.html:35
 msgid "Name"
 msgstr ""
@@ -5688,7 +5758,12 @@ msgid ""
 msgstr ""
 
 #: templates/registration/registration_form.html:135
+#: templates/registration/registration_form.html:188
 msgid "can be blank"
+msgstr ""
+
+#: templates/registration/registration_form.html:147
+msgid "please choose a popular email provider, e.g. gmail"
 msgstr ""
 
 #: templates/registration/registration_form.html:168
@@ -6428,6 +6503,38 @@ msgstr ""
 
 #: templates/user/user-about.html:189
 msgid "past year"
+msgstr ""
+
+#: templates/user/user-about.html:206
+msgid "#(cnt)d total submission"
+msgstr ""
+
+#: templates/user/user-about.html:206
+msgid "#(cnt)d total submissions"
+msgstr ""
+
+#: templates/user/user-about.html:211
+msgid "#(cnt)d submission in the last year"
+msgstr ""
+
+#: templates/user/user-about.html:211
+msgid "#(cnt)d submissions in the last year"
+msgstr ""
+
+#: templates/user/user-about.html:216
+msgid "#(cnt)d submission in (year)d"
+msgstr ""
+
+#: templates/user/user-about.html:216
+msgid "#(cnt)d submissions in #(year)d"
+msgstr ""
+
+#: templates/user/user-about.html:234
+msgid "#(cnt)d submission on #(date)s"
+msgstr ""
+
+#: templates/user/user-about.html:234
+msgid "#(cnt)d submissions on #(date)s"
 msgstr ""
 
 #: templates/user/user-base.html:43

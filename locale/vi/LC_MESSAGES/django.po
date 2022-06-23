@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dmoj\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-22 16:05+0000\n"
+"POT-Creation-Date: 2022-06-23 04:28+0000\n"
 "PO-Revision-Date: 2020-08-23 18:59\n"
 "Last-Translator: \n"
 "Language-Team: Vietnamese\n"
@@ -54,6 +54,22 @@ msgstr "Tiếng Anh"
 #: dmoj/settings.py:402
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
+
+#: dmoj/urls.py:33
+msgid "Activation Successful!"
+msgstr "Kích hoạt thành công"
+
+#: dmoj/urls.py:40
+msgid "Activation key invalid"
+msgstr "Mã kích hoạt không hợp lệ"
+
+#: dmoj/urls.py:47
+msgid "Registration Completed"
+msgstr "Đăng ký thành công"
+
+#: dmoj/urls.py:51
+msgid "Registration not allowed"
+msgstr "Không được phép đăng ký"
 
 #: dmoj/urls.py:104 templates/base.html:220 templates/organization/tabs.html:32
 msgid "Home"
@@ -383,6 +399,7 @@ msgid "Rejudge the selected submissions"
 msgstr "Chấm lại các bài đã chọn"
 
 #: judge/admin/submission.py:200 judge/views/problem_manage.py:131
+#, python-format
 msgid "%d submission was successfully rescored."
 msgid_plural "%d submissions were successfully rescored."
 msgstr[0] "%d bài đã được tính điểm lại."
@@ -572,6 +589,69 @@ msgstr ""
 #: judge/contest_format/legacy_ioi.py:18
 msgid "IOI (pre-2016)"
 msgstr ""
+
+#: judge/custom_translations.py:11
+#, python-format
+msgid ""
+"This password is too short. It must contain at least %(min_length)d "
+"character."
+msgid_plural ""
+"This password is too short. It must contain at least %(min_length)d "
+"characters."
+msgstr[0] "Mật khẩu quá ngắn, mật khẩu cần có ít nhất %(min_length)d ký tự."
+
+#: judge/custom_translations.py:15
+#, python-format
+msgid "Your password must contain at least %(min_length)d character."
+msgid_plural "Your password must contain at least %(min_length)d characters."
+msgstr[0] "Mật khẩu cần có ít nhất %(min_length)d ký tự."
+
+#: judge/custom_translations.py:18
+#, python-format
+msgid "The password is too similar to the %(verbose_name)s."
+msgstr "Mật khẩu không được quá giống với %(verbose_name)s."
+
+#: judge/custom_translations.py:19
+msgid "Your password can't be too similar to your other personal information."
+msgstr "Mật khẩu không được quá giống với các thông tin các nhân"
+
+#: judge/custom_translations.py:20
+msgid "This password is entirely numeric."
+msgstr "Mật khẩu này chỉ toàn các số."
+
+#: judge/custom_translations.py:21
+msgid "Your password can't be entirely numeric."
+msgstr "Mật khẩu không được hoàn toàn bằng số."
+
+#: judge/custom_translations.py:24
+msgid "PRoblems"
+msgstr "Danh sách bài"
+
+#: judge/custom_translations.py:25
+#, python-brace-format
+msgid "posted {time}"
+msgstr "đã đăng {time}"
+
+#: judge/custom_translations.py:28
+#, python-brace-format
+msgid "commented {time}"
+msgstr "đã bình luận {time}"
+
+#: judge/custom_translations.py:31 templates/organization/home.html:161
+#, python-format
+msgid "%(duration)s long"
+msgstr "Thời gian làm bài: %(duration)s"
+
+#: judge/custom_translations.py:32 templates/organization/home.html:160
+#, python-format
+msgid "%(time_limit)s window"
+msgstr ""
+"Thời gian làm bài: %(time_limit)s (bắt đầu tính giờ khi nhấn tham gia kỳ thi)"
+
+#: judge/custom_translations.py:33
+#, python-format
+msgid "Ends in %(countdown)s"
+msgstr "Kết thúc trong %(countdown)s"
 
 #: judge/forms.py:35
 #, python-brace-format
@@ -2890,6 +2970,7 @@ msgid "Page [page] of [topage]"
 msgstr "Trang [page] /[topage]"
 
 #: judge/pdf_problems.py:288
+#, python-format
 msgid "Page %(current)s of %(total)s"
 msgstr "Trang %(current)s / %(total)s"
 
@@ -3368,6 +3449,7 @@ msgid "Managing join requests for %s"
 msgstr "Quản lý các yêu cầu tham gia %s"
 
 #: judge/views/organization.py:245
+#, python-format
 msgid ""
 "Your organization can only receive %(can_add)d more members. You cannot "
 "approve %(to_approve)d users."
@@ -3511,10 +3593,12 @@ msgid "Create new problem"
 msgstr "Tạo bài mới"
 
 #: judge/views/problem.py:882
+#, python-brace-format
 msgid "Edit problem {0}"
 msgstr "Sửa đề bài {0}"
 
 #: judge/views/problem.py:885
+#, python-format
 msgid "Edit problem %s"
 msgstr "Sửa đề bài %s"
 
@@ -3567,7 +3651,7 @@ msgid ""
 "Can be left blank. In case the output can be too long (over 20MB), please "
 "set this."
 msgstr ""
-"Có thể bỏ trống. Chỉ thay đổi nếu độ dài của output quá dài (hơn 20Mb)."
+"Có thể bỏ trống. Chỉ thay đổi nếu độ dài của output quá dài (hơn 20MB)."
 
 #: judge/views/problem_data.py:140
 #, python-brace-format
@@ -4238,6 +4322,7 @@ msgid "Hide"
 msgstr "Ẩn"
 
 #: templates/comments/list.html:111
+#, python-format
 msgid ""
 "\n"
 "                                                This comment is hidden due "
@@ -4247,8 +4332,8 @@ msgid ""
 "                                            "
 msgstr ""
 "\n"
-"                                                Bình luận này đã bị ẩn vì "
-"có quá nhiều phản ứng tiêu cực.\n"
+"                                                Bình luận này đã bị ẩn vì có "
+"quá nhiều phản ứng tiêu cực.\n"
 "                                                Nhấn vào <a href="
 "\"javascript:comment_show_content(%(id)s)\">đây</a> để xem.\n"
 "                                            "
@@ -5042,17 +5127,6 @@ msgstr "Quản trị tổ chức"
 msgid "New contests"
 msgstr "Kỳ thi mới"
 
-#: templates/organization/home.html:160
-#, python-format
-msgid "%(time_limit)s window"
-msgstr ""
-"Thời gian làm bài: %(time_limit)s (bắt đầu tính giờ khi nhấn tham gia kỳ thi)"
-
-#: templates/organization/home.html:161
-#, python-format
-msgid "%(duration)s long"
-msgstr "Thời gian làm bài: %(duration)s"
-
 #: templates/organization/list.html:24 templates/status/language-list.html:35
 msgid "Name"
 msgstr "Tên"
@@ -5844,8 +5918,13 @@ msgstr ""
 "của bạn."
 
 #: templates/registration/registration_form.html:135
+#: templates/registration/registration_form.html:188
 msgid "can be blank"
 msgstr "có thể bỏ trống"
+
+#: templates/registration/registration_form.html:147
+msgid "please choose a popular email provider, e.g. gmail"
+msgstr "hãy chọn một địa chỉ mail thông dụng, ví dụ như gmail"
 
 #: templates/registration/registration_form.html:168
 msgid "(again, for confirmation)"
@@ -6216,6 +6295,7 @@ msgstr "Điểm cuối cùng:"
 
 #: templates/submission/status-testcases.html:179
 #: templates/submission/status-testcases.html:183
+#, python-format
 msgid "%(points)s/%(total)s points"
 msgstr "%(points)s/%(total)s points"
 
@@ -6602,7 +6682,42 @@ msgstr "Lịch sử rating"
 msgid "past year"
 msgstr "năm vừa qua"
 
+#: templates/user/user-about.html:206
+msgid "#(cnt)d total submission"
+msgstr "Số lượng bài nộp: #(cnt)d"
+
+#: templates/user/user-about.html:206
+msgid "#(cnt)d total submissions"
+msgstr "Số lượng bài nộp: #(cnt)d"
+
+#: templates/user/user-about.html:211
+msgid "#(cnt)d submission in the last year"
+msgstr "Số bài nộp trong năm vừa qua: #(cnt)d"
+
+#: templates/user/user-about.html:211
+msgid "#(cnt)d submissions in the last year"
+msgstr "Số bài nộp trong năm vừa qua: #(cnt)d"
+
+#: templates/user/user-about.html:216
+#, fuzzy
+#| msgid "#(cnt)d submission in #(year)d"
+msgid "#(cnt)d submission in (year)d"
+msgstr "Số bài nộp trong năm (year)d: #(cnt)d"
+
+#: templates/user/user-about.html:216
+msgid "#(cnt)d submissions in #(year)d"
+msgstr "Số bài nộp trong năm #(year)d: #(cnt)d"
+
+#: templates/user/user-about.html:234
+msgid "#(cnt)d submission on #(date)s"
+msgstr "#(date)s: #(cnt)d bài"
+
+#: templates/user/user-about.html:234
+msgid "#(cnt)d submissions on #(date)s"
+msgstr "#(date)s: #(cnt)d bài"
+
 #: templates/user/user-base.html:43
+#, python-format
 msgid "%(counter)s problem solved"
 msgid_plural "%(counter)s problems solved"
 msgstr[0] "Đã giải %(counter)s bài tập"
@@ -6667,6 +6782,7 @@ msgid "%(points).1f points"
 msgstr ""
 
 #: templates/user/user-problems.html:112
+#, python-format
 msgid "%(points)s / %(total)s"
 msgstr ""
 
@@ -6741,18 +6857,6 @@ msgstr "Chọn tất cả"
 #~ msgid "You already voted."
 #~ msgstr "Bạn đang ở một kỳ thi: \"%s\"."
 
-#~ msgid "Activation Successful!"
-#~ msgstr "Kích hoạt thành công"
-
-#~ msgid "Activation key invalid"
-#~ msgstr "Mã kích hoạt không hợp lệ"
-
-#~ msgid "Registration Completed"
-#~ msgstr "Đăng ký thành công"
-
-#~ msgid "Registration not allowed"
-#~ msgstr "Không được phép đăng ký"
-
 #~ msgid "Password change successful"
 #~ msgstr "Đổi mật khẩu thành công"
 
@@ -6791,41 +6895,6 @@ msgstr "Chọn tất cả"
 #~ msgid "The scoreboard will be frozen in the **last %d minute**."
 #~ msgid_plural "The scoreboard will be frozen in the **last %d minutes**."
 #~ msgstr[0] "Bảng điểm sẽ được đóng băng trong **%d phút cuối**."
-
-#~ msgid ""
-#~ "This password is too short. It must contain at least %(min_length)d "
-#~ "character."
-#~ msgid_plural ""
-#~ "This password is too short. It must contain at least %(min_length)d "
-#~ "characters."
-#~ msgstr[0] "Mật khẩu quá ngắn, mật khẩu cần có ít nhất %(min_length)d ký tự."
-
-#~ msgid "Your password must contain at least %(min_length)d character."
-#~ msgid_plural ""
-#~ "Your password must contain at least %(min_length)d characters."
-#~ msgstr[0] "Mật khẩu cần có ít nhất %(min_length)d ký tự."
-
-#~ msgid "The password is too similar to the %(verbose_name)s."
-#~ msgstr "Mật khẩu không được quá giống với %(verbose_name)s."
-
-#~ msgid ""
-#~ "Your password can't be too similar to your other personal information."
-#~ msgstr "Mật khẩu không được quá giống với các thông tin các nhân"
-
-#~ msgid "This password is entirely numeric."
-#~ msgstr "Mật khẩu này chỉ toàn các số."
-
-#~ msgid "Your password can't be entirely numeric."
-#~ msgstr "Mật khẩu không được hoàn toàn bằng số."
-
-#~ msgid "PRoblems"
-#~ msgstr "Danh sách bài"
-
-#~ msgid "posted {time}"
-#~ msgstr "đã đăng {time}"
-
-#~ msgid "commented {time}"
-#~ msgstr "đã bình luận {time}"
 
 #~ msgid "Problem URL"
 #~ msgstr "Link bài"
@@ -6997,9 +7066,6 @@ msgstr "Chọn tất cả"
 #~ msgstr ""
 #~ "Hãy đọc <a href=\"/about/blog/\">nội quy blog</a> trước khi tạo blog mới."
 
-#~ msgid "Ends in %(countdown)s"
-#~ msgstr "Kết thúc trong %(countdown)s."
-
 #~ msgid ""
 #~ "Please read the <a href=\"/about/comment/\">guidelines</a> before "
 #~ "commenting."
@@ -7150,9 +7216,6 @@ msgstr "Chọn tất cả"
 #~ "Nếu bạn có vấn đề với việc kích hoạt tài khoản, hãy liên hệ với chúng "
 #~ "mình qua: "
 
-#~ msgid "please choose a popular email provider, e.g. gmail"
-#~ msgstr "hãy chọn một địa chỉ mail thông dụng, ví dụ như gmail"
-
 #~ msgid "HH:mm:ss MMMM D, YYYY"
 #~ msgstr "HH:mm:ss D MMMM, YYYY"
 
@@ -7260,29 +7323,8 @@ msgstr "Chọn tất cả"
 #~ msgid "Filter by online judge..."
 #~ msgstr "Lọc theo online judge..."
 
-#~ msgid "#(cnt)d total submission"
-#~ msgstr "Số lượng bài nộp: #(cnt)d"
-
-#~ msgid "#(cnt)d total submissions"
-#~ msgstr "Số lượng bài nộp: #(cnt)d"
-
-#~ msgid "#(cnt)d submission in the last year"
-#~ msgstr "Số bài nộp trong năm vừa qua: #(cnt)d"
-
-#~ msgid "#(cnt)d submissions in the last year"
-#~ msgstr "Số bài nộp trong năm vừa qua: #(cnt)d"
-
 #~ msgid "#(cnt)d submission in #(year)d"
 #~ msgstr "Số bài nộp trong năm #(year)d: #(cnt)d"
-
-#~ msgid "#(cnt)d submissions in #(year)d"
-#~ msgstr "Số bài nộp trong năm #(year)d: #(cnt)d"
-
-#~ msgid "#(cnt)d submission on #(date)s"
-#~ msgstr "#(date)s: #(cnt)d bài"
-
-#~ msgid "#(cnt)d submissions on #(date)s"
-#~ msgstr "#(date)s: #(cnt)d bài"
 
 #~ msgid "Problems solved:"
 #~ msgstr "Số bài đã giải:"
@@ -7316,11 +7358,6 @@ msgstr "Chọn tất cả"
 
 #~ msgid "<a href=\"{1}\">{0}</a> Blog Post"
 #~ msgstr "<a href=\"{1}\">{0}</a> blog"
-
-#, fuzzy
-#~| msgid "#(cnt)d submission in #(year)d"
-#~ msgid "#(cnt)d submission in (year)d"
-#~ msgstr "Số bài nộp trong năm (year)d: #(cnt)d"
 
 #~ msgid "%s Members"
 #~ msgstr "%s thành viên"
