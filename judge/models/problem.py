@@ -561,7 +561,7 @@ class Problem(models.Model):
 
     def _rescore(self):
         from judge.tasks import rescore_problem
-        transaction.on_commit(rescore_problem.s(self.id).delay)
+        transaction.on_commit(rescore_problem.s(self.id, False).delay)
 
     class Meta:
         permissions = (
