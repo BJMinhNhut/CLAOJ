@@ -312,7 +312,7 @@ class ContestDetail(ContestMixin, TitleMixin, CommentedDetailView):
 
 
 class ContestClone(ContestMixin, PermissionRequiredMixin, TitleMixin, SingleObjectFormView):
-    title = _('Clone Contest')
+    title = gettext_lazy('Clone Contest')
     template_name = 'contest/clone.html'
     form_class = ContestCloneForm
     permission_required = 'judge.clone_contest'
@@ -650,7 +650,7 @@ class ContestStats(TitleMixin, ContestMixin, DetailView):
 ContestRankingProfile = namedtuple(
     'ContestRankingProfile',
     'id user css_class username points cumtime tiebreaker organization participation '
-    'participation_rating problem_cells result_cell',
+    'participation_rating problem_cells result_cell display_name',
 )
 
 BestSolutionData = namedtuple('BestSolutionData', 'code points time state is_pretested')
@@ -679,6 +679,7 @@ def make_contest_ranking_profile(contest, participation, contest_problems):
         problem_cells=[display_user_problem(contest_problem) for contest_problem in contest_problems],
         result_cell=contest.format.display_participation_result(participation),
         participation=participation,
+        display_name=user.display_name,
     )
 
 
