@@ -209,8 +209,8 @@
                 var file = $('#file_upload')[0].files[0];
                 if (file) {
                     $('#file_drag').html(
-                        '<b>' + {{ _("'File name'") }} + ':</b> ' + file.name + '<br>' +
-                        '<b>' + {{ _("'File size'") }} + ':</b> ' + (file.size / (1024)).toFixed(0) + ' KB'
+                        '<b>' + "{{ _('File name') }}" + ':</b> ' + file.name + '<br>' +
+                        '<b>' + "{{ _('File size') }}" + ':</b> ' + (file.size / (1024)).toFixed(0) + ' KB'
                     );
 
                     if (window.FileReader && fileonly == 'False') {
