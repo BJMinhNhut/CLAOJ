@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dmoj\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-23 06:40+0000\n"
+"POT-Creation-Date: 2022-06-23 16:01+0000\n"
 "PO-Revision-Date: 2020-08-23 18:59\n"
 "Last-Translator: \n"
 "Language-Team: Vietnamese\n"
@@ -5676,16 +5676,16 @@ msgstr ""
 "${file_size_limit}MB.`"
 
 #: templates/problem/submit.html:212
-msgid "'File name'"
-msgstr "'Tên file'"
+msgid "File name"
+msgstr "Tên file"
 
 #: templates/problem/submit.html:213
-msgid "'File size'"
-msgstr "'Độ lớn của file'"
+msgid "File size"
+msgstr "Kích thước file"
 
 #: templates/problem/submit.html:378
 msgid "Warning!"
-msgstr ""
+msgstr "Cảnh báo!"
 
 #: templates/problem/submit.html:379
 #, python-format
