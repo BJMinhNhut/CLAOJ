@@ -194,6 +194,14 @@
                         });
                     });
                 },
+                beforeClose: function () {
+                    if ('DjangoPagedown' in window) {
+                        var $wmd = $('.featherlight .wmd-input');
+                        if ($wmd.length) {
+                            window.DjangoPagedown.destroyEditor($wmd.get(0));
+                        }
+                    }
+                },
                 variant: 'featherlight-edit'
             });
 

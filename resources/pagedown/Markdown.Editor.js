@@ -72,8 +72,8 @@
 
     // The default text that appears in the dialog input box when entering
     // links.
-    var imageDefaultText = "http://";
-    var linkDefaultText = "http://";
+    var imageDefaultText = "https://";
+    var linkDefaultText = "https://";
 
     // -------------------------------------------------------------------
     //  END OF YOUR CHANGES
