@@ -191,9 +191,10 @@ class ProblemEditForm(ModelForm):
     class Meta:
         model = Problem
         fields = ['code', 'name', 'authors', 'testers', 'is_public', 'time_limit', 'memory_limit', 'points',
-                  'partial', 'testcase_visibility_mode', 'types', 'group', 'statement_file', 'description']
+                  'partial', 'testcase_visibility_mode', 'source', 'types', 'group', 'statement_file', 'description']
         widgets = {
             'name': TextInput(attrs={'style': 'width: 100%'}),
+            'source': TextInput(attrs={'style': 'width: 100%'}),
             'authors': HeavySelect2MultipleWidget(data_view='profile_select2', attrs={'style': 'width: 100%'}),
             'testcase_visibility_mode': Select2Widget(attrs={'style': 'min-width: 250px'}),
             'date': DateInput(attrs={'type': 'date'}),
