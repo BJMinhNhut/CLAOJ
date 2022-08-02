@@ -13,7 +13,7 @@ logger = logging.getLogger('judge.bridge')
 size_pack = struct.Struct('!I')
 assert size_pack.size == 4
 
-MAX_ALLOWED_PACKET_SIZE = 8 * 1024 * 1024
+MAX_ALLOWED_PACKET_SIZE = 64 * 1024 * 1024
 
 
 def proxy_list(human_readable):

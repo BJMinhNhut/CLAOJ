@@ -245,6 +245,10 @@
                     let href = this['attributes']['href']['value'];
                     if (href.includes('submissions')) {
                         let time = $(this).find('.solving-time').text()
+                        if (time.length == 0) {
+                            return;
+                        }
+
                         let hrefElement = href.split('/');
 
                         let problem = hrefElement[hrefElement.length - 2];
