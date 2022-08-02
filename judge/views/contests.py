@@ -716,9 +716,7 @@ def base_contest_ranking_list(contest, problems, queryset):
 
 
 def contest_ranking_list(contest, problems):
-    return base_contest_ranking_list(contest, problems, contest.users.filter(virtual__gt=ContestParticipation.SPECTATE)
-                                     .prefetch_related('user__organizations')
-                                     .order_by('is_disqualified', '-score', 'cumtime', 'tiebreaker'))
+    return base_contest_ranking_list(contest, problems, base_contest_ranking_queryset(contest))
 
 
 def get_contest_ranking_list(request, contest, participation=None, ranking_list=contest_ranking_list, ranker=ranker):
@@ -731,6 +729,7 @@ def get_contest_ranking_list(request, contest, participation=None, ranking_list=
 class ContestRankingBase(ContestMixin, TitleMixin, DetailView):
     template_name = 'contest/ranking.html'
     ranking_table_template_name = 'contest/ranking-table.html'
+    show_virtual = False
     tab = None
 
     def get_title(self):
@@ -784,7 +783,8 @@ class ContestRanking(ContestRankingBase):
 
     @property
     def cache_key(self):
-        return f'contest_ranking_cache_{self.object.key}'
+        return f'contest_ranking_cache_{self.object.key}_{self.show_virtual}_' \
+               f'{self.request.LANGUAGE_CODE}'
 
     @property
     def bypass_cache_ranking(self):
@@ -796,8 +796,8 @@ class ContestRanking(ContestRankingBase):
         #     queryset = base_contest_frozen_ranking_queryset(self.object)
         # else:
         queryset = base_contest_ranking_queryset(self.object)
-        # if not self.show_virtual:
-        queryset = queryset.filter(virtual=ContestParticipation.LIVE)
+        if not self.show_virtual:
+            queryset = queryset.filter(virtual=ContestParticipation.LIVE)
         return queryset
 
     def get_ranking_list(self):
@@ -808,6 +808,12 @@ class ContestRanking(ContestRankingBase):
                 ranking_list=partial(base_contest_ranking_list, queryset=queryset),
                 ranker=lambda users, key: ((_('???'), user) for user in users),
             )
+
+        if 'show_virtual' in self.request.GET:
+            self.show_virtual = self.request.session['show_virtual'] \
+                              = self.request.GET.get('show_virtual').lower() == 'true'
+        else:
+            self.show_virtual = self.request.session.get('show_virtual', False)
 
         queryset = self.get_ranking_queryset()
 
@@ -831,6 +837,7 @@ class ContestRanking(ContestRankingBase):
         context = super().get_context_data(**kwargs)
         context['has_rating'] = self.object.ratings.exists()
         context['cache_timeout'] = self.object.scoreboard_cache_timeout
+        context['show_virtual'] = self.show_virtual
         context['display_first_solves'] = self.object.format.name not in \
             [IOIContestFormat.name, LegacyIOIContestFormat.name]
         return context

@@ -74,6 +74,11 @@
             color: gray !important;
             font-weight: 600;
         }
+
+        .virtual-participation {
+            color: grey;
+            float: right
+        }
     </style>
 
     {% if is_ICPC_format %}
@@ -284,6 +289,18 @@
             };
 
             window.totalAC();
+
+            {% if tab == 'ranking' %}
+                {% if show_virtual %}
+                    $('#show-virtual-participations-checkbox').prop('checked', true);
+                {% endif %}
+
+                $('#show-virtual-participations-checkbox').click(function () {
+                    const parser = new URL(window.location.href);
+                    parser.searchParams.set('show_virtual', '{{ 'false' if show_virtual else 'true' }}');
+                    window.location.href = parser.href;
+                });
+            {% endif %}
         });
 
 
@@ -379,6 +396,8 @@
         {% endif %}
         <input id="show-personal-info-checkbox" type="checkbox" style="vertical-align: bottom">
         <label for="show-personal-info-checkbox" style="vertical-align: bottom">{{ _('Show full name, organization') }}</label>
+        <input id="show-virtual-participations-checkbox" type="checkbox" style="vertical-align: bottom">
+        <label for="show-virtual-participations-checkbox" style="vertical-align: bottom">{{ _('Show virtual participations') }}</label>
         {% if tab == 'ranking' %}
 	        {% if not is_ICPC_format %}
                 <a href="#" onclick="download_table_as_csv()" style="float: right;">{{ _('Download as CSV') }}</a>
