@@ -12,6 +12,14 @@
     {% endif %}
 {% endblock %}
 
+{% block user_name_display scoped %}
+    {% if user.virtual > 0 %}
+    {{ link_user(user) }}<sup class="virtual-participation" title="{{ _("%(cnt)s virtual participation of this user", cnt=ordinal(user.virtual)) }}">[{{user.virtual}}]</sup>
+    {% else %}
+        {{ link_user(user) }}
+    {% endif %}
+{% endblock %}
+
 {% block user_name_data %}
     {% if not contest.ended %}
         {% if not user.participation.ended %}
