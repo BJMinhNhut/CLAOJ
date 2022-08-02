@@ -430,7 +430,7 @@ class ProblemList(QueryStringSortMixin, TitleMixin, SolvedProblemMixin, ListView
                     queryset = self.apply_full_text(queryset, query)
                 else:
                     queryset = queryset.filter(
-                        Q(code__icontains=query) | Q(name__icontains=query) |
+                        Q(code__icontains=query) | Q(name__icontains=query) | Q(source__icontains=query) |
                         Q(translations__name__icontains=query, translations__language=self.request.LANGUAGE_CODE))
         self.prepoint_queryset = queryset
         if self.point_start is not None:

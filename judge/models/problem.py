@@ -138,6 +138,9 @@ class Problem(models.Model):
     name = models.CharField(max_length=100, verbose_name=_('problem name'), db_index=True,
                             help_text=_('The full name of the problem, '
                                         'as shown in the problem list.'))
+    source = models.CharField(max_length=200, verbose_name=_('Problem source'), db_index=True, blank=True,
+                              help_text=_('Source of problem. Please credit the source of the problem'
+                                          'if it is not yours'))
     description = models.TextField(verbose_name=_('problem body'), blank=True,
                                    validators=[disallowed_characters_validator])
     pdf_url = models.CharField(max_length=200, verbose_name=_('PDF statement URL'), blank=True,
