@@ -1,6 +1,7 @@
 from collections import defaultdict
 from functools import partial
 
+from django.http import HttpResponseBadRequest
 from django.shortcuts import render
 from django.utils.translation import gettext as _
 from packaging import version
@@ -24,6 +25,15 @@ def status_all(request):
         'judges': judges,
         'runtime_version_data': Judge.runtime_versions(),
         'see_all_judges': see_all,
+    })
+
+
+def status_oj(request):
+    if not request.user.is_superuser:
+        return HttpResponseBadRequest(_('You must be admin to view this content.'), content_type='text/plain')
+
+    return render(request, 'status/oj-status.html', {
+        'title': _('OJ Status'),
     })
 
 
