@@ -19,8 +19,8 @@ from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from django_ace import AceWidget
-from judge.models import BlogPost, Contest, ContestAnnouncement, ContestProblem, Language, Organization, Problem, \
-    Profile, Solution, Submission, WebAuthnCredential
+from judge.models import BlogPost, Contest, ContestAnnouncement, ContestProblem, Language, LanguageLimit, \
+    Organization, Problem, Profile, Solution, Submission, WebAuthnCredential
 from judge.utils.subscription import newsletter_id
 from judge.widgets import HeavyPreviewPageDownWidget, HeavySelect2MultipleWidget, HeavySelect2Widget, MartorWidget, \
     Select2MultipleWidget, Select2Widget
@@ -121,6 +121,28 @@ class UserForm(ModelForm):
     class Meta:
         model = User
         fields = ['first_name']
+
+
+class LanguageLimitForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(LanguageLimitForm, self).__init__(*args, **kwargs)
+
+    def clean_time_limit(self):
+        has_high_perm = self.user and self.user.has_perm('judge.high_problem_timelimit')
+        timelimit = self.cleaned_data['time_limit']
+        if timelimit and timelimit > settings.CLAOJ_PROBLEM_TIMELIMIT_LIMIT and not has_high_perm:
+            raise forms.ValidationError(_('You cannot set time limit higher than %d seconds')
+                                        % settings.CLAOJ_PROBLEM_TIMELIMIT_LIMIT,
+                                        'problem_timelimit_too_long')
+        return self.cleaned_data['time_limit']
+
+    class Meta:
+        model = LanguageLimit
+        fields = ('language', 'time_limit', 'memory_limit')
+        widgets = {
+            'language': Select2Widget(attrs={'style': 'width:200px'}),
+        }
 
 
 class ProblemEditForm(ModelForm):
@@ -226,6 +248,10 @@ class ProblemEditForm(ModelForm):
 
 
 class ProposeProblemSolutionFormSet(inlineformset_factory(Problem, Solution, form=ProposeProblemSolutionForm)):
+    pass
+
+
+class LanguageLimitFormSet(inlineformset_factory(Problem, LanguageLimit, form=LanguageLimitForm, can_delete=True)):
     pass
 
 
