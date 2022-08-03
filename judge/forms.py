@@ -361,6 +361,28 @@ class CustomAuthenticationForm(AuthenticationForm):
         return (getattr(settings, 'SOCIAL_AUTH_%s_KEY' % key, None) and
                 getattr(settings, 'SOCIAL_AUTH_%s_SECRET' % key, None))
 
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            user = None
+        if user is not None:
+            self.confirm_login_allowed(user)
+        return super(CustomAuthenticationForm, self).clean()
+
+    def confirm_login_allowed(self, user):
+        if not user.is_active and user.profile.ban_reason:
+            raise forms.ValidationError(
+                _('This account has been banned. Reason: %s') % user.profile.ban_reason,
+                code='banned',
+            )
+        super(CustomAuthenticationForm, self).confirm_login_allowed(user)
+
+
+class UserBanForm(Form):
+    ban_reason = CharField()
+
 
 class NoAutoCompleteCharField(forms.CharField):
     def widget_attrs(self, widget):

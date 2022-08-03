@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-03 12:37+0000\n"
+"POT-Creation-Date: 2022-08-03 13:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,7 +106,7 @@ msgstr ""
 msgid "Included contests"
 msgstr ""
 
-#: judge/admin/contest.py:66 judge/forms.py:486
+#: judge/admin/contest.py:66 judge/forms.py:508
 #: templates/contest/contest.html:213 templates/contest/contest.html:292
 #: templates/contest/moss.html:43 templates/problem/list.html:237
 #: templates/problem/list.html:252 templates/user/user-problems.html:58
@@ -225,8 +225,8 @@ msgid "Summary"
 msgstr ""
 
 #: judge/admin/interface.py:117 judge/models/contest.py:464
-#: judge/models/contest.py:596 judge/models/profile.py:335
-#: judge/models/profile.py:366
+#: judge/models/contest.py:596 judge/models/profile.py:347
+#: judge/models/profile.py:378
 msgid "user"
 msgstr ""
 
@@ -674,7 +674,7 @@ msgstr ""
 msgid "Scratch codes must be 16 base32 characters."
 msgstr ""
 
-#: judge/forms.py:43 judge/forms.py:458
+#: judge/forms.py:43 judge/forms.py:480
 msgid "Invalid scratch code."
 msgstr ""
 
@@ -726,7 +726,7 @@ msgstr ""
 msgid "If private, only these users may see the problem."
 msgstr ""
 
-#: judge/forms.py:192 judge/forms.py:554
+#: judge/forms.py:192 judge/forms.py:576
 msgid "You can paste a list of usernames into this box."
 msgstr ""
 
@@ -756,7 +756,7 @@ msgstr ""
 msgid "The memory limit for this problem, in KB (e.g. 512 MB = 524288 KB)."
 msgstr ""
 
-#: judge/forms.py:245 judge/forms.py:610
+#: judge/forms.py:245 judge/forms.py:632
 msgid "Only accept alphanumeric characters (a-z, 0-9) and underscore (_)"
 msgstr ""
 
@@ -816,61 +816,66 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: judge/forms.py:386
+#: judge/forms.py:377
+#, python-format
+msgid "This account has been banned. Reason: %s"
+msgstr ""
+
+#: judge/forms.py:408
 msgid "Invalid code length."
 msgstr ""
 
-#: judge/forms.py:417
+#: judge/forms.py:439
 msgid "Invalid WebAuthn response."
 msgstr ""
 
-#: judge/forms.py:420
+#: judge/forms.py:442
 msgid "No WebAuthn challenge issued."
 msgstr ""
 
-#: judge/forms.py:426
+#: judge/forms.py:448
 msgid "Invalid WebAuthn credential ID."
 msgstr ""
 
-#: judge/forms.py:456
+#: judge/forms.py:478
 msgid "Invalid two-factor authentication token or scratch code."
 msgstr ""
 
-#: judge/forms.py:460
+#: judge/forms.py:482
 msgid "Must specify either totp_token or webauthn_response."
 msgstr ""
 
-#: judge/forms.py:464 judge/models/problem.py:135
+#: judge/forms.py:486 judge/models/problem.py:135
 msgid "Problem code must be ^[a-z0-9_]+$"
 msgstr ""
 
-#: judge/forms.py:469
+#: judge/forms.py:491
 msgid "Problem with code already exists."
 msgstr ""
 
-#: judge/forms.py:474 judge/models/contest.py:72
+#: judge/forms.py:496 judge/models/contest.py:72
 msgid "Contest id must be ^[a-z0-9_]+$"
 msgstr ""
 
-#: judge/forms.py:479
+#: judge/forms.py:501
 msgid "Contest with key already exists."
 msgstr ""
 
-#: judge/forms.py:517
+#: judge/forms.py:539
 msgid "Problems must have distinct order."
 msgstr ""
 
-#: judge/forms.py:564
+#: judge/forms.py:586
 #, python-format
 msgid "Contest duration cannot be longer than %d days"
 msgstr ""
 
-#: judge/forms.py:576
+#: judge/forms.py:598
 #, python-format
 msgid "Contest id must starts with `%s`"
 msgstr ""
 
-#: judge/forms.py:605
+#: judge/forms.py:627
 msgid ""
 "Users are able to pratice contest problems even if the contest has ended, so "
 "don't set the contest time too high if you don't really need it."
@@ -1590,7 +1595,7 @@ msgid "Display this blog post at the homepage."
 msgstr ""
 
 #: judge/models/interface.py:80 judge/models/profile.py:118
-#: judge/models/profile.py:136 judge/models/profile.py:367
+#: judge/models/profile.py:136 judge/models/profile.py:379
 msgid "organization"
 msgstr ""
 
@@ -2315,184 +2320,188 @@ msgid "User will not be ranked."
 msgstr ""
 
 #: judge/models/profile.py:145
-msgid "user script"
-msgstr ""
-
-#: judge/models/profile.py:146
-msgid "User-defined JavaScript for site customization."
+msgid "Show to banned user in login page."
 msgstr ""
 
 #: judge/models/profile.py:147
-msgid "current contest"
+msgid "user script"
+msgstr ""
+
+#: judge/models/profile.py:148
+msgid "User-defined JavaScript for site customization."
 msgstr ""
 
 #: judge/models/profile.py:149
-msgid "math engine"
+msgid "current contest"
 msgstr ""
 
 #: judge/models/profile.py:151
-msgid "the rendering engine used to render math"
-msgstr ""
-
-#: judge/models/profile.py:152
-msgid "TOTP 2FA enabled"
+msgid "math engine"
 msgstr ""
 
 #: judge/models/profile.py:153
-msgid "check to enable TOTP-based two-factor authentication"
+msgid "the rendering engine used to render math"
 msgstr ""
 
 #: judge/models/profile.py:154
-msgid "WebAuthn 2FA enabled"
+msgid "TOTP 2FA enabled"
 msgstr ""
 
 #: judge/models/profile.py:155
-msgid "check to enable WebAuthn-based two-factor authentication"
+msgid "check to enable TOTP-based two-factor authentication"
 msgstr ""
 
 #: judge/models/profile.py:156
-msgid "TOTP key"
+msgid "WebAuthn 2FA enabled"
 msgstr ""
 
 #: judge/models/profile.py:157
-msgid "32 character base32-encoded key for TOTP"
+msgid "check to enable WebAuthn-based two-factor authentication"
+msgstr ""
+
+#: judge/models/profile.py:158
+msgid "TOTP key"
 msgstr ""
 
 #: judge/models/profile.py:159
-msgid "TOTP key must be empty or base32"
-msgstr ""
-
-#: judge/models/profile.py:160
-msgid "scratch codes"
+msgid "32 character base32-encoded key for TOTP"
 msgstr ""
 
 #: judge/models/profile.py:161
+msgid "TOTP key must be empty or base32"
+msgstr ""
+
+#: judge/models/profile.py:162
+msgid "scratch codes"
+msgstr ""
+
+#: judge/models/profile.py:163
 msgid ""
 "JSON array of 16 character base32-encoded "
 "codes                                                         for scratch "
 "codes"
 msgstr ""
 
-#: judge/models/profile.py:165
+#: judge/models/profile.py:167
 msgid ""
 "Scratch codes must be empty or a JSON array "
 "of                                                                  16-"
 "character base32 codes"
 msgstr ""
 
-#: judge/models/profile.py:167
+#: judge/models/profile.py:169
 msgid "last TOTP timecode"
 msgstr ""
 
-#: judge/models/profile.py:168
+#: judge/models/profile.py:170
 msgid "API token"
 msgstr ""
 
-#: judge/models/profile.py:169
+#: judge/models/profile.py:171
 msgid "64 character hex-encoded API access token"
 msgstr ""
 
-#: judge/models/profile.py:171
+#: judge/models/profile.py:173
 msgid "API token must be None or hexadecimal"
 msgstr ""
 
-#: judge/models/profile.py:172
+#: judge/models/profile.py:174
 msgid "internal notes"
 msgstr ""
 
-#: judge/models/profile.py:173
+#: judge/models/profile.py:175
 msgid "Notes for administrators regarding this user."
 msgstr ""
 
-#: judge/models/profile.py:174
+#: judge/models/profile.py:176
 msgid "last data download time"
 msgstr ""
 
-#: judge/models/profile.py:175
+#: judge/models/profile.py:177
 msgid "display name override"
 msgstr ""
 
-#: judge/models/profile.py:176
+#: judge/models/profile.py:178
 msgid "Name displayed in place of username"
 msgstr ""
 
-#: judge/models/profile.py:325
+#: judge/models/profile.py:337
 msgid "Shows in-progress development stuff"
 msgstr ""
 
-#: judge/models/profile.py:326
+#: judge/models/profile.py:338
 msgid "Edit TOTP settings"
 msgstr ""
 
-#: judge/models/profile.py:327
+#: judge/models/profile.py:339
 msgid "Can set high problem timelimit"
 msgstr ""
 
-#: judge/models/profile.py:328
+#: judge/models/profile.py:340
 msgid "Can set long contest duration"
 msgstr ""
 
-#: judge/models/profile.py:330
+#: judge/models/profile.py:342
 msgid "user profile"
 msgstr ""
 
-#: judge/models/profile.py:331
+#: judge/models/profile.py:343
 msgid "user profiles"
 msgstr ""
 
-#: judge/models/profile.py:337
+#: judge/models/profile.py:349
 msgid "device name"
 msgstr ""
 
-#: judge/models/profile.py:338
+#: judge/models/profile.py:350
 msgid "credential ID"
 msgstr ""
 
-#: judge/models/profile.py:339
+#: judge/models/profile.py:351
 msgid "public key"
 msgstr ""
 
-#: judge/models/profile.py:340
+#: judge/models/profile.py:352
 msgid "sign counter"
 msgstr ""
 
-#: judge/models/profile.py:361
+#: judge/models/profile.py:373
 msgid "WebAuthn credential"
 msgstr ""
 
-#: judge/models/profile.py:362
+#: judge/models/profile.py:374
 msgid "WebAuthn credentials"
 msgstr ""
 
-#: judge/models/profile.py:369
+#: judge/models/profile.py:381
 msgid "request time"
 msgstr ""
 
-#: judge/models/profile.py:370
+#: judge/models/profile.py:382
 msgid "state"
 msgstr ""
 
-#: judge/models/profile.py:371 templates/organization/requests/tabs.html:4
+#: judge/models/profile.py:383 templates/organization/requests/tabs.html:4
 msgid "Pending"
 msgstr ""
 
-#: judge/models/profile.py:372 templates/organization/requests/tabs.html:10
+#: judge/models/profile.py:384 templates/organization/requests/tabs.html:10
 msgid "Approved"
 msgstr ""
 
-#: judge/models/profile.py:373 templates/organization/requests/tabs.html:13
+#: judge/models/profile.py:385 templates/organization/requests/tabs.html:13
 msgid "Rejected"
 msgstr ""
 
-#: judge/models/profile.py:375
+#: judge/models/profile.py:387
 msgid "reason"
 msgstr ""
 
-#: judge/models/profile.py:378
+#: judge/models/profile.py:390
 msgid "organization join request"
 msgstr ""
 
-#: judge/models/profile.py:379
+#: judge/models/profile.py:391
 msgid "organization join requests"
 msgstr ""
 
@@ -3937,73 +3946,82 @@ msgstr ""
 msgid "Perform Two-factor Authentication"
 msgstr ""
 
-#: judge/views/user.py:100
+#: judge/views/user.py:101
 msgid "No such user"
 msgstr ""
 
-#: judge/views/user.py:100
+#: judge/views/user.py:101
 #, python-format
 msgid "No user handle \"%s\"."
 msgstr ""
 
-#: judge/views/user.py:104
+#: judge/views/user.py:105
 msgid "My account"
 msgstr ""
 
-#: judge/views/user.py:105
+#: judge/views/user.py:106
 #, python-format
 msgid "User %s"
 msgstr ""
 
-#: judge/views/user.py:152
+#: judge/views/user.py:153
 msgid "Login"
 msgstr ""
 
-#: judge/views/user.py:193
+#: judge/views/user.py:194
 msgid "M j, Y, G:i"
 msgstr ""
 
-#: judge/views/user.py:349
+#: judge/views/user.py:234
+msgid "Ban user"
+msgstr ""
+
+#: judge/views/user.py:243
+#, python-format
+msgid "Banned by %s"
+msgstr ""
+
+#: judge/views/user.py:370
 msgid "Preparing your data..."
 msgstr ""
 
-#: judge/views/user.py:353 templates/user/edit-profile.html:358
+#: judge/views/user.py:374 templates/user/edit-profile.html:358
 msgid "Download your data"
 msgstr ""
 
-#: judge/views/user.py:411
+#: judge/views/user.py:432
 msgid "Updated on site"
 msgstr ""
 
-#: judge/views/user.py:445 templates/admin/auth/user/change_form.html:14
+#: judge/views/user.py:466 templates/admin/auth/user/change_form.html:14
 #: templates/admin/auth/user/change_form.html:17 templates/base.html:267
-#: templates/user/user-tabs.html:20
+#: templates/user/user-tabs.html:21
 msgid "Edit profile"
 msgstr ""
 
-#: judge/views/user.py:460
+#: judge/views/user.py:481
 msgid "Generated API token for user"
 msgstr ""
 
-#: judge/views/user.py:472
+#: judge/views/user.py:493
 msgid "Removed API token for user"
 msgstr ""
 
-#: judge/views/user.py:482
+#: judge/views/user.py:503
 msgid "Generated scratch codes for user"
 msgstr ""
 
-#: judge/views/user.py:488 templates/user/list.html:7
+#: judge/views/user.py:509 templates/user/list.html:7
 #: templates/user/user-list-tabs.html:4
 msgid "Leaderboard"
 msgstr ""
 
-#: judge/views/user.py:521 templates/user/contrib-list.html:60
+#: judge/views/user.py:542 templates/user/contrib-list.html:60
 #: templates/user/user-list-tabs.html:5
 msgid "Contributors"
 msgstr ""
 
-#: judge/views/user.py:598
+#: judge/views/user.py:619
 msgid "You have been successfully logged out."
 msgstr ""
 
@@ -5697,16 +5715,21 @@ msgstr ""
 msgid "Invalid username or password."
 msgstr ""
 
-#: templates/registration/login.html:53
+#: templates/registration/login.html:40
+msgid ""
+"If you have problems with your account, feel free to shoot us a message at: "
+msgstr ""
+
+#: templates/registration/login.html:59
 msgid "Forgot your password?"
 msgstr ""
 
-#: templates/registration/login.html:54
+#: templates/registration/login.html:60
 #: templates/registration/two_factor_auth.html:92
 msgid "Login!"
 msgstr ""
 
-#: templates/registration/login.html:60
+#: templates/registration/login.html:66
 msgid "Or log in with..."
 msgstr ""
 
@@ -6742,11 +6765,15 @@ msgstr ""
 msgid "Impersonate"
 msgstr ""
 
-#: templates/user/user-tabs.html:14
+#: templates/user/user-tabs.html:12
+msgid "Ban this user"
+msgstr ""
+
+#: templates/user/user-tabs.html:15
 msgid "Admin User"
 msgstr ""
 
-#: templates/user/user-tabs.html:17
+#: templates/user/user-tabs.html:18
 msgid "Admin Profile"
 msgstr ""
 

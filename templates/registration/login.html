@@ -31,8 +31,14 @@
         <form action="" method="post" class="form-area">
             {% csrf_token %}
             {% if form.errors %}
-                <div id="form-errors">
+                <div id="form-errors" style="max-width: fit-content;">
                     <p class="error">{{ _('Invalid username or password.') }}</p>
+                    {% for error in form.non_field_errors() %}
+                        <p class="error">{{error}}</p>
+                    {% endfor %}
+                    {% if form.errors and misc_config.discord_invite_link and misc_config.discord_invite_shieldio %}
+                    {{ _('If you have problems with your account, feel free to shoot us a message at: ') }}<a href="https://www.facebook.com/itclapro">It-Cla Productions</a>
+                    {% endif %}
                 </div>
             {% endif %}
             <table border="0" style="text-align:left">
