@@ -148,8 +148,8 @@ input {
     background-color: #F7F8F9;
     border-radius: 0 $widget_border_radius;
     position: absolute;
-    padding: 5px 8px;
-    	box-shadow: 0 0 4px #ccc;
+    padding: 5px 8px 3px 8px;
+    box-shadow: 0 0 4px #ccc;
 	border: none;
 	&:hover, &.active {
 		background-color: #009688;

@@ -101,7 +101,7 @@ class ProblemCaseForm(ModelForm):
             'is_pretest', 'checker', 'checker_args', 'generator_args')
         widgets = {
             'generator_args': HiddenInput,
-            'type': Select(attrs={'style': 'width: 100%'}),
+            'type': Select2Widget(attrs={'style': 'width: 100%'}),
             'points': NumberInput(attrs={'style': 'width: 4em'}),
             # 'output_prefix': NumberInput(attrs={'style': 'width: 4.5em'}),
             # 'output_limit': NumberInput(attrs={'style': 'width: 6em'}),

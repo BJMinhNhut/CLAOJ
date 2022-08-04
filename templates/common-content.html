@@ -32,7 +32,7 @@
                                 'class': 'btn-clipboard',
                                 'data-clipboard-text': $(this).text(),
                                 'title': 'Click to copy'
-                            }).text('Copy')));
+                            }).append('<i class="fa fa-copy" style="font-size: 1.25em;"></i>')));
 
                         $(copyButton.get(0)).mouseleave(function () {
                             $(this).attr('class', 'btn-clipboard');

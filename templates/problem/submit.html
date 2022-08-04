@@ -416,9 +416,10 @@
             </div>
             <input id="file_upload" type="file" name="submission_file" style="display: none;" onchange="handleFileChange()">
             <label for="file_upload" id="file_drag">
-		<b>{{ _("Click to select a file or drag a file into this box") }}</b><br>
-		(<i>{{ _("Or patse your code into the editor") }}</i>)<br> 
-	    </label>
+                <i class="fa fa-upload"></i> 
+                <b>{{ _("Click to select a file or drag a file into this box") }}</b><br>
+                (<i>{{ _("Or patse your code into the editor") }}</i>)<br> 
+	        </label>
             <hr>
         </div>
 
@@ -437,8 +438,9 @@
                         </select>
 
                 {{ form.judge }}
-                <input type="submit" value="{{ _('Submit!') }}" class="button"
+                <input id="submit_code" style="display: none;"
                        {% if request.in_contest and submission_limit and not submissions_left %}disabled{% endif %}>
+                <label for="submit_code" class="unselectable button"><i class="fa fa-paper-plane" style="color:white;"></i> {{ _('Submit!') }}</label> 
             </div>
         {% endif %}
     </form>
