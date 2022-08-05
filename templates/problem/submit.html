@@ -438,7 +438,7 @@
                         </select>
 
                 {{ form.judge }}
-                <input id="submit_code" style="display: none;"
+                <input id="submit_code" type= "submit" style="display: none;"
                        {% if request.in_contest and submission_limit and not submissions_left %}disabled{% endif %}>
                 <label for="submit_code" class="unselectable button"><i class="fa fa-paper-plane" style="color:white;"></i> {{ _('Submit!') }}</label> 
             </div>
