@@ -323,3 +323,13 @@ ul.problem-list {
     	background: #00b8d4;
     }
 }
+
+.button.editorial {
+    background-color: #0288d1;
+    &:hover {
+        background-color: #039be5;
+    }
+    &:active {
+        background-color: #005b9f;
+    }
+}

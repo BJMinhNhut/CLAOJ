@@ -150,6 +150,13 @@
                 <i class="fa-solid fa-paper-plane" style="color:white;"></i> {{ _('Submit solution') }}
             </a>
         {% endif %}
+
+        {% if (editorial and editorial.is_accessible_by(request.user)) and not request.in_contest %}
+            <div style="padding-top: 1px;"><a href="{{ url('problem_editorial', problem.code) }}" class="unselectable button full editorial">
+                <i class="fa-solid fa-book" style="color:white;"></i> {{ _('Read editorial') }}
+            </a></div>
+        {% endif %}
+
         <hr style="padding-bottom: 0.3em">
 
         {% if request.user.is_authenticated and has_submissions %}
@@ -159,10 +166,6 @@
         {% endif %}
         <div><a href="{{ url('chronological_submissions', problem.code) }}">{{ _('All submissions') }}</a></div>
         <div><a href="{{ url('ranked_submissions', problem.code) }}">{{ _('Best submissions') }}</a></div>
-        {% if (editorial and editorial.is_accessible_by(request.user)) and not request.in_contest %}
-            <hr>
-            <div><a href="{{ url('problem_editorial', problem.code) }}">{{ _('Read editorial') }}</a></div>
-        {% endif %}
         {% if can_edit_problem %}
             <hr>
             <div>
