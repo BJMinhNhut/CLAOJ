@@ -23,14 +23,23 @@
         .github-icon i {
             color: black;
         }
+
+        input {
+            width: 100%;
+        }
     </style>
+{% endblock %}
+
+{% block title_row %}
+{% set title = '' %}
 {% endblock %}
 
 {% block body %}
     <div class="auth-flow-form">
         <form action="" method="post" class="form-area">
+            <center><h2 style="display:inline;text-align: center;">{{ _('Login') }}</h2></center>
             {% csrf_token %}
-            {% if form.errors %}
+            {% if form.errors %}x
                 <div id="form-errors" style="max-width: fit-content;">
                     <p class="error">{{ _('Invalid username or password.') }}</p>
                     {% for error in form.non_field_errors() %}
@@ -43,21 +52,23 @@
             {% endif %}
             <table border="0" style="text-align:left">
                 <tr>
-                    <th><i class="fa fa-user fa-fw"></i>
+                    <th style="padding-top: 0.75em;"><i class="fa fa-user fa-fw"></i>
                     </th>
-                    <td>{{ form.username }}
+                    <td style="width:100%;">{{ form.username }}
                     </td>
                 </tr>
                 <tr>
-                    <th><i class="fa fa-key fa-fw"></i>
+                    <th style="padding-top: 0.75em;"><i class="fa fa-key fa-fw"></i>
                     </th>
-                    <td>{{ form.password }}
+                    <td style="width:100%;">{{ form.password }}
                     </td>
                 </tr>
             </table>
             <hr>
-		<a href="{{ url('password_reset') }}">{{ _('Forgot your password?') }}</a>
-            <button style="float:right;" type="submit">{{ _('Login!') }}</button>
+		<a href="{{ url('password_reset') }}" style="padding-right: 1em;">{{ _('Forgot your password?') }}</a>
+            <button style="float:right;" type="submit">
+                <i class="fa fa-sign-in" aria-hidden="true"></i> {{ _('Login') }}
+            </button>
             <input type="hidden" name="next" value="{{ next }}">
         </form>
         

@@ -53,11 +53,12 @@
         {% if PYGMENT_THEME %}
             <link rel="stylesheet" href="{{ static(PYGMENT_THEME) }}">
         {% endif %}{% if INLINE_FONTAWESOME %}
-        <link rel="stylesheet" href="{{ static('libs/fontawesome/font-awesome.css') }}">{% endif %}
+        <!-- <link rel="stylesheet" href="{{ static('libs/fontawesome/font-awesome.css') }}">{% endif %} -->
         <link rel="stylesheet" type="text/css" href="{{ static('libs/featherlight/featherlight.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ static('libs/clipboard/tooltip.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ static('libs/select2/select2.css') }}">
     {% endcompress %}
+    <script src="https://kit.fontawesome.com/3fa30c8a4a.js" crossorigin="anonymous"></script>
     <link rel="canonical"
           href="{{ DMOJ_SCHEME }}://{{ DMOJ_CANONICAL|default(site.domain) }}{{ request.get_full_path() }}">
     {% if request.user.is_impersonate %}
@@ -98,7 +99,7 @@
             window.event_dispatcher = new WSEventDispatcher(
                 '{{ EVENT_DAEMON_LOCATION }}',
                 '{{ EVENT_DAEMON_POLL_LOCATION }}',
-                {{ EVENT_LAST_MSG }}
+                '{{ EVENT_LAST_MSG }}'
             );
         </script>
     {% endif %}
@@ -150,8 +151,8 @@
                 selected = null;
             })
 
-            {# Virtual = 0 is live participation, virtual = -1 is spectating #}
-            {% if request.participation.contest.push_announcements and request.participation.virtual <= 0 %}
+            // Virtual = 0 is live participation, virtual = -1 is spectating #}
+            {% if (request.participation.contest.push_announcements) and (request.participation.virtual <= 0) %}
                 $(function () {
                     event_dispatcher.auto_reconnect = true;
                     event_dispatcher.on('contest_{{ request.participation.contest.id_secret }}', function (data) {
@@ -213,7 +214,7 @@
 <div id="nav-background"></div>
 <nav id="navigation" class="unselectable">
     <div id="nav-container">
-        <a id="navicon" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
+        <a id="navicon" href="javascript:void(0)"><i class="fa-solid fa-bars"></i></a>
         <ul id="nav-list">
             <li class="home-nav-element"><a href="{{ url('home') }}">{% include "site-logo-fragment.html" %}</a></li>
             <li class="home-nav-element"><span class="nav-divider"></span></li>
@@ -242,7 +243,7 @@
                 {% endif %}
             style="margin-right: 5px;">
                 <span title="{{ _('Report issue') }}">
-                    <i class="fa fa-exclamation-triangle" style="color: yellow;"></i>
+                    <i class="fa-solid fa-exclamation-triangle" style="color: yellow;"></i>
                 </span>
             </a>
             <a id="flag_vi" href="#" onclick="submmit_language('vi')" style="margin-right: 5px; margin-top: 4px;">
@@ -262,16 +263,18 @@
                         </a>
                         <ul style="width: 150px">
                             {% if request.user.is_staff or request.user.is_superuser %}
-                                <li><a href="{{ url('admin:index') }}">{{ _('Admin') }}</a></li>
+                                <li><a href="{{ url('admin:index') }}"><i class="fa-solid fa-pen-to-square fa-fw"></i> {{ _('Admin') }}</a></li>
                             {% endif %}
-                            <li><a href="{{ url('user_edit_profile') }}">{{ _('Edit profile') }}</a></li>
+                            <li><a href="{{ url('user_edit_profile') }}">
+                                <i class="fa-solid fa-address-card fa-fw"></i> {{ _('Edit profile') }}
+                            </a></li>
                             {% if request.user.is_impersonate %}
-                                <li><a href="{{ url('impersonate-stop') }}">Stop impersonating</a></li>
+                                <li><a href="{{ url('impersonate-stop') }}"><i class="fa-solid fa-pause fa-fw"></i> {{ _('Stop impersonating') }}</a></li>
                             {% else %}
                                 <li>
                                     <form action="{{ url('auth_logout') }}" method="POST">
                                         {% csrf_token %}
-                                        <button type="submit">{{ _('Log out') }}</button>
+                                        <button type="submit"><i class="fa-solid fa-right-from-bracket fa-fw"></i> {{ _('Log out') }}</button>
                                     </form>
                                 </li>
                             {% endif %}
@@ -342,7 +345,7 @@
             <br>
 	        <a style="color: #b0bec5"> {{ _('Long An HSGS Online Judge') }} </a> <br>
             <a style="color: #b0bec5"> {{ _('powered by %(dmoj)s', dmoj=safe('<a href="https://dmoj.ca"><b>DMOJ</b>')) }}</a>
-            <a style="color: #b0bec5"> {{ _('and %(vnoj)s', vnoj=safe('<a href="https://oj.vnoi.info"><b>VNOJ</b>')) }} |</a>
+            <a style="color: #b0bec5"> {{ _('and %(vnoj)s', vnoj=safe('<a href="https://oj.vnoi.info"><b>VNOJ</b>')) }}</a> |
 	        <a style="color: #b0bec5"> {{ _('developed by %(itcla)s', itcla=safe('<a href="https://www.facebook.com/itclapro"><b>IT-CLA Productions</b>')) }}</a>
             {% if i18n_config.footer %}
                 {{ i18n_config.footer|safe }} |

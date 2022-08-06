@@ -13,6 +13,7 @@
             <div id="comment-form-body">{{ form.body }}</div>
         </div>
         <hr>
-        <input style="float: right" type="submit" value="Post!" class="button">
+        <input id="post_comment" style="display: none" type="submit" class="button">
+        <label for="post_comment" class="button" style="float: right;">{{ _('Save') }}</label>
     </form>
 </div>

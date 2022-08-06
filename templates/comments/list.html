@@ -162,7 +162,8 @@
                         <div id="comment-form-body">{{ comment_form.body }}</div>
                     </div>
                     <hr>
-                    <input style="float:right" type="submit" value="{{ _('Posted comment') }}" class="button">
+                    <input id="post_comment" style="display: none" type="submit" class="button">
+                    <label for="post_comment" class="button" style="float: right;"><i class="fa-solid fa-arrow-up-from-bracket"></i> {{ _('Post comment') }}</label>
                 </form>
             {% endif %}
         </div>

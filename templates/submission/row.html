@@ -13,7 +13,7 @@
                 {{ submission.case_points|floatformat(-1) }}/{{ submission.case_total|floatformat(0) }}&nbsp|&nbsp
             {%- endif -%}
         {%- else -%}
-             <i class="fa fa-spinner fa-pulse"></i>
+             <i class="fa-solid fa-spinner fa-pulse"></i>
         {%- endif -%}
         <span class="language">{{ submission.language.short_display_name }}</span>
     </div>
@@ -33,7 +33,7 @@
             {% if not request.in_contest and submission.contest_object_id %}
                 <a href="{{ url('contest_view', submission.contest_object.key) }}"
                    class="submission-contest">
-                    <i title="{{ submission.contest_object.name }}" class="fa fa-dot-circle-o"></i>
+                    <i title="{{ submission.contest_object.name }}" class="fa-solid fa-dot-circle"></i>
                 </a>
             {% endif %}
         </div>
@@ -52,18 +52,18 @@
     {% if can_view %}
         <div class="sub-prop"><div>
             <a href="{{ url('submission_status', submission.id) }}">
-                <i class="fa fa-eye fa-fw"></i><span class="label">{{ _('view') }}</span>
+                <i class="fa-solid fa-eye fa-fw"></i><span class="label">{{ _('view') }}</span>
             </a> ·
             <a href="{{ url('submission_source', submission.id) }}">
-                <i class="fa fa-file-code-o fa-fw"></i><span class="label">{{ _('source') }}</span>
+                <i class="fa-solid fa-file-code fa-fw"></i><span class="label">{{ _('source') }}</span>
             </a>
             {% if perms.judge.rejudge_submission and can_edit %} ·
                 {% if not submission.is_locked %}
                     <a href="#" onclick="rejudge_submission({{ submission.id }}, event);return false">
-                        <i class="fa fa-refresh fa-fw"></i><span class="label">{{ _('rejudge') }}</span>
+                        <i class="fa-solid fa-refresh fa-fw"></i><span class="label">{{ _('rejudge') }}</span>
                     </a>
                 {% else %}
-                    <i class="fa fa-refresh fa-fw grey-icon"></i>
+                    <i class="fa-solid fa-refresh fa-fw grey-icon"></i>
                     <span class="label grey-label"
                           title="{{ _('This submission has been locked, and cannot be rejudged.') }}">
                         {{ _('locked') }}
@@ -72,10 +72,10 @@
             {% endif %}
             {% if can_edit %} ·
                 <a href="{{ url('problem_submission_diff', submission.problem.code) }}?username={{ submission.user.user.username }}&highlight={{ submission.id }}">
-                    <i class="fa fa-files-o fa-fw"></i><span class="label">{{ _('diff') }}</span>
+                    <i class="fa-solid fa-code-compare fa-fw"></i><span class="label">{{ _('diff') }}</span>
                 </a> .
                 <a href="{{ url('admin:judge_submission_change', submission.id) }}">
-                    <i class="fa fa-cog fa-fw"></i><span class="label">{{ _('admin') }}</span>
+                    <i class="fa-solid fa-cog fa-fw"></i><span class="label">{{ _('admin') }}</span>
                 </a>
             {% endif %}
         </div></div>

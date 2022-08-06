@@ -74,9 +74,11 @@ a.view-pdf {
     }
 }
 
-.info-float .fa {
-    color: #000;
-    padding-right: 0.2em;
+.info-float {
+    .fa, .fa-solid, .fa-regular, .fa-light, .fa-thin, .fa-duotone {
+        color: #000;
+        padding-right: 0.2em;
+    }
 }
 
 #problem-types, #allowed-langs {

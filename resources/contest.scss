@@ -48,7 +48,7 @@
                 margin-left: 17px;
                 margin-bottom: 0.2em;
 
-                i.fa {
+                i.fa, i.fa-solid {
                     color: orange;
                 }
 
@@ -173,7 +173,7 @@
 
     .participate-button {
         display: inline-block;
-        width: 100px;
+        width: 8em;
     }
 
     .contest-block {
@@ -232,7 +232,7 @@ form.contest-join-pseudotab {
     input {
         display: inline;
         border: none;
-	box-shadow: none;
+	    box-shadow: none !important;
         padding: 0;
         background: none;
         font-weight: 600;
@@ -246,7 +246,7 @@ form.contest-join-pseudotab {
 .contest-participation-operation {
     float: right;
 
-    .fa {
+    .fa, .fa-solid {
         color: #444;
     }
 

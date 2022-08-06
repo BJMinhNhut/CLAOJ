@@ -68,7 +68,7 @@
     <div id="blog-container">
         <div class="blog-content">
             <div class="sidebox" style="margin-bottom:2em;">
-                <h3>{{ _('About') }} {{ organization.name }} <i class="fa fa-info-circle"></i></h3>
+                <h3>{{ _('About') }} {{ organization.name }} <i class="fa-solid fa-info-circle"></i></h3>
                 <div class="sidebox-content">
                     <div style="margin: 1.4em;">
                         {% cache 3600 'organization_html' organization.id MATH_ENGINE %}
@@ -79,7 +79,7 @@
             </div>
             {% if posts %}
                 <div class="sidebox">
-                    <h3>{{ _('News') }} <i class="fa fa-terminal"></i></h3>
+                    <h3>{{ _('News') }} <i class="fa-solid fa-terminal"></i></h3>
 					
                     {% for post in posts %}                
 						{% include "blog/blog-post.html" %}
@@ -92,7 +92,7 @@
         </div>
         <div class="blog-sidebar">
             <div class="blog-sidebox sidebox">
-                <h3>{{ _('Controls') }} <i class="fa fa-question-circle"></i></h3>
+                <h3>{{ _('Controls') }} <i class="fa-solid fa-question-circle"></i></h3>
                 <div class="sidebox-content" style="padding: 1em 2em;">
                     {% if request.user.is_authenticated %}
                         {% if is_member %}
@@ -141,7 +141,7 @@
 
             {% if new_contests %}
                 <div class="blog-sidebox sidebox">
-                    <h3>{{ _('New contests') }} <i class="fa fa-trophy"></i></h3>
+                    <h3>{{ _('New contests') }} <i class="fa-solid fa-trophy"></i></h3>
                     <div class="sidebox-content">
                         {% for contest in new_contests %}
                             <div class="contest">
@@ -169,7 +169,7 @@
             {% endif %}
             {% if new_problems %}
                 <div class="sidebox">
-                    <h3>{{ _('New problems') }} <i class="fa fa-puzzle-piece"></i>
+                    <h3>{{ _('New problems') }} <i class="fa-solid fa-puzzle-piece"></i>
                     </h3>
                     <div class="sidebox-content" style="padding-bottom: 1em;">
                         <table class="problem-list">

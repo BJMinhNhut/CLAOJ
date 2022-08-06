@@ -78,25 +78,25 @@
         <span class="contest-tags">
             {% if not contest.is_visible %}
                 <span style="background-color: #000000; color: #ffffff" class="contest-tag">
-                    <i class="fa fa-eye-slash"></i> {{ _('hidden') }}
+                    <i class="fa-solid fa-eye-slash"></i> {{ _('hidden') }}
                 </span>
             {% endif %}
             {% if contest.is_organization_private %}
                 {% for org in contest.organizations.all() %}
                     <span style="background-color: #cccccc" class="contest-tag">
                         <a href="{{ org.get_absolute_url() }}" style="color: #000000">
-                            <i class="fa fa-lock"></i> {{ org.name }}
+                            <i class="fa-solid fa-lock"></i> {{ org.name }}
                         </a>
                     </span>
                 {% endfor %}
             {% elif contest.is_private %}
                 <span style="background-color: #666666; color: #ffffff" class="contest-tag">
-                    <i class="fa fa-lock"></i> {{ _('private') }}
+                    <i class="fa-solid fa-lock"></i> {{ _('private') }}
                 </span>
             {% endif %}
             {% if contest.is_rated %}
                 <span style="background-color: #e54c14; color: #ffffff" class="contest-tag">
-                    <i class="fa fa-bar-chart"></i> {{ _('rated') }}
+                    <i class="fa-solid fa-bar-chart"></i> {{ _('rated') }}
                 </span>
             {% endif %}
             {% for tag in contest.tags.all() %}

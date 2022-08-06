@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 @charset "UTF-8";
 
@@ -126,7 +127,7 @@ th {
     display: inline-block;
     margin-top: 1em;
     background: white;
-    padding: 10px 15px;
+    padding: 15px 25px;
     border-radius: $widget_border_radius;
     border: 1px solid $border_gray;
     box-shadow: $sidebox_shadow;
@@ -174,7 +175,7 @@ b {
 }
 
 h2 {
-    font-weight: 900;
+    font-weight: 600;
     font-family: $title_fonts;
     font-size: 2em;
     border-radius: $widget_border_radius;
@@ -183,7 +184,7 @@ h2 {
 }
 
 h3 {
-    font-weight: 700;
+    font-weight: 600;
     color: #212121;
     font-family: $title_fonts;
     font-size: 1.4em;
@@ -346,7 +347,7 @@ nav {
                 color: #90a4ae;
                 padding: 18px 7px;
                 height: 18px;
-		transition: background ease-in-out 0.1s;
+		        transition: background ease-in-out 0.1s;
 
                 &:link {
                     color: #90a4ae;
@@ -378,6 +379,9 @@ nav {
                 background: $widget_black;
                 margin: 0 !important;
                 box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+                width: fit-content;
+                border-radius: 0 0 6px 6px;
+                border-left: 4px solid #4db6ac;
 
                 li {
                     &:first-child {
@@ -395,7 +399,6 @@ nav {
                         font-size: 0.8em;
                         line-height: 18px;
                         display: block;
-                        border-left: 4px solid #4db6ac;
                         white-space: nowrap;
                     }
                 }
@@ -510,11 +513,11 @@ noscript #noscript {
 .toggle {
     font-weight: bold;
 
-    .fa {
+    .fa, .fa-solid {
         transition: transform 0.4s;
     }
 
-    &.open .fa {
+    &.open .fa, &.open .fa-solid {
         transform: rotate(90deg);
     }
 }
@@ -619,9 +622,9 @@ noscript #noscript {
 
     .select2-container--default.select2-container--open.select2-container--above .select2-selection--single, .select2-container--default.select2-container--open.select2-container--above .select2-selection--multiple {
         background-color: white !important;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        border-bottom: none !important;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top: none !important;
     }
 
     .select2-container--default {
@@ -653,10 +656,16 @@ noscript #noscript {
     border: 1px solid $border_gray;
 }
 
-.select2-container--open .select2-dropdown {
+.select2-container--open .select2-dropdown--below {
     border-top: none;
     border: 1px solid $border_gray;
     box-shadow: $sidebox_shadow;
+}
+
+.select2-container--open .select2-dropdown--above {
+    border-top: none;
+    border: 1px solid $border_gray;
+    box-shadow: 0 -6px 10px 0 rgb(0 0 0 / 15%);
 }
 // border-bottom: 1px solid rgb(204, 204, 204)
 // border-bottom-left-radius: 4px

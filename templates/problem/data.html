@@ -242,9 +242,12 @@
                 type: "submit",
                 value: "{{ _('Autofill testcases') }}",
                 class: "button",
-                style: "display: inherit; margin-top: 0.5em",
+                style: "display: none;",
                 id: "submit-button",
             }).appendTo($file_test.parent());
+
+            var $label="<label for=\"submit-button\" style=\"display: inline-table; margin-top: 0.5em;\" class=\"button\"><i class=\"fa-solid fa-square-pen\"></i> {{ _('Autofill testcases') }}</label>";
+            $($label).appendTo($file_test.parent());
 
             function swap_row($a, $b) {
                 var $a_order = $a.find('input[id$=order]'), $b_order = $b.find('input[id$=order]');
@@ -591,7 +594,7 @@
             {% for org in problem.organizations.all() %}
                 <span class="organization-tag">
                     <a href="{{ org.get_absolute_url() }}">
-                        <i class="fa fa-lock"></i> {{ org.name }}
+                        <i class="fa-solid fa-lock"></i> {{ org.name }}
                     </a>
                 </span>
             {% endfor %}
@@ -629,12 +632,13 @@
             {{ cases_formset._non_form_errors }}
         {% endif %}
 
-        <input type="submit" style="margin: 1em 0" value="{{ _('Save test') }}" class="button">
+        <input id="save" type="submit" style="display:none;">
+        <label for="save" class="unselectable button" style="margin: 1em 0; width: fit-content;"><i class="fa-solid fa-floppy-disk"></i> {{ _('Save test') }}</label>
 
         <table id="case-table" class="table">
             <thead>
             <tr>
-                <th><a id="add-case-first-row" href="#"><i class="fa fa-plus"></i></a></th>
+                <th><a id="add-case-first-row" href="#"><i class="fa-solid fa-plus"></i></a></th>
                 <th class="order-column"></th>
                 <th class="type-column">{{ _('Type') }}</th>
                 <th>{{ _('Input file') }}</th>
@@ -662,7 +666,7 @@
                     <tbody class="extra-row-body" style="display: none">
                 {% endif %}
                 <tr data-type="{{ form['type'].value() }}">
-                    <td><a class="add-case-row-below" href="#"><i class="fa fa-plus"></i></a></td>
+                    <td><a class="add-case-row-below" href="#"><i class="fa-solid fa-plus"></i></a></td>
                     <td>{{ form.id }}{{ form.order.errors }}{{ form.order }}</td>
                     <td class="type-column">{{ form.type.errors }}{{ form.type }}</td>
                     <td{% if not (form.empty_permitted or form['type'].value() != 'C' or
@@ -688,9 +692,10 @@
             {% endfor %}
             </tbody>
         </table>
-	<a id="add-case-row" href="#" style="display: None;"><i class="fa fa-plus"></i> {{ _('Add new case') }}</a>
+	<a id="add-case-row" href="#" style="display: None;"><i class="fa-solid fa-plus"></i> {{ _('Add new case') }}</a>
 
-        <input type="submit" style="margin: 1em 0" value="{{ _('Save test') }}" class="button">
+    <input id="save" type="submit" style="display:none;">
+    <label for="save" class="unselectable button" style="margin: 1em 0; width: fit-content;"><i class="fa-solid fa-floppy-disk"></i> {{ _('Save test') }}</label>
     </form>
     <div style="display: none" class="generator-args-editor"><textarea></textarea><a class="button">{{ _('Save') }}</a></div>
 {% endblock %}

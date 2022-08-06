@@ -11,7 +11,7 @@
             {% for org in contest.organizations.all() %}
                 <span class="organization-tag">
                     <a href="{{ org.get_absolute_url() }}">
-                        <i class="fa fa-lock"></i> {{ org.name }}
+                        <i class="fa-solid fa-lock"></i> {{ org.name }}
                     </a>
                 </span>
             {% endfor %}
@@ -202,13 +202,13 @@
     {% if contest.ended or request.user.is_superuser or is_editor or is_tester %}
         <hr>
         <div class="contest-problems">
-            <h2 style="margin-bottom: 0.2em"><i class="fa fa-fw fa-question-circle"></i>{{ _('Problems') }} </h2>
+            <h3 style="margin-bottom: 0.2em"><i class="fa-solid fa-fw fa-question-circle"></i>{{ _('Problems') }} </h3>
             <table id="contest-problems" class="table">
                 <thead>
                 <tr>
                     <th>#</th>
                     {% if request.user.is_authenticated %}
-                        <th><i class="fa fa-check"></i></th>
+                        <th><i class="fa-solid fa-check"></i></th>
                     {% endif %}
                     <th>{{ _('Problem') }}</th>
                     <th>{{ _('Points') }}</th>
@@ -228,9 +228,9 @@
                                 <td solved="1" style="width: 2em;">
                                     <a href="{{ url('user_submissions', problem.code, request.user.username) }}">
                                         {% if problem.is_public or request.in_contest %}
-                                            <i class="solved-problem-color fa fa-check-circle"></i>
+                                            <i class="solved-problem-color fa-solid fa-check-circle"></i>
                                         {% else %}
-                                            <i class="solved-problem-color fa fa-lock"></i>
+                                            <i class="solved-problem-color fa-solid fa-lock"></i>
                                         {% endif %}
                                     </a>
                                 </td>
@@ -238,18 +238,18 @@
                                 <td solved="0" style="width: 2em;">
                                     <a href="{{ url('user_submissions', problem.code, request.user.username) }}">
                                         {% if problem.is_public or request.in_contest %}
-                                            <i class="attempted-problem-color fa fa-minus-circle"></i>
+                                            <i class="attempted-problem-color fa-solid fa-minus-circle"></i>
                                         {% else %}
-                                            <i class="attempted-problem-color fa fa-lock"></i>
+                                            <i class="attempted-problem-color fa-solid fa-lock"></i>
                                         {% endif %}
                                     </a>
                                 </td>
                             {% else %}
                                 <td solved="-1" style="width: 2em;">
                                     {% if problem.is_public or request.in_contest %}
-                                        <i class="unsolved-problem-color fa fa-minus-circle"></i>
+                                        <i class="unsolved-problem-color fa-solid fa-minus-circle"></i>
                                     {% else %}
-                                        <i class="unsolved-problem-color fa fa-lock"></i>
+                                        <i class="unsolved-problem-color fa-solid fa-lock"></i>
                                     {% endif %}
                                 </td>
                             {% endif %}
@@ -284,7 +284,7 @@
         </div>
         {% if has_clarifications %}
         <div class="contest-clartifications">
-            <h2 style="margin-bottom: 0.2em"><i class="fa fa-check"></i> {{ _('Clarifications') }}</h2>
+            <h3 style="margin-bottom: 0.2em"><i class="fa-regular fa-lightbulb"></i> {{ _('Clarifications') }}</h3>
             <table id="contest-clartifications" class="table">
                 <thead>
                     <tr>
@@ -313,8 +313,9 @@
         </div>
         {% endif %}
         {% if has_announcements or can_edit %}
+        <br>
         <div class="contest-clartifications">
-            <h2 style="margin-bottom: 0.2em"><i class="fa fa-check"></i> {{ _('Announcements') }}</h2>
+            <h3 style="margin-bottom: 0.2em"><i class="fa-solid fa-bullhorn"></i> {{ _('Announcements') }}</h3>
             <table id="contest-clartifications" class="table">
                 <thead>
                     <tr>
@@ -338,7 +339,7 @@
                 {% if can_edit %}
                     <tr>
                         <td colspan="3">
-                            <a class="button" href="{{ url('contest_announce', contest.key) }}">{{ _('Add an announcement') }}</a>
+                            <a class="button" style="width: fit-content; margin-left: 0.2em;" href="{{ url('contest_announce', contest.key) }}"><i class="fa-solid fa-circle-plus"></i> {{ _('Add an announcement') }}</a>
                         </td>
                     </tr>
                 {% endif %}
@@ -356,8 +357,8 @@
 
     <hr>
     <span class="social">
-        {{ post_to_facebook(request, contest, '<i class="fa fa-facebook-official"></i>') }}
-        {{ post_to_twitter(request, SITE_NAME + ':', contest, '<i class="fa fa-twitter"></i>') }}
+        {{ post_to_facebook(request, contest, '<i class="fa-brands fa-facebook"></i>') }}
+        {{ post_to_twitter(request, SITE_NAME + ':', contest, '<i class="fa-brands fa-twitter"></i>') }}
     </span>
 
     {% if not comment_lock %}

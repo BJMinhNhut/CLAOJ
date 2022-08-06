@@ -28,12 +28,12 @@
         {% if statuses or not submission.is_graded %}
             {% for case in statuses %}
                 {% if case.status == "AC" %}
-                    <span class="fa fa-check case-AC"></span>
+                    <span class="fa-solid fa-check case-AC"></span>
                 {% elif case.status == "SC" %}
                     <span class="case-SC">&ndash;</span>
                 {% else %}
                     <a href="#{{ case.id }}">
-                        <span class="fa fa-times case-{{ case.status }} case-bad"></span>
+                        <span class="fa-solid fa-times case-{{ case.status }} case-bad"></span>
                     </a>
                 {% endif %}
                 {% if case.num_combined > 1 %}
@@ -41,7 +41,7 @@
                 {% endif %}
             {% endfor %}
             {% if not submission.is_graded %}
-                <span class="fa fa-spinner fa-pulse"></span>
+                <span class="fa-solid fa-spinner fa-pulse"></span>
             {% endif %}
             <br><br>
         {% endif %}
@@ -67,7 +67,7 @@
             <tr id="{{ case.id }}" class="case-row toggle closed">
                 <td>
                     {%- if has_extended_data -%}
-                        <i class="fa fa-chevron-right fa-fw"></i>
+                        <i class="fa-solid fa-chevron-right fa-fw"></i>
                     {%- endif -%}
                     {%- if batch.id -%}
                         <b>{{ _('Test') }} #{{ loop.index }}</b>
@@ -107,41 +107,41 @@
 
             {% if has_extended_data %}
                 <tr id="{{ case.id }}-output" style="display:none" class="case-feedback toggled">
-		    <td colspan="5" class="case-output">
-                    {% if print_case_data %}
-                         <strong>{{ _('Input') }}</strong>
-                         <div class="case-info"><pre class="case-output">{{ curr_data['input']|linebreaksbr }}</pre></div>
+                    <td colspan="5" class="case-output">
+                            {% if print_case_data %}
+                                <strong>{{ _('Input') }}</strong>
+                                <div class="case-info"><pre class="case-output">{{ curr_data['input']|linebreaksbr }}</pre></div>
 
-                         <strong>{{ _('Correct output') }}</strong>
-                         <div class="case-info">                                
-                                {% if prefix_length is none %}
-                                    <pre class="case-output">{{ curr_data['answer']|linebreaksbr }}</pre>
-                                {% else %}
-                                    <pre class="case-output">{{ curr_data['answer'][:prefix_length]|linebreaksbr }}</pre>
-                                {% endif %}
-                         </div>
-		        
-			 <strong>{{ _("User's output") }}</strong>
-                    	 <div class="case-info">
-			     {% if not case.output %}
-		                <pre class="case-output" style="color:gray; font-style: italic">({{ _('empty') }})</pre> 
-                             {% else %}
-				{% if prefix_length is none %}
-                                    <pre class="case-output">{{ case.output|linebreaksbr }}</pre>
-                                {% else %}
-                                    <pre class="case-output">{{ case.output[:prefix_length]|linebreaksbr }}</pre>
-                                {% endif %}
-			     {% endif %}                             
-			 </div>
-                    {% endif %}
+                                <strong>{{ _('Correct output') }}</strong>
+                                <div class="case-info">                                
+                                        {% if prefix_length is none %}
+                                            <pre class="case-output">{{ curr_data['answer']|linebreaksbr }}</pre>
+                                        {% else %}
+                                            <pre class="case-output">{{ curr_data['answer'][:prefix_length]|linebreaksbr }}</pre>
+                                        {% endif %}
+                                </div>
+                        
+                                <strong>{{ _("User's output") }}</strong>
+                                <div class="case-info">
+                                    {% if not case.output %}
+                                        <pre class="case-output" style="color:gray; font-style: italic">({{ _('empty') }})</pre> 
+                                                {% else %}
+                                        {% if prefix_length is none %}
+                                            <pre class="case-output">{{ case.output|linebreaksbr }}</pre>
+                                        {% else %}
+                                            <pre class="case-output">{{ case.output[:prefix_length]|linebreaksbr }}</pre>
+                                        {% endif %}
+                                    {% endif %}                             
+                                </div>
+                            {% endif %}
 
-                    {% if print_case_ext_feedback %}
-                            <strong>{{ _('Judge feedback') }}</strong>
-                            <div class="case-info">
-                                <pre class="case-output">{{ case.extended_feedback|linebreaksbr }}</pre>
-                            </div>
-                    {% endif %}
-		    </td>
+                            {% if print_case_ext_feedback %}
+                                    <strong>{{ _('Judge feedback') }}</strong>
+                                    <div class="case-info">
+                                        <pre class="case-output">{{ case.extended_feedback|linebreaksbr }}</pre>
+                                    </div>
+                            {% endif %}
+                    </td>
                 </tr>
             {% endif %}
         {% endfor %}

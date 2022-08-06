@@ -189,11 +189,11 @@
     {% endif %}
 {% endblock %}
 
-	    {% block title_row %}
-    		{% set tab = 'list' %}
-    		{% set title = _('Problem list') %}
-    	    	{% include "problem/problem-list-tabs.html" %}	
-	    {% endblock %}
+{% block title_row %}
+    {% set tab = 'list' %}
+    {% set title = _('Problem list') %}
+        {% include "problem/problem-list-tabs.html" %}	
+{% endblock %}
 
 
 {% block body %}
@@ -214,8 +214,8 @@
         			<table class="problem-list" style="width:100%">
             			{% for problem in hot_problems %}
                 			<tr>
-	            			<td style="padding-right:7px"><a href="{{ url('problem_detail', problem.code) }}">{{ problem.name }} </a></td>
-		    			<td style="text-align:right"><span class="problem-points">{{ problem.points|floatformat }}{% if problem.partial %}p{% endif %} </span></td>
+	            			    <td style="padding-right:7px"><a href="{{ url('problem_detail', problem.code) }}">{{ problem.name }} </a></td>
+		    			        <td style="text-align:right"><span class="problem-points">{{ problem.points|floatformat }}{% if problem.partial %}p{% endif %} </span></td>
                 			</tr>
             			{% endfor %}
        				</table>

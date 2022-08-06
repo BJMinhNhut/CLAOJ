@@ -329,13 +329,16 @@ class ProblemSubmitForm(ModelForm):
 
         if judge_choices:
             self.fields['judge'].widget = Select2Widget(
-                attrs={'style': 'width: 150px', 'data-placeholder': _('Any judge')},
+                attrs={'style': 'width: 180px', 'data-placeholder': _('Any judge')},
             )
             self.fields['judge'].choices = judge_choices
 
     class Meta:
         model = Submission
         fields = ['language']
+        widgets = {
+            'language': Select2Widget(attrs={'style': 'width: 180px'})
+        }
 
 
 class OrganizationForm(ModelForm):

@@ -33,7 +33,7 @@
             </div>
             <div class="filter-form-group">
                 <label for="category"><i>{{ _('Category') }}</i></label>
-                <select id="category" name="category">
+                <select id="category" name="category" style="width:100%;">
                     {% if category %}
                         <option value="" selected="selected">{{ _('All') }}</option>
                     {% else %}
@@ -48,7 +48,7 @@
             </div>
             <div class="filter-form-group">
                     <label for="type"><i>{{ _('Problem types') }}</i></label>
-                    <select id="types" name="type" multiple>
+                    <select id="types" name="type" style="width:100%;" multiple>
                         {% for type in problem_types %}
                             <option value="{{ type.id }}"{% if type.id in selected_types %} selected{% endif %}>
                                 {{ type.full_name }}

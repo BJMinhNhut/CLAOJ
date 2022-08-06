@@ -61,7 +61,7 @@ a {
 .comment-operation {
     flex: auto;
 
-    .fa {
+    .fa, .fa-solid {
         color: #444;
     }
 
@@ -76,6 +76,7 @@ a {
 
 .comment-submit {
     width: 100%;
+    padding: 10px 15px;
 }
 
 .comment-post-wrapper {
@@ -85,7 +86,7 @@ a {
     input, textarea {
         min-width: 100%;
         max-width: 100%;
-	background: #eceff1;
+	    background: #eceff1;
     	border: none;
     	border-radius: $widget_border_radius;
 

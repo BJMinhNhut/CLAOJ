@@ -32,29 +32,30 @@
     color: white !important;
     text-decoration: none !important;
     cursor: pointer;
-    vertical-align: middle;
     white-space: nowrap;
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 22px;
     background: $button_color;
-    box-shadow: $button_shadow;
-    border: none;
+    box-shadow: none;
     border-radius: $widget_border_radius;
     font-family: $title_fonts;
-    padding: 6px 12px;
+    margin: 2px 0;
+    padding: 4px 11px;
     display: block;
     text-align: center;
+    border: none;
+    transition: background 0.2s;
 
     // 4k hack
     font-size: $base_font_size;
 
     &:hover {
-        background: #00796b;
+        background: #26a69a;
+        box-shadow: $button_shadow;
     }
 
     &.disabled {
-        background: linear-gradient(to bottom, darkgray 0, gray 100%) repeat-x !important;
-        border-color: grey !important;
+        background: #cfd8dc;
         cursor: not-allowed;
     }
 }
@@ -64,11 +65,12 @@
 }
 
 button:hover, button:hover, input[type=submit]:hover {
-    background: #00796b;
+    background: #26a69a;
+    box-shadow: $button_shadow;
 }
 
-.button:active, button:active, input[type=submit]:hover {
-    background: #00796b;
+.button:active, button:active, input[type=submit]:active {
+    background: #00675b;
     box-shadow: none;
 }
 
@@ -84,7 +86,7 @@ input {
         color: #555;
         height: 2.2em;
         background: #f7f8f9;
-	border: 1px solid $border_gray;
+	    border: 1px solid $border_gray;
         border-radius: $input_box_radius;
         transition: box-shadow ease-in-out 0.1s;
         box-sizing: border-box;
@@ -126,13 +128,15 @@ input {
 }
 
 textarea:focus {
-    box-shadow: 0 0 6px #aaa;
+    box-shadow: $sidebox_shadow;
+    background-color: white;
     outline: 0;
 }
 
 input {
     &[type="text"]:focus, &[type="password"]:focus, &[type="email"]:focus, &[type="number"]:focus, &[type="date"]:focus {
-        box-shadow: 0 0 6px #aaa;
+        box-shadow: $sidebox_shadow;
+        background-color: white;
         outline: 0;
     }
 }
@@ -447,11 +451,11 @@ ul.select2-selection__rendered {
     border-bottom: 1px solid $border_gray;
     color: #546e7a;
     padding: 10px 12px;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1.3em;
 }
 
-.sidebox h3 .fa {
+.sidebox h3 .fa, .sidebox h3 .fa-solid {
     color: #546e7a;
     float: left;
     margin: 0.1em 0.4em 0 0;

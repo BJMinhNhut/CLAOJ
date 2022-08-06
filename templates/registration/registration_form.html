@@ -111,13 +111,17 @@
     </style>
 {% endblock %}
 
+{% block title_row %}
+{% set title = '' %}
+{% endblock %}
+
 {% block js_media %}
     {% include "timezone/media-js.html" %}
     {{ form.media.js }}
     <script type="text/javascript">
         $(function () {
             $('.pass-req-link').click(function () {
-                $('.pass-req').toggle('fast');
+                $('.pass-req').slideToggle('fast');
                 return false;
             });
         });
@@ -130,8 +134,8 @@
 {% block body %}
     <div id="center-float">
         <form id="edit-form" action="" method="post" class="form-area">
+            <center><h2 style="display:inline;text-align: center;">{{ _('Register') }}</h2></center>
             {% csrf_token %}
-
             <div class="block-header">{{ _('Full name') }}<small>({{ _('can be blank') }})</small></div>
             <span class="fullwidth{% if form.full_name.errors %}-error{% endif %}">{{ form.full_name }}</span>
             {% if form.full_name.errors %}
@@ -209,7 +213,9 @@
                     <a href="{{ tos_url }}">{{ _('Terms & Conditions') }}</a>.
                 </span>
             {% endif %}
-            <button style="float:right;" type="submit">{{ _('Register!') }}</button>
+            <button style="float:right;" type="submit">
+                <i class="fa fa-sign-in" aria-hidden="true"></i> {{ _('Register') }}
+            </button>
         </form>
     </div>
 
