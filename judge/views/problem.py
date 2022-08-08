@@ -332,9 +332,9 @@ class ProblemList(QueryStringSortMixin, TitleMixin, SolvedProblemMixin, ListView
             if sort_key in self.sql_sort:
                 queryset = queryset.order_by(self.order, 'id')
             elif sort_key == 'name':
-                queryset = queryset.order_by(self.order.replace('name', 'i18n_name'), 'id')
+                queryset = queryset.order_by('i18n_name', self.order, 'name', 'id')
             elif sort_key == 'group':
-                queryset = queryset.order_by(self.order + '__name', 'id')
+                queryset = queryset.order_by(self.order + '__name', 'name', 'id')
             elif sort_key == 'editorial':
                 queryset = queryset.order_by(self.order.replace('editorial', 'has_public_editorial'), 'id')
             elif sort_key == 'solved':
@@ -545,41 +545,16 @@ class ProblemList(QueryStringSortMixin, TitleMixin, SolvedProblemMixin, ListView
 
 
 class SuggestList(ProblemList):
+    title = gettext_lazy('Suggested problem list')
     template_name = 'problem/suggest-list.html'
-    permission_required = "superuser"
+    permission_required = 'superuser'
 
-    def get_normal_queryset(self):
-        filter = Q(is_public=False)
-
-        # Only super user can see all suggesting problems
-        if self.request.user.is_superuser:
-            filter &= ~Q(suggester=None)
-        else:
-            filter &= Q(suggester=self.profile)
-        queryset = Problem.objects.filter(filter).select_related('group').defer('description', 'summary')
-        if self.show_types:
-            queryset = queryset.prefetch_related('types')
-        if self.category is not None:
-            queryset = queryset.filter(group__id=self.category)
-        if self.selected_types:
-            queryset = queryset.filter(types__in=self.selected_types)
-        if 'search' in self.request.GET:
-            self.search_query = query = ' '.join(self.request.GET.getlist('search')).strip()
-            if query:
-                if settings.ENABLE_FTS and self.full_text:
-                    queryset = queryset.search(query, queryset.BOOLEAN).extra(order_by=['-relevance'])
-                else:
-                    queryset = queryset.filter(
-                        Q(code__icontains=query) | Q(name__icontains=query) | Q(source__icontains=query) |
-                        Q(translations__name__icontains=query, translations__language=self.request.LANGUAGE_CODE))
-        self.prepoint_queryset = queryset
-        if self.point_start is not None:
-            queryset = queryset.filter(points__gte=self.point_start)
-        if self.point_end is not None:
-            queryset = queryset.filter(points__lte=self.point_end)
-        return queryset.distinct()
+    def get_filter(self):
+        return Q(is_public=False) & ~Q(suggester=None)
 
     def get(self, request, *args, **kwargs):
+        if not request.user.has_perm('judge.suggest_new_problem'):
+            raise Http404
         return super(SuggestList, self).get(request, *args, **kwargs)
 
 

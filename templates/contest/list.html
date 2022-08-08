@@ -137,11 +137,10 @@
     {% endif %}
     <span title="{%- trans count=contest.virtual_count - contest.user_count -%}
         This contest has {{count}} virtual participation
-        {% pluralize %}
+        {%- pluralize -%}
         This contest has {{count}} virtual participations
-        {% endtrans %}"
-        style="opacity: 50%;">({{ contest.virtual_count - contest.user_count }})
-    </span>
+        {%- endtrans -%}"
+        style="opacity: 50%;">({{ contest.virtual_count - contest.user_count }})</span>
 {% endmacro %}
 
 {% macro contest_join(contest, request) %}
