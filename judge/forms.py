@@ -585,7 +585,7 @@ class ContestForm(ModelForm):
 
         has_long_perm = self.user and self.user.has_perm('judge.long_contest_duration')
         if end_time and start_time and \
-           (end_time - start_time).days > settings.VNOJ_CONTEST_DURATION_LIMIT and not has_long_perm:
+           (end_time - start_time).days > settings.CLAOJ_CONTEST_DURATION_LIMIT and not has_long_perm:
             raise forms.ValidationError(_('Contest duration cannot be longer than %d days')
                                         % settings.CLAOJ_CONTEST_DURATION_LIMIT,
                                         'contest_duration_too_long')
