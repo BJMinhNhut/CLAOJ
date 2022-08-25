@@ -337,7 +337,7 @@ class ProblemSubmitForm(ModelForm):
         model = Submission
         fields = ['language']
         widgets = {
-            'language': Select2Widget(attrs={'style': 'width: 180px'})
+            'language': Select2Widget(attrs={'style': 'width: 180px'}),
         }
 
 
