@@ -184,7 +184,7 @@
     {% endif %}
     <script type="text/javascript">
         $(function () {
-            var url = '{{ url('contest_participation', contest.key, '__username__') }}';
+            var url = "{{ url('contest_participation', contest.key, '__username__') }}";
             var placeholder = $('#search-contest').replaceWith($('<select>').attr({
                 id: 'search-contest'
             })).attr('placeholder');
@@ -192,7 +192,7 @@
             $('#search-contest').select2({
                 placeholder: placeholder,
                 ajax: {
-                    url: '{{ url('contest_user_search_select2_ajax', contest.key) }}'
+                    url: "{{ url('contest_user_search_select2_ajax', contest.key) }}"
                 },
                 minimumInputLength: 1,
                 templateResult: function (data) {
@@ -233,6 +233,11 @@
                 $("a#cache_alert").click();
             }
 
+            function convertToSeconds(timeString) {
+                const time = timeString.split(':').map(Number); // time = [hour, minute, second]
+                return time[0] * 60 * 60 + time[1] * 60 + time[2];
+            }
+
             function timeComparison(sub1, sub2) {
                 if (!sub2) return;
                 return sub1['time'] < sub2['time'];
@@ -260,7 +265,7 @@
 
                         let curSub = {
                             'td': $(this).parent(),
-                            'time': time,
+                            'time': convertToSeconds(time),
                         }
 
                         let fs = firstSolves[problem];
@@ -297,7 +302,7 @@
 
                 $('#show-virtual-participations-checkbox').click(function () {
                     const parser = new URL(window.location.href);
-                    parser.searchParams.set('show_virtual', '{{ 'false' if show_virtual else 'true' }}');
+                    parser.searchParams.set('show_virtual', "{{ 'false' if show_virtual else 'true' }}");
                     window.location.href = parser.href;
                 });
             {% endif %}
@@ -334,8 +339,8 @@
                             header.push(clean_text($col.text()));
                         } else if ($col.hasClass('username')) {
                             // Username and Full name
-                            header.push(clean_text('{{ _('Username') }}'));
-                            header.push(clean_text('{{ _('Full Name') }}'));
+                            header.push(clean_text("{{ _('Username') }}"));
+                            header.push(clean_text("{{ _('Full Name') }}"));
                         } else {
                             // Point
                             var name = $col.find('.problem-code').text();

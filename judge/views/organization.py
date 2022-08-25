@@ -137,6 +137,8 @@ class LeaveOrganization(OrganizationMembershipChange):
     def handle(self, request, org, profile):
         if not profile.organizations.filter(id=org.id).exists():
             return generic_message(request, _('Leaving organization'), _('You are not in "%s".') % org.short_name)
+        if org.is_admin(profile):
+            return generic_message(request, _('Leaving organization'), _('You cannot leave an organization you own.'))
         profile.organizations.remove(org)
 
 
@@ -361,6 +363,11 @@ class KickUserWidgetView(LoginRequiredMixin, OrganizationMixin, SingleObjectMixi
         if not organization.members.filter(id=user.id).exists():
             return generic_message(request, _("Can't kick user"),
                                    _('The user you are trying to kick is not in organization: %s.') %
+                                   organization.name, status=400)
+
+        if organization.admins.filter(id=user.id).exists():
+            return generic_message(request, _("Can't kick user"),
+                                   _('The user you are trying to kick is an admin of organization: %s.') %
                                    organization.name, status=400)
 
         organization.members.remove(user)

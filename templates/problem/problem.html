@@ -398,7 +398,7 @@
 
 {% block comments %}
     {% if request.user.is_authenticated and not request.profile.mute %}
-        <a href="{{ url('new_problem_ticket', problem.code) }}" class="button clarify">
+        <a href="{{ url('new_problem_ticket', problem.code) }}" class="button secondary clarify">
             {%- if comment_lock and request.profile.current_contest.live -%}
                 <i class="fa-solid fa-exclamation-circle"></i> {{ _('Request clarification') }}
             {%- else -%}

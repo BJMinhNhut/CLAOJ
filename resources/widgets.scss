@@ -58,20 +58,30 @@
         background: #cfd8dc;
         cursor: not-allowed;
     }
+
+    &:active {
+        background: #00675b;
+        box-shadow: none;
+    }
 }
 
-.button.full, input[type=submit].full, button.full {
+.full {
     padding: 6px 0;
 }
 
-button:hover, button:hover, input[type=submit]:hover {
-    background: #26a69a;
-    box-shadow: $button_shadow;
-}
-
-.button:active, button:active, input[type=submit]:active {
-    background: #00675b;
-    box-shadow: none;
+.secondary {
+    border: 2px solid $button_color;
+    color: $button_color !important;
+    background: white;
+    line-height: 20px;
+    &:hover {
+        background: white;
+        box-shadow: $button_shadow;
+    }
+    &:active {
+        background: #e0e0e0;
+        box-shadow: none;
+    }
 }
 
 .inline-button {
@@ -82,9 +92,9 @@ button:hover, button:hover, input[type=submit]:hover {
 
 input {
     &[type=text], &[type=password], &[type=email], &[type=number], &[type=date], &[type=url] {
-        padding: 4px 8px 3px 8px;
+        padding: 4px 8px 4px 8px;
         color: #555;
-        height: 2.2em;
+        height: 30px;
         background: #f7f8f9;
 	    border: 1px solid $border_gray;
         border-radius: $input_box_radius;
@@ -97,8 +107,8 @@ input {
     }
 
     &[type=number] {
-	width: 100%;	
-	max-width: 300px;
+        width: 100%;	
+        max-width: 300px;
     }
 
     &[type=checkbox] {

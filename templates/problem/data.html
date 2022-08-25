@@ -92,7 +92,7 @@
                     type: 'number',
                     value: try_parse_json($args.val()).precision || 6,
                     title: 'precision (decimal digits)',
-                    style: 'width: 4em'
+                    style: 'width: 4em; margin-left: 6px;'
                 }).change(function () {
                     if ($checker.val().startsWith('floats'))
                         $args.val(JSON.stringify({precision: parseInt($(this).val())}));
@@ -237,16 +237,14 @@
             }).appendTo($td);
 
             var $file_test = $('#id_problem-data-zipfile');
-            $("<br>").appendTo($file_test.parent());
             $("<input/>", {
                 type: "submit",
                 value: "{{ _('Autofill testcases') }}",
-                class: "button",
                 style: "display: none;",
                 id: "submit-button",
             }).appendTo($file_test.parent());
 
-            var $label="<label for=\"submit-button\" style=\"display: inline-table; margin-top: 0.5em;\" class=\"button\"><i class=\"fa-solid fa-square-pen\"></i> {{ _('Autofill testcases') }}</label>";
+            var $label="<label for=\"submit-button\" style=\"display: inline-table; margin-top: 0.5em;\" class=\"button secondary\"><i class=\"fa-solid fa-square-pen\"></i> {{ _('Autofill testcases') }}</label>";
             $($label).appendTo($file_test.parent());
 
             function swap_row($a, $b) {
@@ -585,6 +583,10 @@
             padding-bottom: 1em;
             background: #e99;
         }
+
+        .table.test-option td {
+            text-align: left;
+        }
     </style>
 {% endblock %}
 
@@ -620,7 +622,7 @@
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ cases_formset.management_form }}
-        <table class="table">{{ data_form.as_table() }}</table>
+        <table class="table test-option">{{ data_form.as_table() }}</table>
 
 	<div class="alert alert-warning alert-dismissable" id="fill-test-case-noti" style="display: none;">
             <a class="close">x</a>

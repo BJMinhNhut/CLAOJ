@@ -32,8 +32,8 @@
             $('.contest-tag').find('a[data-featherlight]').featherlight();
 
             $('.join-warning').click(function () {
-                return confirm('{{ _('Are you sure you want to join?') }}\n' +
-                    '{{ _('Joining a contest for the first time starts your timer, after which it becomes unstoppable.') }}');
+                return confirm("{{ _('Are you sure you want to join?') }}\n" +
+                    "{{ _('Joining a contest for the first time starts your timer, after which it becomes unstoppable.') }}");
             });
 
             {% if hide_private_contests is not none %}
@@ -43,7 +43,7 @@
 
                 $('#hide-private-contests-checkbox').click(function () {
                     const parser = new URL(window.location.href);
-                    parser.searchParams.set('hide_private_contests', '{{ 'false' if hide_private_contests else 'true' }}');
+                    parser.searchParams.set('hide_private_contests', "{{ 'false' if hide_private_contests else 'true' }}");
                     window.location.href = parser.href;
                 });
             {% endif %}

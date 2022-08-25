@@ -20,16 +20,15 @@
         });
     </script>
 
-    <script src="{{ static('vnoj/jquery.formset.js') }}"></script>
+    <script src="{{ static('claoj/jquery.formset.js') }}"></script>
     <script type="text/javascript">
         $(function() {
             $('#form_set tr').formset({
                 prefix: '{{ contest_problem_formset.prefix }}'
             });
-        })
 
-        var noResults = function () {
-                return '{{ _('Press Enter to select multiple users...') }}';
+            var noResults = function () {
+                return "{{ _('Press Enter to select multiple users...') }}";
             };
 
             $(document).one('click', '#id_private_contestants + .select2', function (e) {
@@ -61,7 +60,7 @@
                     });
                 }
             });
-        })
+        });
     </script>
     {{ form.media.js }}
 {% endblock %}
