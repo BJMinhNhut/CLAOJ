@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-08 14:59+0000\n"
+"POT-Creation-Date: 2022-09-11 09:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -263,8 +263,8 @@ msgid "Taxonomy"
 msgstr ""
 
 #: judge/admin/problem.py:134 templates/blog/top-scorers.html:9
-#: templates/contest/contest.html:214 templates/contest/edit.html:115
-#: templates/organization/list.html:25 templates/problem/data.html:646
+#: templates/contest/contest.html:214 templates/contest/edit.html:114
+#: templates/organization/list.html:25 templates/problem/data.html:648
 #: templates/problem/list.html:242 templates/problem/list.html:263
 #: templates/submission/status-testcases.html:90
 #: templates/user/base-users-table.html:11 templates/user/user-problems.html:60
@@ -804,7 +804,7 @@ msgstr ""
 
 #: judge/forms.py:356 judge/views/register.py:26
 #: templates/blog/top-contrib.html:8 templates/blog/top-rating.html:8
-#: templates/blog/top-scorers.html:8 templates/contest/ranking.html:337
+#: templates/blog/top-scorers.html:8 templates/contest/ranking.html:342
 #: templates/problem/submission-diff.html:112
 #: templates/registration/registration_form.html:145
 #: templates/user/base-users-table.html:5
@@ -3157,9 +3157,9 @@ msgid "Creating new blog post"
 msgstr ""
 
 #: judge/views/blog.py:310 judge/views/contests.py:1006
-#: judge/views/organization.py:293 judge/views/organization.py:606
-#: judge/views/organization.py:629 judge/views/problem.py:844
-#: judge/views/problem.py:976
+#: judge/views/organization.py:295 judge/views/organization.py:613
+#: judge/views/organization.py:636 judge/views/problem.py:852
+#: judge/views/problem.py:984
 msgid "Created on site"
 msgstr ""
 
@@ -3180,8 +3180,8 @@ msgid "Updating blog post"
 msgstr ""
 
 #: judge/views/blog.py:346 judge/views/comment.py:146
-#: judge/views/contests.py:1077 judge/views/organization.py:336
-#: judge/views/problem.py:935
+#: judge/views/contests.py:1077 judge/views/organization.py:338
+#: judge/views/problem.py:943
 msgid "Edited from site"
 msgstr ""
 
@@ -3413,7 +3413,7 @@ msgstr ""
 msgid "This organization is not open."
 msgstr ""
 
-#: judge/views/organization.py:139
+#: judge/views/organization.py:139 judge/views/organization.py:141
 msgid "Leaving organization"
 msgstr ""
 
@@ -3422,98 +3422,108 @@ msgstr ""
 msgid "You are not in \"%s\"."
 msgstr ""
 
-#: judge/views/organization.py:157
+#: judge/views/organization.py:141
+msgid "You cannot leave an organization you own."
+msgstr ""
+
+#: judge/views/organization.py:159
 #, python-format
 msgid "Can't request to join %s"
 msgstr ""
 
-#: judge/views/organization.py:158
+#: judge/views/organization.py:160
 #, python-format
 msgid "You already have a pending request to join %s."
 msgstr ""
 
-#: judge/views/organization.py:165
+#: judge/views/organization.py:167
 #, python-format
 msgid "Request to join %s"
 msgstr ""
 
-#: judge/views/organization.py:183
+#: judge/views/organization.py:185
 msgid "Join request detail"
 msgstr ""
 
-#: judge/views/organization.py:211 judge/views/organization.py:212
+#: judge/views/organization.py:213 judge/views/organization.py:214
 #, python-format
 msgid "Managing join requests for %s"
 msgstr ""
 
-#: judge/views/organization.py:245
+#: judge/views/organization.py:247
 #, python-format
 msgid ""
 "Your organization can only receive %(can_add)d more members. You cannot "
 "approve %(to_approve)d users."
 msgstr ""
 
-#: judge/views/organization.py:258
+#: judge/views/organization.py:260
 #, python-format
 msgid "Approved %d user."
 msgid_plural "Approved %d users."
 msgstr[0] ""
 msgstr[1] ""
 
-#: judge/views/organization.py:259
+#: judge/views/organization.py:261
 #, python-format
 msgid "Rejected %d user."
 msgid_plural "Rejected %d users."
 msgstr[0] ""
 msgstr[1] ""
 
-#: judge/views/organization.py:289 templates/organization/list-tabs.html:5
+#: judge/views/organization.py:291 templates/organization/list-tabs.html:5
 msgid "Create new organization"
 msgstr ""
 
-#: judge/views/organization.py:312 judge/views/organization.py:316
+#: judge/views/organization.py:314 judge/views/organization.py:318
 msgid "Can't create organization"
 msgstr ""
 
-#: judge/views/organization.py:317
+#: judge/views/organization.py:319
 msgid "You are not allowed to create new organizations."
 msgstr ""
 
-#: judge/views/organization.py:326
+#: judge/views/organization.py:328
 #, python-format
 msgid "Editing %s"
 msgstr ""
 
-#: judge/views/organization.py:344 judge/views/organization.py:352
+#: judge/views/organization.py:346 judge/views/organization.py:354
 msgid "Can't edit organization"
 msgstr ""
 
-#: judge/views/organization.py:345
+#: judge/views/organization.py:347
 msgid "You are not allowed to edit this organization."
 msgstr ""
 
-#: judge/views/organization.py:353
+#: judge/views/organization.py:355
 msgid "You are not allowed to kick people from this organization."
 msgstr ""
 
-#: judge/views/organization.py:358 judge/views/organization.py:362
+#: judge/views/organization.py:360 judge/views/organization.py:364
+#: judge/views/organization.py:369
 msgid "Can't kick user"
 msgstr ""
 
-#: judge/views/organization.py:359
+#: judge/views/organization.py:361
 msgid "The user you are trying to kick does not exist!"
 msgstr ""
 
-#: judge/views/organization.py:363
+#: judge/views/organization.py:365
 #, python-format
 msgid "The user you are trying to kick is not in organization: %s."
 msgstr ""
 
-#: judge/views/organization.py:399
+#: judge/views/organization.py:370
+#, python-format
+msgid "The user you are trying to kick is an admin of organization: %s."
+msgstr ""
+
+#: judge/views/organization.py:406
 msgid "Cannot view organization's private data"
 msgstr ""
 
-#: judge/views/organization.py:400
+#: judge/views/organization.py:407
 msgid "You must join the organization to view its private data."
 msgstr ""
 
@@ -3540,73 +3550,73 @@ msgstr ""
 msgid "Could not find an editorial with the code \"%s\"."
 msgstr ""
 
-#: judge/views/problem.py:311 templates/contest/contest.html:205
-#: templates/contest/edit.html:110 templates/contest/edit.html:114
+#: judge/views/problem.py:319 templates/contest/contest.html:205
+#: templates/contest/edit.html:109 templates/contest/edit.html:113
 #: templates/user/user-tabs.html:8 templates/user/users-table.html:23
 msgid "Problems"
 msgstr ""
 
-#: judge/views/problem.py:548
+#: judge/views/problem.py:556
 msgid "Suggested problem list"
 msgstr ""
 
-#: judge/views/problem.py:621 judge/views/problem.py:629
+#: judge/views/problem.py:629 judge/views/problem.py:637
 #, python-format
 msgid "Submit to %s"
 msgstr ""
 
-#: judge/views/problem.py:678
+#: judge/views/problem.py:686
 msgid "Banned from submitting"
 msgstr ""
 
-#: judge/views/problem.py:679
+#: judge/views/problem.py:687
 msgid ""
 "You have been declared persona non grata for this problem. You are "
 "permanently barred from submitting this problem."
 msgstr ""
 
-#: judge/views/problem.py:683
+#: judge/views/problem.py:691
 msgid "Too many submissions"
 msgstr ""
 
-#: judge/views/problem.py:684
+#: judge/views/problem.py:692
 msgid "You have exceeded the submission limit for this problem."
 msgstr ""
 
-#: judge/views/problem.py:772
+#: judge/views/problem.py:780
 msgid "Clone Problem"
 msgstr ""
 
-#: judge/views/problem.py:800
+#: judge/views/problem.py:808
 #, python-format
 msgid "Cloned problem from %s"
 msgstr ""
 
-#: judge/views/problem.py:817 judge/views/problem.py:820
+#: judge/views/problem.py:825 judge/views/problem.py:828
 #: templates/organization/tabs.html:42
 #: templates/problem/problem-list-tabs.html:5
 msgid "Create new problem"
 msgstr ""
 
-#: judge/views/problem.py:865
+#: judge/views/problem.py:873
 #, python-brace-format
 msgid "Edit problem {0}"
 msgstr ""
 
-#: judge/views/problem.py:868
+#: judge/views/problem.py:876
 #, python-format
 msgid "Edit problem %s"
 msgstr ""
 
-#: judge/views/problem.py:946
+#: judge/views/problem.py:954
 msgid "Can't edit problem"
 msgstr ""
 
-#: judge/views/problem.py:947
+#: judge/views/problem.py:955
 msgid "You are not allowed to edit this problem."
 msgstr ""
 
-#: judge/views/problem.py:954 judge/views/problem.py:957
+#: judge/views/problem.py:962 judge/views/problem.py:965
 msgid "Suggesting new problem"
 msgstr ""
 
@@ -3799,64 +3809,64 @@ msgstr ""
 msgid "Comparing submission %(first)s with %(second)s"
 msgstr ""
 
-#: judge/views/submission.py:283 judge/views/submission.py:284
+#: judge/views/submission.py:287 judge/views/submission.py:288
 #: templates/problem/problem.html:167
 msgid "All submissions"
 msgstr ""
 
-#: judge/views/submission.py:443 judge/views/submission.py:448
+#: judge/views/submission.py:447 judge/views/submission.py:452
 msgid "All my submissions"
 msgstr ""
 
-#: judge/views/submission.py:444 judge/views/submission.py:449
+#: judge/views/submission.py:448 judge/views/submission.py:453
 #, python-format
 msgid "All submissions by %s"
 msgstr ""
 
-#: judge/views/submission.py:485 judge/views/submission.py:488
+#: judge/views/submission.py:489 judge/views/submission.py:492
 #, python-format
 msgid "All submissions for %s"
 msgstr ""
 
-#: judge/views/submission.py:510
+#: judge/views/submission.py:514
 msgid "Must pass a problem"
 msgstr ""
 
-#: judge/views/submission.py:548 judge/views/submission.py:555
+#: judge/views/submission.py:552 judge/views/submission.py:559
 #, python-format
 msgid "My submissions for %(problem)s"
 msgstr ""
 
-#: judge/views/submission.py:549 judge/views/submission.py:559
+#: judge/views/submission.py:553 judge/views/submission.py:563
 #, python-format
 msgid "%(user)s's submissions for %(problem)s"
 msgstr ""
 
-#: judge/views/submission.py:651
+#: judge/views/submission.py:655
 msgid "Must pass a contest"
 msgstr ""
 
-#: judge/views/submission.py:659 judge/views/submission.py:674
+#: judge/views/submission.py:663 judge/views/submission.py:678
 #, python-format
 msgid "My submissions in %(contest)s"
 msgstr ""
 
-#: judge/views/submission.py:660 judge/views/submission.py:678
+#: judge/views/submission.py:664 judge/views/submission.py:682
 #, python-format
 msgid "%(user)s's submissions in %(contest)s"
 msgstr ""
 
-#: judge/views/submission.py:696 judge/views/submission.py:714
+#: judge/views/submission.py:700 judge/views/submission.py:718
 #, python-brace-format
 msgid "{user}'s submissions for {problem} in {contest}"
 msgstr ""
 
-#: judge/views/submission.py:701
+#: judge/views/submission.py:705
 #, python-brace-format
 msgid "{user}'s submissions for problem {number} in {contest}"
 msgstr ""
 
-#: judge/views/submission.py:722
+#: judge/views/submission.py:726
 #, python-brace-format
 msgid "{user}'s submissions for problem {label} in {contest}"
 msgstr ""
@@ -4083,7 +4093,7 @@ msgstr ""
 
 #: templates/admin/judge/submission/change_form.html:14
 #: templates/admin/judge/submission/change_form.html:17
-#: templates/submission/source.html:39 templates/submission/status.html:80
+#: templates/submission/source.html:39 templates/submission/status.html:136
 msgid "Rejudge"
 msgstr ""
 
@@ -4170,7 +4180,7 @@ msgstr ""
 #: templates/blog/content.html:49 templates/comments/list.html:83
 #: templates/comments/list.html:98 templates/contest/contest-tabs.html:23
 #: templates/contest/tag-title.html:9 templates/flatpages/admin_link.html:3
-#: templates/license.html:10 templates/problem/data.html:685
+#: templates/license.html:10 templates/problem/data.html:687
 #: templates/problem/editorial.html:14
 msgid "Edit"
 msgstr ""
@@ -4193,14 +4203,14 @@ msgstr ""
 msgid "Please read the [guidelines][0] before creating a new blog post."
 msgstr ""
 
-#: templates/blog/edit.html:43 templates/contest/edit.html:137
+#: templates/blog/edit.html:43 templates/contest/edit.html:136
 #: templates/organization/edit.html:55
 #: templates/organization/requests/pending.html:34
 #: templates/problem/editor.html:130 templates/ticket/edit-notes.html:4
 msgid "Update"
 msgstr ""
 
-#: templates/blog/edit.html:43 templates/contest/edit.html:139
+#: templates/blog/edit.html:43 templates/contest/edit.html:138
 #: templates/organization/edit.html:53 templates/organization/new.html:10
 #: templates/problem/create.html:9 templates/problem/suggest.html:19
 msgid "Create"
@@ -4259,7 +4269,7 @@ msgstr ""
 msgid "Top scorers"
 msgstr ""
 
-#: templates/comments/edit-ajax.html:17 templates/problem/data.html:700
+#: templates/comments/edit-ajax.html:17 templates/problem/data.html:702
 msgid "Save"
 msgstr ""
 
@@ -4436,7 +4446,7 @@ msgstr ""
 msgid "Info"
 msgstr ""
 
-#: templates/contest/contest-tabs.html:6 templates/submission/list.html:356
+#: templates/contest/contest-tabs.html:6 templates/submission/list.html:358
 msgid "Statistics"
 msgstr ""
 
@@ -4699,31 +4709,31 @@ msgstr ""
 msgid "Announce"
 msgstr ""
 
-#: templates/contest/edit.html:32 templates/problem/editor.html:23
+#: templates/contest/edit.html:31 templates/problem/editor.html:23
 msgid "Press Enter to select multiple users..."
 msgstr ""
 
-#: templates/contest/edit.html:101
+#: templates/contest/edit.html:100
 msgid "Edit contest in admin panel for more options"
 msgstr ""
 
-#: templates/contest/edit.html:116
+#: templates/contest/edit.html:115
 msgid "Order in contest"
 msgstr ""
 
-#: templates/contest/edit.html:118
+#: templates/contest/edit.html:117
 msgid "Max submission"
 msgstr ""
 
-#: templates/contest/edit.html:121
+#: templates/contest/edit.html:120
 msgid "Maximum number of submissions"
 msgstr ""
 
-#: templates/contest/edit.html:123
+#: templates/contest/edit.html:122
 msgid "or leave blank for no limit."
 msgstr ""
 
-#: templates/contest/edit.html:126 templates/problem/editor.html:114
+#: templates/contest/edit.html:125 templates/problem/editor.html:114
 #: templates/user/edit-profile.html:422
 msgid "Delete"
 msgstr ""
@@ -4904,27 +4914,27 @@ msgstr ""
 msgid "Are you sure you want to un-disqualify this participation?"
 msgstr ""
 
-#: templates/contest/ranking.html:338
+#: templates/contest/ranking.html:343
 msgid "Full Name"
 msgstr ""
 
-#: templates/contest/ranking.html:394
+#: templates/contest/ranking.html:399
 msgid "View user participation"
 msgstr ""
 
-#: templates/contest/ranking.html:398
+#: templates/contest/ranking.html:403
 msgid "Show full name, organization"
 msgstr ""
 
-#: templates/contest/ranking.html:400
+#: templates/contest/ranking.html:405
 msgid "Show virtual participations"
 msgstr ""
 
-#: templates/contest/ranking.html:403
+#: templates/contest/ranking.html:408
 msgid "Download as CSV"
 msgstr ""
 
-#: templates/contest/ranking.html:418
+#: templates/contest/ranking.html:423
 #, python-format
 msgid ""
 "The scoreboard is cached for %(cache_timeout)s seconds, your submission "
@@ -5145,7 +5155,7 @@ msgid "There are no requests to approve."
 msgstr ""
 
 #: templates/organization/requests/pending.html:17
-#: templates/problem/data.html:650
+#: templates/problem/data.html:652
 msgid "Delete?"
 msgstr ""
 
@@ -5197,61 +5207,61 @@ msgstr ""
 msgid "Instruction"
 msgstr ""
 
-#: templates/problem/data.html:243 templates/problem/data.html:249
+#: templates/problem/data.html:242 templates/problem/data.html:247
 msgid "Autofill testcases"
 msgstr ""
 
-#: templates/problem/data.html:416
+#: templates/problem/data.html:414
 msgid ""
 "No input/output files. Make sure your files are following themis/cms test "
 "format"
 msgstr ""
 
-#: templates/problem/data.html:420
+#: templates/problem/data.html:418
 #, python-brace-format
 msgid ""
 "The number of input files (${inFiles.length}) do not match the number of "
 "output files (${outFiles.length})!"
 msgstr ""
 
-#: templates/problem/data.html:606
+#: templates/problem/data.html:608
 msgid "View YAML"
 msgstr ""
 
-#: templates/problem/data.html:627
+#: templates/problem/data.html:629
 msgid "Test cases have been filled automatically and **not saved yet**!"
 msgstr ""
 
-#: templates/problem/data.html:629
+#: templates/problem/data.html:631
 msgid ""
 "Please modify the table below if needed and press the `Apply` button to save!"
 msgstr ""
 
-#: templates/problem/data.html:636 templates/problem/data.html:698
+#: templates/problem/data.html:638 templates/problem/data.html:700
 msgid "Save test"
 msgstr ""
 
-#: templates/problem/data.html:643
+#: templates/problem/data.html:645
 msgid "Type"
 msgstr ""
 
-#: templates/problem/data.html:644
+#: templates/problem/data.html:646
 msgid "Input file"
 msgstr ""
 
-#: templates/problem/data.html:645
+#: templates/problem/data.html:647
 msgid "Output file"
 msgstr ""
 
-#: templates/problem/data.html:647
+#: templates/problem/data.html:649
 msgid "Pretest?"
 msgstr ""
 
-#: templates/problem/data.html:648
+#: templates/problem/data.html:650
 msgid "Generator args"
 msgstr ""
 
-#: templates/problem/data.html:695
+#: templates/problem/data.html:697
 msgid "Add new case"
 msgstr ""
 
@@ -5615,7 +5625,7 @@ msgstr ""
 msgid "Point range"
 msgstr ""
 
-#: templates/problem/search-form.html:66 templates/submission/list.html:348
+#: templates/problem/search-form.html:66 templates/submission/list.html:349
 #: templates/ticket/list.html:250
 msgid "Go"
 msgstr ""
@@ -6157,7 +6167,7 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
-#: templates/submission/list.html:362
+#: templates/submission/list.html:364
 msgid "Total:"
 msgstr ""
 
@@ -6202,7 +6212,7 @@ msgstr ""
 msgid "View raw source"
 msgstr ""
 
-#: templates/submission/source.html:32 templates/submission/status.html:73
+#: templates/submission/source.html:32 templates/submission/status.html:129
 msgid "Resubmit"
 msgstr ""
 
@@ -6297,19 +6307,31 @@ msgstr ""
 msgid "Submission aborted!"
 msgstr ""
 
-#: templates/submission/status.html:70
-msgid "View source"
+#: templates/submission/status.html:54
+msgid "Collapse"
 msgstr ""
 
-#: templates/submission/status.html:88
+#: templates/submission/status.html:56 templates/submission/status.html:157
+msgid "Expand"
+msgstr ""
+
+#: templates/submission/status.html:144
 msgid "Diff this submission"
 msgstr ""
 
-#: templates/submission/status.html:105
+#: templates/submission/status.html:154
+msgid "Source code"
+msgstr ""
+
+#: templates/submission/status.html:156
+msgid "Raw"
+msgstr ""
+
+#: templates/submission/status.html:192
 msgid "Press Ctrl-Enter or Command-Enter to abort."
 msgstr ""
 
-#: templates/submission/status.html:107
+#: templates/submission/status.html:194
 msgid "Abort"
 msgstr ""
 

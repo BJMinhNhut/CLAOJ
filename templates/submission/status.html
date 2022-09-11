@@ -1,5 +1,62 @@
 {% extends "submission/info-base.html" %}
-{% block js_media %}
+
+{% block media %}
+    <style>
+        .line {
+            position: relative;
+        }
+
+        .highlighter {
+            position: absolute;
+            width: 9999px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        a:active .line .highlighter {
+            background: rgba(255, 212, 0, 0.48);
+        }
+
+        .copy-clipboard {
+            margin-top: 0;
+        }
+
+        .toggle {
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .source-wrap {
+            max-height: 30em;
+            overflow: scroll;
+        }
+
+        .expanded {
+            max-height: fit-content;
+        }
+
+        #view-option {
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
+
+{% block content_js_media %}
+    <script type="text/javascript">
+        function expandSource() {
+            const content = document.getElementById("source-content");
+            content.classList.toggle("expanded");
+            
+            const view = document.getElementById("view-option");
+            if (content.classList.contains("expanded")) {
+                view.innerHTML = "{{ _('Collapse') }}"
+            } else {
+                view.innerHTML = "{{ _('Expand') }}";
+            }
+        }
+    </script>
     {% if not submission.is_graded and EVENT_LAST_MSG %}
         <script type="text/javascript">
             $(function () {
@@ -14,7 +71,7 @@
                     request = false;
                     blocked = true;
                     $.ajax({
-                        url: '{{ url('submission_testcases_query') }}',
+                        url: "{{ url('submission_testcases_query') }}",
                         data: {id: '{{ submission.id }}'}
                     }).done(function (data) {
                         list.empty().html(data).find('.toggle').each(function () {
@@ -32,6 +89,7 @@
                     if ($(window).scrollTop() + $(window).height() > $(document).height() - 100)
                         $("html, body").animate({scrollTop: $(document).height()}, 0);
                 }
+                register_toggle($('#source-header'));
 
                 event_dispatcher.on('sub_{{ submission.id_secret }}', function (message) {
                         switch (message.type) {
@@ -66,9 +124,7 @@
 
 {% block body %}
     <br>
-    {% if not submission.language.file_only or request.user.is_superuser %}
-    	<div><a href="{{ url('submission_source', submission.id) }}"><i class="fa-solid fa-file-code fa-fw"></i> {{ _('View source') }}</a></div>
-    {% endif %}
+
     {% if (request.user == submission.user.user or perms.judge.resubmit_other) and not submission.language.file_only %}
         <div><a href="{{ url('problem_submit', submission.problem.code, submission.id) }}"><i class="fa-solid fa-paper-plane fa-fw"></i> {{ _('Resubmit') }}</a></div>
     {% endif %}
@@ -88,7 +144,38 @@
             <i class="fa-solid fa-code-compare fa-fw"></i> {{ _('Diff this submission') }}
         </a></div>
     {% endif %}
-    
+
+    {% if not submission.language.file_only or request.user.is_superuser %}
+        <br>
+        <hr class="half-hr">
+        <br>
+
+        <div>
+            <h3 id="source-header" style="font-weight: 600; display: inline">{{ _('Source code') }}</h3>
+            <span style="float:right">
+                [<a href="{{ url('submission_source_raw', submission.id) }}">{{ _('Raw') }}</a>]
+                [<a id="view-option" onclick="expandSource()">{{ _('Expand') }}</a>]
+            </span>
+        </div>
+
+        <div id="source-content" class="source-wrap" style="margin-top: 1em;">
+            <table style="width: 100%; padding-top: 5px;">
+                <tr>
+                    <td class="source-ln" style="width: 0">
+                        <div>
+                            {% for line in raw_source.split('\n') %}
+                                <a href="#line-{{ loop.index }}" name="line-{{ loop.index }}">
+                                    <pre class="line">{{ loop.index }}</pre>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </td>
+                    <td class="source-code">{{ highlighted_source }}</td>
+                </tr>
+            </table>
+        </div>
+    {% endif %}
+
     <br>
     <hr class="half-hr">
     <br>

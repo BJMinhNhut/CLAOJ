@@ -25,6 +25,7 @@
             <h3>{{ _('Execution Results') }}</h3>
         {% endif %}
         <br>
+
         {% if statuses or not submission.is_graded %}
             {% for case in statuses %}
                 {% if case.status == "AC" %}
@@ -45,6 +46,49 @@
             {% endif %}
             <br><br>
         {% endif %}
+
+        {% if submission.is_graded %}
+            {% if submission.result != "AB" %}
+                <b>{{ _('Resources:') }}</b>
+                {% if submission.result == "TLE" %}
+                    <span>---,</span>
+                {% else %}
+                    <span title="{{ submission.time*1000 }}ms">{{ (submission.time*1000)|floatformat(0) }} ms,</span>
+                {% endif %}
+                {{ submission.memory|kbdetailformat }}
+                <br>
+                {% if submission.result == "AC" %}
+                    <b>{{ _('Maximum single-case runtime:') }}</b>
+                    <span title="{{ max_execution_time*1000 }}ms">{{ (max_execution_time*1000)|floatformat(0) }} ms</span>
+                    <br>
+                {% endif %}
+                {% if is_pretest %}
+                    <b>{{ _('Final pretest score:') }}</b>
+                {% else %}
+                    <b>{{ _('Final score:') }}</b>
+                {% endif %}
+                {{ submission.case_points|floatformat(-3) }}/{{ submission.case_total|floatformat(0) }}
+                {% if request.in_contest and submission.contest_or_none %}
+                    {% with contest=submission.contest_or_none %}
+                        {% set points=contest.points|roundfloat(3) %}
+                        {% set total=contest.problem.points|floatformat(-1) %}
+                        ({{ _('%(points)s/%(total)s points', points=points, total=total) }})
+                    {% endwith %}
+                {% else %}
+                    {% with points=submission.points|floatformat(3), total=submission.problem.points|floatformat(3) %}
+                        ({{ _('%(points)s/%(total)s points', points=points, total=total) }})
+                    {% endwith %}
+                {% endif %}
+                {% if is_pretest and submission.result == "AC" %}
+                    <br>
+                    <i>{{ _('Passing pretests does not guarantee a full score on system tests.') }}</i>
+                {% endif %}
+            {% else %}
+                <b>{{ _('Submission aborted!') }}</b>
+            {% endif %}
+            <br><br>
+        {% endif %}
+
         {% set test_case_id = counter() %}
         {% set test_case_counter = counter() %}
         {% for batch in batches %}
@@ -150,48 +194,6 @@
         {% if batch.id %}</div>{% endif %}
             <br>
         {% endfor %}
-        {% if submission.is_graded %}
-            <br>
-            {% if submission.result != "AB" %}
-                <b>{{ _('Resources:') }}</b>
-                {% if submission.result == "TLE" %}
-                    <span>---,</span>
-                {% else %}
-                    <span title="{{ submission.time*1000 }}ms">{{ (submission.time*1000)|floatformat(0) }} ms,</span>
-                {% endif %}
-                {{ submission.memory|kbdetailformat }}
-                <br>
-                {% if submission.result == "AC" %}
-                    <b>{{ _('Maximum single-case runtime:') }}</b>
-                    <span title="{{ max_execution_time*1000 }}ms">{{ (max_execution_time*1000)|floatformat(0) }} ms</span>
-                    <br>
-                {% endif %}
-                {% if is_pretest %}
-                    <b>{{ _('Final pretest score:') }}</b>
-                {% else %}
-                    <b>{{ _('Final score:') }}</b>
-                {% endif %}
-                {{ submission.case_points|floatformat(-3) }}/{{ submission.case_total|floatformat(0) }}
-                {% if request.in_contest and submission.contest_or_none %}
-                    {% with contest=submission.contest_or_none %}
-                        {% set points=contest.points|roundfloat(3) %}
-                        {% set total=contest.problem.points|floatformat(-1) %}
-                        ({{ _('%(points)s/%(total)s points', points=points, total=total) }})
-                    {% endwith %}
-                {% else %}
-                    {% with points=submission.points|floatformat(3), total=submission.problem.points|floatformat(3) %}
-                        ({{ _('%(points)s/%(total)s points', points=points, total=total) }})
-                    {% endwith %}
-                {% endif %}
-                {% if is_pretest and submission.result == "AC" %}
-                    <br>
-                    <i>{{ _('Passing pretests does not guarantee a full score on system tests.') }}</i>
-                {% endif %}
-            {% else %}
-                <b>{{ _('Submission aborted!') }}</b>
-            {% endif %}
-            <br>
-        {% endif %}
     {% endif %}
 {% else %}
     {% include "submission/internal-error-message.html" %}

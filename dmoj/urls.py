@@ -157,12 +157,11 @@ urlpatterns = [
     url(r'^submissions/diff$', submission.SubmissionSourceDiff, name='diff_submissions'),
     url(r'^submissions/user/(?P<user>[\w-]+)/', paged_list_view(submission.AllUserSubmissions, 'all_user_submissions')),
 
-    url(r'^src/(?P<submission>\d+)$', submission.SubmissionSource.as_view(), name='submission_source'),
-    url(r'^src/(?P<submission>\d+)/raw$', submission.SubmissionSourceRaw.as_view(), name='submission_source_raw'),
-
     url(r'^submission/(?P<submission>\d+)', include([
         url(r'^$', submission.SubmissionStatus.as_view(), name='submission_status'),
         url(r'^/abort$', submission.abort_submission, name='submission_abort'),
+        url(r'^/raw$', submission.SubmissionSourceRaw.as_view(), name='submission_source_raw'),
+        url(r'^/src$', submission.SubmissionSource.as_view(), name='submission_source'),
     ])),
 
     url(r'^users/', include([

@@ -223,6 +223,10 @@ class SubmissionStatus(SubmissionDetailBase):
             = group_test_cases(submission.test_cases.all())
         context['feedback_limit'] = min(3, test_case_count - 1)
         context['statuses'] = combine_statuses(statuses, submission)
+        context["raw_source"] = submission.source.source.rstrip("\n")
+        context["highlighted_source"] = highlight_code(
+            submission.source.source, submission.language.pygments
+        )
 
         context['can_view_test'] = submission.problem.is_testcase_accessible_by(self.request.user)
         if context['can_view_test']:

@@ -53,9 +53,6 @@
         <div class="sub-prop"><div>
             <a href="{{ url('submission_status', submission.id) }}">
                 <i class="fa-solid fa-eye fa-fw"></i><span class="label">{{ _('view') }}</span>
-            </a> ·
-            <a href="{{ url('submission_source', submission.id) }}">
-                <i class="fa-solid fa-file-code fa-fw"></i><span class="label">{{ _('source') }}</span>
             </a>
             {% if perms.judge.rejudge_submission and can_edit %} ·
                 {% if not submission.is_locked %}
@@ -73,7 +70,7 @@
             {% if can_edit %} ·
                 <a href="{{ url('problem_submission_diff', submission.problem.code) }}?username={{ submission.user.user.username }}&highlight={{ submission.id }}">
                     <i class="fa-solid fa-code-compare fa-fw"></i><span class="label">{{ _('diff') }}</span>
-                </a> .
+                </a> ·
                 <a href="{{ url('admin:judge_submission_change', submission.id) }}">
                     <i class="fa-solid fa-cog fa-fw"></i><span class="label">{{ _('admin') }}</span>
                 </a>
