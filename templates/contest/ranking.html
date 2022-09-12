@@ -244,17 +244,23 @@
             }
 
             window.firstSolve = function() {
+                console.time('firstSolve');
                 let firstSolves = {};
 
                 $('td.full-score a').each(function () {
-                    if ($(this).parent().parent().find('.virtual-participation').length) {
+                    if (this.parentNode.parentNode.getElementsByClassName('virtual-participation').length) {
                         // Skip virtual participation
+                        return;
+                    }
+
+                    if (this.parentNode.parentNode.classList.contains('disqualified')) {
+                        // Skip disqualified
                         return;
                     }
 
                     let href = this['attributes']['href']['value'];
                     if (href.includes('submissions')) {
-                        let time = $(this).find('.solving-time').text()
+                        let time = this.getElementsByClassName('solving-time')[0].textContent;
                         if (time.length == 0) {
                             return;
                         }
@@ -275,7 +281,8 @@
                         }
                     }
                 });
-
+                console.timeEnd('firstSolve');
+                
                 for (let problem in firstSolves) {
                     firstSolves[problem]['td'].addClass('first-solve');
                 }
