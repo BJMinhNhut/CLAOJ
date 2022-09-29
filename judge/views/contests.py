@@ -17,7 +17,7 @@ from django.db.models.expressions import CombinedExpression
 from django.db.models.query import Prefetch
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.template import loader
+from django.template import loader, RequestContext
 from django.template.defaultfilters import date as date_filter
 from django.urls import reverse
 from django.utils import timezone
@@ -743,7 +743,7 @@ class ContestRankingBase(ContestMixin, TitleMixin, DetailView):
             'has_rating': self.object.ratings.exists(),
             'perms': PermWrapper(self.request.user),
             'can_edit': self.can_edit,
-        })
+        }, request=self.request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
