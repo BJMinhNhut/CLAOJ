@@ -43,15 +43,14 @@ svg.rate-box {
     circle {
         fill: none;
         stroke-width: 2px;
-        stroke: $color_primary75;
-    }
-
-    path {
-        fill: $color_primary75;
     }
 
     &.rate-none {
         visibility: hidden;
+    }
+
+    &.rate-primary75 {
+        @include rate-svg-color($color_primary75);
     }
 
     &.rate-newbie {
@@ -146,10 +145,11 @@ svg.rate-box {
 
     .rating {
         display: inline-block;
+        vertical-align: middle;
     }
 
     .rate-box {
         margin-right: 0.2em;
-        vertical-align: bottom;
+        vertical-align: middle;
     }
 }
