@@ -21,3 +21,7 @@ $path_to_root: '..';    // relative path from style.css to STATIC_ROOT
 
 $sidebox_shadow: 0 6px 10px 0 rgb(0 0 0 / 50%);
 $button_shadow: 0 1px 5px #546e7a;
+
+@mixin vars-img {
+    filter: invert(1) hue-rotate(180deg);
+}
