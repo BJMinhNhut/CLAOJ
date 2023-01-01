@@ -393,13 +393,15 @@ urlpatterns = [
         'problem': ProblemSitemap,
         'user': UserSitemap,
         'home': HomePageSitemap,
-        'contest': ContestSitemap,
-        'organization': OrganizationSitemap,
-        'blog': BlogPostSitemap,
-        'solutions': SolutionSitemap,
         'pages': UrlSitemap([
             {'location': '/about/', 'priority': 0.9},
         ]),
+        'problem': ProblemSitemap,
+        'solutions': SolutionSitemap,
+        'blog': BlogPostSitemap,
+        'contest': ContestSitemap,
+        'organization': OrganizationSitemap,
+        'user': UserSitemap,
     }}),
 
     url(r'^judge-select2/', include([
