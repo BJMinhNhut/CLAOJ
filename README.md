@@ -118,7 +118,7 @@ Check out [**DMOJ/judge-server**](https://github.com/DMOJ/judge-server) for more
 Supported languages include:
 * C++ 11/14/17/20 (GCC and Clang)
 * C 99/11
-* Java 8/9/10/11
+* Java 8-19
 * Python 2/3
 * PyPy 2/3
 * Pascal
@@ -139,6 +139,7 @@ The judge can also grade in the languages listed below:
 * INTERCAL
 * Kotlin
 * Lua
+* LLVM IR
 * NASM x86/x64
 * Objective-C
 * OCaml
