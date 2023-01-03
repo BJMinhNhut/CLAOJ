@@ -6,6 +6,19 @@
         </div>
         <hr><br>
     {% endif %}
+
+    {% if not comment_lock and not has_comments %}
+        <p class="no-comments-message">{{ _('There are no comments at the moment.') }}</p>
+    {% else %}
+        <div class="comment-header-space"></div>
+    {% endif %}
+
+    {% if comment_lock %}
+        <div class="alert alert-warning comment-lock">
+            {{ _('Comments are disabled on this page.') }}
+        </div>
+    {% endif %}
+
     {% if has_comments %}
         <ul class="comments top-level-comments new-comments">
             {% set logged_in = request.user.is_authenticated %}
@@ -126,8 +139,6 @@
                 {% endwith %}
             {% endfor %}
         </ul>
-    {% elif not comment_lock %}
-        <p class="no-comments-message">{{ _('There are no comments at the moment.') }}</p>
     {% endif %}
 
     {% if request.user.is_authenticated and comment_form and not comment_lock %}
@@ -159,12 +170,6 @@
                     <label for="post_comment" class="button" style="float: right;"><i class="fa-solid fa-arrow-up-from-bracket"></i> {{ _('Post comment') }}</label>
                 </form>
             {% endif %}
-        </div>
-    {% endif %}
-
-    {% if comment_lock %}
-        <div class="alert alert-warning">
-            {{ _('Comments are disabled on this page.') }}
         </div>
     {% endif %}
 </div>
