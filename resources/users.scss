@@ -12,16 +12,12 @@ td.user-name, td.personal-info, td.organization-name {
     text-align: left;
 }
 
-td.rating {
-    padding: 0 1em;
+tr:target {
+    background: rgba($color_link200, 0.2);
 }
 
-tr {
-    padding-bottom: 96px;
-
-    &:target {
-        background: rgba($color_link200, 0.2);
-    }
+td.rating {
+    padding: 0 1em;
 }
 
 #search-handle {
@@ -48,16 +44,17 @@ tr {
         color: $color_primary75;
     }
 
-    .username {
-        width: 100%;
-    }
-
-    .header {
-        vertical-align: middle;
-    }
-
-    .rank, .points, .problems, .fullname, .username {
+    th.rank, th.points, th.problems, th.username {
         white-space: nowrap;
+    }
+
+    th.rank {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    th.username {
+        width: 100%;
     }
 
     tr {
@@ -87,44 +84,12 @@ tr {
     }
 }
 
-a.edit-profile {
-    float: right;
-    padding-top: 1em;
-}
-
-.user-problem-group {
-    h3 {
-        font-weight: 600;
-        font-size: 1.25em;
-        margin-bottom: -10px;
-        max-height: 20%;
-        line-height: 2.5em;
-    }
-    ul {
-        -webkit-columns: 300px 4;
-        -moz-columns: 300px 4;
-        columns: 300px 4;
-        list-style-type: none;
-        margin-top: 0;
-        margin-left: -20px;
-        margin-bottom: 0;
-    }
-    a img {
-        max-width: 1em;
-        margin-right: 3px;
-        padding-bottom: 1px;
-        vertical-align: middle;
-    }
-}
-
-.user-info-cell {
-    padding-left: 15px;
-    border-left: 1px solid $color_primary25;
-}
-
-.contest-history-cell {
-    border-left: 1px solid $color_primary25;
-    padding: 0 0.5em;
+.user-problem-group h3 {
+    font-weight: 600;
+    font-size: 1.25em;
+    margin-bottom: -10px;
+    max-height: 20%;
+    line-height: 2.5em;
 }
 
 .hide-solved-problems {
@@ -150,13 +115,16 @@ a.edit-profile {
 
 .user-info-page {
     display: flex;
-    max-width: 100%;
-    min-height: 0;
 }
 
 .user-sidebar {
-    flex: 0 0 150px;
-    padding: 0 1em;
+    width: 135px;
+    padding: 0 15px;
+}
+
+img.user-gravatar {
+    display: block;
+    border-radius: 6px;
 }
 
 .user-content {
@@ -171,7 +139,6 @@ a.edit-profile {
     }
 
     .user-sidebar {
-        width: 150px;
         margin: 0 auto;
     }
 
@@ -186,10 +153,6 @@ a.edit-profile {
         font-size: 1.4em;
     }
 
-    .pp-scaled {
-        font-size: 0.8em;
-    }
-
     .pp-weighted {
         color: $color_primary50;
     }
@@ -199,19 +162,6 @@ a.edit-profile {
         min-width: unset;
         width: unset;
         border-left: none;
-    }
-
-    td.problem-name {
-        text-align: left;
-        padding-left: 1em;
-    }
-
-    td.problem-score {
-        width: 80px;
-    }
-
-    td.problem-category {
-        width: 100px;
     }
 }
 
@@ -293,10 +243,8 @@ a.edit-profile {
             align-self: center;
             padding-left: 8%;
             font-size: 0.85em;
-        }
 
-        @media(max-width: 1000px) {
-            #submission-total-count {
+            @media (max-width: 1000px) {
                 padding-left: 5px;
             }
         }
@@ -307,13 +255,12 @@ a.edit-profile {
 
             th.submission-date-col {
                 width: 8%;
-            }
 
-            @media (max-width: 1000px) {
-                th.submission-date-col {
+                @media (max-width: 1000px) {
                     display: none;
                 }
             }
+
             td {
                 border-radius: 20%;
 
@@ -353,6 +300,7 @@ a.edit-profile {
     color: $color_primary75;
 }
 
-.user-gravatar img {
+img.user-gravatar  {
+    border-radius: 100px;
     box-shadow: $sidebox_shadow;
 }
