@@ -25,14 +25,13 @@ def get_resource(request):
     else:
         scheme = "http"
     return {
-        "STYLE_CSS": "dark/style.css" if "dark" in request.GET else "style.css",
-        "PYGMENT_THEME": settings.PYGMENT_THEME,
-        "INLINE_JQUERY": settings.INLINE_JQUERY,
-        "INLINE_FONTAWESOME": settings.INLINE_FONTAWESOME,
-        "JQUERY_JS": settings.JQUERY_JS,
-        "FONTAWESOME_CSS": settings.FONTAWESOME_CSS,
-        "DMOJ_SCHEME": scheme,
-        "DMOJ_CANONICAL": settings.DMOJ_CANONICAL,
+        'STYLE_CSS': 'dark/style.css' if 'dark' in request.GET else 'style.css',
+        'INLINE_JQUERY': settings.INLINE_JQUERY,
+        'INLINE_FONTAWESOME': settings.INLINE_FONTAWESOME,
+        'JQUERY_JS': settings.JQUERY_JS,
+        'FONTAWESOME_CSS': settings.FONTAWESOME_CSS,
+        'DMOJ_SCHEME': scheme,
+        'DMOJ_CANONICAL': settings.DMOJ_CANONICAL,
     }
 
 
