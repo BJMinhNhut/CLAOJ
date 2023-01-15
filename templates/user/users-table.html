@@ -1,7 +1,7 @@
 {% extends "user/base-users-table.html" %}
 
 {% block after_rank_head %}
-    <th class="header rank" style="width: 5%;">
+    <th class="header rate" style="width: 5%;">
         {% if sort_links %}<a href="{{ sort_links.rating }}">{% endif %}
         <span class="rate-group">
             <svg class="rate-box rate-primary75" viewBox="0 0 16 16">
@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block after_rank %}
-    <td class="rating">{% if user.rating %}{{ rating_number(user) }}{% endif %}</td>
+    <td class="rate">{% if user.rating %}{{ rating_number(user) }}{% endif %}</td>
 {% endblock %}
 
 {% block after_point_head %}
