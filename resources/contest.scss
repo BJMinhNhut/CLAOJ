@@ -217,3 +217,118 @@ form.contest-join-pseudotab {
 
     padding: 0 5px;
 }
+
+#ranking-table {
+    .username {
+        min-width: 20em;
+    }
+
+    .rating-column {
+        min-width: 3em;
+    }
+
+    td {
+        height: 2.5em;
+    }
+
+    a {
+        display: block;
+        color: $color_primary75;
+    }
+
+    .userinfo a, .user-name a, .user-name form {
+        display: inline-block !important;
+    }
+
+    /* Make problem table headers green on hover */
+    th a:hover {
+        color: #009688;
+    }
+
+    td a:hover {
+        text-decoration: underline;
+    }
+
+    .rank {
+        min-width: 2.5em
+    }
+
+    .points {
+        min-width: 4em;
+    }
+
+    .disqualified {
+        background-color: #ffa8a8 !important;
+    }
+
+    .full-score, .full-score a {
+        font-weight: bold;
+        color: green;
+    }
+
+    .partial-score, .partial-score a {
+        color: green;
+    }
+
+    .failed-score, .failed-score a {
+        font-weight: bold;
+        color: red;
+    }
+
+    .pretest-full-score, .pretest-full-score a {
+        font-weight: bold;
+        color: #2980b9;
+    }
+
+    .pretest-partial-score, .pretest-partial-score a {
+        color: #2980b9;
+    }
+
+    .pretest-failed-score, .pretest-failed-score a {
+        font-weight: bold;
+        color: red;
+    }
+
+    .user-points, .user-points a {
+        font-weight: bold;
+        color: $color_primary100;
+    }
+
+    .solving-time {
+        color: gray;
+        font-weight: normal;
+        font-size: 0.75em;
+        padding-bottom: -0.75em;
+    }
+
+    .point-denominator {
+        border-top: 1px solid gray;
+        font-size: 0.7em;
+    }
+
+    .first-solve {
+        background-color: #a5d6a7 !important;
+    }
+
+    .start-time {
+        display: none;
+    }
+
+    .user-name {
+        position: relative;
+    }
+
+    .personal-info {
+        display: none;
+    }
+
+    .personal-info a {
+        color: gray !important;
+        font-weight: 600;
+    }
+
+    .virtual-participation {
+        color: grey;
+        float: right
+    }
+}
