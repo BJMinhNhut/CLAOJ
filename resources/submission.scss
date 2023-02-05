@@ -91,6 +91,10 @@
         .score {
             font-size: 1.3em;
 			font-weight: bold;
+
+            .grading-spinner {
+                color: $color_primary100;
+            }
         }
     }
 

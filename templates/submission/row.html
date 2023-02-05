@@ -13,7 +13,7 @@
                 {{ submission.case_points|floatformat(-1) }}/{{ submission.case_total|floatformat(0) }}&nbsp|&nbsp
             {%- endif -%}
         {%- else -%}
-             <i class="fa-solid fa-spinner fa-pulse"></i>
+             <i class="fa-solid fa-spinner fa-pulse grading-spinner"></i>
         {%- endif -%}
         <span class="language">{{ submission.language.short_display_name }}</span>
     </div>
