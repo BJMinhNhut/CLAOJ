@@ -9,31 +9,39 @@
 
 {% block users_media %}
     <style>
-        #users-table .username {
+        #ranking-table .username {
             min-width: 20em;
         }
 
-        #users-table td {
+        #ranking-table .rating-column {
+            min-width: 3em;
+        }
+
+        #ranking-table td {
             height: 2.5em;
         }
 
-        #users-table a {
+        #ranking-table a {
             display: block;
         }
 
-        #users-table {	
-            font-size: 14px;	
+        #ranking-table {
+            font-size: 14px;
         }
 
-        .userinfo a, .user-name a, .user-name form {	
-            display: inline-block-block !important;	
+        .user-name a, .user-name form {
+            display: inline-block !important;
         }
 
-        #users-table th a:hover {
+        #ranking-table th a, #ranking-table th a:link, #ranking-table th a:visited {
+            color: white;
+        }
+
+        #ranking-table th a:hover {
             color: #009688;
         }
 
-        #users-table td a:hover {
+        #ranking-table td:not(.user-name, .personal-info) a:hover {
             text-decoration: underline;
         }
 
@@ -161,7 +169,7 @@
                     $.ajax({
                         url: '?raw'
                     }).done(function (data) {
-                        $('#users-table').html(data);
+                        $('#ranking-table').html(data);
                         if (localStorage.getItem('show-personal-info') == 'true') {
                             $('.personal-info').show();
                             $('#show-personal-info-checkbox').prop('checked', true);
@@ -333,7 +341,7 @@
 
                 var csv = [];
 
-                $('table#users-table thead tr').each(function () {
+                $('#ranking-table thead tr').each(function () {
                     var header = [];
                     $(this).find('th').each(function () {
                         var $col = $(this);
@@ -360,7 +368,12 @@
                     csv.push(header.join(','));
                 });
 
-                $('table#users-table tbody tr').each(function () {
+                $('#ranking-table tbody tr').each(function () {
+                    // Skip hidden row (due to filtering)
+                    if ($(this).is(':hidden')) {
+                        return;
+                    }
+
                     var row_data = [];
                     $(this).find('td').each(function () {
                         var $col = $(this);

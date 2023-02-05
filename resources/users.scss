@@ -39,11 +39,7 @@ td.rating {
     padding-left: 0.5em;
 }
 
-#users-table, #organization-table {
-    th a {
-        color: $color_primary75;
-    }
-
+.users-table {
     th.rank, th.points, th.problems, th.username {
         white-space: nowrap;
     }
@@ -61,7 +57,9 @@ td.rating {
     th.username {
         width: 100%;
     }
+}
 
+.users-table, .organization-table {
     tr {
         transition: background-color linear .1s;
 
