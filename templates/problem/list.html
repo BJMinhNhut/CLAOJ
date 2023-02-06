@@ -14,45 +14,32 @@
                 padding: 0;
             }
 
-            a.hot-problem-link:hover > .hot-problem-count {
-                visibility: visible;
+            table.problem-list tr td{
+                border-bottom: 1px solid #e0e0e0;
+                padding: 7px 0;
+            }
+            table.problem-list tr:last-child td {
+                border: none;
+            }
+            table.problem-list {
+                border-spacing: 0;
             }
 
-	table.problem-list tr td{
-		border-bottom: 1px solid #e0e0e0;
-		padding: 7px 0;
-	}
-	table.problem-list tr:last-child td {
-		border: none;
-	}
-	table.problem-list {
-		border-spacing: 0;
-	}
-
-	span.problem-points {
-		background: #777;
-    		color: white;
-    		padding: 3px 6px;
-    		font-weight: 700;
-    		border-radius: 10px;
-    		font-size: 12px;
-    		vertical-align: middle;
-    		text-align: center;
-    		line-height: 1;
-    		white-space: nowrap;
-    		min-width: 10px;
-    		display: inline-block;
-	}
-
-
-            span.hot-problem-count {
-                color: #555;
-                font-size: 0.75em;
-                vertical-align: super;
-                visibility: hidden;
-                padding-left: 0.25em;
-                position: relative;
+            span.problem-points {
+                background: #777;
+                    color: white;
+                    padding: 3px 6px;
+                    font-weight: 700;
+                    border-radius: 10px;
+                    font-size: 12px;
+                    vertical-align: middle;
+                    text-align: center;
+                    line-height: 1;
+                    white-space: nowrap;
+                    min-width: 10px;
+                    display: inline-block;
             }
+
         </style>
     {% endif %}
 {% endblock %}
