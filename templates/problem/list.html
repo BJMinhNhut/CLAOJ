@@ -27,17 +27,17 @@
 
             span.problem-points {
                 background: #777;
-                    color: white;
-                    padding: 3px 6px;
-                    font-weight: 700;
-                    border-radius: 10px;
-                    font-size: 12px;
-                    vertical-align: middle;
-                    text-align: center;
-                    line-height: 1;
-                    white-space: nowrap;
-                    min-width: 10px;
-                    display: inline-block;
+                color: white;
+                padding: 3px 6px;
+                font-weight: 700;
+                border-radius: 10px;
+                font-size: 12px;
+                vertical-align: middle;
+                text-align: center;
+                line-height: 1;
+                white-space: nowrap;
+                min-width: 10px;
+                display: inline-block;
             }
 
         </style>
@@ -71,9 +71,13 @@
                     $form.submit();
                 }
 
-                $category.select2().css({'visibility': 'visible'}).change(clean_submit);
-                $('#types').select2({multiple: 1, placeholder: "{{ _('Filter by type...') }}"})
-                    .css({'visibility': 'visible'});
+                $category.select2({
+                    theme: '{{ DMOJ_SELECT2_THEME }}'
+                }).css({'visibility': 'visible'}).change(clean_submit);
+                $('#types').select2({
+                    theme: '{{ DMOJ_SELECT2_THEME }}',
+                    multiple: 1, placeholder: '{{ _('Filter by type...') }}'
+                }).css({'visibility': 'visible'});
 
                 // This is incredibly nasty to do but it's needed because otherwise the select2 steals the focus
                 $search.keypress(function (e) {

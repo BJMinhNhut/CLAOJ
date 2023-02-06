@@ -1,11 +1,12 @@
 .select2-selection--single {
-    background-color: #fff;
-    border: 1px solid #aaa;
-    border-radius: 4px;
+    background-color: $color_primary5;
+    border: 1px solid $color_primary25;
+    border-radius: $input_box_radius;
+    height: 32px !important;
 
     .select2-selection__rendered {
-        color: #444;
-        line-height: 28px;
+        color: $color_primary75;
+        line-height: 30px;
     }
 
     .select2-selection__clear {
@@ -15,11 +16,11 @@
     }
 
     .select2-selection__placeholder {
-        color: #999;
+        color: $color_primary50;
     }
 
     .select2-selection__arrow {
-        height: 26px;
+        height: 30px;
 
         position: absolute;
 
@@ -29,7 +30,7 @@
         width: 20px;
 
         b {
-            border-color: #888 transparent transparent transparent;
+            border-color: $color_primary50 transparent transparent transparent;
             border-style: solid;
             border-width: 5px 4px 0 4px;
 
@@ -62,7 +63,7 @@
 
 &.select2-container--disabled {
     .select2-selection--single {
-        background-color: #eee;
+        background-color: $color_primary10;
         cursor: default;
 
         .select2-selection__clear {
@@ -75,7 +76,7 @@
     .select2-selection--single {
         .select2-selection__arrow {
             b {
-                border-color: transparent transparent #888 transparent;
+                border-color: transparent transparent $color_primary50 transparent;
                 border-width: 0 4px 5px 4px;
             }
         }
