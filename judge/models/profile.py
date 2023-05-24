@@ -45,7 +45,7 @@ class Organization(models.Model):
                                   help_text=_('Displayed beside user name during contests'))
     about = models.TextField(verbose_name=_('organization description'))
     admins = models.ManyToManyField('Profile', verbose_name=_('administrators'), related_name='admin_of',
-                                    help_text=_('Those who can edit this organization'), null=True, blank=True)
+                                    help_text=_('Those who can edit this organization'), blank=True)
     creation_date = models.DateTimeField(verbose_name=_('creation date'), auto_now_add=True)
     is_open = models.BooleanField(verbose_name=_('is open organization?'),
                                   help_text=_('Allow joining organization'), default=False)
