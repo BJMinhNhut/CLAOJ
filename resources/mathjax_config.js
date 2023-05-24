@@ -2,10 +2,12 @@ window.MathJax = {
     tex: {
         inlineMath: [
             ['~', '~'],
+            ['$', '$'],
             ['\\(', '\\)']
         ]
     },
-    options: {
-        enableMenu: false
-    }
+    processRefs: true,  
+    processEscapes: true,
+    processEnvironments: true,
+    digits: /^(?:[0-9]+(?:\{,\}[0-9]{3})*(?:\.[0-9]*)?|\.[0-9]+)/,
 };

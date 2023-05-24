@@ -17,7 +17,7 @@ from django.db.models.expressions import CombinedExpression
 from django.db.models.query import Prefetch
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.template import loader, RequestContext
+from django.template import loader
 from django.template.defaultfilters import date as date_filter
 from django.urls import reverse
 from django.utils import timezone
