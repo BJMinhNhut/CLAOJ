@@ -1,35 +1,34 @@
-Django>=3.2,<4
+Django>=2.2,<3
 django-cleanup
-django_compressor>=3
-django-mptt>=0.13
+django_compressor
+django-mptt
 django-pagedown<2
-django-registration-redux>=2.10
-django-reversion>=3.0.5,<4
+django-registration-redux
+django-reversion
 django-social-share
-django-sortedm2m>=3.1.0
+django-sortedm2m @ git+https://github.com/DMOJ/django-sortedm2m.git
 django-impersonate
 django-redis
 dmoj-wpadmin @ git+https://github.com/DMOJ/dmoj-wpadmin.git
 lxml
-Pygments<2.12
-mistune<2
-social-auth-core==4.3.0
-social-auth-app-django==5.0.0
+Pygments
+mistune>=2.0.3
+social-auth-app-django
 pytz
 django-statici18n
 pika
 ua-parser
 pyyaml
 jinja2
-django_jinja>=2.5.0
+django_jinja
 llist
 requests
-django-fernet-fields @ git+https://github.com/DMOJ/django-fernet-fields.git
+django-fernet-fields
 pyotp
 qrcode[pil]
-jsonfield @ git+https://github.com/DMOJ/jsonfield.git
+jsonfield
 pymoss
-packaging<22
+packaging
 celery
 ansi2html @ git+https://github.com/DMOJ/ansi2html.git
 sqlparse
@@ -37,10 +36,7 @@ lupa
 martor @ git+https://github.com/VNOI-Admin/martor.git
 netaddr
 webauthn<1
-bleach[css]
+bleach<5
 markdown2 @ git+https://github.com/VNOI-Admin/python-markdown2.git
-discord-webhook
 django-admin-sortable2<2
 icalendar
-# This is a celery dependency whose latest major version is breaking everything.
-importlib-metadata<5

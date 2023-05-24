@@ -52,7 +52,7 @@ class MathInlineLexer(mistune.InlineLexer):
 
 class MathRenderer(mistune.Renderer):
     def __init__(self, *args, **kwargs):
-        if kwargs.pop("math", False) and settings.MATHOID_URL != False:
+        if kwargs.pop("math", False) and settings.MATHOID_URL is not False:
             self.mathoid = MathoidMathParser(kwargs.pop("math_engine", None) or "svg")
         else:
             self.mathoid = None
