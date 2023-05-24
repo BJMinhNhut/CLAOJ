@@ -45,7 +45,8 @@ DMOJ_SSL = 0
 # Refer to dmoj.ca/post/103-point-system-rework
 DMOJ_PP_STEP = 0.95
 DMOJ_PP_ENTRIES = 100
-DMOJ_PP_BONUS_FUNCTION = lambda n: 300 * (1 - 0.997 ** n)  # noqa: E731
+def DMOJ_PP_BONUS_FUNCTION(n): return 300 * (1 - 0.997 ** n)  # noqa: E731
+
 
 CLAOJ_ORG_PP_STEP = 0.95
 CLAOJ_ORG_PP_ENTRIES = 100
@@ -55,7 +56,7 @@ CLAOJ_ORG_PP_SCALE = 1
 # Both should be int
 CLAOJ_CP_COMMENT = 1  # Each comment vote equals 1 CP
 CLAOJ_CP_TICKET = 10  # Each good ticket equals 10 CP
-CLAOJ_CP_PROBLEM = 20 # Each suggested problem equals 20 CP
+CLAOJ_CP_PROBLEM = 20  # Each suggested problem equals 20 CP
 
 NODEJS = '/usr/bin/node'
 EXIFTOOL = '/usr/bin/exiftool'
@@ -334,7 +335,6 @@ SILENCED_SYSTEM_CHECKS = ['urls.W002', 'fields.W342']
 ROOT_URLCONF = 'dmoj.urls'
 LOGIN_REDIRECT_URL = '/user'
 WSGI_APPLICATION = 'dmoj.wsgi.application'
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 TEMPLATES = [
     {
@@ -422,8 +422,8 @@ BLEACH_USER_SAFE_ATTRS = {
     'dfn': ['title'],
     'time': ['datetime'],
     'data': ['value'],
-    'td':  ['colspan', 'rowspan'],
-    'th':  ['colspan', 'rowspan'],
+    'td': ['colspan', 'rowspan'],
+    'th': ['colspan', 'rowspan'],
     'audio': ['autoplay', 'controls', 'crossorigin', 'muted', 'loop', 'preload', 'src'],
     'video': ['autoplay', 'controls', 'crossorigin', 'height', 'muted', 'loop', 'poster', 'preload', 'src', 'width'],
     'source': ['src', 'srcset', 'type'],
