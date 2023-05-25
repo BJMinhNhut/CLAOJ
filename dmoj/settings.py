@@ -206,11 +206,13 @@ else:
                     'children': [
                         'judge.ProblemGroup',
                         'judge.ProblemType',
+                        'judge.License',
                     ],
                 },
+                ('judge.Submission', 'fa-check-square-o'),
                 {
-                    'model': 'judge.Submission',
-                    'icon': 'fa-check-square-o',
+                    'model': 'judge.Language',
+                    'icon': 'fa-file-code-o',
                     'children': [
                         'judge.Language',
                         'judge.Judge',
@@ -224,17 +226,19 @@ else:
                         'judge.ContestTag',
                     ],
                 },
+                ('judge.Ticket', 'fa-bell'),
                 {
                     'model': 'auth.User',
                     'icon': 'fa-user',
                     'children': [
+                        'judge.Profile',
                         'auth.Group',
                         'registration.RegistrationProfile',
                     ],
                 },
                 {
-                    'model': 'judge.Profile',
-                    'icon': 'fa-user-plus',
+                    'model': 'judge.Organization',
+                    'icon': 'fa-users',
                     'children': [
                         'judge.Organization',
                         'judge.OrganizationRequest',
@@ -244,16 +248,20 @@ else:
                     'model': 'judge.NavigationBar',
                     'icon': 'fa-bars',
                     'children': [
-                        'judge.MiscConfig',
-                        'judge.License',
                         'sites.Site',
                         'redirects.Redirect',
                     ],
                 },
                 ('judge.BlogPost', 'fa-rss-square'),
-                ('judge.Comment', 'fa-comment-o'),
+                {
+                    'model': 'judge.Comment',
+                    'icon': 'fa-comment-o',
+                    'children': [
+                        'judge.CommentLock',
+                    ],
+                },
                 ('flatpages.FlatPage', 'fa-file-text-o'),
-                ('judge.Solution', 'fa-pencil'),
+                ('judge.MiscConfig', 'fa-question-circle'),
             ],
             'dashboard': {
                 'breadcrumbs': True,
