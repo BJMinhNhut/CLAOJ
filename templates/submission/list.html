@@ -31,9 +31,9 @@
             <script type="text/javascript">
                 window.rejudge_submission = function (id, e) {
                     if ((typeof e !== 'undefined' && e.ctrlKey) ||
-                        confirm('Are you sure you want to rejudge?')) {
+                        confirm("{{ _('Are you sure you want to rejudge?') }}")) {
                         $.ajax({
-                            url: '{{ url('submission_rejudge') }}',
+                            url: "{{ url('submission_rejudge') }}",
                             type: "POST",
                             data: {
                                 id: id
@@ -72,13 +72,13 @@
 
                 $('#status').select2({
                     multiple: 1,
-                    placeholder: '{{ _('Filter by status...') }}',
+                    placeholder: "{{ _('Filter by status...') }}",
                     matcher: idAndTextMatcher,
                 }).css({'visibility': 'visible'});
 
                 $('#language').select2({
                     multiple: 1,
-                    placeholder: '{{ _('Filter by language...') }}',
+                    placeholder: "{{ _('Filter by language...') }}",
                     matcher: idAndTextMatcher,
                 }).css({'visibility': 'visible'});
 
@@ -172,7 +172,7 @@
                     if (force || !doing_ajax) {
                         if (!force) doing_ajax = true;
                         $.ajax({
-                            url: '{{ url('submission_single_query') }}',
+                            url: "{{ url('submission_single_query') }}",
                             data: {id: id, show_problem: show_problem}
                         }).done(function (data) {
                             var was_shown = row.is(':visible');

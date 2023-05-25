@@ -323,8 +323,8 @@
     "model": "judge.language",
     "pk": 25,
     "fields": {
-        "key": "JAVA8",
-        "name": "Java 8",
+        "key": "JAVA",
+        "name": "Java",
         "short_name": null,
         "common_name": "Java",
         "ace": "java",

@@ -215,7 +215,7 @@
                         update_ticket_state(open);
                     },
                     error: function (data) {
-                        alert('Could not change ticket: ' + data.responseText);
+                        alert("{{ _('Could not change ticket: {error}') }}".replace('{error}', data.responseText));
                     }
                 });
             });
@@ -293,14 +293,14 @@
             function ticket_status(ticket) {
                 update_ticket_state(ticket.open);
                 if (is_highest_ref())
-                    notify('ticket', (ticket.open ? '{{ _('Reopened: ') }}' :
-                        '{{ _('Closed: ') }}') + $title.text());
+                    notify('ticket', (ticket.open ? "{{ _('Reopened: ') }}" :
+                        "{{ _('Closed: ') }}") + $title.text());
             }
 
             function ticket_message(ticket) {
                 console.log('Fetching data for: ' + ticket.message);
                 $.ajax({
-                    url: '{{ url('ticket_message_ajax', ticket.id) }}',
+                    url: "{{ url('ticket_message_ajax', ticket.id) }}",
                     data: {message: ticket.message},
                     success: function (data) {
                         console.log('Got data for: ' + ticket.message);
@@ -367,7 +367,6 @@
                 <div class="info">
                     <a href="{{ url('user_page', request.user.username) }}" class="user">
                         <img src="{{ gravatar(request.user, 135) }}" class="gravatar">
-                        <div class="username {{ request.profile.css_class }}">{{ request.profile.display_name }}</div>
                     </a>
                 </div>
                 <div class="detail">

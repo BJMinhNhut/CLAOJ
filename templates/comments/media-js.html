@@ -8,7 +8,7 @@
                 var reply_id = 'reply-' + parent;
                 if ($comment_reply.find('#' + reply_id).length == 0) {
                     var $reply_form = $('#new-comment').clone(true).prop('id', reply_id);
-                    $reply_form.find('h3').html('{{ _('Replying to comment') }}');
+                    $reply_form.find('h3').html("{{ _('Replying to comment') }}");
                     $reply_form.prepend('<a class="close">x</a>');
                     $reply_form.find('form.comment-submit-form input#id_parent').val(parent);
                     $reply_form.appendTo($comment_reply);
@@ -61,12 +61,12 @@
                     $comment.find('.next-revision').css({visibility: show_revision == max_revision ? 'hidden' : ''});
                     var $content = $comment.find('.content').html(body);
 
-                    var edit_text = '{{ _('edit {edits}') }}'.replace("{edits}", show_revision);
+                    var edit_text = "{{ _('edit {edits}') }}".replace("{edits}", show_revision);
 
                     if (show_revision == 0) {
-                        edit_text = '{{ _('original') }}';
+                        edit_text = "{{ _('original') }}";
                     } else if (show_revision == max_revision && max_revision == 1) {
-                        edit_text = '{{ _('edited') }}';
+                        edit_text = "{{ _('edited') }}";
                     }
 
                     $comment.find('.comment-edit-text').text(' ' + edit_text + ' ');
@@ -94,7 +94,7 @@
                             on_success();
                     },
                     error: function (data, textStatus, jqXHR) {
-                        alert('Could not vote: ' + data.responseText);
+                        alert("{{ _('Could not vote: {error}') }}".replace('{error}', data.responseText));
                     }
                 });
             }
@@ -108,7 +108,7 @@
             };
 
             window.comment_upvote = function (id) {
-                ajax_vote('{{ url('comment_upvote') }}', id, 1, function () {
+                ajax_vote("{{ url('comment_upvote') }}", id, 1, function () {
                     var $votes = get_$votes(id);
                     if ($votes.downvote.hasClass('voted')){
                         $votes.downvote.removeClass('voted');
@@ -125,7 +125,7 @@
             };
 
             window.comment_downvote = function (id) {
-                ajax_vote('{{ url('comment_downvote') }}', id, -1, function () {
+                ajax_vote("{{ url('comment_downvote') }}", id, -1, function () {
                     var $votes = get_$votes(id);
 					if ($votes.upvote.hasClass('voted')) {
                         $votes.upvote.removeClass('voted');
@@ -144,15 +144,15 @@
             var $comments = $('.comments');
             $comments.find('a.hide-comment').click(function (e) {
                 e.preventDefault();
-                if (!(e.ctrlKey || e.metaKey || confirm('Are you sure you want to hide this comment?')))
+                if (!(e.ctrlKey || e.metaKey || confirm("{{ _('Are you sure you want to hide this comment?') }}")))
                     return;
 
                 var id = $(this).attr('data-id');
-                $.post('{{ url('comment_hide') }}', {id: id}).then(function () {
+                $.post("{{ url('comment_hide') }}", {id: id}).then(function () {
                     $('#comment-' + id).remove();
                     $('#comment-' + id + '-children').remove();
                 }).catch(function () {
-                    alert('Failed.');
+                    alert("{{ _('Could not hide comment.') }}");
                 });
             });
 
@@ -187,10 +187,12 @@
                                 if (window.add_code_copy_buttons)
                                     window.add_code_copy_buttons($area);
                                 var $edits = $comment.find('.comment-edits').first();
-                                $edits.text('updated');
+                                $edits.text("{{ _('updated') }}");
                             }).fail(function () {
-                                console.log('Failed to update comment:' + id);
+                                alert("{{ _('Failed to update comment body.') }}");
                             });
+                        }).fail(function (data) {
+                            alert("{{ _('Could not edit comment: {error}') }}".replace('{error}', data.responseText));
                         });
                     });
                 },

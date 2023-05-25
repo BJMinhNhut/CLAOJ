@@ -7,7 +7,7 @@
     <script type="text/javascript" src="{{ static('libs/featherlight/featherlight.min.js') }}"></script>
     <script type="text/javascript" src="{{ static('claoj/jszip/jszip.min.js') }}"></script>
     <script type="text/javascript">
-        window.valid_files = {{valid_files_json}}.sort();
+        window.valid_files = {{ valid_files_json }}.sort();
 
         $(function () {
             function autofill_if_exists($select, file) {
@@ -91,7 +91,7 @@
                 var $precision = $('<input>', {
                     type: 'number',
                     value: try_parse_json($args.val()).precision || 6,
-                    title: 'precision (decimal digits)',
+                    title: "{{ _('precision (decimal digits)') }}",
                     style: 'width: 4em; margin-left: 6px;'
                 }).change(function () {
                     if ($checker.val().startsWith('floats'))
