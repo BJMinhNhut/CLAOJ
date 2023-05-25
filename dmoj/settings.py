@@ -410,7 +410,7 @@ LOCALE_PATHS = [
 
 LANGUAGES = [
     ('en', _('English')),
-    ('vi', _('Vietnamese'))
+    ('vi', _('Vietnamese')),
 ]
 
 BLEACH_USER_SAFE_TAGS = [
