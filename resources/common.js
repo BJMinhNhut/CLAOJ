@@ -352,15 +352,6 @@ $(function () {
     });
 });
 
-$.fn.textWidth = function () {
-    var html_org = $(this).html();
-    var html_calc = '<span style="white-space: nowrap;">' + html_org + '</span>';
-    $(this).html(html_calc);
-    var width = $(this).find('span:first').width();
-    $(this).html(html_org);
-    return width;
-};
-
 $(function () {
     $('.tabs').each(function () {
         var $this = $(this), $h2 = $(this).find('h2'), $ul = $(this).find('ul');
