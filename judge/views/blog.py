@@ -2,8 +2,8 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.db import IntegrityError
-from django.db.models import Count, Max
-from django.db.models.expressions import Value
+from django.db.models import Count, FilteredRelation, Max, Q
+from django.db.models.expressions import F, Value
 from django.db.models.functions import Coalesce
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotFound, \
     HttpResponseRedirect
@@ -21,7 +21,6 @@ from judge.models import BlogPost, BlogVote, Comment, Contest, Language, Problem
 from judge.utils.cachedict import CacheDict
 from judge.utils.diggpaginator import DiggPaginator
 from judge.utils.problems import user_completed_ids
-from judge.utils.raw_sql import RawSQLColumn, unique_together_left_join
 from judge.utils.tickets import filter_visible_tickets
 from judge.utils.views import TitleMixin, generic_message
 
@@ -132,9 +131,10 @@ class PostListBase(ListView):
         queryset = (BlogPost.objects.filter(visible=True, publish_on__lte=timezone.now())
                     .prefetch_related('authors__user'))
         if self.request.user.is_authenticated:
-            queryset = queryset.annotate(vote_score=Coalesce(RawSQLColumn(BlogVote, 'score'), Value(0)))
             profile = self.request.profile
-            unique_together_left_join(queryset, BlogVote, 'blog', 'voter', profile.id)
+            queryset = queryset.annotate(
+                my_vote=FilteredRelation('votes', condition=Q(votes__voter_id=profile.id)),
+            ).annotate(vote_score=Coalesce(F('my_vote__score'), Value(0)))
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -272,9 +272,10 @@ class PostView(TitleMixin, CommentedDetailView):
     def get_queryset(self):
         queryset = super().get_queryset()
         if self.request.user.is_authenticated:
-            queryset = queryset.annotate(vote_score=Coalesce(RawSQLColumn(BlogVote, 'score'), Value(0)))
             profile = self.request.profile
-            unique_together_left_join(queryset, BlogVote, 'blog', 'voter', profile.id)
+            queryset = queryset.annotate(
+                my_vote=FilteredRelation('votes', condition=Q(votes__voter_id=profile.id)),
+            ).annotate(vote_score=Coalesce(F('my_vote__score'), Value(0)))
         return queryset
 
     def get_context_data(self, **kwargs):
