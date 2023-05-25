@@ -66,9 +66,9 @@ def strip_paragraphs_tags(tree):
         parent = p.getparent()
         prev = p.getprevious()
         if prev is not None:
-            prev.tail = (prev.tail or '') + (p.text or '')
+            prev.tail = (prev.tail or '') + p.text
         else:
-            parent.text = (parent.text or '') + (p.text or '')
+            parent.text = (parent.text or '') + p.text
         parent.remove(p)
 
 

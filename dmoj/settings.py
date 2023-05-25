@@ -45,7 +45,10 @@ DMOJ_SSL = 0
 # Refer to dmoj.ca/post/103-point-system-rework
 DMOJ_PP_STEP = 0.95
 DMOJ_PP_ENTRIES = 100
-def DMOJ_PP_BONUS_FUNCTION(n): return 300 * (1 - 0.997 ** n)  # noqa: E731
+
+
+def DMOJ_PP_BONUS_FUNCTION(n):
+    return 0.05 * n  # 15 * (1 - 0.997 ** n)  # noqa: E731; 100 bai nua diem: 0.9930924
 
 
 CLAOJ_ORG_PP_STEP = 0.95
