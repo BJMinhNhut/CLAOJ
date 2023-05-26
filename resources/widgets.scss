@@ -191,9 +191,8 @@ input {
     font-family: $title_fonts;
     font-weight: 700;
 
-    &.tabs-no-flex {
-        display: block;
-    }
+    justify-content: space-between;
+    flex-wrap: wrap;
 
     .tab {
         .tab-icon {
