@@ -50,7 +50,7 @@ else:
                 final_attrs["class"] = ""
             final_attrs["class"] += " wmd-input"
             return get_template(self.template).render(
-                self.get_template_context(final_attrs, value)
+                self.get_template_context(final_attrs, value),
             )
 
         def get_template_context(self, attrs, value):
