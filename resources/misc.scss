@@ -8,16 +8,17 @@
     }
 
     .version-blank {
-        background: #eee;
+        background: $color_primary10;
     }
 
     .version-latest {
-        background: #b3ff3fe6;
+        background: #dcedc8;
+        color: black
     }
 
     .version-outdated {
-        background: #f00c;
-        color: white;
+        background: #ffcdd2;
+        color: black;
     }
 
     tbody {

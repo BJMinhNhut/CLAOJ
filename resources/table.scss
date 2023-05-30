@@ -10,21 +10,21 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0.5em;
-    background: rgba(0, 0, 0, 0.01);
+    background: rgba($color_primary100, 0.01);
 
     &.striped tr:nth-child(even) {
-        background: #f7f8f9;
+        background: $color_primary5;
     }
 
     td:first-child {
-        border-color: $border_gray;
+        border-color: $color_primary25;
         border-width: 1px 1px 0 1px;
     }
 
     tr:last-child {
         td {
             &:first-child {
-                border: 1px solid $border_gray;
+                border: 1px solid $color_primary25;
                 border-bottom-left-radius: $widget_border_radius;
             }
 
@@ -32,19 +32,19 @@
             border-bottom-right-radius: $widget_border_radius;
             }
 
-            border-color: $border_gray;
+            border-color: $color_primary25;
             border-width: 1px 1px 1px 0;
         }
     }
 
     tbody {
-	tr:last-child th:first-child {
-	    border-bottom: 1px solid $border_gray;
-	}
+        tr:last-child th:first-child {
+            border-bottom: 1px solid $color_primary25;
+        }
     }
 
     thead tr {
-	background: #f7f8f9;
+	    background: $color_primary5;
     }
 
     thead th {
@@ -61,8 +61,8 @@
 
     th {
         height: 2em;
-        color: #546e7a;
-        border-color: $border_gray;
+        color: $color_primary60;
+        border-color: $color_primary25;
         border-width: 1px 0 0 0;
         border-style: solid;
         padding: 4px 10px;
@@ -75,17 +75,17 @@
 
         &:first-child {
             border-top-left-radius: $table_header_rounding;
-            border-left: 1px solid $border_gray;
+            border-left: 1px solid $color_primary25;
         }
 
         &:last-child {
             border-top-right-radius: $table_header_rounding;
-	    border-right: 1px solid $border_gray;
+	    border-right: 1px solid $color_primary25;
         }
     }
 
     td {
-        border-color: $border_gray;
+        border-color: $color_primary25;
         border-width: 1px 1px 0 0;
         border-style: solid;
         padding: 7px 5px;

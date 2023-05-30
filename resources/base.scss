@@ -1,8 +1,8 @@
+@charset "UTF-8";
+
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-
-@charset "UTF-8";
 
 @import "vars";
 
@@ -22,8 +22,8 @@
 }
 
 select {
-	background-color: #f7f8f9;
-    	border: 1px solid $border_gray;
+	background-color: $color_primary5;
+    	border: 1px solid $color_primary25;
     	border-radius: 4px;
     	color: #37474f;
     	padding: 1px;
@@ -70,7 +70,7 @@ img {
 }
 
 table.sortable thead {
-    background-color: $background_gray;
+    background-color: $color_primary10;
     color: #666;
     font-weight: bold;
     cursor: default;
@@ -101,8 +101,8 @@ pre {
         word-wrap: break-word;
         margin: 1.5em 0 1.5em 0;
         padding: 1em;
-        background-color: #eceff1;
-        color: black;
+        background-color: $color_primary10;
+        color: $color_primary100;
         border-radius: $widget_border_radius;
 }
 
@@ -111,12 +111,12 @@ hr {
     height: 0;
     border: 0;
     font-style: italic;
-    border-bottom: 1px solid $border_gray;
+    border-bottom: 1px solid $color_primary25;
     padding: 0;
 }
 
 .dashed {
-    border-bottom: 1px dashed $border_gray;
+    border-bottom: 1px dashed $color_primary25;
 }
 
 th {
@@ -126,10 +126,10 @@ th {
 .form-area {
     display: inline-block;
     margin-top: 1em;
-    background: white;
+    background: $color_pageBg;
     padding: 15px 25px;
     border-radius: $widget_border_radius;
-    border: 1px solid $border_gray;
+    border: 1px solid $color_primary25;
     box-shadow: $sidebox_shadow;
 }
 
@@ -152,9 +152,9 @@ body {
     margin: 0 auto;
     font-size: $base_font_size;
     line-height: 1.231;
-    background: white;
+    background: $color_pageBg;
     font-family: $body_fonts;
-    color: #000;
+    color: $color_primary100;
     height: 100%;
 }
 
@@ -229,7 +229,7 @@ header {
     }
 
     a {
-        color: #FFF;
+        color: $color_primary0;
     }
 
     li {
@@ -284,7 +284,7 @@ header {
 }
 
 #nav-container {
-    background: $widget_black;
+    background: $color_primary75;
     margin: 0 0 0 -100em;
     padding: 0 0 0 100em;
     width: 500%;
@@ -325,7 +325,7 @@ nav {
 
         li {
             display: inline-block;
-            color: #FFF;
+            color: $color_primary0;
             text-transform: uppercase;
             position: relative;
 
@@ -360,9 +360,9 @@ nav {
                 }
 
                 &.active {
-                    color: white;
+                    color: $color_primary0;
                     padding: 18px 7px 13px 7px;
-    		    border-bottom: 5px solid #4db6ac;
+    		        border-bottom: 5px solid #4db6ac;
                 }
 
                 .nav-expand {
@@ -375,8 +375,8 @@ nav {
                 position: absolute;
                 left: 5px;
                 display: none;
-                color: #fff;
-                background: $widget_black;
+                color: $color_primary0;
+                background: $color_primary75;
                 margin: 0 !important;
                 box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
                 width: fit-content;
@@ -386,7 +386,7 @@ nav {
                 li {
                     &:first-child {
                         a.active {
-                            border-top: 1px solid $widget_black;
+                            border-top: 1px solid $color_primary75;
                         }
                     }
                 }
@@ -452,14 +452,14 @@ hr {
     display: block;
 
     .title {
-        color: #393630;
+        color: $color_primary75;
     }
 }
 
 footer {
     text-align: center;
     height: 65px;
-    background: #eceff1;
+    background: $color_primary10;
 }
 
 html {
@@ -475,7 +475,7 @@ a {
 noscript #noscript {
     font-family: Arial, sans-serif;
     font-size: 111%;
-    color: white;
+    color: $color_primary0;
     font-weight: bold;
     background: $announcement_red;
     text-align: center;
@@ -489,7 +489,7 @@ noscript #noscript {
 #announcement {
     font-family: Arial, sans-serif;
     font-size: 111%;
-    color: white;
+    color: $color_primary0;
     font-weight: bold;
     background: $announcement_red;
     text-align: center;
@@ -507,7 +507,7 @@ noscript #noscript {
 }
 
 .time {
-    color: #555;
+    color: $color_primary75;
 }
 
 .toggle {
@@ -541,9 +541,9 @@ noscript #noscript {
 #nav-placeholder {
     height: 47px;
     max-width: 107em;
-    background: white;
-    border-right: 1px solid $border_gray;
-    border-left: 1px solid $border_gray;
+    background: $color_primary0;
+    border-right: 1px solid $color_primary25;
+    border-left: 1px solid $color_primary25;
 }
 
 #contest-info {
@@ -555,7 +555,7 @@ noscript #noscript {
     background: rgba(0, 0, 0, 0.60);
     z-index: 100000;
     padding: 10px 12px;
-    color: white;
+    color: $color_primary0;
     cursor: move;
     position: fixed;
     left: 20px;
@@ -566,7 +566,7 @@ noscript #noscript {
         height: 1.4em;
         padding: 0;
         margin: 0;
-        color: white;
+        color: $color_primary0;
         display: block;
     }
 }
@@ -599,24 +599,24 @@ noscript #noscript {
     min-height: 100%;
     position: relative;
     margin: 0 auto;
-    background: white;
+    background: $color_pageBg;
 	
 	
     .select-items {
         box-shadow: $sidebox_shadow;
-        border: 1px solid $border_gray;
+        border: 1px solid $color_primary25;
         border-radius: $widget_border_radius !important;
     }
 
     .select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
-        background-color: white !important;
+        background-color: $color_pageBg !important;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
         border-bottom: none !important;
     }
 
     .select2-container--default.select2-container--open.select2-container--above .select2-selection--single, .select2-container--default.select2-container--open.select2-container--above .select2-selection--multiple {
-        background-color: white !important;
+        background-color: $color_pageBg !important;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         border-top: none !important;
@@ -626,12 +626,12 @@ noscript #noscript {
         transition: box-shadow ease-in-out 0.1s !important;
     
         .select2-selection--multiple, .select2-selection--single {
-            background-color: #f7f8f9;
-            border: 1px solid $border_gray !important;
+            background-color: $color_primary5;
+            border: 1px solid $color_primary25 !important;
             height: 2.2em; 
             border-radius: $input_box_radius;
             &:hover {
-                box-shadow: 0 0 3px #bbb !important;
+                box-shadow: 0 0 3px $color_primary25 !important;
             }
         }
     }
@@ -648,18 +648,18 @@ noscript #noscript {
 
 .select2-container--default .select2-search--dropdown .select2-search__field {
     border-radius: 4px;
-    border: 1px solid $border_gray;
+    border: 1px solid $color_primary25;
 }
 
 .select2-container--open .select2-dropdown--below {
     border-top: none;
-    border: 1px solid $border_gray;
+    border: 1px solid $color_primary25;
     box-shadow: $sidebox_shadow;
 }
 
 .select2-container--open .select2-dropdown--above {
     border-top: none;
-    border: 1px solid $border_gray;
+    border: 1px solid $color_primary25;
     box-shadow: 0 -6px 10px 0 rgb(0 0 0 / 15%);
 }
 // border-bottom: 1px solid rgb(204, 204, 204)
@@ -715,7 +715,7 @@ math {
         display: block;
         line-height: 26px;
         font-size: 2em;
-        color: #FFF;
+        color: $color_primary0;
         padding: 0 0 0 0.25em;
         margin: 9px 0.25em;
         white-space: nowrap;
@@ -735,7 +735,7 @@ math {
         border-left: 4px solid $highlight_blue;
         position: fixed;
         top: 36px;
-        background: $widget_black;
+        background: $color_primary75;
         bottom: 0;
         width: 8em;
         left: 0;

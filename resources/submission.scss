@@ -7,13 +7,13 @@
 }
 
 #submissions-table {
-    background: rgba(0, 0, 0, .01);
+    background: rgba($color_primary100, .01);
 }
 
 .submissions-status-table {
     border-spacing: 0;
     width: 100%;
-    border: $border_gray 1px solid;
+    border: $color_primary25 1px solid;
     border-radius: $widget_border_radius;
 }
 
@@ -24,9 +24,9 @@
 }
 .submission-row {
     display: flex;
-    border-top: $border_gray 1px solid;
-    border-left: $border_gray 1px solid;
-    border-right: $border_gray 1px solid;
+    border-top: $color_primary25 1px solid;
+    border-left: $color_primary25 1px solid;
+    border-right: $color_primary25 1px solid;
     transition: background-color linear 0.1s;
 
     &:first-child {
@@ -54,11 +54,11 @@
 
 
     &:nth-child(even) {
-	background: #f7f8f9;
+	background: $color_primary5;
     }
 
     &:hover {
-        background: #eaeaea;
+        background: $color_primary10;
     }
 
     &:not(:empty) ~ & {
@@ -68,7 +68,7 @@
     > div {
         padding: 7px 5px;
         vertical-align: middle;
-        border-bottom: $border_gray 1px solid;
+        border-bottom: $color_primary25 1px solid;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -79,8 +79,8 @@
         min-width: 80px;
         width: 80px;
         text-align: center;
-        border-bottom-color: $border_gray;
-        border-right: $border_gray 1px solid;
+        border-bottom-color: $color_primary25;
+        border-right: $color_primary25 1px solid;
 
         .state {
             font-size: 0.75em;
@@ -114,7 +114,7 @@
         }
 
         .sub-testcase {
-            color: #555;
+            color: $color_primary50;
             white-space: nowrap;
             padding-right: 5px;
         }
@@ -131,7 +131,7 @@
         width: 70px;
         white-space: nowrap;
         text-align: center;
-        border-left: $border_gray 1px solid;
+        border-left: $color_primary25 1px solid;
 
         .time {
             font-weight: bold;
@@ -144,12 +144,12 @@
 }
 
 .sub-prop .grey-label {
-    color: grey;
+    color: $color_primary50;
     font-style: italic;
 }
 
 .sub-prop .grey-icon {
-    color: grey;
+    color: $color_primary50;
 }
 
 label[for="language"], label[for="status"], label[for="organization"] {
@@ -171,11 +171,11 @@ label[for="language"], label[for="status"], label[for="organization"] {
 }
 
 #statistics-table tr:not(:first-child) td {
-    border-top: 1px solid white !important;
+    border-top: 1px solid $color_primary0 !important;
 }
 
 #statistics-table tr:not(:last-child) td:not(:last-child) {
-    border-right: 1px solid white;
+    border-right: 1px solid $color_primary0
 }
 
 #content-left.submission {
@@ -223,17 +223,17 @@ label[for="language"], label[for="status"], label[for="organization"] {
 }
 
 .submission-contest {
-    color: #555;
+    color: $color_primary50;
 }
 
 .source-ln {
-    color: gray;
-    border-right: 1px solid $border_gray;
+    color: $color_primary50;
+    border-right: 1px solid $color_primary25;
     padding-right: 5px;
     text-align: right;
 
     a {
-        color: gray;
+        color: $color_primary50;
         display: block;
 
         &:hover {
@@ -268,7 +268,7 @@ label[for="language"], label[for="status"], label[for="organization"] {
 
 .source-wrap {
     overflow-x: auto;
-    background: #eceff1;
+    background: $color_primary10;
     line-height: 1.5;
     border-radius: $widget_border_radius;
 }
@@ -280,7 +280,7 @@ label[for="language"], label[for="status"], label[for="organization"] {
     }
 
     .count {
-        color: black;
+        color: $color_primary100;
     }
 }
 
@@ -328,11 +328,11 @@ label[for="language"], label[for="status"], label[for="organization"] {
     	padding: 0.5em 1em;
     	/* padding-bottom: 3px; */
     	/* padding-top: 0.5em; */
-   	    background: #eceff1;
+   	    background: $color_primary10;
     	/* border: 1px solid #2980b9; */
     	/* border-left-width: 0.5em; */
    	    border-radius: 4px;
-    	color: #263238;
+    	color: $color_primary75;
     	margin: 3px 5px 8px 5px;
 	    text-align: left;
     }
@@ -353,7 +353,7 @@ label[for="language"], label[for="status"], label[for="organization"] {
     	max-width: 10em;
         margin: 0;
     	padding: 8px;
-    	border-top: 1px solid $border_gray;
+    	border-top: 1px solid $color_primary25;
     	text-align: left;    
     }
 
@@ -484,6 +484,6 @@ label[for="language"], label[for="status"], label[for="organization"] {
     float: right;
 
     .submission-date {
-        color: gray;
+        color: $color_primary50;
     }
 }

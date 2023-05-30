@@ -23,7 +23,7 @@
 }
 
 .django-ace-widget>div {
-    border: 1px solid $border_gray;
+    border: 1px solid $color_primary25;
     font-size: 14px;
 }
 
@@ -55,7 +55,7 @@
     }
 
     &.disabled {
-        background: #cfd8dc;
+        background: $color_primary25;
         cursor: not-allowed;
     }
 
@@ -72,14 +72,14 @@
 .secondary {
     border: 2px solid $button_color;
     color: $button_color !important;
-    background: white;
+    background: $color_primary0;
     line-height: 20px;
     &:hover {
-        background: white;
+        background: $color_primary0;
         box-shadow: $button_shadow;
     }
     &:active {
-        background: #e0e0e0;
+        background: $color_primary10;
         box-shadow: none;
     }
 }
@@ -93,10 +93,10 @@
 input {
     &[type=text], &[type=password], &[type=email], &[type=number], &[type=date], &[type=url] {
         padding: 4px 8px 4px 8px;
-        color: #555;
+        color: $color_primary75;
         height: 30px;
-        background: #f7f8f9;
-	    border: 1px solid $border_gray;
+        background: $color_primary5;
+	    border: 1px solid $color_primary25;
         border-radius: $input_box_radius;
         transition: box-shadow ease-in-out 0.1s;
         box-sizing: border-box;
@@ -118,22 +118,22 @@ input {
 
 textarea {
     padding: 4px 8px;
-    color: #555;
+    color: $color_primary75;
     height: 2.2em;
-    background: #f7f8f9;
-    border: 1px solid $border_gray;
+    background: $color_primary5;
+    border: 1px solid $color_primary25;
     border-radius: $widget_border_radius;
     transition: box-shadow ease-in-out 0.1s;
     box-sizing: border-box;
 }
 
 textarea:hover {
-    box-shadow: 0 0 3px #bbb;
+    box-shadow: 0 0 3px $color_primary25;
 }
 
 input {
     &[type="text"]:hover, &[type="password"]:hover, &[type="email"]:hover, &[type="number"]:hover, &[type="date"]:hover {
-        box-shadow: 0 0 3px #bbb;
+        box-shadow: 0 0 3px $color_primary25;
     }
 }
 
@@ -159,7 +159,7 @@ input {
     font-size: 12px;
     color: #767676;
     cursor: pointer;
-    background-color: #F7F8F9;
+    background-color: $color_primary5;
     border-radius: 0 $widget_border_radius;
     position: absolute;
     padding: 5px 8px 3px 8px;
@@ -269,7 +269,7 @@ input {
 // Bootstrap-y pagination
 ul.pagination a:hover {
     color: #212121;
-    background: $background_gray;
+    background: $color_primary10;
 }
 
 ul.pagination a {
@@ -281,7 +281,7 @@ ul.pagination {
     padding-left: 0;
     margin: 0;
     border-radius: $widget_border_radius;
-    border-right: 1px solid $border_gray;
+    border-right: 1px solid $color_primary25;
 
     > {
         li {
@@ -311,8 +311,8 @@ ul.pagination {
                     line-height: 1.42857;
                     text-decoration: none;
                     color: #212121;
-                    background-color: $background_light_gray;
-                    border: 1px solid $border_gray;
+                    background-color: $color_primary5;
+                    border: 1px solid $color_primary25;
 		    border-right: none;
                     margin-left: -1px;
                 }
@@ -321,20 +321,20 @@ ul.pagination {
 
         .disabled-page > {
             a {
-                color: #bbb;
-                background-color: $background_gray;
+                color: $color_primary25;
+                background-color: $color_primary10;
             }
 
             span {
-                color: #bbb;
-                background-color: $background_gray;
+                color: $color_primary25;
+                background-color: $color_primary10;
             }
         }
 
         .active-page > {
             a {
                 z-index: 2;
-                color: #FFF;
+                color: $color_primary0;
                 background-color: $highlight_blue;
                 border-color: transparent;
                 cursor: default;
@@ -342,7 +342,7 @@ ul.pagination {
 
             span {
                 z-index: 2;
-                color: #FFF;
+                color: $color_primary0;
                 background-color: $highlight_blue;
                 border-color: transparent;
                 cursor: default;
@@ -402,7 +402,7 @@ ul.pagination {
     font-weight: 700;
     line-height: 1;
     color: #000;
-    text-shadow: 0 1px 0 #fff;
+    text-shadow: 0 1px 0 $color_primary0;
     filter: alpha(opacity=20);
     opacity: 0.2;
 }
@@ -433,7 +433,7 @@ a.close {
     font-size: 12px;
     font-weight: 700;
     line-height: 1;
-    color: #fff;
+    color: $color_primary0;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
@@ -443,7 +443,7 @@ a.close {
 }
 
 .form-submit-group {
-    border-top: 1px solid #EEE;
+    border-top: 1px solid $color_primary10;
     margin-top: 0.8em;
     padding-top: 0.5em;
     text-align: right;
@@ -455,9 +455,9 @@ ul.select2-selection__rendered {
 
 .sidebox h3 {
     margin: 0 -5px;
-    background: #f7f8f9;
+    background: $color_primary5;
     border-radius: $widget_border_radius $widget_border_radius 0 0;
-    border-bottom: 1px solid $border_gray;
+    border-bottom: 1px solid $color_primary25;
     color: #546e7a;
     padding: 10px 12px;
     font-weight: 600;
@@ -488,7 +488,7 @@ ul.select2-selection__rendered {
     border-radius: $widget_border_radius;
     box-shadow: $sidebox_shadow;
     padding: 0 5px;
-        border: 1px solid $border_gray;
+        border: 1px solid $color_primary25;
     height: fit-content;
 }
 
@@ -577,9 +577,9 @@ ul.select2-selection__rendered {
   padding: .5rem 1rem;
   line-height: 1.5;
   align-content: center;
-  color: #555;
-  background-color: #fff;
-  border: .075rem solid #ddd;
+  color: $color_primary75;
+  background-color: $color_primary0;
+  border: .075rem solid $color_primary25;
   border-radius: .25rem;
   box-shadow: inset 0 .2rem .4rem rgba(0,0,0,.05);
   -webkit-user-select: none;
@@ -601,20 +601,20 @@ ul.select2-selection__rendered {
   height: 1.5rem;
   padding: .5rem 1rem;
   line-height: 1.5;
-  color: #555;
-  background-color: #eee;
-  border: .075rem solid #ddd;
+  color: $color_primary75;
+  background-color: $color_primary10;
+  border: .075rem solid $color_primary25;
   border-radius: 0 .25rem .25rem 0;
 }
 
 /* Focus */
 .file input:focus ~ .file-custom {
-  box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9;
+  box-shadow: 0 0 0 .075rem $color_primary0, 0 0 0 .2rem #0074d9;
 }
 
 details {
-    border: 1px solid $border_gray;
-    background: $background_light_gray;
+    border: 1px solid $color_primary25;
+    background: $color_primary5;
     padding: 5px 10px;
     border-radius: 4px;
 }

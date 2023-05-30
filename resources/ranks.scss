@@ -1,10 +1,12 @@
+@import "vars";
+
 .admin a, .admin {
-    color: black !important;
+    color: $color_primary100 !important;
     font-weight: bold !important;
 }
 
 .banned a, .banned {
-    color: black !important;
+    color: $color_primary100 !important;
     font-weight: normal !important;
     text-decoration: line-through !important; 
 }
@@ -129,13 +131,13 @@ svg.rate-box {
 }
 
 .rate-legendary-grandmaster a::first-letter {
-    color: black;
+    color: $color_primary100;
 }
 
 .rate-group {
     white-space: nowrap;
     display: inline-block;
-    color: black;
+    color: $color_primary100;
 
     .rating {
         display: inline-block;
