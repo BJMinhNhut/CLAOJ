@@ -10,9 +10,13 @@ $color_primary75: #263238;  // widget
 $color_primary90: #212121;
 $color_primary100: #000;
 
+$color_link50: #64b5f6;     // default (title)
+$color_link75: #0288d1;     // default
+$color_link100: #01579b;    // hover
+$color_link200: #ffa000;    // active
+
 $color_pageBg: color.adjust($color_primary5, $lightness: 10%);
 
-$highlight_blue: #0288d1;
 $announcement_red: #c62828;
 
 $button_color: #009688;

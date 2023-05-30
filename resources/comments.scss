@@ -118,7 +118,7 @@ a {
     margin: 0px -4px 30px -40px;
 
     &:target > .comment-box {
-        border-left: 10px solid $highlight_blue;
+        border-left: 10px solid $color_link75;
         padding-left: 5px;
     }
 

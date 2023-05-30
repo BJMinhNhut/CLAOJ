@@ -48,14 +48,14 @@ select {
 
 
 a {
-    color: $highlight_blue;
+    color: $color_link75;
 
     &:hover {
-        color: #0645ad;
+        color: $color_link100;
     }
 
     &:active {
-        color: #faa700;
+        color: $color_link200;
     }
 }
 
@@ -723,7 +723,7 @@ math {
 
         &.hover {
             color: #4db7fe;
-            text-shadow: 0 0 5px $highlight_blue;
+            text-shadow: 0 0 5px $color_link75;
             transition-duration: 0.25s;
         }
     }
@@ -732,7 +732,7 @@ math {
         display: none;
         padding: 0;
         margin-left: 0;
-        border-left: 4px solid $highlight_blue;
+        border-left: 4px solid $color_link75;
         position: fixed;
         top: 36px;
         background: $color_primary75;

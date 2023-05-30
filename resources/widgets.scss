@@ -113,7 +113,7 @@ input {
 
     &:focus {
         border-color: rgba(82, 168, 236, 0.8);
-        box-shadow: inset 0 1px 1px rgba($color_primary100, 0.075), 0 0 8px $highlight_blue;
+        box-shadow: inset 0 1px 1px rgba($color_primary100, 0.075), 0 0 8px $color_link75;
         background-color: $color_primary100;
         outline: 0;
     }
@@ -143,7 +143,7 @@ textarea {
     }
 
     &:focus {
-        box-shadow: inset 0 1px 1px rgba($color_primary100, 0.075), 0 0 8px $highlight_blue;
+        box-shadow: inset 0 1px 1px rgba($color_primary100, 0.075), 0 0 8px $color_link75;
         background-color: $color_primary100;
         outline: 0;
     }
@@ -326,7 +326,7 @@ ul.pagination {
             a {
                 z-index: 2;
                 color: $color_primary0;
-                background-color: $highlight_blue;
+                background-color: $color_link75;
                 border-color: transparent;
                 cursor: default;
             }
@@ -334,7 +334,7 @@ ul.pagination {
             span {
                 z-index: 2;
                 color: $color_primary0;
-                background-color: $highlight_blue;
+                background-color: $color_link75;
                 border-color: transparent;
                 cursor: default;
             }
