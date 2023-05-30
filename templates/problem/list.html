@@ -89,7 +89,7 @@
                 }
 
                 $category.select2().css({'visibility': 'visible'}).change(clean_submit);
-                $('#types').select2({multiple: 1, placeholder: '{{ _('Filter by type...') }}'})
+                $('#types').select2({multiple: 1, placeholder: "{{ _('Filter by type...') }}"})
                     .css({'visibility': 'visible'});
 
                 // This is incredibly nasty to do but it's needed because otherwise the select2 steals the focus
@@ -100,7 +100,7 @@
 
                 $('#random').click(function (e) {
                     var action = $form.attr('action');
-                    $form.attr('action', '{{ url('problem_random') }}').attr('target', '_blank').submit();
+                    $form.attr('action', "{{ url('problem_random') }}").attr('target', '_blank').submit();
                     $form.attr('action', action).attr('target', '');
                     e.preventDefault();
                 });
@@ -117,9 +117,7 @@
 
                 var info_float = $('.info-float');
                 var container = $('#content-right');
-                if (window.bad_browser) {
-                    container.css('float', 'right');
-                } else if (!featureTest('position', 'sticky')) {
+                if (!featureTest('position', 'sticky')) {
                     fix_div(info_float, 55);
                     $(window).resize(function () {
                         info_float.width(container.width());
