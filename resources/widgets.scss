@@ -13,7 +13,7 @@
     color: #55ACEE;
 }
 
-.facebook-this it {
+.facebook-this i {
     color: #133783;
 }
 
@@ -63,10 +63,10 @@
         background: #00675b;
         box-shadow: none;
     }
-}
 
-.full {
-    padding: 6px 0;
+    &.full {
+        padding: 6px 0;
+    }
 }
 
 .secondary {
@@ -106,6 +106,18 @@ input {
         font-size: $base_font_size;
     }
 
+    &:hover {
+        border-color: rgba(82, 168, 236, 0.8);
+        box-shadow: 0 0 3px $color_primary25;
+    }
+
+    &:focus {
+        border-color: rgba(82, 168, 236, 0.8);
+        box-shadow: inset 0 1px 1px rgba($color_primary100, 0.075), 0 0 8px $highlight_blue;
+        background-color: $color_primary100;
+        outline: 0;
+    }
+
     &[type=number] {
         width: 100%;	
         max-width: 300px;
@@ -125,28 +137,14 @@ textarea {
     border-radius: $widget_border_radius;
     transition: box-shadow ease-in-out 0.1s;
     box-sizing: border-box;
-}
 
-textarea:hover {
-    box-shadow: 0 0 3px $color_primary25;
-}
-
-input {
-    &[type="text"]:hover, &[type="password"]:hover, &[type="email"]:hover, &[type="number"]:hover, &[type="date"]:hover {
+    &:hover {
         box-shadow: 0 0 3px $color_primary25;
     }
-}
 
-textarea:focus {
-    box-shadow: $sidebox_shadow;
-    background-color: white;
-    outline: 0;
-}
-
-input {
-    &[type="text"]:focus, &[type="password"]:focus, &[type="email"]:focus, &[type="number"]:focus, &[type="date"]:focus {
-        box-shadow: $sidebox_shadow;
-        background-color: white;
+    &:focus {
+        box-shadow: inset 0 1px 1px rgba($color_primary100, 0.075), 0 0 8px $highlight_blue;
+        background-color: $color_primary100;
         outline: 0;
     }
 }
@@ -210,9 +208,6 @@ input {
             a, span {
                 border-top-color: $button_color;
             }
-
-            .tab-icon {
-            }
         }
 	
     }
@@ -268,7 +263,6 @@ input {
 
 // Bootstrap-y pagination
 ul.pagination a:hover {
-    color: #212121;
     background: $color_primary10;
 }
 
@@ -280,7 +274,6 @@ ul.pagination {
     display: inline-block;
     padding-left: 0;
     margin: 0;
-    border-radius: $widget_border_radius;
     border-right: 1px solid $color_primary25;
 
     > {
@@ -289,7 +282,6 @@ ul.pagination {
 
             &:first-child > {
                 a, span {
-                    margin-left: 0;
                     border-top-left-radius: $widget_border_radius;
                     border-bottom-left-radius: $widget_border_radius;
                 }
@@ -322,7 +314,6 @@ ul.pagination {
         .disabled-page > {
             a {
                 color: $color_primary25;
-                background-color: $color_primary10;
             }
 
             span {
@@ -449,8 +440,13 @@ a.close {
     text-align: right;
 }
 
+ul.select2-results__options {
+    color: black;
+}
+
 ul.select2-selection__rendered {
     padding: 0 5px !important;
+    color: black;
 }
 
 .sidebox h3 {
