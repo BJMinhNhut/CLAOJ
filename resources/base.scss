@@ -185,7 +185,7 @@ h2 {
 
 h3 {
     font-weight: 600;
-    color: #212121;
+    color: $color_primary90;
     font-family: $title_fonts;
     font-size: 1.4em;
     border-radius: $widget_border_radius;
@@ -255,7 +255,7 @@ header {
             }
 
             & > span {
-                color: #eee;
+                color: $color_primary10;
                 vertical-align: middle;
                 display: inline;
                 margin-top: 11px;
@@ -277,7 +277,7 @@ header {
 
 #nav-shadow {
     height: 3px;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
+    background: linear-gradient(rgba($color_primary100, 0.5), transparent);
     margin: 0 0 0 -100em;
     padding: 0 0 0 100em;
     width: 500%;
@@ -378,7 +378,7 @@ nav {
                 color: $color_primary0;
                 background: $color_primary75;
                 margin: 0 !important;
-                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+                box-shadow: 2px 2px 4px rgba($color_primary100, 0.4);
                 width: fit-content;
                 border-radius: 0 0 6px 6px;
                 border-left: 4px solid #4db6ac;
@@ -439,7 +439,7 @@ nav {
 }
 
 hr {
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba($color_primary100, 0.2);
 }
 
 #content {
@@ -552,7 +552,7 @@ noscript #noscript {
     border: 5px solid #009688;
     border-radius: $widget_border_radius;
     box-shadow: $sidebox_shadow;
-    background: rgba(0, 0, 0, 0.60);
+    background: rgba($color_primary100, 0.60);
     z-index: 100000;
     padding: 10px 12px;
     color: $color_primary0;
