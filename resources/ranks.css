@@ -1,0 +1,148 @@
+@charset "UTF-8";
+.admin a, .admin {
+  color: #000 !important;
+  font-weight: bold !important;
+}
+
+.banned a, .banned {
+  color: #000 !important;
+  font-weight: normal !important;
+  text-decoration: line-through !important;
+}
+
+.banned a::before {
+  content: "🚫";
+}
+
+.staff a, .staff {
+  color: #ff888a !important;
+  font-weight: bold !important;
+}
+
+.staff a::before {
+  content: "🔥";
+}
+
+.teacher a::before {
+  content: "🧑‍🏫";
+}
+
+svg.rate-box {
+  width: 1.2em;
+}
+svg.rate-box circle {
+  fill: none;
+  stroke-width: 2px;
+}
+svg.rate-box.rate-none {
+  visibility: hidden;
+}
+svg.rate-box.rate-newbie circle {
+  stroke: #808080;
+}
+svg.rate-box.rate-newbie path {
+  fill: #808080;
+}
+svg.rate-box.rate-pupil circle {
+  stroke: #008000;
+}
+svg.rate-box.rate-pupil path {
+  fill: #008000;
+}
+svg.rate-box.rate-specialist circle {
+  stroke: #03A89E;
+}
+svg.rate-box.rate-specialist path {
+  fill: #03A89E;
+}
+svg.rate-box.rate-expert circle {
+  stroke: #0000FF;
+}
+svg.rate-box.rate-expert path {
+  fill: #0000FF;
+}
+svg.rate-box.rate-candidate-master circle {
+  stroke: #AA00AA;
+}
+svg.rate-box.rate-candidate-master path {
+  fill: #AA00AA;
+}
+svg.rate-box.rate-master circle, svg.rate-box.rate-international-master circle {
+  stroke: #FF8C00;
+}
+svg.rate-box.rate-master path, svg.rate-box.rate-international-master path {
+  fill: #FF8C00;
+}
+svg.rate-box.rate-grandmaster circle, svg.rate-box.rate-international-grandmaster circle, svg.rate-box.rate-legendary-grandmaster circle {
+  stroke: #FF0000;
+}
+svg.rate-box.rate-grandmaster path, svg.rate-box.rate-international-grandmaster path, svg.rate-box.rate-legendary-grandmaster path {
+  fill: #FF0000;
+}
+svg.rate-box.rate-target circle:last-child {
+  stroke: none;
+  fill: #FF0000;
+}
+
+.rating {
+  font-weight: bold;
+}
+.rating a {
+  display: inline-block;
+}
+
+.rate-none, .rate-none a {
+  color: #999;
+  font-weight: normal;
+}
+
+.rate-newbie, .rate-newbie a {
+  color: #808080;
+}
+
+.rate-pupil, .rate-pupil a {
+  color: #008000;
+}
+
+.rate-specialist, .rate-specialist a {
+  color: #03A89E;
+}
+
+.rate-expert, .rate-expert a {
+  color: #0000FF;
+}
+
+.rate-candidate-master, .rate-candidate-master a {
+  color: #AA00AA;
+}
+
+.rate-master, .rate-master a, .rate-international-master, .rate-international-master a {
+  color: #FF8C00;
+}
+
+.rate-grandmaster, .rate-grandmaster a, .rate-international-grandmaster, .rate-international-grandmaster a {
+  color: #FF0000;
+}
+
+.rate-legendary-grandmaster, .rate-legendary-grandmaster a {
+  color: #FF0000;
+}
+
+.rate-legendary-grandmaster a::first-letter {
+  color: #000;
+}
+
+.rate-group {
+  white-space: nowrap;
+  display: inline-block;
+  color: #000;
+}
+.rate-group .rating {
+  display: inline-block;
+}
+.rate-group .rate-box {
+  margin-right: 0.2em;
+  vertical-align: bottom;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3Nhc3NfcHJvY2Vzc2VkL3JhbmtzLmNzcyIsIi4uL3Jlc291cmNlcy9yYW5rcy5zY3NzIiwiLi4vcmVzb3VyY2VzL3ZhcnMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxnQkFBZ0I7QUNFaEI7RUFDSSxzQkFBQTtFQUNBLDRCQUFBO0FEQUo7O0FDR0E7RUFDSSxzQkFBQTtFQUNBLDhCQUFBO0VBQ0Esd0NBQUE7QURBSjs7QUNHQTtFQUNJLGFBQUE7QURBSjs7QUNHQTtFQUNJLHlCQUFBO0VBQ0EsNEJBQUE7QURBSjs7QUNHQTtFQUNJLGFBQUE7QURBSjs7QUNHQTtFQUNJLGdCQUFBO0FEQUo7O0FDWUE7RUFDSSxZQUFBO0FEVEo7QUNXSTtFQUNJLFVBQUE7RUFDQSxpQkFBQTtBRFRSO0FDWUk7RUFDSSxrQkFBQTtBRFZSO0FDUEk7RUFDSSxlQW9Cd0I7QURYaEM7QUNQSTtFQUNJLGFBaUJ3QjtBRFJoQztBQ2JJO0VBQ0ksZUF3QndCO0FEVGhDO0FDYkk7RUFDSSxhQXFCd0I7QUROaEM7QUNuQkk7RUFDSSxlQTRCd0I7QURQaEM7QUNuQkk7RUFDSSxhQXlCd0I7QURKaEM7QUN6Qkk7RUFDSSxlQWdDd0I7QURMaEM7QUN6Qkk7RUFDSSxhQTZCd0I7QURGaEM7QUMvQkk7RUFDSSxlQW9Dd0I7QURIaEM7QUMvQkk7RUFDSSxhQWlDd0I7QURBaEM7QUNyQ0k7RUFDSSxlQXdDd0I7QUREaEM7QUNyQ0k7RUFDSSxhQXFDd0I7QURFaEM7QUMzQ0k7RUFDSSxlQTRDd0I7QURDaEM7QUMzQ0k7RUFDSSxhQXlDd0I7QURJaEM7QUNBUTtFQUNJLFlBQUE7RUFDQSxhQUFBO0FERVo7O0FDR0E7RUFDSSxpQkFBQTtBREFKO0FDRUk7RUFDSSxxQkFBQTtBREFSOztBQ0lBO0VBQ0ksV0FBQTtFQUNBLG1CQUFBO0FEREo7O0FDSUE7RUFDSSxjQUFBO0FEREo7O0FDSUE7RUFDSSxjQUFBO0FEREo7O0FDSUE7RUFDSSxjQUFBO0FEREo7O0FDSUE7RUFDSSxjQUFBO0FEREo7O0FDSUE7RUFDSSxjQUFBO0FEREo7O0FDSUE7RUFDSSxjQUFBO0FEREo7O0FDSUE7RUFDSSxjQUFBO0FEREo7O0FDSUE7RUFDSSxjQUFBO0FEREo7O0FDSUE7RUFDSSxXQzNIZTtBRjBIbkI7O0FDSUE7RUFDSSxtQkFBQTtFQUNBLHFCQUFBO0VBQ0EsV0NqSWU7QUZnSW5CO0FDR0k7RUFDSSxxQkFBQTtBRERSO0FDSUk7RUFDSSxtQkFBQTtFQUNBLHNCQUFBO0FERlIiLCJmaWxlIjoicmFua3MuY3NzIn0= */
