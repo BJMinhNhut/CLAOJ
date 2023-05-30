@@ -1,0 +1,13 @@
+{% extends "user/base-users.html" %}
+
+{% block title_ruler %}{% endblock %}
+
+{% block title_row %}
+    {% set tab = 'list' %}
+    {% set title = _('Leaderboard') %}
+    {% include "user/user-list-tabs.html" %}
+{% endblock %}
+
+{% block users_table %}
+    {% include "user/users-table.html" %}
+{% endblock %}

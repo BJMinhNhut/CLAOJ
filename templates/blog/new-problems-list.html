@@ -1,0 +1,19 @@
+<div class="blog-sidebox sidebox">
+    <h3>{{ _('New problems') }} <i class="fa fa-puzzle-piece"></i>
+    </h3>
+    <div class="sidebox-content">
+        <table class="problem-list">
+            {% for problem in new_problems %}
+                <tr>
+	            <td style="padding-right:7px"><a href="{{ url('problem_detail', problem.code) }}">{{ problem.name }} </a></td>
+		        <td style="text-align:right"><span class="problem-points">{{ problem.points|floatformat }}{% if problem.partial %}p{% endif %} </span></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <span class="rssatom">
+            <a href="{{ url('problem_rss') }}"><span><i class="fa fa-rss"></i></span> RSS</a>
+            /
+            <a href="{{ url('problem_atom') }}">Atom</a>
+        </span>
+    </div>
+</div>

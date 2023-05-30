@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block js_media %}
+    {% include "leave-warning.html" %}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // This code activates flatpickr on fields with the 'datetimefield' class when the document has loaded
+        window.addEventListener("DOMContentLoaded", function () {
+            flatpickr(".datetimefield", {
+                enableTime: true,
+                enableSeconds: true,
+                dateFormat: "Y-m-d H:i:S",
+                time_24hr: true,
+            });
+        });
+    </script>
+    {{ form.media.js }}
+{% endblock %}
+
+{% block media %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    {{ form.media.css }}
+    <link rel="stylesheet" type="text/css" href="{{ static('ui_form.css') }}">
+{% endblock %}
+
+{% block body %}
+<div>
+    {% if edit and request.user.is_staff %}
+        <div class="alert alert-warning alert-dismissable">
+            <a class="close">x</a>
+            <a href="{{ url('admin:judge_blogpost_change', object.id) }}">{{ _('Edit blog post in admin panel for more options') }}</a>
+        </div>
+    {% elif not edit %}
+        <div class="alert alert-warning">
+            {{ (_('Please read the [guidelines][0] before creating a new blog post.') + '\n\n  [0]: /about/blog/')|markdown('blog', strip_paragraphs=True) }}
+        </div>
+    {% endif %}
+    <form action="" method="post" class="form-area" style="width: 100%; display: flex; justify-content: center; flex-direction: column;">
+        {% csrf_token %}
+        <table class="django-as-table">{{ form.as_table() }}</table>
+        <hr>
+        <div style="display: flex; justify-content: flex-end;">
+            <input type="submit" value="{% if edit %} {{ _('Update') }} {% else %} {{ _('Create') }} {% endif %}" class="button">
+        </div>
+    </form>
+</div>
+{% endblock %}

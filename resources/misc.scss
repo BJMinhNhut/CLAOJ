@@ -1,0 +1,79 @@
+@import "vars";
+
+#judge-versions {
+    display: block;
+
+    .version {
+        font-family: $monospace-fonts;
+    }
+
+    .version-blank {
+        background: $color_primary10;
+    }
+
+    .version-latest {
+        background: #dcedc8;
+        color: black
+    }
+
+    .version-outdated {
+        background: #ffcdd2;
+        color: black;
+    }
+
+    tbody {
+        display: block;
+    }
+
+    tr {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+
+        &:first-child {
+            position: sticky;
+            top: 42px;
+            line-height: 1.8em;
+        }
+    }
+
+    td, th {
+        display: block;
+        flex: 1 0 110px;
+        overflow-x: hidden;
+        height: auto;
+        padding: 7px 5px;
+    }
+}
+
+.django-as-table {
+    text-align: left;
+
+    th {
+        vertical-align: top;
+        padding-top: 4px;
+    }
+}
+
+.centered-form {
+    max-width: 700px;
+    margin: auto;
+
+    .submit-bar {
+        float: right;
+    }
+}
+
+@media (min-width: 700px) {
+    .xs-br {
+        display: none;
+    }
+}
+
+.auth-flow-form {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+    padding-top: 5%;
+}

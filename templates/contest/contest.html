@@ -1,0 +1,376 @@
+{% extends "common-content.html" %}
+
+{% block title_ruler %}{% endblock %}
+
+{% block title_row %}
+    {% set tab = 'detail' %}
+    {% set title = contest.name %}
+    {% include "contest/contest-tabs.html" %}
+    {% if contest.is_organization_private %}
+        <span class="organization-tags">
+            {% for org in contest.organizations.all() %}
+                <span class="organization-tag">
+                    <a href="{{ org.get_absolute_url() }}">
+                        <i class="fa-solid fa-lock"></i> {{ org.name }}
+                    </a>
+                </span>
+            {% endfor %}
+        </span>
+    {% endif %}
+{% endblock %}
+
+{% block content_js_media %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.time-remaining').each(function () {
+                count_down($(this));
+            });
+        });
+    </script>
+    {% include "contest/media-js.html" %}
+    {% if not comment_lock %}
+        {% include "comments/media-js.html" %}
+    {% endif %}
+{% endblock %}
+
+{% block content_media %}
+    {% if not comment_lock %}
+        {% include "comments/media-css.html" %}
+    {% else %}
+        <style>
+            #content-body {
+                overflow: auto;
+            }
+        </style>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div id="banner">
+       <a href="https://www.timeanddate.com/worldclock/fixedtime.html?msg={{ contest.name|urlquote('') }}&amp;iso=
+                {{- contest.start_time|utc|date('Y-m-d\TH:i:s') }}" class="date">
+            {%- if contest.is_in_contest(request.user) and not request.participation.live -%}
+                {% if request.participation.spectate %}
+                    {%- trans countdown=contest.time_before_end|as_countdown -%} Spectating, contest ends in {{countdown}}. {%- endtrans -%}
+                {% elif request.participation.end_time %}
+                    {%- trans countdown=request.participation.time_remaining|as_countdown -%} Participating virtually, {{countdown}} remaining. {%- endtrans -%}
+                {% else %}
+                    {{- _('Participating virtually.') -}}
+                {% endif %}
+            {%- else -%}
+                {% if contest.start_time > now %}
+                    {%- trans countdown=contest.time_before_start|as_countdown -%} Starting in {{countdown}}. {%- endtrans -%}
+                {% elif contest.end_time < now %}
+                    {{- _('Contest is over.') -}}
+                {% else %}
+                    {%- if has_joined -%}
+                        {% if live_participation.ended %}
+                            {%- trans countdown=contest.time_before_end|as_countdown -%} Your time is up! Contest ends in {{countdown}}. {%- endtrans -%}
+                        {% else %}
+                            {%- trans countdown=live_participation.time_remaining|as_countdown -%} You have {{countdown}} remaining. {%- endtrans -%}
+                        {% endif %}
+                    {%- else -%}
+                        {%- trans countdown=contest.time_before_end|as_countdown -%} Contest ends in {{countdown}} {%- endtrans -%}
+                    {%- endif -%}
+                {% endif %}
+            {%- endif -%}
+        </a>
+        <div id="time">
+            {% with start_time=contest.start_time|date(_("F j, Y, G:i T")) %}
+                {% if contest.time_limit %}
+                    {% set end_time=contest.end_time|date(_("F j, Y, G:i T")) %}
+                    {% set time_limit=contest.time_limit|timedelta('localized-no-seconds') %}
+                    {{ _('%(time_limit)s window between %(start_time)s and %(end_time)s', start_time=bold(start_time), end_time=bold(end_time), time_limit=bold(time_limit)) }}
+                {% else %}
+                    {% set length=contest.contest_window_length|timedelta('localized-no-seconds') %}
+                    {{ _('%(length)s long starting on %(start_time)s', start_time=bold(start_time), length=bold(length)) }}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        {% if contest.show_short_display %}
+            <div id="details">
+                <ul>
+                    {% with authors=contest.authors.all() %}
+                        {% if authors %}
+                            <li>
+                                {% trans trimmed count=authors|length, link_authors=link_users(authors) %}
+                                    The author of this contest is {{ link_authors }}.
+                                {% pluralize count %}
+                                    The authors of this contest are {{ link_authors }}.
+                                {% endtrans %}
+                            </li>
+                        {% endif %}
+                    {% endwith %}
+                    {% with testers=contest.testers.all() %}
+                        {% if testers %}
+                            <li>
+                                {% trans trimmed count=testers|length, link_testers=link_users(testers) %}
+                                    Special thanks to {{ link_testers }} for testing and feedback on the problems.
+                                {% pluralize count %}
+                                    Special thanks to {{ link_testers }} for testing and feedback on the problems.
+                                {% endtrans %}
+                            </li>
+                        {% endif %}
+                    {% endwith %}
+                    <li>
+                        {% if contest.is_rated %}
+                            {% if contest.rate_all %}
+                                {% if contest.rating_floor is not none and contest.rating_ceiling is not none %}
+                                    {{ _('This contest will be **rated** for **all** participants who have a rating between **%(rating_floor)d** and **%(rating_ceiling)d**, inclusive.', rating_floor=contest.rating_floor, rating_ceiling=contest.rating_ceiling)|markdown('default') }}
+                                {% elif contest.rating_floor is not none and contest.rating_ceiling is none %}
+                                    {{ _('This contest will be **rated** for **all** participants who have a rating of at least **%(rating_floor)d**.', rating_floor=contest.rating_floor)|markdown('default') }}
+                                {% elif contest.rating_floor is none and contest.rating_ceiling is not none %}
+                                    {{ _('This contest will be **rated** for **all** participants who have a rating of at most **%(rating_ceiling)d**.', rating_ceiling=contest.rating_ceiling)|markdown('default') }}
+                                {% else %}
+                                    {{ _('This contest will be **rated** for **all** participants.')|markdown('default') }}
+                                {% endif %}
+                            {% else %}
+                                {% if contest.rating_floor is not none and contest.rating_ceiling is not none %}
+                                    {{ _('This contest will be **rated** for participants who submit at least once and have a rating between **%(rating_floor)d** and **%(rating_ceiling)d**, inclusive.', rating_floor=contest.rating_floor, rating_ceiling=contest.rating_ceiling)|markdown('default') }}
+                                {% elif contest.rating_floor is not none and contest.rating_ceiling is none %}
+                                    {{ _('This contest will be **rated** for participants who submit at least once and have a rating of at least **%(rating_floor)d**.', rating_floor=contest.rating_floor)|markdown('default') }}
+                                {% elif contest.rating_floor is none and contest.rating_ceiling is not none %}
+                                    {{ _('This contest will be **rated** for participants who submit at least once and have a rating of at most **%(rating_ceiling)d**.', rating_ceiling=contest.rating_ceiling)|markdown('default') }}
+                                {% else %}
+                                    {{ _('This contest will be **rated** for participants who submit at least once.')|markdown('default') }}
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            {{ _('This contest will **not** be rated.')|markdown('default') }}
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% filter markdown('default') %}
+                            {% trans trimmed count=metadata.problem_count %}
+                                There is **{{ count }}** problem in this contest.
+                            {% pluralize count %}
+                                There are **{{ count }}** problems in this contest.
+                            {% endtrans %}
+                        {% endfilter %}
+                        <ul>
+                            <li>
+                                {% if metadata.has_partials %}
+                                    {{ _('**Partial scoring is enabled** for some or all of these problems.')|markdown('default') }}
+                                {% else %}
+                                    {{ _('This contest **will not use partial scoring**.')|markdown('default') }}
+                                {% endif %}
+                            </li>
+                            <li>
+                                {% if metadata.has_pretests %}
+                                    {{ _('The pretest system **will be used** for some or all of these problems.')|markdown('default') }}
+                                {% else %}
+                                    {{ _('The pretest system **will not be used** for this contest.')|markdown('default') }}
+                                {% endif %}
+                            </li>
+                            <li>
+                                {% if metadata.has_submission_cap %}
+                                    {{ _('Some or all of these problems **have a submission limit**.')|markdown('default') }}
+                                {% else %}
+                                    {{ _('There is **no submission limit** for any of these problems.')|markdown('default') }}
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        {{ _('The contest format is **%(format)s**.', format=contest.format.name)|markdown('default') }}
+                        <ul>
+                            {% for line in contest.format.get_short_form_display() %}
+                                <li>{{ line|markdown('default') }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li>
+                        {% if contest.scoreboard_visibility == contest.SCOREBOARD_VISIBLE %}
+                            {{ _('The scoreboard will be **visible** for the duration of the contest.')|markdown('default') }}
+                        {% elif contest.scoreboard_visibility == contest.SCOREBOARD_AFTER_PARTICIPATION %}
+                            {{ _('The scoreboard will be **hidden** until your window is over.')|markdown('default') }}
+                        {% elif contest.scoreboard_visibility == contest.SCOREBOARD_AFTER_CONTEST %}
+                            {{ _('The scoreboard will be **hidden** for the entire duration of the contest.')|markdown('default') }}
+                        {% endif %}
+                    </li>
+                    {% if contest.access_code %}
+                        <li>
+                            {{ _('An **access code is required** to join the contest.')|markdown('default') }}
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if contest.ended or request.user.is_superuser or is_editor or is_tester %}
+        <hr>
+        <div class="contest-problems">
+            <h3 style="margin-bottom: 0.2em"><i class="fa-solid fa-fw fa-question-circle"></i>{{ _('Problems') }} </h3>
+            <table id="contest-problems" class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    {% if request.user.is_authenticated %}
+                        <th><i class="fa-solid fa-check"></i></th>
+                    {% endif %}
+                    <th>{{ _('Problem') }}</th>
+                    <th>{{ _('Points') }}</th>
+                    <th>{{ _('AC Rate') }}</th>
+                    <th>{{ _('# AC') }}</th>
+                    {% if metadata.has_public_editorials %}
+                        <th>{{ _('Editorials') }}</th>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for problem in contest_problems %}
+                    <tr>
+                        <td style="width: 2em;">{{loop.index}}</td>
+                        {% if request.user.is_authenticated %}
+                            {% if problem.id in completed_problem_ids %}
+                                <td solved="1" style="width: 2em;">
+                                    <a href="{{ url('user_submissions', problem.code, request.user.username) }}">
+                                        {% if problem.is_public or request.in_contest %}
+                                            <i class="solved-problem-color fa-solid fa-check-circle"></i>
+                                        {% else %}
+                                            <i class="solved-problem-color fa-solid fa-lock"></i>
+                                        {% endif %}
+                                    </a>
+                                </td>
+                            {% elif problem.id in attempted_problem_ids %}
+                                <td solved="0" style="width: 2em;">
+                                    <a href="{{ url('user_submissions', problem.code, request.user.username) }}">
+                                        {% if problem.is_public or request.in_contest %}
+                                            <i class="attempted-problem-color fa-solid fa-minus-circle"></i>
+                                        {% else %}
+                                            <i class="attempted-problem-color fa-solid fa-lock"></i>
+                                        {% endif %}
+                                    </a>
+                                </td>
+                            {% else %}
+                                <td solved="-1" style="width: 2em;">
+                                    {% if problem.is_public or request.in_contest %}
+                                        <i class="unsolved-problem-color fa-solid fa-minus-circle"></i>
+                                    {% else %}
+                                        <i class="unsolved-problem-color fa-solid fa-lock"></i>
+                                    {% endif %}
+                                </td>
+                            {% endif %}
+                        {% endif %}
+                        <td style="text-align: left; padding-left: 1em;">
+                            {% if in_contest or problem.is_public or request.user.is_superuser or is_editor or is_tester %}
+                                <a href="{{ url('problem_detail', problem.code) }}">{{ problem.i18n_name or problem.name }}</a>
+                            {% else %}
+                                {{ problem.i18n_name or problem.name }}
+                            {% endif %}
+                        </td>
+                        <td>{{ problem.points|floatformat }}{% if problem.partial %}p{% endif %}</td>
+                        <td>{{ problem.ac_rate|floatformat(1) }}%</td>
+                        <td>
+                            {% if problem.is_public %}
+                                <a href="{{ url('ranked_submissions', problem.code) }}">{{ problem.user_count }}</a>
+                            {% else %}
+                                {{ problem.user_count }}
+                            {% endif %}
+                        </td>
+                        {% if metadata.has_public_editorials %}
+                            <td>
+                                {% if problem.is_public and problem.has_public_editorial %}
+                                    <a href="{{ url('problem_editorial', problem.code) }}">{{ _('Editorial') }}</a>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if has_clarifications %}
+        <div class="contest-clartifications">
+            <h3 style="margin-bottom: 0.2em"><i class="fa-regular fa-lightbulb"></i> {{ _('Clarifications') }}</h3>
+            <table id="contest-clartifications" class="table">
+                <thead>
+                    <tr>
+                        <th>{{ _('When') }}</th>
+                        <th>{{ _('Problem') }}</th>
+                        <th>{{ _('Description') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for clarification in clarifications %}
+                    <tr>
+                        <td style="width: 15%;">{{ clarification.date|date(_("F j, Y, G:i")) }}</td>
+                        <td style="width: 20%; text-align: left; padding-left: 2em;">
+                            <a href="{{ url('problem_detail', clarification.problem.code) }}"
+                                class="problem">
+                                {{ clarification.problem.name }}
+                            </a>
+                        </td>
+                        <td style="text-align: left; padding-left: 2em;">
+                            {{ clarification.description|markdown('problem', MATH_ENGINE)|reference }}
+                        </td> 
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+        {% if has_announcements or can_edit %}
+        <br>
+        <div class="contest-clartifications">
+            <h3 style="margin-bottom: 0.2em"><i class="fa-solid fa-bullhorn"></i> {{ _('Announcements') }}</h3>
+            <table id="contest-clartifications" class="table">
+                <thead>
+                    <tr>
+                        <th>{{ _('When') }}</th>
+                        <th>{{ _('Title') }}</th>
+                        <th>{{ _('Description') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for announcement in announcements %}
+                    <tr>
+                        <td style="width: 15%;">{{ announcement.date|date(_("F j, Y, G:i")) }}</td>
+                        <td style="width: 20%; text-align: left; padding-left: 2em;">
+                            {{ announcement.title }}
+                        </td>
+                        <td style="text-align: left; padding-left: 2em;">
+                            {{ announcement.description|markdown('announcement', MATH_ENGINE)|reference }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% if can_edit %}
+                    <tr>
+                        <td colspan="3">
+                            <a class="button" style="width: fit-content; margin-left: 0.2em;" href="{{ url('contest_announce', contest.key) }}"><i class="fa-solid fa-circle-plus"></i> {{ _('Add an announcement') }}</a>
+                        </td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    {% endif %}
+
+    <div class="content-description">
+        {% cache 3600 'contest_html' contest.id MATH_ENGINE %}
+            {{ contest.description|markdown('contest', MATH_ENGINE)|reference|str|safe }}
+        {% endcache %}
+    </div>
+
+    <hr>
+    <span class="social">
+        {{ post_to_facebook(request, contest, '<i class="fa-brands fa-facebook"></i>') }}
+        {{ post_to_twitter(request, SITE_NAME + ':', contest, '<i class="fa-brands fa-twitter"></i>') }}
+    </span>
+
+    {% if not comment_lock %}
+        {% include "comments/list.html" %}
+    {% endif %}
+{% endblock %}
+
+{% block description_end %}{% endblock %}
+
+{% block bodyend %}
+    {{ super() }}
+    {% if not comment_lock %}
+        {% include "comments/math.html" %}
+    {% endif %}
+{% endblock %}

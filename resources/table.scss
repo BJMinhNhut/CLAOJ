@@ -1,0 +1,108 @@
+@import "vars";
+
+.h-scrollable-table {
+    overflow-x: auto;
+}
+
+.table {
+    border-spacing: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.5em;
+    background: rgba($color_primary100, 0.01);
+
+    &.striped tr:nth-child(even) {
+        background: $color_primary5;
+    }
+
+    td:first-child {
+        border-color: $color_primary25;
+        border-width: 1px 1px 0 1px;
+    }
+
+    tr:last-child {
+        td {
+            &:first-child {
+                border: 1px solid $color_primary25;
+                border-bottom-left-radius: $widget_border_radius;
+            }
+
+            &:last-child {
+            border-bottom-right-radius: $widget_border_radius;
+            }
+
+            border-color: $color_primary25;
+            border-width: 1px 1px 1px 0;
+        }
+    }
+
+    tbody {
+        tr:last-child th:first-child {
+            border-bottom: 1px solid $color_primary25;
+        }
+    }
+
+    thead tr {
+	    background: $color_primary5;
+    }
+
+    thead th {
+        vertical-align: middle;
+
+        &:first-child {
+            border-top-left-radius: $table_header_rounding;
+        }
+
+        &:last-child {
+            border-top-right-radius: $table_header_rounding;
+        }
+    }
+
+    th {
+        height: 2em;
+        color: $color_primary60;
+        border-color: $color_primary25;
+        border-width: 1px 0 0 0;
+        border-style: solid;
+        padding: 4px 10px;
+        vertical-align: middle;
+        text-align: center;
+        white-space: nowrap;
+        font-weight: 600;
+	    font-family: $title_fonts;
+        font-size: 1.1em;
+
+        &:first-child {
+            border-top-left-radius: $table_header_rounding;
+            border-left: 1px solid $color_primary25;
+        }
+
+        &:last-child {
+            border-top-right-radius: $table_header_rounding;
+	    border-right: 1px solid $color_primary25;
+        }
+    }
+
+    td {
+        border-color: $color_primary25;
+        border-width: 1px 1px 0 0;
+        border-style: solid;
+        padding: 7px 5px;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    // Monkey-patches for awkward table rounding
+    tr:not(:first-child) th {
+        border-radius: 0;
+    }
+
+    tr:last-child th {
+        border-bottom-left-radius: $table_header_rounding;
+    }
+
+    thead tr th {
+        border-bottom-left-radius: 0 !important;
+    }
+}
