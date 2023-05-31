@@ -11,12 +11,12 @@
         &.category {
             text-align: left;
             padding: 0 1em;
-	    width: 70%;
+	        width: 70%;
         }
 
         &.problem {
             text-align: left;
-	    padding: 0.6em 1em;
+	        padding: 0.6em 1em;
             width: 65%;
         }
 
@@ -79,7 +79,7 @@
     }
 	
     .form-submit-group {
-    	border-top: 1px solid #EEE;
+    	border-top: 1px solid $color_primary10;
     	padding-top: 0.8em;
     	text-align: right;
     }
@@ -280,7 +280,7 @@ ul.problem-list {
 }
 
 #problem-table th a {
-    color: #546e7a;
+    color: $color_primary75;
     display: block;
     padding: 9px 10px;
 }
@@ -320,7 +320,7 @@ ul.problem-list {
     }
 
     .noUi-connect {
-    	background: #00b8d4;
+    	background: $color_link75;
     }
 }
 

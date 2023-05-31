@@ -45,7 +45,7 @@ tr {
 
 #users-table, #organization-table {
     th a {
-        color: $color_primary0;
+        color: $color_primary75;
     }
 
     .username {
@@ -70,10 +70,6 @@ tr {
         &.highlight {
             background: rgba($color_link200, 0.2);
         }
-    }
-	
-    th a {
-	color: #546e7a;
     }
 }
 
@@ -351,4 +347,8 @@ a.edit-profile {
             }
         }
     }
+}
+
+.grayed, .block-header {
+    color: $color_primary75;
 }

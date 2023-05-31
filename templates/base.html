@@ -339,10 +339,11 @@
     <footer>
         <span id="footer-content">
             <br>
-	        <a style="color: #b0bec5"> {{ _('Long An HSGS Online Judge') }} </a> <br>
-            <a style="color: #b0bec5"> {{ _('powered by %(dmoj)s', dmoj=safe('<a href="https://dmoj.ca"><b>DMOJ</b>')) }}</a>
-            <a style="color: #b0bec5"> {{ _('and %(vnoj)s', vnoj=safe('<a href="https://oj.vnoi.info"><b>VNOJ</b>')) }}</a> |
-	        <a style="color: #b0bec5"> {{ _('developed by %(itcla)s', itcla=safe('<a href="https://www.facebook.com/itclapro"><b>IT-CLA Productions</b>')) }}</a>
+	        <a> {{ _('Long An HSGS Online Judge') }} </a> <br>
+            <a> {{ _('powered by %(dmoj)s', dmoj=safe('<a href="https://dmoj.ca"><b>DMOJ</b>')) }}</a>
+            <a> {{ _('and %(vnoj)s', vnoj=safe('<a href="https://oj.vnoi.info"><b>VNOJ</b>')) }}</a>
+            <a> | </a>
+	        <a> {{ _('developed by %(itcla)s', itcla=safe('<a href="https://www.facebook.com/itclapro"><b>IT-CLA Productions</b>')) }}</a>
             {% if i18n_config.footer %}
                 {{ i18n_config.footer|safe }} |
             {% endif %}

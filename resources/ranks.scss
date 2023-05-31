@@ -43,6 +43,11 @@ svg.rate-box {
     circle {
         fill: none;
         stroke-width: 2px;
+        stroke: $color_primary75;
+    }
+
+    path {
+        fill: $color_primary75;
     }
 
     &.rate-none {

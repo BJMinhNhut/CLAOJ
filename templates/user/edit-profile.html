@@ -4,11 +4,6 @@
     {% include "timezone/media-css.html" %}
     {{ form.media.css }}
     <style>
-	.wmd-input {
-		background: #eceff1;
-		border: none;	
-	}
-
         .sortedm2m-container, .sortedm2m-container p.selector-filter {
             width: 300px;
         }
@@ -24,10 +19,6 @@
             height: 70px
         }
 
-        .grayed {
-            color: #666;
-        }
-
         .inline-header {
             float: left;
             font-size: 1.1em;
@@ -36,7 +27,6 @@
         }
 
         .block-header {
-            color: #666;
             font-size: 1.1em;
         }
 
@@ -50,8 +40,7 @@
         }
 
         #edit-form {
-            max-width: 700px;
-            min-width: 500px;
+            min-width: 700px;
         }
 
         .settings {
@@ -166,11 +155,11 @@
                 event.preventDefault();
 
                 if (typeof window.PublicKeyCredential === 'undefined') {
-                    alert('{{ _('WebAuthn is not supported by your browser.') }}');
+                    alert("{{ _('WebAuthn is not supported by your browser.') }}");
                     return;
                 }
 
-                $.getJSON('{{ url('webauthn_attest') }}')
+                $.getJSON("{{ url('webauthn_attest') }}")
                     .done(publicKey => {
                         decodeJSONBytes(publicKey);
                         navigator.credentials.create({publicKey})
@@ -182,7 +171,7 @@
                                         clientData: urlSafeBase64Encode(credential.response.clientDataJSON),
                                     }
                                 };
-                                $.post('{{ url('webauthn_attest') }}', {
+                                $.post("{{ url('webauthn_attest') }}", {
                                     credential: JSON.stringify(credential),
                                     name: $('#new-webauthn-name').val(),
                                 })
@@ -190,7 +179,7 @@
                                     .fail((jqXHR) => alert(jqXHR.responseText));
                             });
                     })
-                    .fail(() => alert('{{ _('Failed to contact server.') }}'));
+                    .fail(() => alert("{{ _('Failed to contact server.') }}"));
             });
 
             $('.webauthn-delete').click(function (event) {
@@ -301,7 +290,6 @@ You will not be able to view your scratch codes after you leave this page!') }}"
                     {{ form.about }}
                 <hr>
             {% endif %}
-            <hr>
 
             <div class="settings" style="padding-top:0.7em">
                 <div class="pane" style="vertical-align:top">
@@ -326,6 +314,7 @@ You will not be able to view your scratch codes after you leave this page!') }}"
                         {% endif %}
                     </table>
 
+                    <hr>
                     <table border="0">
                         {% if form.newsletter %}
                             <tr><td>

@@ -61,7 +61,7 @@
 
     th {
         height: 2em;
-        color: $color_primary60;
+        color: $color_primary75;
         border-color: $color_primary25;
         border-width: 1px 0 0 0;
         border-style: solid;
@@ -80,7 +80,7 @@
 
         &:last-child {
             border-top-right-radius: $table_header_rounding;
-	    border-right: 1px solid $color_primary25;
+	        border-right: 1px solid $color_primary25;
         }
     }
 

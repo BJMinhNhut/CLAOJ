@@ -6783,7 +6783,7 @@ msgstr "Chọn thành phố của bạn"
 
 #: templates/user/edit-profile.html:318
 msgid "Editor theme"
-msgstr "Giao diện khung code"
+msgstr "Chủ đề code"
 
 #: templates/user/edit-profile.html:323
 msgid "Math engine"
