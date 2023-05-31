@@ -58,7 +58,9 @@ def comet_location(request):
 
 def __nav_tab(path):
     result = list(
-        NavigationBar.objects.extra(where=["%s REGEXP BINARY regex"], params=[path])[:1]
+        NavigationBar.objects.extra(where=["%s REGEXP BINARY regex"], params=[path])[
+            :1
+        ],
     )
     return (
         result[0].get_ancestors(include_self=True).values_list("key", flat=True)
@@ -98,7 +100,7 @@ class MiscConfigDict(dict):
             if self.site is not None:
                 keys = ["%s:%s" % (self.site, key) for key in keys] + keys
             map = dict(
-                MiscConfig.objects.values_list("key", "value").filter(key__in=keys)
+                MiscConfig.objects.values_list("key", "value").filter(key__in=keys),
             )
             for item in keys:
                 if item in map:
