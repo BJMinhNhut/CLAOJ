@@ -352,3 +352,7 @@ a.edit-profile {
 .grayed, .block-header {
     color: $color_primary75;
 }
+
+.user-gravatar img {
+    box-shadow: $sidebox_shadow;
+}

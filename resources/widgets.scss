@@ -159,13 +159,13 @@ textarea {
     right: 0;
     display: block;
     font-size: 12px;
-    color: #767676;
+    color: $color_primary50;
     cursor: pointer;
     background-color: $color_primary5;
     border-radius: 0 $widget_border_radius;
     position: absolute;
     padding: 5px 8px 3px 8px;
-    box-shadow: 0 0 4px #ccc;
+    box-shadow: -2px 2px 2px $color_primary25;
 	border: none;
 	&:hover, &.active {
 		background-color: #009688;

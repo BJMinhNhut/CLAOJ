@@ -225,7 +225,7 @@ header {
     }
 
     a {
-        color: $color_primary0;
+        color: #eceff1;
     }
 
     li {
@@ -342,8 +342,9 @@ nav {
                 vertical-align: middle;
                 color: #90a4ae;
                 padding: 18px 7px;
-                height: 18px;
+                height: 18px;   
 		        transition: background ease-in-out 0.1s;
+                margin: 0;
 
                 &:link {
                     color: #90a4ae;
@@ -352,7 +353,7 @@ nav {
                 &:hover {
                     color: #4db6ac;
                     background: #455a64;
-                    margin: 0;
+                    box-shadow: none;
                 }
 
                 &.active {
@@ -372,11 +373,10 @@ nav {
                 left: 5px;
                 display: none;
                 color: $color_primary0;
-                background: $color_primary75;
+                background: #263238;
                 margin: 0 !important;
-                box-shadow: 2px 2px 4px rgba($color_primary100, 0.4);
+                box-shadow: $sidebox_shadow;
                 width: fit-content;
-                border-radius: 0 0 6px 6px;
                 border-left: 4px solid #4db6ac;
 
                 li {
@@ -407,7 +407,7 @@ nav {
                 width: 100%;
                 border-radius: 0;
                 height: auto;
-		box-shadow: none;
+		        box-shadow: none;
             }
 
             &:hover > ul, &:active > ul, &:focus > ul {
