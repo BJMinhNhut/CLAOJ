@@ -11,9 +11,10 @@ django-impersonate
 django-redis
 dmoj-wpadmin @ git+https://github.com/DMOJ/dmoj-wpadmin.git
 lxml
-Pygments
-mistune>=2.0.3
-social-auth-app-django
+Pygments<2.12
+mistune<2
+social-auth-core==4.3.0
+social-auth-app-django==5.0.0
 pytz
 django-statici18n
 pika
@@ -28,7 +29,7 @@ pyotp
 qrcode[pil]
 jsonfield @ git+https://github.com/DMOJ/jsonfield.git
 pymoss
-packaging
+packaging<22
 celery
 ansi2html @ git+https://github.com/DMOJ/ansi2html.git
 sqlparse
