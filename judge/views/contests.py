@@ -735,7 +735,7 @@ class ContestRankingBase(ContestMixin, TitleMixin, DetailView):
     def get_rendered_ranking_table(self):
         users, problems = self.get_ranking_list()
 
-        return loader.render_to_string(self.ranking_table_template_name, request=self.request, context={
+        return loader.render_to_string(self.ranking_table_template_name, context={
             'table_id': 'ranking-table',
             'users': users,
             'problems': problems,
