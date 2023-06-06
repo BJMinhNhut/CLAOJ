@@ -63,6 +63,15 @@
     }
 }
 
+#nav-background {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+}
+
 #nav-shadow {
     height: 3px;
     background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
@@ -321,6 +330,8 @@ nav {
 
 @media not all and (max-width: 760px) {
     #nav-list {
+        display: block !important;
+
         li {
             &.home-menu-item {
                 display: none;
