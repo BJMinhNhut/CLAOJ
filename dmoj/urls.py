@@ -235,8 +235,8 @@ urlpatterns = [
 
     path('contributors', include([
         path('/', user.ContribList.as_view(), name='contributors_list'),
-        path('/<int:page>', lambda request, page:
-            HttpResponsePermanentRedirect('%s?page=%s' % (reverse('contributors_list'), page))),
+        path('/<int:page>', lambda request,
+             page:HttpResponsePermanentRedirect('%s?page=%s' % (reverse('contributors_list'), page))),
         path('/find', user.user_contributor_redirect, name='user_contributor_redirect'),
     ])),
 
@@ -251,8 +251,7 @@ urlpatterns = [
         path('/kick', organization.KickUserWidgetView.as_view(), name='organization_user_kick'),
         path('/problems', organization.ProblemListOrganization.as_view(), name='problem_list_organization'),
         path('/contests', organization.ContestListOrganization.as_view(), name='contest_list_organization'),
-        path('/submissions/',
-            paged_list_view(organization.SubmissionListOrganization, 'submission_list_organization')),
+        path('/submissions/', paged_list_view(organization.SubmissionListOrganization, 'submission_list_organization')),
         path('/problem-create', organization.ProblemCreateOrganization.as_view(), name='problem_create_organization'),
         path('/contest-create', organization.ContestCreateOrganization.as_view(), name='contest_create_organization'),
 
@@ -403,8 +402,7 @@ urlpatterns = [
         path('profile/', UserSelect2View.as_view(), name='profile_select2'),
         path('organization/', OrganizationSelect2View.as_view(), name='organization_select2'),
         path('organization_profile/<int:pk>/',
-            OrganizationUserSelect2View.as_view(),
-            name='organization_profile_select2'),
+             OrganizationUserSelect2View.as_view(), name='organization_profile_select2'),
         path('problem/', ProblemSelect2View.as_view(), name='problem_select2'),
         path('contest/', ContestSelect2View.as_view(), name='contest_select2'),
         path('comment/', CommentSelect2View.as_view(), name='comment_select2'),
