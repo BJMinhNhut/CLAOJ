@@ -21,7 +21,7 @@ from fernet_fields import EncryptedCharField
 from pyotp.utils import strings_equal
 from sortedm2m.fields import SortedManyToManyField
 
-from judge.models.choices import ACE_THEMES, MATH_ENGINES_CHOICES, TIMEZONE
+from judge.models.choices import ACE_THEMES, MATH_ENGINES_CHOICES, SITE_THEMES, TIMEZONE
 from judge.models.runtime import Language
 from judge.ratings import rating_class
 from judge.utils.float_compare import float_compare_equal
@@ -131,6 +131,7 @@ class Profile(models.Model):
     contribution_points = models.IntegerField(default=0, db_index=True)
     problem_count = models.IntegerField(default=0, db_index=True)
     ace_theme = models.CharField(max_length=30, choices=ACE_THEMES, default='tomorrow')
+    site_theme = models.CharField(max_length=10, verbose_name=_('site theme'), choices=SITE_THEMES, default='auto')
     last_access = models.DateTimeField(verbose_name=_('last access time'), default=now)
     ip = models.GenericIPAddressField(verbose_name=_('last IP'), blank=True, null=True)
     organizations = SortedManyToManyField(Organization, verbose_name=_('organization'), blank=True,

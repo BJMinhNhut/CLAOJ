@@ -133,6 +133,12 @@ DMOJ_API_PAGE_SIZE = 1000
 DMOJ_PASSWORD_RESET_LIMIT_WINDOW = 3600
 DMOJ_PASSWORD_RESET_LIMIT_COUNT = 10
 
+# At the bare minimum, dark and light theme CSS file locations must be declared
+DMOJ_THEME_CSS = {
+    'light': 'style.css',
+    'dark': 'dark/style.css',
+}
+
 MARKDOWN_STYLES = {}
 MARKDOWN_DEFAULT_STYLE = {}
 
@@ -361,25 +367,26 @@ TEMPLATES = [
         "DIRS": [
             os.path.join(BASE_DIR, "templates"),
         ],
-        "APP_DIRS": False,
-        "OPTIONS": {
-            "match_extension": (".html", ".txt"),
-            "match_regex": "^(?!admin/)",
-            "context_processors": [
-                "django.template.context_processors.media",
-                "django.template.context_processors.tz",
-                "django.template.context_processors.i18n",
-                "django.template.context_processors.request",
-                "django.contrib.messages.context_processors.messages",
-                "judge.template_context.comet_location",
-                "judge.template_context.get_resource",
-                "judge.template_context.general_info",
-                "judge.template_context.site",
-                "judge.template_context.site_name",
-                "judge.template_context.misc_config",
-                "judge.template_context.math_setting",
-                "social_django.context_processors.backends",
-                "social_django.context_processors.login_redirect",
+        'APP_DIRS': False,
+        'OPTIONS': {
+            'match_extension': ('.html', '.txt'),
+            'match_regex': '^(?!admin/)',
+            'context_processors': [
+                'django.template.context_processors.media',
+                'django.template.context_processors.tz',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.request',
+                'django.contrib.messages.context_processors.messages',
+                'judge.template_context.comet_location',
+                'judge.template_context.get_resource',
+                'judge.template_context.general_info',
+                'judge.template_context.site',
+                'judge.template_context.site_name',
+                'judge.template_context.site_theme',
+                'judge.template_context.misc_config',
+                'judge.template_context.math_setting',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
             "autoescape": select_autoescape(["html", "xml"]),
             "trim_blocks": True,
