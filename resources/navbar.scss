@@ -1,11 +1,14 @@
-// Navbar should look the same in every theme, so vars-common should be enough.
-@import "vars-common";
+@import "vars";
 
 #user-links {
     top: 0;
     right: 0;
     position: absolute;
     height: 100%;
+    color: #90a4ae;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
 
     .anon {
         padding-right: 10px;
@@ -14,10 +17,10 @@
         align-items: center;
         white-space: nowrap;
         color: #5c5954;
+    }
 
-        a {
-            color: #FFF;
-        }
+    a {
+        color: #eceff1;
     }
 
     li {
@@ -36,13 +39,13 @@
 
                 & > span {
                     font-size: 13px;
-                    padding: 10px 10px;
+                    padding: 14px 10px;
                     display: block;
                     white-space: nowrap;
 
                     & > img {
                         vertical-align: middle;
-                        border-radius: $widget_border_radius;
+                        border-radius: 50px;
                         margin-right: 6px;
                     }
 
@@ -63,31 +66,54 @@
 #nav-shadow {
     height: 3px;
     background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
+    margin: 0 0 0 -100em;
+    padding: 0 0 0 100em;
+    width: 500%;
 }
 
 #nav-container {
-    background: #3b3b3b;
+    background: #263238;
+    margin: 0 0 0 -100em;
+    padding: 0 0 0 100em;
+    width: 500%;
 
     // opacity: 0.77
     // filter: alpha(opacity=77)
     height: 100%;
 }
 
-nav {
+#navigation {
+    max-width: 1320px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+}
+
+nav {
+    position: relative;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    margin: 0 auto;
     z-index: 500;
+    text-align: left;
+    font-family: $title_fonts;
+    font-weight: 700;
 
     ul {
-        margin: 0 0 0 -5px;
-        padding: 0 0 0 1%;
-        display: block;
+	    max-width: 80em;
+        margin: 0 0 0 -5px !important;
+        padding: 0 0 0 5%;
+        text-align: left;
+        display: inline;
+        list-style: none;
+        background: transparent;
 
         li {
             display: inline-block;
-            color: #FFF;
+            color: $color_primary0;
             text-transform: uppercase;
             position: relative;
 
@@ -106,23 +132,26 @@ nav {
                 display: inline-block;
                 text-decoration: none;
                 vertical-align: middle;
-                color: #FFF;
-                padding: 13px 7px;
-                height: 18px;
+                color: #90a4ae;
+                padding: 18px 7px;
+                height: 18px;   
+		        transition: background ease-in-out 0.1s;
+                margin: 0;
 
                 &:link {
-                    color: #FFF;
+                    color: #90a4ae;
                 }
 
                 &:hover {
-                    color: #FFF;
-                    background: rgba(255, 255, 255, 0.25);
-                    margin: 0;
+                    color: #4db6ac;
+                    background: #455a64;
+                    box-shadow: none;
                 }
 
                 &.active {
-                    color: #FFF;
-                    background: $highlight_blue;
+                    color: white;
+                    padding: 18px 7px 13px 7px;
+    		        border-bottom: 5px solid #4db6ac;
                 }
 
                 .nav-expand {
@@ -135,15 +164,17 @@ nav {
                 position: absolute;
                 left: 5px;
                 display: none;
-                color: #fff;
-                background: #3b3b3b;
+                color: $color_primary0;
+                background: #263238;
                 margin: 0 !important;
-                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+                box-shadow: $sidebox_shadow;
+                width: fit-content;
+                border-left: 4px solid #4db6ac;
 
                 li {
                     &:first-child {
                         a.active {
-                            border-top: 1px solid #3b3b3b;
+                            border-top: 1px solid $color_primary75;
                         }
                     }
                 }
@@ -156,7 +187,6 @@ nav {
                         font-size: 0.8em;
                         line-height: 18px;
                         display: block;
-                        border-left: 4px solid $highlight_blue;
                         white-space: nowrap;
                     }
                 }
@@ -169,6 +199,7 @@ nav {
                 width: 100%;
                 border-radius: 0;
                 height: auto;
+		        box-shadow: none;
             }
 
             &:hover > ul, &:active > ul, &:focus > ul {
@@ -191,7 +222,7 @@ nav {
         display: inline-block;
         height: 32px;
         margin-right: 1px;
-        border-right: 3px solid rgba(255, 255, 255, 0.15);
+        border-right: 3px solid transparent;
     }
 }
 
@@ -199,8 +230,28 @@ nav {
     display: none;
 }
 
+#nav-list {
+    padding: 0 12px;
+}
+
+#nav-placeholder {
+    height: 47px;
+    max-width: 107em;
+    background: $color_primary0;
+    border-right: 1px solid $color_primary25;
+    border-left: 1px solid $color_primary25;
+}
+
 @media (max-width: 760px) {
     #navigation {
+        height: 46px;
+    }
+
+    #nav-background {
+        z-index: 3;
+        top: 0;
+        left: 0;
+        width: 100%;
         height: 36px;
     }
 
@@ -209,15 +260,15 @@ nav {
         display: block;
         line-height: 26px;
         font-size: 2em;
-        color: #FFF;
-        padding: 0 0.25em;
-        margin: 4px 0.25em;
+        color: $color_primary0;
+        padding: 0 0 0 0.25em;
+        margin: 9px 0.25em;
         white-space: nowrap;
         float: left;
 
         &.hover {
             color: #4db7fe;
-            text-shadow: 0 0 5px $highlight_blue;
+            text-shadow: 0 0 5px $color_link75;
             transition-duration: 0.25s;
         }
     }
@@ -225,17 +276,15 @@ nav {
     #nav-list {
         display: none;
         padding: 0;
-        margin: 0;
+        margin-left: 0;
+        border-left: 4px solid $color_link75;
         position: fixed;
         top: 36px;
-        background: #3b3b3b;
+        background: $color_primary75;
         bottom: 0;
         width: 8em;
         left: 0;
-
-        &.show-list {
-            display: block;
-        }
+        box-shadow: none;
 
         li {
             display: block;
