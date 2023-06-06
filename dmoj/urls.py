@@ -216,7 +216,6 @@ urlpatterns = [
         path('/announce', contests.ContestAnnounce.as_view(), name='contest_announce'),
         path('/clone', contests.ContestClone.as_view(), name='contest_clone'),
         path('/ranking/', contests.ContestRanking.as_view(), name='contest_ranking'),
-        path('/ranking/ajax', contests.contest_ranking_ajax, name='contest_ranking_ajax'),
         path('/join', contests.ContestJoin.as_view(), name='contest_join'),
         path('/leave', contests.ContestLeave.as_view(), name='contest_leave'),
         path('/stats', contests.ContestStats.as_view(), name='contest_stats'),
