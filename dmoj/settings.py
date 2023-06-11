@@ -140,8 +140,8 @@ DMOJ_THEME_CSS = {
 }
 # At the bare minimum, dark and light ace themes must be declared
 DMOJ_THEME_DEFAULT_ACE_THEME = {
-    'light': 'github',
-    'dark': 'twilight',
+    'light': 'tomorrow',
+    'dark': 'tomorrow_night',
 }
 DMOJ_SELECT2_THEME = 'dmoj'
 
