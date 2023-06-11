@@ -38,7 +38,7 @@ def submission_data(start_date, end_date, utc_offset):
         queryset.values('result').annotate(count=Count('result'))
         .filter(count__gt=0).order_by('-count').values_list('result', 'count')
     )
-    
+
     queue_time = (
         # Divide by 1000000 to convert microseconds to seconds
         queryset.filter(judged_date__isnull=False, rejudged_date__isnull=True)
@@ -52,7 +52,7 @@ def submission_data(start_date, end_date, utc_offset):
     result_data = {result: [0] * num_days for result in result_order}
 
     # results_ordered = [(str(Submission.USER_DISPLAY_CODES[res]), count) for (res, count) in results]
-    results_ordered = [('',0)] * (len(result_order)-1)
+    results_ordered = [('', 0)] * (len(result_order) - 1)
     for (res, count) in results:
         is_err = True
         for i, e in enumerate(result_order):
@@ -62,7 +62,7 @@ def submission_data(start_date, end_date, utc_offset):
                 break
         if is_err:
             results_ordered.append((str(Submission.USER_DISPLAY_CODES[res]), count))
-            
+
     for date, result, count in submissions:
         result_data[result if result in result_order else 'ERR'][days_labels.index(date.isoformat())] += count
 
