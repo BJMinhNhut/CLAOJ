@@ -49,13 +49,12 @@ td.rating {
         padding-right: 5px;
     }
 
-    th.rate, td.rate {
-        border-right: none;
-        text-align: left;
-    }
-
     th.username {
         width: 100%;
+    }
+
+    th a {
+        color: $color_primary75;
     }
 }
 

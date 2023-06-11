@@ -130,3 +130,18 @@
         }
     }
 }
+
+table.problem-list {
+    border-spacing: 0;
+    width: 100%;
+
+    tr td {
+        border-bottom: 1px solid $color_primary10;
+        padding: 7px 0;
+    }
+
+    tr:last-child td {
+        border: none;
+    }
+} 
+
