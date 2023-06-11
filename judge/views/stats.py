@@ -38,7 +38,6 @@ def submission_data(start_date, end_date, utc_offset):
         queryset.values('result').annotate(count=Count('result'))
         .filter(count__gt=0).order_by('-count').values_list('result', 'count')
     )
-    results = [(str(Submission.USER_DISPLAY_CODES[res]), count) for (res, count) in results]
 
     queue_time = (
         # Divide by 1000000 to convert microseconds to seconds
@@ -51,6 +50,18 @@ def submission_data(start_date, end_date, utc_offset):
     num_days = len(days_labels)
     result_order = ['AC', 'WA', 'TLE', 'CE', 'ERR']
     result_data = {result: [0] * num_days for result in result_order}
+
+    # results_ordered = [(str(Submission.USER_DISPLAY_CODES[res]), count) for (res, count) in results]
+    results_ordered = [('', 0)] * (len(result_order) - 1)
+    for (res, count) in results:
+        is_err = True
+        for i, e in enumerate(result_order):
+            if e == str(res):
+                results_ordered[i] = (str(Submission.USER_DISPLAY_CODES[res]), count)
+                is_err = False
+                break
+        if is_err:
+            results_ordered.append((str(Submission.USER_DISPLAY_CODES[res]), count))
 
     for date, result, count in submissions:
         result_data[result if result in result_order else 'ERR'][days_labels.index(date.isoformat())] += count
@@ -82,7 +93,7 @@ def submission_data(start_date, end_date, utc_offset):
     return {
         'by_day': get_stacked_bar_chart(days_labels, result_data, settings.DMOJ_STATS_SUBMISSION_RESULT_COLORS),
         'by_language': get_pie_chart(languages),
-        'result': get_pie_chart(results),
+        'result': get_pie_chart(results_ordered),
         'queue_time': get_bar_chart(queue_time_data),
     }
 
