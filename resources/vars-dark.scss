@@ -1,0 +1,60 @@
+@import "vars-common";
+
+$is_light_theme: false;
+
+$color_primary0: #1c2429;
+$color_primary5: #263238;   // light background
+$color_primary10: #304047;     // background
+$color_primary25: #3b4d56;  // border
+$color_primary33: #555;     // widget
+$color_primary50: #546e7a;
+$color_primary60: #78909c;
+$color_primary75: #90a4ae;     // widget
+$color_primary90: #b0bec5;
+$color_primary100: #cfd8dc;
+
+$color_link50: #009688;    // default (title)
+$color_link75: #039be5;    // default
+$color_link100: #4fc3f7;   // hover
+$color_link200: #ff8f00;   // active
+
+$color_header_text: $color_primary75;
+$color_header_bg: $color_primary5;
+$color_header_border: $color_primary25;
+
+$color_pageBg: #1c2429;    // #212121 because some elements should be darker than pageBg
+
+// custom one-off colours
+$color_contest_ranking_disqualified: #622;
+$color_first_solve: #004d40;
+
+$color_rating_none: #aaa;
+$color_rating_newbie: #988f81;
+$color_rating_pupil: #72ff72;
+$color_rating_specialist: #57fcf2;
+$color_rating_expert: #337dff;
+$color_rating_candidate_master: #ff55ff;
+$color_rating_master: #ff981a;
+$color_rating_grandmaster: #ff1a1a;
+
+
+$color_select2_search_dropdown: $color_primary10;
+
+$color_user_submission_activity0: #37474f;
+$color_user_submission_activity1: #0e4429;
+$color_user_submission_activity2: #1b5e20;
+$color_user_submission_activity3: #2e7d32;
+$color_user_submission_activity4: #43a047;
+
+$color_pagination_hover: $color_primary33;
+
+$color_problem_submit_select2: #8a8a8a;
+
+$path_to_root: '..';    // relative path from style.css to STATIC_ROOT
+
+$sidebox_shadow: 0 6px 10px 0 rgb(0 0 0 / 30%);
+$button_shadow: 0 1px 5px #546e7a;
+
+@mixin vars-img {
+    filter: invert(1) hue-rotate(180deg);
+}

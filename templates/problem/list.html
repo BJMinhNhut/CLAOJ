@@ -14,49 +14,32 @@
                 padding: 0;
             }
 
-            a.hot-problem-link:hover > .hot-problem-count {
-                visibility: visible;
+            table.problem-list tr td{
+                border-bottom: 1px solid #e0e0e0;
+                padding: 7px 0;
+            }
+            table.problem-list tr:last-child td {
+                border: none;
+            }
+            table.problem-list {
+                border-spacing: 0;
             }
 
-	table.problem-list tr td{
-		border-bottom: 1px solid #e0e0e0;
-		padding: 7px 0;
-	}
-	table.problem-list tr:last-child td {
-		border: none;
-	}
-	table.problem-list {
-		border-spacing: 0;
-	}
-
-	span.problem-points {
-		background: #777;
-    		color: white;
-    		padding: 3px 6px;
-    		font-weight: 700;
-    		border-radius: 10px;
-    		font-size: 12px;
-    		vertical-align: middle;
-    		text-align: center;
-    		line-height: 1;
-    		white-space: nowrap;
-    		min-width: 10px;
-    		display: inline-block;
-	}
-
-
-            span.hot-problem-count {
-                color: #555;
-                font-size: 0.75em;
-                vertical-align: super;
-                visibility: hidden;
-                padding-left: 0.25em;
-                position: relative;
+            span.problem-points {
+                background: #777;
+                color: white;
+                padding: 3px 6px;
+                font-weight: 700;
+                border-radius: 10px;
+                font-size: 12px;
+                vertical-align: middle;
+                text-align: center;
+                line-height: 1;
+                white-space: nowrap;
+                min-width: 10px;
+                display: inline-block;
             }
 
-            ul.problem-list {
-                padding: 0 !important;
-            }
         </style>
     {% endif %}
 {% endblock %}
@@ -88,9 +71,13 @@
                     $form.submit();
                 }
 
-                $category.select2().css({'visibility': 'visible'}).change(clean_submit);
-                $('#types').select2({multiple: 1, placeholder: '{{ _('Filter by type...') }}'})
-                    .css({'visibility': 'visible'});
+                $category.select2({
+                    theme: '{{ DMOJ_SELECT2_THEME }}'
+                }).css({'visibility': 'visible'}).change(clean_submit);
+                $('#types').select2({
+                    theme: '{{ DMOJ_SELECT2_THEME }}',
+                    multiple: 1, placeholder: '{{ _('Filter by type...') }}'
+                }).css({'visibility': 'visible'});
 
                 // This is incredibly nasty to do but it's needed because otherwise the select2 steals the focus
                 $search.keypress(function (e) {
@@ -100,7 +87,7 @@
 
                 $('#random').click(function (e) {
                     var action = $form.attr('action');
-                    $form.attr('action', '{{ url('problem_random') }}').attr('target', '_blank').submit();
+                    $form.attr('action', "{{ url('problem_random') }}").attr('target', '_blank').submit();
                     $form.attr('action', action).attr('target', '');
                     e.preventDefault();
                 });
@@ -117,9 +104,7 @@
 
                 var info_float = $('.info-float');
                 var container = $('#content-right');
-                if (window.bad_browser) {
-                    container.css('float', 'right');
-                } else if (!featureTest('position', 'sticky')) {
+                if (!featureTest('position', 'sticky')) {
                     fix_div(info_float, 55);
                     $(window).resize(function () {
                         info_float.width(container.width());
@@ -255,7 +240,7 @@
                             <a href="{{ sort_links.group }}">{{ _('Category') }}{{ sort_order.group }}</a>
                         </th>
                         {% if show_types %}
-                            <th>
+                            <th class="types">
                                 <a href="{{ sort_links.type }}">{{ _('Types') }}{{ sort_order.type }}</a>
                             </th>
                         {% endif %}

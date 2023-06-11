@@ -1,15 +1,3 @@
-// IE 8
-if (!Array.prototype.indexOf) {
-    Array.prototype.indexOf = function (obj) {
-        for (var i = 0; i < this.length; i++) {
-            if (this[i] == obj) {
-                return i;
-            }
-        }
-        return -1;
-    }
-}
-
 if (!String.prototype.startsWith) {
     String.prototype.startsWith = function (searchString, position) {
         return this.substr(position || 0, searchString.length) === searchString;
@@ -267,8 +255,8 @@ $(function () {
     register_time($('.time-with-rel'));
 
     $('form').submit(function (evt) {
-        // Prevent multiple submissions of forms, see #565
-        $("input[type='submit']").prop('disabled', true);
+        // Prevent multiple submissions of forms, see #565, #1776
+        $("button[type=submit], input[type=submit]").prop('disabled', true);
     });
 });
 

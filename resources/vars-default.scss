@@ -1,0 +1,57 @@
+@import "vars-common";
+
+$is_light_theme: true;
+
+$color_primary0: #fff;
+$color_primary5: #f5f5f5;   // light background
+$color_primary10: #eceff1;     // background
+$color_primary25: #c8ccd0;    // border
+$color_primary33: #aaa;     // widget
+$color_primary50: #9e9e9e;
+$color_primary60: #546e7a;
+$color_primary75: #263238;  // widget
+$color_primary90: #212121;
+$color_primary100: #000;
+
+$color_link50: #009688;     // default (title)
+$color_link75: #0288d1;     // default
+$color_link100: #01579b;    // hover
+$color_link200: #ffa000;    // active
+
+$color_header_text: $color_primary75;
+$color_header_bg: $color_primary50;
+$color_header_border: $color_primary25;
+
+$color_pageBg: #fff;
+
+// custom one-off colours
+$color_contest_ranking_disqualified: #ffcdd2;
+$color_first_solve: #a5d6a7;
+
+$color_rating_none: #999;
+$color_rating_newbie: #808080;
+$color_rating_pupil: #008000;
+$color_rating_specialist: #03a89e;
+$color_rating_expert: #0000ff;
+$color_rating_candidate_master: #aa00aa;
+$color_rating_master: #ff8c00;
+$color_rating_grandmaster: #ff0000;
+
+$color_select2_search_dropdown: $color_primary0;
+
+$color_user_submission_activity0: #e0e0e0;
+$color_user_submission_activity1: #a5d6a7;
+$color_user_submission_activity2: #4caf50;
+$color_user_submission_activity3: #388e3c;
+$color_user_submission_activity4: #2e7d32;
+
+$color_pagination_hover: $color_primary100;
+
+$color_problem_submit_select2: #757575;
+
+$path_to_root: '.';     // relative path from style.css to STATIC_ROOT
+
+$sidebox_shadow: 0 6px 10px 0 rgb(0 0 0 / 15%);
+$button_shadow: 0 1px 5px #b0bec5;
+
+@mixin vars-img {}

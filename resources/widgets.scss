@@ -13,7 +13,7 @@
     color: #55ACEE;
 }
 
-.facebook-this it {
+.facebook-this i {
     color: #133783;
 }
 
@@ -63,10 +63,10 @@
         background: #00675b;
         box-shadow: none;
     }
-}
 
-.full {
-    padding: 6px 0;
+    &.full {
+        padding: 6px 0;
+    }
 }
 
 .secondary {
@@ -106,47 +106,61 @@ input {
         font-size: $base_font_size;
     }
 
+    &:hover {
+        border-color: rgba(82, 168, 236, 0.8);
+        box-shadow: 0 0 8px $color_primary25;
+    }
+
+    &:focus {
+        border-color: rgba(82, 168, 236, 0.8);
+        box-shadow: inset 0 1px 1px rgba($color_primary100, 0.075), 0 0 8px $color_link75;
+        outline: 0;
+    }
+
     &[type=number] {
         width: 100%;	
         max-width: 300px;
     }
 
     &[type=checkbox] {
+        appearance: none;
         vertical-align: middle;
+        border: 1px solid $color_primary50;
+        background: $color_primary0;
+        border-radius: 2px;
+        width: 0.95em;
+        height: 0.95em;
+        cursor: pointer;
+
+        &:checked {
+            appearance: auto;
+            accent-color: $highlight_blue;
+        }
+    }
+
+    &::placeholder {
+        color: $color_primary50;
     }
 }
 
 textarea {
     padding: 4px 8px;
-    color: $color_primary75;
+    color: $color_primary90;
     height: 2.2em;
     background: $color_primary5;
     border: 1px solid $color_primary25;
     border-radius: $widget_border_radius;
     transition: box-shadow ease-in-out 0.1s;
     box-sizing: border-box;
-}
 
-textarea:hover {
-    box-shadow: 0 0 3px $color_primary25;
-}
-
-input {
-    &[type="text"]:hover, &[type="password"]:hover, &[type="email"]:hover, &[type="number"]:hover, &[type="date"]:hover {
-        box-shadow: 0 0 3px $color_primary25;
+    &:hover {
+        border-color: rgba(82, 168, 236, 0.8);
+        box-shadow: 0 0 8px $color_primary25;
     }
-}
 
-textarea:focus {
-    box-shadow: $sidebox_shadow;
-    background-color: white;
-    outline: 0;
-}
-
-input {
-    &[type="text"]:focus, &[type="password"]:focus, &[type="email"]:focus, &[type="number"]:focus, &[type="date"]:focus {
-        box-shadow: $sidebox_shadow;
-        background-color: white;
+    &:focus {
+        border-color: rgba(82, 168, 236, 0.8);
+        box-shadow: inset 0 1px 1px rgba($color_primary100, 0.075), 0 0 8px $color_link75;
         outline: 0;
     }
 }
@@ -157,13 +171,13 @@ input {
     right: 0;
     display: block;
     font-size: 12px;
-    color: #767676;
+    color: $color_primary50;
     cursor: pointer;
     background-color: $color_primary5;
     border-radius: 0 $widget_border_radius;
     position: absolute;
     padding: 5px 8px 3px 8px;
-    box-shadow: 0 0 4px #ccc;
+    box-shadow: -2px 2px 2px $color_primary25;
 	border: none;
 	&:hover, &.active {
 		background-color: #009688;
@@ -210,16 +224,13 @@ input {
             a, span {
                 border-top-color: $button_color;
             }
-
-            .tab-icon {
-            }
         }
 	
     }
 
     h2 {
-	margin-top: 0.25em;
-        color: #212121;
+	    margin-top: 0.25em;
+        color: $color_primary90;
     }
 
     > ul {
@@ -268,19 +279,13 @@ input {
 
 // Bootstrap-y pagination
 ul.pagination a:hover {
-    color: #212121;
-    background: $color_primary10;
-}
-
-ul.pagination a {
-    transition: background ease-in-out 0.1s;
+    background: rgba($color_pagination_hover, 0.55);
 }
 
 ul.pagination {
     display: inline-block;
     padding-left: 0;
     margin: 0;
-    border-radius: $widget_border_radius;
     border-right: 1px solid $color_primary25;
 
     > {
@@ -289,7 +294,6 @@ ul.pagination {
 
             &:first-child > {
                 a, span {
-                    margin-left: 0;
                     border-top-left-radius: $widget_border_radius;
                     border-bottom-left-radius: $widget_border_radius;
                 }
@@ -310,10 +314,10 @@ ul.pagination {
                     padding: 4px 12px;
                     line-height: 1.42857;
                     text-decoration: none;
-                    color: #212121;
-                    background-color: $color_primary5;
-                    border: 1px solid $color_primary25;
-		    border-right: none;
+                    color: $color_header_text;
+                    background-color: $color_header_bg;
+                    border: 1px solid $color_header_border;
+                    border-right: none;
                     margin-left: -1px;
                 }
             }
@@ -322,7 +326,6 @@ ul.pagination {
         .disabled-page > {
             a {
                 color: $color_primary25;
-                background-color: $color_primary10;
             }
 
             span {
@@ -335,7 +338,7 @@ ul.pagination {
             a {
                 z-index: 2;
                 color: $color_primary0;
-                background-color: $highlight_blue;
+                background-color: $color_link75;
                 border-color: transparent;
                 cursor: default;
             }
@@ -343,7 +346,7 @@ ul.pagination {
             span {
                 z-index: 2;
                 color: $color_primary0;
-                background-color: $highlight_blue;
+                background-color: $color_link75;
                 border-color: transparent;
                 cursor: default;
             }
@@ -352,8 +355,10 @@ ul.pagination {
 }
 
 .top-pagination-bar {
-    margin-bottom: 7px;
+    margin: 11px 0 7px;
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .bottom-pagination-bar {
@@ -401,8 +406,7 @@ ul.pagination {
     font-size: 21px;
     font-weight: 700;
     line-height: 1;
-    color: #000;
-    text-shadow: 0 1px 0 $color_primary0;
+    color: $color_primary100;
     filter: alpha(opacity=20);
     opacity: 0.2;
 }
@@ -413,7 +417,7 @@ a.close {
     line-height: 1;
 
     &:hover {
-        color: black !important;
+        color: $color_primary100;
     }
 }
 
@@ -449,23 +453,19 @@ a.close {
     text-align: right;
 }
 
-ul.select2-selection__rendered {
-    padding: 0 5px !important;
-}
-
 .sidebox h3 {
     margin: 0 -5px;
-    background: $color_primary5;
+    background: $color_header_bg;
     border-radius: $widget_border_radius $widget_border_radius 0 0;
     border-bottom: 1px solid $color_primary25;
-    color: #546e7a;
+    color: $color_header_text;
     padding: 10px 12px;
     font-weight: 600;
     font-size: 1.3em;
 }
 
 .sidebox h3 .fa, .sidebox h3 .fa-solid {
-    color: #546e7a;
+    color: $color_header_text;
     float: left;
     margin: 0.1em 0.4em 0 0;
 }

@@ -1,39 +1,28 @@
 @import "vars";
 
 #problem-table {
-    margin-bottom: 0;
-
-    td {
-	&:first-child {
-		width: 8%;	
-	}
-
-        &.category {
-            text-align: left;
+    td, th {
+        // Text columns are left-aligned
+        &.problem, &.category, &.types {
             padding: 0 1em;
-	    width: 70%;
+	        width: 70%;
+        }
+        
+        // Numeric columns are center-aligned
+        &.solved, &.points, &.ac-rate, &.editorial, &.users {
+            padding: 0 10px;
         }
 
         &.problem {
-            text-align: left;
-	    padding: 0.6em 1em;
-            width: 65%;
-        }
-
-        &.pp {
-            text-align: left;
-            padding-left: 1em;
-            width: 100%;
+            width: 100%; // Fill up all spare space with problem titles
         }
 
         &.users {
-            text-align: right;
             padding: 0 1em;
             white-space: nowrap;
         }
 
         &.types {
-            text-align: left;
             padding: 0 1em;
         }
 
@@ -44,6 +33,20 @@
         &.points {
             white-space: nowrap;
         }
+    }
+
+    td {
+        &.problem, &.category, &.types {
+            text-align: left;
+        }
+
+        &.users {
+            text-align: right;
+        }
+    }
+    
+    th a {
+        color: inherit;
     }
 
     tr {
@@ -79,7 +82,7 @@
     }
 	
     .form-submit-group {
-    	border-top: 1px solid #EEE;
+    	border-top: 1px solid $color_primary10;
     	padding-top: 0.8em;
     	text-align: right;
     }
@@ -258,6 +261,145 @@ ul.problem-list {
 
     .submit-bar {
         float: right;
+
+        .select2-container {
+            width: max-content !important;
+            min-width: 180px;
+        }
+    }
+
+    #submit-wrapper {
+        margin-top: 0.7em;
+
+        #editor, #language {
+            margin-top: 4px;
+        }
+
+        #id_language {
+            width: 100%;
+        }
+    }
+
+    .django-ace-toolbar {
+        background-color: $color_primary0;
+        background-image: none;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    #file_drag {
+        border: 1px solid $color_primary25;
+        border-radius: 6px;
+        background-color: $color_primary10;
+        color: $color_primary60;
+        cursor: pointer;
+        display: block;
+        padding: 1.5em;
+        text-align: center;
+        transition: background 0.3s,color 0.3s;
+    }
+
+    #file_drag:hover, #file_drag.hover {
+        box-shadow: inset $button_shadow;
+        background-color: $color_primary10;
+    }
+
+    .helptext {
+        font-size: 13px;
+        color: #999;
+        border-width: 0 0 1px 0;
+    }
+    .helptext::before {
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        content: "\f05a";
+        padding-right: 5px;
+        font-size: 14px;
+    }
+
+    .errorlist {
+        background: rgba(255, 0, 0, 0.3);
+        border: 3px dashed red;
+        border-right: none;
+        border-left: solid red;
+        padding: 0 1em 0.1em 2em;
+        margin: 0.3em 0 0.5em 0;
+    }
+
+    .errornote {
+        border: 3px dashed #ffc000;
+        border-left: solid #ffc000;
+        padding: 0.7em 2em;
+        margin: 0 0 8px;
+        font-size: 13px !important;
+        font-weight: 400;
+    }
+
+    .required th::after {
+        content: "*";
+        color: red;
+    }
+}
+
+#language-select2 {
+    &.select2-dropdown--above {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .select2-results__message {
+        white-space: nowrap
+    }
+
+    .select2-results__option {
+        color: $color_problem_submit_select2 !important;
+        background: $color_primary0 !important;
+    }
+
+    .select2-results__option--highlighted {
+        text-decoration: underline;
+    }
+
+    .select2-results__option[aria-selected=true] {
+        font-weight: bold;
+        color: $color_primary100 !important;
+    }
+
+    .select2-results__option {
+        padding: 4px 0px;
+    }
+
+    .select2-results__options {
+        overflow-y: visible !important;
+    }
+
+    .select2-results__option {
+        break-inside: avoid-column;
+    }
+
+    .select2-results {
+        -webkit-columns: 10 7em;
+        -moz-columns: 10 7em;
+        columns: 10 7em;
+        padding-left: 1.5em;
+        padding-top: 0.5em;
+    }
+
+    .select2-container {
+        width: max-content !important;
+    }
+
+    #result-version-info {
+        border-bottom: 1px solid $color_primary50;
+        margin: 0px 1em;
+        color: $color_problem_submit_select2;
+        font-weight: 600;
+        padding: 0.2em 0;
+        text-align: right;
     }
 }
 
@@ -280,7 +422,7 @@ ul.problem-list {
 }
 
 #problem-table th a {
-    color: #546e7a;
+    color: $color_primary75;
     display: block;
     padding: 9px 10px;
 }
@@ -320,7 +462,7 @@ ul.problem-list {
     }
 
     .noUi-connect {
-    	background: #00b8d4;
+    	background: $color_link75;
     }
 }
 

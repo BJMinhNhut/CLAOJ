@@ -8,85 +8,12 @@
 {% endblock %}
 
 {% block users_media %}
-    <style>
-        #users-table .username {
-            min-width: 20em;
-        }
-
-        #users-table td {
-            height: 2.5em;
-        }
-
-        #users-table a {
-            display: block;
-        }
-
-        #users-table {	
-            font-size: 14px;	
-        }
-
-        .user-name a, .user-name form {	
-            display: inline-block !important;	
-        }
-
-        #users-table th a:hover {
-            color: #009688;
-        }
-
-        #users-table td a:hover {
-            text-decoration: underline;
-        }
-
-        .rank {
-            min-width: 2.4em
-        }
-
-        .points {
-            min-width: 2.4em
-        }
-
-        .first-solve {
-            background-color: #a5d6a7 !important;
-        }
-
-        .disqualified {
-            background-color: #ffa8a8 !important;
-        }
-
-        .point-denominator {
-            border-top: 1px solid gray;
-            font-size: 0.7em;
-        }
-
-        .start-time {
-            display: none;
-        }
-
-        .user-name {
-            position: relative;
-        }
-
-        .personal-info {
-            display: none;
-        }
-
-        .personal-info a {
-            color: gray !important;
-            font-weight: 600;
-        }
-
-        .virtual-participation {
-            color: grey;
-            float: right
-        }
-    </style>
 
     {% if is_ICPC_format %}
         {% include "contest/media-icpc-css.html" %}
     {% else %}
         {% include "contest/media-css.html" %}
     {% endif %}
-
 
     <style>
         .select2-selection__arrow {
@@ -161,7 +88,7 @@
                     $.ajax({
                         url: '?raw'
                     }).done(function (data) {
-                        $('#users-table').html(data);
+                        $('#ranking-table').html(data);
                         if (localStorage.getItem('show-personal-info') == 'true') {
                             $('.personal-info').show();
                             $('#show-personal-info-checkbox').prop('checked', true);
@@ -190,6 +117,7 @@
             })).attr('placeholder');
 
             $('#search-contest').select2({
+                theme: '{{ DMOJ_SELECT2_THEME }}',
                 placeholder: placeholder,
                 ajax: {
                     url: "{{ url('contest_user_search_select2_ajax', contest.key) }}"
@@ -333,7 +261,7 @@
 
                 var csv = [];
 
-                $('table#users-table thead tr').each(function () {
+                $('#ranking-table thead tr').each(function () {
                     var header = [];
                     $(this).find('th').each(function () {
                         var $col = $(this);
@@ -360,7 +288,12 @@
                     csv.push(header.join(','));
                 });
 
-                $('table#users-table tbody tr').each(function () {
+                $('#ranking-table tbody tr').each(function () {
+                    // Skip hidden row (due to filtering)
+                    if ($(this).is(':hidden')) {
+                        return;
+                    }
+
                     var row_data = [];
                     $(this).find('td').each(function () {
                         var $col = $(this);

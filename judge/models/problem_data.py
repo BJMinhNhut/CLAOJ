@@ -26,7 +26,7 @@ CHECKERS = (
     ('floats', _('Floats')),
     ('floatsabs', _('Floats (absolute)')),
     ('floatsrel', _('Floats (relative)')),
-    ('sorted', _('Unordered')),
+    ('sorted', _('Sorted')),
     ('identical', _('Byte identical')),
     ('linecount', _('Line-by-line')),
 )

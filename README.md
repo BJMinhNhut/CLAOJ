@@ -1,7 +1,21 @@
-DMOJ: Modern Online Judge [![Build Status](https://github.com/DMOJ/online-judge/workflows/build/badge.svg)](https://github.com/DMOJ/online-judge/actions/) [![Slack](https://slack.dmoj.ca/badge.svg)](https://slack.dmoj.ca)
-=====
+<h1 align="center">
+  <img src="https://avatars2.githubusercontent.com/u/6934864?v=3&s=1000" width="120px">
+  <br>
+  DMOJ: Modern Online Judge
+</h1>
+<p align="center">
+  <a href="https://github.com/DMOJ/online-judge/actions?query=workflow%3Abuild">
+    <img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/DMOJ/online-judge/build.yml?branch=master"/>
+  </a>
+  <a href="LICENSE.md">
+    <img alt="License" src="https://img.shields.io/github/license/DMOJ/online-judge"/>
+  </a>
+  <a href="https://img.shields.io/github/license/DMOJ/judge-server">
+    <img src="https://slack.dmoj.ca/badge.svg"/>
+  </a>
+</p>
 
-A modern [open-source](https://github.com/DMOJ/online-judge/blob/master/LICENSE) online judge and contest platform system. It has been used to host hundreds of competitions, including several national olympiads.
+A modern open-source online judge and contest platform system. It has been used to host thousands of competitions, including several national olympiads.
 
 See it live at [dmoj.ca](https://dmoj.ca/)!
 
@@ -97,21 +111,20 @@ The DMOJ admin interface is highly versatile, and can be efficiently used for an
 
 ![](https://dmoj.ml/data/_other/readme/admin-dashboard.png)
 
-## Supported Languages
+## Supported languages
 
 Check out [**DMOJ/judge-server**](https://github.com/DMOJ/judge-server) for more judging backend details.
 
 Supported languages include:
 * C++ 11/14/17/20 (GCC and Clang)
 * C 99/11
-* Java 8/9/10/11
+* Java 8-19
 * Python 2/3
 * PyPy 2/3
 * Pascal
-* Perl
 * Mono C#/F#/VB
 
-The judge can also grade in the languages listed below. These languages are less tested and more likely to be buggy.
+The judge can also grade in the languages listed below:
 * Ada
 * AWK
 * COBOL
@@ -126,9 +139,11 @@ The judge can also grade in the languages listed below. These languages are less
 * INTERCAL
 * Kotlin
 * Lua
+* LLVM IR
 * NASM x86/x64
 * Objective-C
 * OCaml
+* Perl
 * PHP
 * Pike
 * Prolog

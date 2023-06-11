@@ -606,8 +606,8 @@ class LanguageLimit(models.Model):
 
 
 class Solution(models.Model):
-    problem = models.OneToOneField(Problem, on_delete=SET_NULL, verbose_name=_('associated problem'),
-                                   null=True, blank=True, related_name='solution')
+    problem = models.OneToOneField(Problem, on_delete=CASCADE, verbose_name=_('associated problem'),
+                                   blank=True, related_name='solution')
     pdf_url = models.CharField(max_length=200, verbose_name=_('PDF solution URL'), blank=True,
                                help_text=_('URL to PDF solution. The PDF file must be embeddable (Mobile web browsers'
                                            'may not support embedding). Fallback included.'))

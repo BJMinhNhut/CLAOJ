@@ -20,6 +20,10 @@
         height: auto;
     }
 
+    img.tex-full, img.tex-image, img.inline-math, img.display-math {
+        @include vars-img;
+    }
+
     h1, h2, h3, h4, h5, h6 {
         font-weight: normal;
         color: $color_primary90;
@@ -212,7 +216,7 @@
     }
 
     ul, ol {
-        padding: 0 0 0 2em !important;
+        padding: 0 0 0 2em;
     }
 
     li p:last-child {

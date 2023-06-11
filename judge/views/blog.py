@@ -20,7 +20,7 @@ from judge.models import BlogPost, BlogVote, Comment, Contest, Language, Problem
     Ticket
 from judge.utils.cachedict import CacheDict
 from judge.utils.diggpaginator import DiggPaginator
-from judge.utils.problems import user_completed_ids
+from judge.utils.opengraph import generate_opengraph
 from judge.utils.tickets import filter_visible_tickets
 from judge.utils.views import TitleMixin, generic_message
 
@@ -194,16 +194,6 @@ class PostList(PostListBase):
 
         now = timezone.now()
 
-        # Dashboard stuff
-        if self.request.user.is_authenticated:
-            user = self.request.profile
-            context['recently_attempted_problems'] = (Submission.objects.filter(user=user)
-                                                      .exclude(problem__in=user_completed_ids(user))
-                                                      .values_list('problem__code', 'problem__name', 'problem__points')
-                                                      .annotate(points=Max('points'), latest=Max('date'))
-                                                      .order_by('-latest')
-                                                      [:settings.DMOJ_BLOG_RECENTLY_ATTEMPTED_PROBLEMS_COUNT])
-
         visible_contests = Contest.get_visible_contests(self.request.user).filter(is_visible=True) \
                                   .order_by('start_time')
 
@@ -280,7 +270,12 @@ class PostView(TitleMixin, CommentedDetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PostView, self).get_context_data(**kwargs)
-        context['og_image'] = self.object.og_image
+
+        metadata = generate_opengraph('generated-meta-blog:%d' % self.object.id,
+                                      self.object.summary or self.object.content, 'blog')
+        context['meta_description'] = metadata[0]
+        context['og_image'] = self.object.og_image or metadata[1]
+
         return context
 
     def get_object(self, queryset=None):
