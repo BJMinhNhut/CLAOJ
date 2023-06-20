@@ -77,7 +77,7 @@ class DetectTimezone(View):
 
 
 def django_uploader(image):
-    ext = os.path.splitext(image.name)[-1]
+    ext = os.path.splitext(image.name)[1]
     if ext not in settings.MARTOR_UPLOAD_SAFE_EXTS:
         ext = '.png'
     name = str(uuid.uuid4()) + ext
@@ -120,8 +120,8 @@ def martor_image_uploader(request):
         return HttpResponseBadRequest('Invalid request')
 
     image = request.FILES['markdown-image-upload']
-    #if request.user.is_staff:
-    #    data = django_uploader(image)
-    #else:
-    data = django_uploader(image)
+    if request.user.is_staff or request.user.has_perm('judge.upload_image_server'):
+        data = django_uploader(image)
+    else:
+        data = imgur_uploader(image)
     return HttpResponse(data, content_type='application/json')
