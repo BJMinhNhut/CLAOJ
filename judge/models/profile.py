@@ -349,6 +349,7 @@ class Profile(models.Model):
             ('totp', _('Edit TOTP settings')),
             ('high_problem_timelimit', _('Can set high problem timelimit')),
             ('long_contest_duration', _('Can set long contest duration')),
+            ('upload_image_server', _('Can upload image to server')),
         )
         verbose_name = _('user profile')
         verbose_name_plural = _('user profiles')
