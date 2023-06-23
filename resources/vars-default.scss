@@ -21,14 +21,14 @@ $color_link100: #01579b;    // hover
 $color_link200: #ffa000;    // active
 
 $color_header_text: $color_primary75;
-$color_header_bg: $color_primary50;
+$color_header_bg: $color_primary5;
 $color_header_border: $color_primary25;
 
 $color_pageBg: #fff;
 
 // custom one-off colours
 $color_contest_ranking_disqualified: #ffcdd2;
-$color_first_solve: #a5d6a7;
+$color_first_solve: #c8e6c9;
 
 $color_rating_none: #999;
 $color_rating_newbie: #808080;
@@ -50,6 +50,8 @@ $color_user_submission_activity4: #2e7d32;
 $color_pagination_hover: $color_primary100;
 
 $color_problem_submit_select2: #757575;
+
+$color_score_ac: #388e3c;
 
 $path_to_root: '.';     // relative path from style.css to STATIC_ROOT
 

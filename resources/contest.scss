@@ -242,7 +242,6 @@ form.contest-join-pseudotab {
 
     a {
         display: block;
-        color: $color_primary75;
     }
 
     /* Make problem table headers green on hover */
@@ -264,11 +263,11 @@ form.contest-join-pseudotab {
 
     .full-score, .full-score a {
         font-weight: bold;
-        color: green;
+        color: $color_score_ac;
     }
 
     .partial-score, .partial-score a {
-        color: green;
+        color: $color_score_ac;
     }
 
     .failed-score, .failed-score a {

@@ -259,6 +259,7 @@
             {% endif %}
     </div>
 
+    {% if authors or problem.suggester or problem.source or not contest_problem or not contest_problem.contest.hide_problem_tags or show_languages or problem.is_editable_by(request.user) %}
     <div class="sidebox problem-info">
         {% if not contest_problem or not contest_problem.contest.hide_problem_authors %}
             {% cache 86400 'problem_authors' problem.id LANGUAGE_CODE %}
@@ -309,6 +310,7 @@
                 {% endwith %}
             </div>
         {% endif %}
+
         {% if show_languages %}
             <div id="allowed-langs">
                 <div class="toggle open unselectable">
@@ -328,6 +330,7 @@
                 </div>
             </div>
         {% endif %}
+
         {% if problem.is_editable_by(request.user) %}
             <div id="available-judges">
                 <i class="fa-solid fa-gavel fa-fw"></i><span
@@ -354,6 +357,7 @@
             </div>
         {% endif %}
     </div>
+    {% endif %}
 {% endblock %}
 
 

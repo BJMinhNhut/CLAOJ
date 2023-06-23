@@ -199,7 +199,8 @@
         {% endif %}
     </div>
 
-    {% if contest.ended or request.user.is_superuser or is_editor or is_tester %}
+    {% set in_contest = contest.is_in_contest(request.user) %}
+    {% if in_contest or contest.ended or request.user.is_superuser or is_editor or is_tester %}
         <hr>
         <div class="contest-problems">
             <h3 style="margin-bottom: 0.2em"><i class="fa-solid fa-fw fa-question-circle"></i>{{ _('Problems') }} </h3>
