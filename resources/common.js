@@ -205,14 +205,14 @@ function set_date_locale(language_code) {
         var rtf = new Intl.RelativeTimeFormat(language_code);
         window.format_ms = function (amount) {
             amount = Math.trunc(amount / 1000); // seconds
-            if (Math.abs(amount) < 120) return rtf.format(amount, 'second');
+            if (Math.abs(amount) < 60) return rtf.format(amount, 'second');
             amount = Math.trunc(amount / 60);   // minutes
-            if (Math.abs(amount) < 180) return rtf.format(amount, 'minute');
+            if (Math.abs(amount) < 60) return rtf.format(amount, 'minute');
             amount = Math.trunc(amount / 60);   // hours
-            if (Math.abs(amount) < 48) return rtf.format(amount, 'hour');
+            if (Math.abs(amount) < 24) return rtf.format(amount, 'hour');
             amount = Math.trunc(amount / 24);   // days
-            if (Math.abs(amount) < 100) return rtf.format(amount, 'day');
-            return '';          // beyond 100 days, use absolute time
+            if (Math.abs(amount) < 32) return rtf.format(amount, 'day');
+            return '';          // beyond 32 days, use absolute time
         };
     } else {
         window.format_ms = function () {
