@@ -4,7 +4,6 @@
 
 {% block title_row %}
     {% set tab = 'detail' %}
-    {% set title = contest.name %}
     {% include "contest/contest-tabs.html" %}
     {% if contest.is_organization_private %}
         <span class="organization-tags">
@@ -200,7 +199,7 @@
     </div>
 
     {% set in_contest = contest.is_in_contest(request.user) %}
-    {% if in_contest or contest.ended or request.user.is_superuser or is_editor or is_tester %}
+    {% if in_contest or contest.ended or request.user.is_superuser or is_editor or is_tester or (is_spectator and contest.started) %}
         <hr>
         <div class="contest-problems">
             <h3 style="margin-bottom: 0.2em"><i class="fa-solid fa-fw fa-question-circle"></i>{{ _('Problems') }} </h3>
