@@ -236,7 +236,7 @@ urlpatterns = [
     path('contributors', include([
         path('/', user.ContribList.as_view(), name='contributors_list'),
         path('/<int:page>', lambda request,
-             page:HttpResponsePermanentRedirect('%s?page=%s' % (reverse('contributors_list'), page))),
+             page: HttpResponsePermanentRedirect('%s?page=%s' % (reverse('contributors_list'), page))),
         path('/find', user.user_contributor_redirect, name='user_contributor_redirect'),
     ])),
 

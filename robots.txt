@@ -1,4 +1,5 @@
 User-agent: *
+Allow: /
 Disallow: /500
 Disallow: /accounts
 Disallow: /admin
@@ -39,12 +40,10 @@ Disallow: /problem/*/test_data
 Disallow: /problem/*/tickets
 Disallow: /src
 Disallow: /stats
-Disallow: /submission
-Disallow: /submissions
 Disallow: /tasks
 Disallow: /ticket
 Disallow: /tickets
-Disallow: /user/$
 Disallow: /users/find/$
-Disallow: /user/*/submissions
 Disallow: /widgets
+
+Sitemap: https://claoj.edu.vn/sitemap.xml

@@ -11,15 +11,7 @@
     {% endif %}
     <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicons-->
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" href="/favicon.ico">
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
@@ -96,7 +88,7 @@
             });
         </script>
     {% endcompress %}
-    {% block js_media %}{% endblock %}       
+    {% block js_media %}{% endblock %}     
     {% if EVENT_LAST_MSG %}
         <script> 
             window.event_dispatcher = new WSEventDispatcher(
@@ -187,8 +179,23 @@
     {% if request.user.is_authenticated and request.profile.user_script and not request.user.is_impersonate and not ignore_user_script %}
         <script type="text/javascript">{{ request.profile.user_script|safe }}</script>
     {% endif %}
+		
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-GBYM2850B1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
 
-    <script>
+	  gtag('config', 'G-GBYM2850B1');
+	</script>	
+	
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4078177791819614"
+     crossorigin="anonymous"></script>
+	<script>
+		 (adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+	<script>
         function submmit_language(lang) {
             if (lang != "{{ LANGUAGE_CODE }}" ) {
                 $("input[name=language]").val(lang)
@@ -334,7 +341,15 @@
 	{% block header %}{% endblock %}
         {% block title_ruler %}{% endblock %}
 
-        <div id="content-body">{% block body %}{% endblock %}</div>
+        <div id="content-body">{% block body %}{% endblock %}
+		<!-- Ads -->
+		<ins class="adsbygoogle"
+			 style="display:block;margin-top:1.65em;text-align: center;"
+			 data-ad-client="ca-pub-4078177791819614"
+			 data-ad-slot="1877233690"
+			 data-ad-format="auto"
+			 data-full-width-responsive="true"></ins>
+		</div>
     </main>
 
     {% if i18n_config.announcement %}
