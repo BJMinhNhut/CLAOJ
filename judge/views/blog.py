@@ -300,6 +300,10 @@ class BlogPostCreate(TitleMixin, CreateView):
         with revisions.create_revision(atomic=True):
             self.get_object = post = form.save()
             post.publish_on = timezone.now()
+            post.slug = ''.join(
+                x for x in form.cleaned_data["title"].lower()
+                if (x.isalpha() or x.isnumeric())
+            )  # Initial post slug
             post.authors.add(self.request.user.profile)
             post.save()
 
