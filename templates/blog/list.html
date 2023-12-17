@@ -223,8 +223,15 @@
 	    	{% include "blog/new-problems-list.html" %}
 	    {% endif %}
 
-            <div class="blog-sidebox sidebox">
-                <h3>{{ _('Comment stream') }} <i class="fa fa-comments"></i></h3>
+            <div class="blog-sidebox sidebox">            
+				<h3>
+				<i class="fa fa-comments"></i>    
+				<span style="margin-right: 10px;">
+				{{ _('Comment stream') }} 
+				</span>
+				<a href="https://discord.gg/xdMrcJHxZv" target="_blank">
+				<img src="https://img.shields.io/discord/1123916507861237881?color=%23009688&label=Discord&logo=Discord&logoColor=white" alt="Discord">
+				</a></h3>
                 <div class="sidebox-content">
                     <ul>
                         {% for comment in comments %}

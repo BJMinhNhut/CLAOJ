@@ -679,7 +679,7 @@ class ProblemSubmit(LoginRequiredMixin, ProblemMixin, TitleMixin, SingleObjectFo
         if (
             not self.request.user.has_perm('judge.spam_submission') and
             Submission.objects.filter(user=self.request.profile, rejudged_date__isnull=True)
-                              .exclude(status__in=['D', 'IE', 'CE', 'AB']).count() >= settings.DMOJ_SUBMISSION_LIMIT
+                              .exclude(status__in=['D', 'IE', 'CE', 'AB']).count() >= settings.CLAOJ_SUBMISSION_LIMIT
         ):
             return HttpResponse(format_html('<h1>{0}</h1>', _('You submitted too many submissions.')), status=429)
         if not self.object.allowed_languages.filter(id=form.cleaned_data['language'].id).exists():
