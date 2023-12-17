@@ -120,3 +120,13 @@ class APIMiddleware(object):
             response.status_code = 401
             return response
         return self.get_response(request)
+
+
+class HealthCheckMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if request.path == '/health':
+            return HttpResponse('ok')
+        return self.get_response(request)
