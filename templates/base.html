@@ -17,10 +17,10 @@
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
     <link rel="manifest" href="/manifest.json">
-    <meta name="msapplication-TileColor" content="#FFBB33">
+    <meta name="msapplication-TileColor" content="#263238">
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
     {# Chrome 39 for Android colour #}
-    <meta name="theme-color" content="#FFBB33">
+    <meta name="theme-color" content="#263238">
     {% if og_image %}
         <meta property="og:image" content="{{ request.build_absolute_uri(og_image) }}">
     {% else %}
@@ -52,7 +52,7 @@
         <link rel="stylesheet" type="text/css" href="{{ static('libs/clipboard/tooltip.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ static('libs/select2/select2.css') }}">
     {% endcompress %}
-    <script src="https://kit.fontawesome.com/3fa30c8a4a.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/3fa30c8a4a.js" crossorigin="anonymous"></script> -->
     <link rel="canonical"
           href="{{ DMOJ_SCHEME }}://{{ DMOJ_CANONICAL|default(site.domain) }}{{ request.get_full_path() }}">
     {% if request.user.is_impersonate %}
@@ -190,11 +190,6 @@
 	  gtag('config', 'G-GBYM2850B1');
 	</script>	
 	
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4078177791819614"
-     crossorigin="anonymous"></script>
-	<script>
-		 (adsbygoogle = window.adsbygoogle || []).push({});
-	</script>
 	<script>
         function submmit_language(lang) {
             if (lang != "{{ LANGUAGE_CODE }}" ) {
@@ -378,4 +373,5 @@
     </footer>
 </div>
 </body>
+<!-- <script type="text/javascript" src="/static/tet.js"></script> -->
 </html>

@@ -50,7 +50,7 @@ def run_moss(self, contest_key):
                 ).order_by('-points').values_list('user__user__username', 'source__source')
 
                 if subs.exists():
-                    moss_call = MOSS(moss_api_key, language=moss_lang, matching_file_limit=100,
+                    moss_call = MOSS(moss_api_key, language=moss_lang, matching_file_limit=200,
                                      comment='%s - %s' % (contest.key, problem.code))
 
                     users = set()

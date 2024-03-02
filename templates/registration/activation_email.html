@@ -14,9 +14,6 @@ The last step is activating your account. Please activate your {{ site_name }} a
 {{ _('Please click on the following link to activate your account:') }}
 <br>
 <a href="{{ request.scheme }}://{{ site.domain }}/accounts/activate/{{ activation_key }}/">{{ request.scheme }}://{{ site.domain }}/accounts/activate/{{ activation_key }}/</a>
-<br><br>
-{{ _('Alternatively, you can reply to this message to activate your account. Your reply must keep the following text intact for this to work:') }}
-<p style="font-family:monospace;">{{ activation_key }}</p>
 {% if SITE_ADMIN_EMAIL %}
 {% with link='<a href="mailto:%(email)s">%(email)s</a>'|safe|format(email=SITE_ADMIN_EMAIL) %}
 {{ _('See you soon! If you have problems activating your account, feel free to send us an email at %(email)s.', email=link) }}

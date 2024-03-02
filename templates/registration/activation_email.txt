@@ -5,8 +5,4 @@ Please activate your {{ site_name }} account in the next {{ count }} days.
 {% endtrans %}
 
 {{ _('Please click on the following link to activate your account:') }}
-    {{ request.scheme }}://{{ site.domain }}/accounts/activate/{{ activation_key }}/
-
-{{ _('Alternatively, you can reply to this message to activate your account. Your reply must keep the following text intact for this to work:') }}
-
-{{ activation_key }}
+    {{ request.scheme }}://{{ site.domain }}/accounts/activate/{{ activation_key }}
